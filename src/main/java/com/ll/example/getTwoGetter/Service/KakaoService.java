@@ -1,5 +1,7 @@
 package com.ll.example.getTwoGetter.Service;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -8,7 +10,7 @@ import java.net.URL;
 
 @Service
 public class KakaoService {
-    public String getKakaoAccessToken (String code) throws IOException {
+    public String getKakaoAccessToken(String code) throws IOException {
         String access_Token = "";
         String refresh_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -63,5 +65,6 @@ public class KakaoService {
 
         return access_Token;
     }
+}
 
 
