@@ -4,8 +4,10 @@ import com.ll.example.getTwoGetter.Repository.UserRepository;
 import com.ll.example.getTwoGetter.Service.KakaoService;
 import com.ll.example.getTwoGetter.Service.MailService;
 import com.ll.example.getTwoGetter.Service.UserService;
+import com.ll.example.getTwoGetter.Util;
 import com.ll.example.getTwoGetter.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,8 @@ public class AccountController {
     @Autowired
     private MailService mailService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @GetMapping("/login")
@@ -51,9 +55,14 @@ public class AccountController {
         username = username.replace("%40", "@");
         if(userService.findByUsename(username)!=null){
             User user = userService.findByUsename(username);
-            System.out.println(username);
+//            System.out.println(user.getPassword());
+            String randomPassword = Util.randomPassword();
+            user.setPassword(randomPassword);
+            userService.save(user);
+            mailService.sendMail(username, randomPassword);
+
+            System.out.println(user.getPassword());
             model.addAttribute("message", "메일이 발송되었습니다.");
-            mailService.sendMail(username, "dd");
             return "account/find";
         }else{
             model.addAttribute("message", "존재하지 않는 이메일입니다.");
@@ -63,7 +72,6 @@ public class AccountController {
 
     @PostMapping("/register")
     public String registerAccount(@RequestBody User user){
-        System.out.println(user);
         userService.save(user);
         return "redirect:/";
     }

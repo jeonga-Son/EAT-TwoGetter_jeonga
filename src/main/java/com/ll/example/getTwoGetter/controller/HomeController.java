@@ -24,7 +24,7 @@ public class HomeController {
 
         }
         else{
-            System.out.println("존재x");
+
 
         }
         return "index";
