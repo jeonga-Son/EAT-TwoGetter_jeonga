@@ -51,8 +51,9 @@ public class AccountController {
         username = username.replace("%40", "@");
         if(userService.findByUsename(username)!=null){
             User user = userService.findByUsename(username);
+            System.out.println(username);
             model.addAttribute("message", "메일이 발송되었습니다.");
-            mailService.sendMail("aaddss639@naver.com", "dd");
+            mailService.sendMail(username, "dd");
             return "account/find";
         }else{
             model.addAttribute("message", "존재하지 않는 이메일입니다.");
