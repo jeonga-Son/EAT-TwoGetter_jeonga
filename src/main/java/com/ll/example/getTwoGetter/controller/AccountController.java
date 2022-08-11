@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -45,6 +46,30 @@ public class AccountController {
         model.addAttribute("userForm", user);
         return "account/register";
     }
+    @GetMapping("/modify")
+    public String modify(@RequestParam String username, @RequestParam String nickname, @RequestParam String password, HttpSession session){
+        if(username.trim().equals("") || nickname.trim().equals("") || password.trim().equals("")){
+            if(username.trim().equals("")){
+                session.setAttribute("message" ,"이메일을 입력해주세요.");
+                return "redirect:/";
+            }
+            if(nickname.trim().equals("")){
+                session.setAttribute("message" ,"닉네임을 입력해주세요.");
+                return "redirect:/";
+            }
+            if(password.trim().equals("")){
+                session.setAttribute("message" ,"비밀번호를 입력해주세요.");
+                return "redirect:/";
+            }
+        }
+        User user = userRepository.findByUsername(username);
+        user.setNickname(nickname);
+        user.setPassword(password);
+        user.setUsername(username);
+        userService.save(user);
+        session.setAttribute("message" ,"수정이 완료되었습니다.");
+        return "redirect:/";
+    }
     @GetMapping("/find")
     public String find(){
         return "account/find";
@@ -55,13 +80,12 @@ public class AccountController {
         username = username.replace("%40", "@");
         if(userService.findByUsename(username)!=null){
             User user = userService.findByUsename(username);
-//            System.out.println(user.getPassword());
+
             String randomPassword = Util.randomPassword();
             user.setPassword(randomPassword);
             userService.save(user);
             mailService.sendMail(username, randomPassword);
 
-            System.out.println(user.getPassword());
             model.addAttribute("message", "메일이 발송되었습니다.");
             return "account/find";
         }else{

@@ -9,23 +9,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class HomeController {
     @Autowired
     UserService userService;
 
     @GetMapping("/")
-    public String home(@AuthenticationPrincipal UserDetails userDetails, Model model){
+    public String home(@AuthenticationPrincipal UserDetails userDetails, Model model, HttpSession session){
         if(userDetails != null){
             String username = userDetails.getUsername();
             User user = userService.findByUsename(username);
-            System.out.println(user.getNickname());;
             model.addAttribute("user",user);
-
         }
-        else{
-
-
+        if(session.getAttribute("message")!=null){
+            String message = (String) session.getAttribute("message");
+            model.addAttribute("message", message);
         }
         return "index";
     }
