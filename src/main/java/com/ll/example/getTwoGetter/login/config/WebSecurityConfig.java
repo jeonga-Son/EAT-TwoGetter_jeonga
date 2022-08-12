@@ -1,4 +1,4 @@
-package com.ll.example.getTwoGetter.config;
+package com.ll.example.getTwoGetter.login.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

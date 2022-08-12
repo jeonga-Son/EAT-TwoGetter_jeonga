@@ -1,4 +1,4 @@
-package com.ll.example.getTwoGetter.model;
+package com.ll.example.getTwoGetter.login.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

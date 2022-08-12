@@ -14,20 +14,49 @@
 </head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" th:fragment="menu(menu)">
-        <a class="btn btn-secondary mx-1  position-absolute top-0 end-0" href="/account/login" th:href="@{/account/login}" sec:authorize="!isAuthenticated()">로그인</a>
-        <form class="form-inline my-2 my-lg-0 position-absolute top-0 end-0" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
-            <span id="user" th:text="${user.nickname}+님">사용자</span>
-            <!--        <span class="text-black" sec:authentication="name">사용자</span>-->
-            <!--        <span class="text-black mx-2" sec:authentication="principal.authorities">권한</span>-->
-            <div>
-                <button class="btn-open-popup btn btn-secondary my-2 my-sm-0" type="button">내 프로필 보기</button>
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit" >로그아웃</button>
-            </div>
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="index.html">EAT-Two Getter</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <!--            <div class="input-group">-->
+            <!--                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />-->
+            <!--                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>-->
+            <!--            </div>-->
         </form>
+        <div sec:authorize="!isAuthenticated()">
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="/account/login" th:href="@{/account/login}">Login</a></li>
+                    </ul>
+
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" sec:authorize="isAuthenticated()">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item btn-open-popup" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><form th:action="@{/logout}" method="POST">
+                            <button class="dropdown-item" type="submit" >Logout</button>
+                        </form></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
         <div class="modal" sec:authorize="isAuthenticated()">
             <div class="modal_body">
-                <form th:action="@{/account/modify}" method="put">
+                <form th:action="@{/account/modify}" method="get">
                     <a th:href="@{/}">
                         <img class="mb-4" src="https://getbootstrap.kr/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
                     </a>
@@ -51,7 +80,6 @@
                             <input type="password" class="form-control-plaintext" id="password" placeholder="password" name="password">
                         </div>
                     </div>
-
                     <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit">수정</button>
                     <button class="modal_close btn btn-secondary mb-3" type="button">닫기</button>
 
@@ -59,29 +87,8 @@
             </div>
 
         </div>
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
-        <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
+
+
     </nav>
 
 </body>

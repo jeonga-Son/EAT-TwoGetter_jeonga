@@ -1,4 +1,4 @@
-package com.ll.example.getTwoGetter.model;
+package com.ll.example.getTwoGetter.login.model;
 
 import lombok.Data;
 

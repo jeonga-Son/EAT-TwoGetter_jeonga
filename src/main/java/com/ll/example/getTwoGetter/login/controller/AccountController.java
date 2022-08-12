@@ -1,11 +1,11 @@
-package com.ll.example.getTwoGetter.controller;
+package com.ll.example.getTwoGetter.login.controller;
 
-import com.ll.example.getTwoGetter.Repository.UserRepository;
-import com.ll.example.getTwoGetter.Service.KakaoService;
-import com.ll.example.getTwoGetter.Service.MailService;
-import com.ll.example.getTwoGetter.Service.UserService;
+import com.ll.example.getTwoGetter.login.Repository.UserRepository;
+import com.ll.example.getTwoGetter.login.Service.KakaoService;
+import com.ll.example.getTwoGetter.login.Service.MailService;
+import com.ll.example.getTwoGetter.login.Service.UserService;
 import com.ll.example.getTwoGetter.Util;
-import com.ll.example.getTwoGetter.model.User;
+import com.ll.example.getTwoGetter.login.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

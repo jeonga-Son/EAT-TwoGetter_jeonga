@@ -1,7 +1,7 @@
-package com.ll.example.getTwoGetter.controller;
+package com.ll.example.getTwoGetter.login.controller;
 
-import com.ll.example.getTwoGetter.Service.UserService;
-import com.ll.example.getTwoGetter.model.User;
+import com.ll.example.getTwoGetter.login.Service.UserService;
+import com.ll.example.getTwoGetter.login.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,4 +29,8 @@ public class HomeController {
         }
         return "index";
     }
+//    @GetMapping("/assets/demo/chart-area-demo.js")
+//    public String redirectHome(){
+//        return "redirect:/";
+//    }
 }

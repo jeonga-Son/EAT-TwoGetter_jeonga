@@ -1,6 +1,6 @@
-package com.ll.example.getTwoGetter.Repository;
+package com.ll.example.getTwoGetter.login.Repository;
 
-import com.ll.example.getTwoGetter.model.User;
+import com.ll.example.getTwoGetter.login.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

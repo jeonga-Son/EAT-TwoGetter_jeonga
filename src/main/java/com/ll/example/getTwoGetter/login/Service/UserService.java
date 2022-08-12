@@ -1,8 +1,8 @@
-package com.ll.example.getTwoGetter.Service;
+package com.ll.example.getTwoGetter.login.Service;
 
-import com.ll.example.getTwoGetter.Repository.UserRepository;
-import com.ll.example.getTwoGetter.model.Role;
-import com.ll.example.getTwoGetter.model.User;
+import com.ll.example.getTwoGetter.login.Repository.UserRepository;
+import com.ll.example.getTwoGetter.login.model.Role;
+import com.ll.example.getTwoGetter.login.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

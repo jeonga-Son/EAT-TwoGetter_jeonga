@@ -1,4 +1,4 @@
-package com.ll.example.getTwoGetter.Service;
+package com.ll.example.getTwoGetter.login.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
