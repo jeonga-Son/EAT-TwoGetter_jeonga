@@ -7,15 +7,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 @SpringBootApplication
-//@EnableJpaAuditing
+@EnableJpaAuditing
 public class GetTwoGetterApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GetTwoGetterApplication.class, args);
 	}
 
-//	@Bean
-//	public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-//		return new HiddenHttpMethodFilter();
-//	}
+	@Bean
+	public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+		return new HiddenHttpMethodFilter();
+	}
 }

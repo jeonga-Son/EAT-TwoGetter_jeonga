@@ -20,14 +20,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/account/**","/css/**","/api/**", "/images/**").permitAll()
+                .antMatchers("/","/account/**","/css/**","/api/**", "/images/**","/board/**", "/post/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
