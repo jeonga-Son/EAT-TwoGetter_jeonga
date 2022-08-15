@@ -325,6 +325,8 @@
         if (status === kakao.maps.services.Status.OK) {
             var infoDiv = document.getElementById('centerAddr');
 
+            //지도 현재 좌표 위도 경도
+            // console.log(map.getCenter())
             for(var i = 0; i < result.length; i++) {
                 // 행정동의 region_type 값은 'H' 이므로
                 infoDiv.innerHTML = result[i].address.address_name;
