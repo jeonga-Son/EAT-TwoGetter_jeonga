@@ -43,7 +43,9 @@
                     <div id="address_view">
                         <p style="font-size: 25px; font-weight: bold">&nbsp;현재 위치</p>
                         <span id="centerAddr" style="font-size: 20px"></span>
+                        <span id="centerLatLng" style="font-size: 20px"></span>
                         <button type="button" class="btn btn-success" id="build_marker">모임 생성</button>
+
                     </div>
                 </div>
             </div>
@@ -62,7 +64,7 @@
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-            level: 1 // 지도의 확대 레벨
+            level: 2 // 지도의 확대 레벨
         };
 
     // 지도를 생성합니다
@@ -324,12 +326,13 @@
     function displayCenterInfo(result, status) {
         if (status === kakao.maps.services.Status.OK) {
             var infoDiv = document.getElementById('centerAddr');
-
+            var infoLng = document.getElementById('centerLatLng');
             //지도 현재 좌표 위도 경도
             // console.log(map.getCenter())
             for(var i = 0; i < result.length; i++) {
                 // 행정동의 region_type 값은 'H' 이므로
                 infoDiv.innerHTML = result[i].address.address_name;
+                infoLng.innerHTML = map.getCenter();
                 break;
 
             }
