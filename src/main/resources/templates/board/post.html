@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" />
     <title>게시판 - 글쓰기</title>
@@ -8,6 +8,9 @@
 <body>
 <!--<header th:insert="common/header.html"></header>-->
 <div class="container">
+    <div class="modal" sec:authorize="isAuthenticated()">
+
+    </div>
     <form action="/post" method="post">
         <div class="form-group row">
             <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
