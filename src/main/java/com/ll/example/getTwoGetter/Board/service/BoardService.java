@@ -41,6 +41,9 @@ public class BoardService {
                     .deliveryCharge(board.getDeliveryCharge())
                     .content(board.getContent())
                     .createdDate(board.getCreatedDate())
+                    .username(board.getUsername())
+                    .lat(board.getLat())
+                    .lng(board.getLng())
                     .build();
             boardDtoList.add(boardDto);
         }
@@ -61,6 +64,9 @@ public class BoardService {
                 .deliveryCharge(board.getDeliveryCharge())
                 .content(board.getContent())
                 .createdDate(board.getCreatedDate())
+                .username(board.getUsername())
+                .lat(board.getLat())
+                .lng(board.getLng())
                 .build();
         return boardDto;
     }

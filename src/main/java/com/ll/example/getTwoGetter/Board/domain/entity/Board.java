@@ -23,7 +23,6 @@ public class Board {
     private Long id;
     @Column(length = 100, nullable = false)
     private String title;
-
     @Column(length = 100, nullable = false)
     private String storeType;
 
@@ -46,10 +45,18 @@ public class Board {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+    @Column(length = 100)
+    private String username;
+
+    @Column(length = 100)
+    private String lat;
+
+    @Column(length = 100)
+    private String lng;
 
     @Builder
     public Board(Long id, String title,  String storeType, String storeName, String orderDetail, String minimumOrderAmount,
-                 String deliveryCharge, String content) {
+                 String deliveryCharge, String content, String username, String lat, String lng) {
         this.id = id;
         this.title = title;
         this.storeType = storeType;
@@ -58,5 +65,8 @@ public class Board {
         this.deliveryCharge = deliveryCharge;
         this.minimumOrderAmount = minimumOrderAmount;
         this.content = content;
+        this.username = username;
+        this.lat = lat;
+        this.lng = lng;
     }
 }
