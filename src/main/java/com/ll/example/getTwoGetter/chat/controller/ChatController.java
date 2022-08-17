@@ -1,7 +1,11 @@
 package com.ll.example.getTwoGetter.chat.controller;
 
+import com.ll.example.getTwoGetter.chat.model.ChatInfo;
+import com.ll.example.getTwoGetter.chat.repository.ChatInfoRepository;
+import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
 import com.ll.example.getTwoGetter.login.Service.UserService;
 import com.ll.example.getTwoGetter.login.model.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,17 +14,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/chat")
+@RequiredArgsConstructor
 public class ChatController {
-    @Autowired
-    UserService userService;
+    private final UserService userService;
+
+    private final ChatInfoService chatInfoService;
+
+    private final ChatInfoRepository chatInfoRepository;
+
     @GetMapping("/list")
     public String chatList(@AuthenticationPrincipal UserDetails userDetails, Model model){
         if(userDetails != null){
             String username = userDetails.getUsername();
-            User user = userService.findByUsename(username);
+            User user = userService.findByUsename(username);;
+            List<ChatInfo> chatInfos =chatInfoService.findByUsername(user.getNickname());
+
+
+            model.addAttribute("chatInfos", chatInfos);
             model.addAttribute("user",user);
+
         }
         return "chat/chatList";
     }

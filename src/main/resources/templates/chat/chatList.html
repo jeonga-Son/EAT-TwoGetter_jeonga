@@ -10,6 +10,21 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="chatList position-absolute top-50 start-50 translate-middle">
+                <table class="table">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>제목</th>
+                        <th>생성일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="chatInfo: ${chatInfos}">
+                        <td th:text="${chatInfo.chatTitle}"></td>
+<!--                        <td th:text="${#temporals.format(question.createDate, 'yy-MM-dd HH:mm')}"></td>-->
+                        <td th:text="${chatInfo.createChatDate}"></td>
+                    </tr>
+                    </tbody>
+                </table>
 
             </div>
 
