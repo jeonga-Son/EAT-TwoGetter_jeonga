@@ -15,6 +15,7 @@
                     <tr>
                         <th>제목</th>
                         <th>생성일</th>
+                        <th>상대방</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -22,6 +23,10 @@
                         <td th:text="${chatInfo.chatTitle}"></td>
 <!--                        <td th:text="${#temporals.format(question.createDate, 'yy-MM-dd HH:mm')}"></td>-->
                         <td th:text="${chatInfo.createChatDate}"></td>
+                        <td th:if="${user.nickname == chatInfo.username}" th:text="${chatInfo.partner}"></td>
+                        <td th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></td>
+
+
                     </tr>
                     </tbody>
                 </table>

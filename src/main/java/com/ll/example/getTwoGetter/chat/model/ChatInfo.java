@@ -23,6 +23,9 @@ public class ChatInfo {
     @Column(length = 100, nullable = false)
     private String username;
 
+    @Column(length = 100, nullable = false)
+    private String partner;
+
     @LastModifiedDate
     private LocalDateTime createChatDate;
 

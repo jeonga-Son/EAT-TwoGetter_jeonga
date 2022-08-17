@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ChatInfoRepository extends JpaRepository<ChatInfo , Long> {
     List<ChatInfo> findByUsername(String username);
+
+    List<ChatInfo> findByPartner(String nickname);
 }

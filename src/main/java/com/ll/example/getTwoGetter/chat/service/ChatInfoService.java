@@ -13,9 +13,17 @@ public class ChatInfoService {
     private final ChatInfoRepository chatInfoRepository;
     public List<ChatInfo> findByUsername(String nickname) {
         List<ChatInfo> chatInfoList = chatInfoRepository.findByUsername(nickname);
-        if(chatInfoList.size()==0){
+        if(chatInfoList==null){
             return null;
         }
         return chatInfoList;
+    }
+
+    public List<ChatInfo> findByPartner(String nickname) {
+        List<ChatInfo> chatInfoList1 = chatInfoRepository.findByPartner(nickname);
+        if(chatInfoList1==null){
+            return null;
+        }
+        return chatInfoList1;
     }
 }

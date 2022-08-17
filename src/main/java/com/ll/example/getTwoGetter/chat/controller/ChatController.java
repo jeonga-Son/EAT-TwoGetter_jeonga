@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,10 +32,13 @@ public class ChatController {
         if(userDetails != null){
             String username = userDetails.getUsername();
             User user = userService.findByUsename(username);;
-            List<ChatInfo> chatInfos =chatInfoService.findByUsername(user.getNickname());
+            List<ChatInfo> chatInfos_user =chatInfoService.findByUsername(user.getNickname());
+            List<ChatInfo> chatInfos_partner = chatInfoService.findByPartner(user.getNickname());
 
-
-            model.addAttribute("chatInfos", chatInfos);
+            List<ChatInfo> joined = new ArrayList<>();
+            joined.addAll(chatInfos_user);
+            joined.addAll(chatInfos_partner);
+            model.addAttribute("chatInfos", joined);
             model.addAttribute("user",user);
 
         }
