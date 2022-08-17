@@ -4,7 +4,7 @@
 
 </head>
 <body class="sb-nav-fixed">
-<nav th:replace = "fragment/common :: menu('home')"></nav>
+<th:block th:replace = "fragment/common :: menu('home')"></th:block>
 <div id="layoutSidenav">
     <div th:replace = "fragment/common :: side('side')"></div>
     <div id="layoutSidenav_content">
@@ -182,11 +182,22 @@
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-            level: 2 // 지도의 확대 레벨
+            level: 4 // 지도의 확대 레벨
         };
 
     // 지도를 생성합니다
     var map = new kakao.maps.Map(mapContainer, mapOption);
+
+    // 마커가 표시될 위치입니다
+    var markerPosition  = new kakao.maps.LatLng(37.637327115801384, 126.83915168286534);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
 
     // 현 위치 반환을 위한 객체를 생성합니다.
     var geocoder = new kakao.maps.services.Geocoder();
@@ -285,7 +296,6 @@
                 position: position, // 마커의 위치
                 image: markerImage
             });
-
         marker.setMap(map); // 지도 위에 마커를 표출합니다
         markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 
