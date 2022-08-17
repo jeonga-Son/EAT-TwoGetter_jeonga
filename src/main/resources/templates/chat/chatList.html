@@ -5,6 +5,59 @@
 </head>
 <body>
 <th:block th:replace = "fragment/common :: menu('chat')"></th:block>
+<div id="layoutSidenav">
+    <div th:replace = "fragment/common :: side('side')"></div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="chatList position-absolute top-50 start-50 translate-middle">
 
+            </div>
+
+        </main>
+        <footer th:replace = "fragment/common :: footer('footer')"></footer>
+    </div>
+</div>
+<script>
+
+    const modal = document.querySelector('.modal');
+    const btnOpenPopup = document.querySelector('.btn-open-popup');
+    const btnClosePopup = document.querySelector('.modal_close');
+
+    btnOpenPopup.addEventListener('click', () => {
+        modal.style.display = 'block';
+    });
+    btnClosePopup.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+</script>
+<script th:inline="javascript">
+    var message = [[${message}]];
+    if(message!==null){
+        alert(message);
+    }
+    // location.replace([[${searchUrl}]]);
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script  th:inline="javascript">
+    function deleteAccount(username){
+        if (!confirm("정말로 삭제하시겠습니까?")) {
+            alert("삭제가 취소되었습니다.")
+        } else {
+            $.ajax({
+                url:'/api/users/'+username,
+                type:'DELETE',
+                success: function (result){
+                    alert('정상적으로 삭제 되었습니다.')
+                    window.location.href="/account/login";
+                }
+            })
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>-->
 </body>
 </html>
