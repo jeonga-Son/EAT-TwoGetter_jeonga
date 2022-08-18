@@ -1,4 +1,5 @@
 package com.ll.example.getTwoGetter.chat.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +30,7 @@ public class ChatInfo {
     @LastModifiedDate
     private LocalDateTime createChatDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "chatInfo", cascade = {CascadeType.ALL})
     private List<ChatMessage> chatMessageList = new ArrayList<>();
 

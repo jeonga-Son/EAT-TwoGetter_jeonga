@@ -36,43 +36,47 @@
                     <button class="closeChat">닫기</button>
                 </div>
             </div>
-            <script>
-                // let chatInfos = [[${chatInfos}]];
-                const chatModal = document.querySelector('.chatModal');
-                const chatOpen = document.querySelector('.화정동떡볶이');
-                const chatClose = document.querySelector('.closeChat');
-                chatOpen.addEventListener('click', () => {
-                    console.log("dd")
-                    chatModal.style.display = 'block';
-                });
-                chatClose.addEventListener('click', () => {
-                    chatModal.style.display = 'none';
-                });
-                // let arr = []; //아이디 값을 담음
-                // const chatModal = document.querySelector('.chatModal')
-                // const element = document.getElementById('content');
-                // const btnClosePopup2 = document.querySelector('.closeChat');
-                // for(let i= 0; i<chatInfos.length; i++){
-                //     arr[i] = document.querySelector('.'+chatInfos[i].chatTitle)
-                // }
-                // for(let i= 0; i<chatInfos.length; i++){
-                //     arr[i].addEventListener('click', () => {
-                //         chatModal.style.display = 'block';
-                //     });
-                // }
-                // function fetchMessage(){
-                //     element.innerText+='<div>gg</div>'
-                // }
-                //
-                // btnClosePopup2.addEventListener('click', () => {
-                //     boardModal.style.display = 'none';
-                // });
-
-            </script>
         </main>
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
     </div>
 </div>
+<script th:inline="javascript">
+    [# th:each="chatInfo, stat : ${chatInfos}"]
+    var chatInfo[[${stat.count}]] = [[${chatInfo}]];
+    [/]
+</script>
+<script>
+    const chatModal = document.querySelector('.chatModal');
+    const chatOpen = document.querySelector('.화정동떡볶이');
+    const chatClose = document.querySelector('.closeChat');
+    chatOpen.addEventListener('click', () => {
+        console.log(chatInfo1.chatTitle)
+        chatModal.style.display = 'block';
+    });
+    chatClose.addEventListener('click', () => {
+        chatModal.style.display = 'none';
+    });
+    // let arr = []; //아이디 값을 담음
+    // const chatModal = document.querySelector('.chatModal')
+    // const element = document.getElementById('content');
+    // const btnClosePopup2 = document.querySelector('.closeChat');
+    // for(let i= 0; i<chatInfos.length; i++){
+    //     arr[i] = document.querySelector('.'+chatInfos[i].chatTitle)
+    // }
+    // for(let i= 0; i<chatInfos.length; i++){
+    //     arr[i].addEventListener('click', () => {
+    //         chatModal.style.display = 'block';
+    //     });
+    // }
+    // function fetchMessage(){
+    //     element.innerText+='<div>gg</div>'
+    // }
+    //
+    // btnClosePopup2.addEventListener('click', () => {
+    //     boardModal.style.display = 'none';
+    // });
+
+</script>
 <script>
 
     const modal = document.querySelector('.modal');
