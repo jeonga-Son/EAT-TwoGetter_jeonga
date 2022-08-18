@@ -25,8 +25,6 @@ public class ChatController {
 
     private final ChatInfoService chatInfoService;
 
-    private final ChatInfoRepository chatInfoRepository;
-
     @GetMapping("/list")
     public String chatList(@AuthenticationPrincipal UserDetails userDetails, Model model){
         if(userDetails != null){
@@ -36,7 +34,7 @@ public class ChatController {
             List<ChatInfo> chatInfos_partner = chatInfoService.findByPartner(user.getNickname());
 
             List<ChatInfo> joined = new ArrayList<>();
-            
+
             joined.addAll(chatInfos_user);
             joined.addAll(chatInfos_partner);
             model.addAttribute("chatInfos", joined);

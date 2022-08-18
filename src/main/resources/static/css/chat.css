@@ -1,5 +1,73 @@
 .chatList{
-    width: 50%;
-    height: 50%;
+    width: 70%;
+    height: 70%;
     border: 3px solid;
+}
+
+
+.chatModal{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+
+    z-index: 3;
+}
+.boardModal.show {
+    display: block;
+}
+.chatModal_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 650px;
+    height: 680px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+}
+.chatModal_content{
+    border: solid 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width:400px;
+    height: 550px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+}
+.closeChat{
+    position: absolute;
+    left: 50%;
+    top: 94%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.sendMessage{
+    position: absolute;
+    left: 50%;
+    top: 86%;
+    transform: translateX(-50%) translateY(-50%);
 }
