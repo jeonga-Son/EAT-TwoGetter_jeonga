@@ -40,7 +40,7 @@
 
     transform: translateX(-50%) translateY(-50%);
 }
-.chatModal_content{
+.chatModal_All{
     border: solid 2px;
     position: absolute;
     top: 50%;
@@ -67,7 +67,24 @@
 }
 .sendMessage{
     position: absolute;
-    left: 50%;
+    left: 63%;
+    top: 86%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.chatUser{
+    width:100%;
+    float: left;
+    background-color: rgba(255,232,57,0.61);
+
+}
+.chatPartner{
+    width:100%;
+    float: right;
+    background-color: rgba(54,255,149,0.61);
+}
+.inputMessage{
+    position: absolute;
+    left: 48%;
     top: 86%;
     transform: translateX(-50%) translateY(-50%);
 }

@@ -11,8 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +44,10 @@ public class ChatController {
             return "redirect:/account/login";
         }
 
+    }
+    @PostMapping("/sendMessage")
+    public void sendMessage(@RequestBody String inputMessage){
+        System.out.println(inputMessage);
     }
 
 }

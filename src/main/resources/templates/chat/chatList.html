@@ -31,8 +31,15 @@
             </div>
             <div class="chatModal">
                 <div class="chatModal_body">
-                    <div class = "chatModal_content" id="content"></div>
+                    <div class = "chatModal_All" id="all">
+                        <div class="chat_title" id="title" style="margin-bottom: 20px"></div>
+                        <div class="chat_content" id="content"></div>
+                    </div>
+<!--                        <input type="hidden" class="inputMessage" name="chatId" id="chatId">-->
+<!--                        <input type="hidden" name="username" th:value="${user.nickname}" hidden>-->
+                        <input type="text" class="inputMessage" placeholder="내용 입력" name="inputMessage">
                         <button class = "sendMessage" type="button">전송</button>
+
                     <button class="closeChat">닫기</button>
                 </div>
             </div>
@@ -44,36 +51,50 @@
     /*<![CDATA[*/
     let chatInfos = /*[[${chatInfos}]]*/;
     let chatInfo_length = /*[[${chatInfos.size()}]]*/;
+    let user = /*[[${user}]]*/;
     /*]]>*/
 </script>
 <script>
     const chatModal = document.querySelector('.chatModal');
     const chatClose = document.querySelector('.closeChat');
     chatClose.addEventListener('click', () => {
+        content.innerText=""
         chatModal.style.display = 'none';
     });
 
 </script>
 <script>
     function chatMessage_upload(id){
-        console.log("dd")
+        console.log(id+"번 채팅방 클릭")
         fetch(`/chatApi/chatMessage/${id}`)
             .then(data=>data.json())
-            .then(responseData=>console.log(responseData))
+            .then(responseData=>{
+                for(let i=0; i<responseData.length; i++){
+                    // console.log(responseData[i].username)
+                    // console.log(responseData[i].content)
+                    if(responseData[i].username == user.nickname){
+                        content.innerHTML+=`<div class="chatUser">나 : ${responseData[i].content}</div>`
+                    }else{
+                        content.innerHTML+=`<div class="chatPartner">${responseData[i].username} : ${responseData[i].content}</div>`
+                    }
+
+                }
+            })
     }
 </script>
 <script>
     const modal = document.querySelector('.modal');
     const btnClosePopup = document.querySelector('.modal_close');
-    const element = document.getElementById('content');
+    const title = document.getElementById('title');
+    const content = document.getElementById('content');
     let arr_chatId=[];
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i] = document.querySelector('.'+chatInfos[i].chatTitle)
     }
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i].addEventListener('click', () => {
+            title.innerHTML = `<div>${chatInfos[i].chatTitle}</div>`
             chatMessage_upload(chatInfos[i].id)
-            element.innerText = chatInfos[i].chatTitle
             chatModal.style.display = 'block';
         });
     }
