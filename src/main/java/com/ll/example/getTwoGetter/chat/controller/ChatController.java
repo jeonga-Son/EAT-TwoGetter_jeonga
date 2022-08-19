@@ -39,9 +39,12 @@ public class ChatController {
             joined.addAll(chatInfos_partner);
             model.addAttribute("chatInfos", joined);
             model.addAttribute("user",user);
-
+            return "chat/chatList";
         }
-        return "chat/chatList";
+        else{
+            return "redirect:/account/login";
+        }
+
     }
 
 }
