@@ -47,30 +47,32 @@
     /*]]>*/
 </script>
 <script>
-    let arr_chatId=[];
     const chatModal = document.querySelector('.chatModal');
-    const chatOpen = document.querySelector('.화정동떡볶이');
     const chatClose = document.querySelector('.closeChat');
-    chatOpen.addEventListener('click', () => {
-        chatModal.style.display = 'block';
-    });
     chatClose.addEventListener('click', () => {
         chatModal.style.display = 'none';
     });
 
 </script>
 <script>
-
+    function chatMessage_upload(id){
+        console.log("dd")
+        fetch(`/chatApi/chatMessage/${id}`)
+            .then(data=>data.json())
+            .then(responseData=>console.log(responseData))
+    }
+</script>
+<script>
     const modal = document.querySelector('.modal');
-    const btnOpenPopup = document.querySelector('.btn-open-popup');
     const btnClosePopup = document.querySelector('.modal_close');
     const element = document.getElementById('content');
-    arr_chatId=[]
+    let arr_chatId=[];
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i] = document.querySelector('.'+chatInfos[i].chatTitle)
     }
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i].addEventListener('click', () => {
+            chatMessage_upload(chatInfos[i].id)
             element.innerText = chatInfos[i].chatTitle
             chatModal.style.display = 'block';
         });

@@ -26,4 +26,9 @@ public class ChatInfoService {
         }
         return chatInfoList1;
     }
+
+    public ChatInfo findById(long id) {
+        ChatInfo chatInfo = chatInfoRepository.findById(id).orElse(null);
+        return chatInfo;
+    }
 }
