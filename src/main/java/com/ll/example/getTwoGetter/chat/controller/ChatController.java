@@ -1,6 +1,7 @@
 package com.ll.example.getTwoGetter.chat.controller;
 
 import com.ll.example.getTwoGetter.chat.model.ChatInfo;
+import com.ll.example.getTwoGetter.chat.model.ChatMessage;
 import com.ll.example.getTwoGetter.chat.repository.ChatInfoRepository;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
 import com.ll.example.getTwoGetter.login.Service.UserService;
@@ -44,10 +45,6 @@ public class ChatController {
             return "redirect:/account/login";
         }
 
-    }
-    @PostMapping("/sendMessage")
-    public void sendMessage(@RequestBody String inputMessage){
-        System.out.println(inputMessage);
     }
 
 }

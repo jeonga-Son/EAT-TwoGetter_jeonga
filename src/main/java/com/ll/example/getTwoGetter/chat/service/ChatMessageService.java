@@ -17,4 +17,8 @@ public class ChatMessageService {
         List<ChatMessage> chatMessages = chatMessageRepository.findByChatInfo(chatInfo);
         return chatMessages;
     }
+
+    public void save(ChatMessage chatMessage) {
+        chatMessageRepository.save(chatMessage);
+    }
 }
