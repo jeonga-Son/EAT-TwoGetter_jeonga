@@ -3,7 +3,7 @@
 <head th:replace="fragment/common :: head('HOME')">
 
 </head>
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed" id="navFix">
 <th:block th:replace = "fragment/common :: menu('home')"></th:block>
 <div id="layoutSidenav">
     <div th:replace = "fragment/common :: side('side')"></div>
@@ -167,7 +167,16 @@
     </div>
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=374dc9ec4e95ae00f4f8e366bf25c14e&libraries=services"></script>
+<script>
+    function showNav(){
+        if(document.getElementById('navFix').classList.contains('sb-sidenav-toggled')){
+            document.getElementById('navFix').classList.remove('sb-sidenav-toggled')
+        }else{
+            document.getElementById('navFix').classList.add('sb-sidenav-toggled')
+        }
 
+    }
+</script>
 <script>
 
     // $('input[name=lat]').attr('value',infoDiv);

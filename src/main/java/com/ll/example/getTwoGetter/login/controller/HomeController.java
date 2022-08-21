@@ -20,9 +20,6 @@ import java.util.List;
 public class HomeController {
     @Autowired
     UserService userService;
-    @Autowired
-    UserRepository userRepository;
-
 
     @GetMapping("/")
     public String home(@AuthenticationPrincipal UserDetails userDetails, Model model, HttpSession session){
@@ -36,6 +33,14 @@ public class HomeController {
             model.addAttribute("message", message);
         }
         return "index";
+    }
+
+
+    @GetMapping("/aaa")
+    public String aaa(Model model){
+        String str = "bb";
+        model.addAttribute("aa", str);
+        return "aaa";
     }
 
 }

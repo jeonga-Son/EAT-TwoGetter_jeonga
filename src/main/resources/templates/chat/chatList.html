@@ -3,13 +3,14 @@
 <head th:replace="fragment/common :: head('Chat')">
 
 </head>
-<body>
+<body class="sb-nav-fixed" id="navFix">
 <th:block th:replace = "fragment/common :: menu('chat')"></th:block>
 <div id="layoutSidenav">
     <div th:replace = "fragment/common :: side('side')"></div>
     <div id="layoutSidenav_content">
         <main>
-            <div class="chatList position-absolute top-50 start-50 translate-middle">
+            <div class="container-fluid px-4">
+            <div class="chatList">
                 <table class="table">
                     <thead class="table-dark">
                     <tr>
@@ -40,11 +41,20 @@
                     <button class="closeChat" onclick="closeChat()">닫기</button>
                 </div>
             </div>
+            </div>
         </main>
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
     </div>
 </div>
-
+<script>
+    function showNav(){
+        if(document.getElementById('navFix').classList.contains('sb-sidenav-toggled')){
+            document.getElementById('navFix').classList.remove('sb-sidenav-toggled')
+        }else{
+            document.getElementById('navFix').classList.add('sb-sidenav-toggled')
+        }
+    }
+</script>
 <script th:inline="javascript">
     /*<![CDATA[*/
     let chatInfos = /*[[${chatInfos}]]*/;
@@ -76,15 +86,22 @@
                     var time = responseData[i].chatMessageTime
                     var time2 = time.substring(11,16)
                     if(responseData[i].username == user.nickname){
-                        content.innerHTML+=`<div class="chatUser"><div>나</div>`+`<div class="chatTime">${time2}</div></div>`+`<div> :
-                        ${responseData[i].content}</div>`
+                        content.innerHTML+=`<div class="chatUserAll"><div class="chatUser"><div class="chatUsername">나&nbsp;</div>`+`<div class="chatTime">${time2}</div></div>`+`<br/>`+`<div class="chatMessageUser">
+                        ${responseData[i].content}</div></div>`
+                        content.innerHTML+=`<br/>`
+                        content.innerHTML+=`<br/>`
+
                     }else{
-                        content.innerHTML+=`<div class="chatPartner"><div>${responseData[i].username}</div>`+`<div class="chatTime">${time2}</div></div>`+`<div> :
-                            ${responseData[i].content}</div>`
+                        content.innerHTML+=`<div class="chatPartnerAll"><div class="chatPartner"><div class="chatPartnername">${responseData[i].username}&nbsp; </div>`+`<div class="chatTime">${time2}</div></div>`+`<br/>`+`<div class="chatMessagePartner">
+                            ${responseData[i].content}</div</div>`
+                        content.innerHTML+=`<br/>`
+                        content.innerHTML+=`<br/>`
+
+
                     }
                 }
             })
-        setTimeout(function (){chatMessage_upload(id)},5000);
+        setTimeout(function (){chatMessage_upload(id)},2000);
     }
     function messagePost(){
         var inputMessage = document.getElementById('inputMessage').value;

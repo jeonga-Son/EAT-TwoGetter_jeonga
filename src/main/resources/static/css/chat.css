@@ -1,6 +1,6 @@
 .chatList{
-    width: 70%;
-    height: 70%;
+    width: 100%;
+    height: 100%;
     border: 3px solid;
 }
 
@@ -69,15 +69,15 @@
     transform: translateX(-50%) translateY(-50%);
 }
 .chatUser{
-    text-align: center;
-    width:100%;
-    background-color: rgba(96,26,97,0.56);
+    /*background-color: rgba(96,26,97,0.56);*/
+    float: right;
+    font-weight: bold;
 
 }
 .chatPartner{
-    text-align: center;
-    width:100%;
-    background-color: rgba(96,26,97,0.17);
+    /*background-color: rgba(96,26,97,0.17);*/
+    float: left;
+    font-weight: bold;
 }
 .inputMessage{
     position: absolute;
@@ -94,7 +94,7 @@
 .chat_content{
     border-bottom: solid 2px;
     border-top:solid 2px;
-    overflow: auto;
+    overflow-x: hidden;
     width:100%;
     height: 440px;
     text-align: center;
@@ -104,18 +104,41 @@
 
 .chatTime{
     font-size: small;
-    width: 10%;
     display: inline-block;
 }
-/*.chatUser>div{*/
-/*    display: inline-block; !* block요소인 div를 inline으로 만들어준다. *!*/
-/*    width: 10%;*/
+.chatUser div{
+    display: inline-block; /* block요소인 div를 inline으로 만들어준다. */
 
-/*    text-align: right;*/
-/*}*/
-/*.chatPartner>div{*/
-/*    display: inline-block; !* block요소인 div를 inline으로 만들어준다. *!*/
-/*    width: 25%;*/
+}
+.chatPartner>div{
+    display: inline-block; /* block요소인 div를 inline으로 만들어준다. */
+}
+.chatUsername{
 
-/*    text-align: left;*/
-/*}*/
+
+}
+.chatPartnername{
+
+
+}
+.chatMessagePartner{
+    float: left;
+    text-align: left;
+    width: 100%;
+
+}
+.chatMessageUser{
+    text-align: right;
+    float:right;
+    width: 100%;
+
+    margin-left: auto;
+}
+.chatUserAll{
+    border-top: solid 1px;
+}
+.chatPartnerAll{
+    border-top: solid 1px;
+
+}
+
