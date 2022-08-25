@@ -171,7 +171,7 @@
                             </tr>
                             <tr>
                                 <th scope="row">위치</th>
-                                <td></td>
+                                <td id="showBoardLocate"></td>
                             </tr>
                             <tr>
                                 <th scope="row">위도</th>
@@ -183,31 +183,31 @@
                             </tr>
                             <tr>
                                 <th scope="row">제목</th>
-                                <td></td>
+                                <td id="showBoardTitle"></td>
                             </tr>
                             <tr>
                                 <th scope="row">가게유형</th>
-                                <td></td>
+                                <td id="showBoardType"></td>
                             </tr>
                             <tr>
                                 <th scope="row">상호명</th>
-                                <td></td>
+                                <td id="showBoardName"></td>
                             </tr>
                             <tr>
                                 <th scope="row">주문내용</th>
-                                <td></td>
+                                <td id="showBoardOrder"></td>
                             </tr>
                             <tr>
                                 <th scope="row">최소주문금액</th>
-                                <td></td>
+                                <td id="showBoardMin"></td>
                             </tr>
                             <tr>
                                 <th scope="row">배달요금</th>
-                                <td></td>
+                                <td id="showBoardDel"></td>
                             </tr>
                             <tr>
                                 <th scope="row">기타사항</th>
-                                <td></td>
+                                <td id="showBoardContent"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -244,8 +244,6 @@
             center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
             level: 4 // 지도의 확대 레벨
         };
-    console.log(localStorage.getItem("Lat"))
-    console.log(localStorage.getItem("Lng"))
     if(localStorage.getItem("Lat")!=null){
         var latCenter = localStorage.getItem("Lat")
         var lngCenter = localStorage.getItem("Lng")
@@ -524,9 +522,9 @@
         if (status === kakao.maps.services.Status.OK) {
             var infoDiv = document.getElementById('centerAddr');
             var infoLng = document.getElementById('centerLatLng');
-            // console.log(infoDiv.innerHTML)
+
             //지도 현재 좌표 위도 경도
-            // console.log(map.getCenter())
+
             for(var i = 0; i < result.length; i++) {
                 // 행정동의 region_type 값은 'H' 이므로
                 infoDiv.innerHTML = result[i].address.address_name;
@@ -614,64 +612,21 @@
     /*]]>*/
 </script>
 
-<!--<script>-->
-<!--    var arrLat = [];-->
-<!--    var arrLng = [];-->
-<!--    var positions = [];-->
-<!--    var imageSrc2 = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";-->
-<!--    // 마커 이미지의 이미지 크기 입니다-->
-<!--    var imageSize2 = new kakao.maps.Size(35, 50);-->
-
-<!--    // 마커 이미지를 생성합니다-->
-<!--    var markerImage2 = new kakao.maps.MarkerImage(imageSrc2, imageSize2);-->
-
-<!--    const boardDetailModal = document.querySelector('.boardDetailModal');-->
-<!--    const boardDetailModal_close = document.querySelector('.boardDetailModal_close');-->
-<!--    const boardDetailModal_close2 = document.querySelector('.boardDetailModal_close2');-->
-
-<!--    showBoardMarker();-->
-
-<!--        function showBoardMarker() {-->
-<!--            for (var i = 0; i < boardInfo.length; i++) {-->
-<!--                arrLat[i] = boardInfo[i].lat;-->
-<!--                arrLng[i] = boardInfo[i].lng;-->
-<!--            }-->
-
-<!--            for (var i = 0; i < boardInfo.length; i++) {-->
-<!--              positions[i] = new kakao.maps.LatLng(arrLat[i], arrLng[i]);-->
-<!--            }-->
-
-<!--            for (var i = 0; i < positions.length; i++) {-->
-<!--                addMarker(positions[i]);-->
-<!--            }-->
-
-<!--            function addMarker(positions) {-->
-<!--               // 마커를 생성합니다-->
-<!--                var marker2 = new kakao.maps.Marker({-->
-<!--                    map: map, // 마커를 표시할 지도-->
-<!--                    position: positions, // 마커를 표시할 위치-->
-<!--                    image : markerImage2 // 마커 이미지-->
-<!--                });-->
-
-<!--                kakao.maps.event.addListener(marker2, 'click', function() {-->
-<!--                    boardDetailModal.style.display = 'block';-->
-<!--                });-->
-<!--            }-->
-<!--        }-->
-
-<!--        boardDetailModal_close.addEventListener('click', () => {-->
-<!--            boardDetailModal.style.display = 'none';-->
-<!--        });-->
-
-<!--        boardDetailModal_close2.addEventListener('click', () => {-->
-<!--            boardDetailModal.style.display = 'none';-->
-<!--        });-->
-
-<!--</script>-->
 <script>
     var arrLat = [];
     var arrLng = [];
     var positions = [];
+    var arridBoard= [];
+    var arrshowBoardNickname = []
+    var arrshowBoardLocate=[]
+    var arrshowBoardTitle=[]
+    var arrshowBoardType = []
+    var arrshowBoardName= []
+    var arrshowBoardOrder = []
+    var arrshowBoardMin= []
+    var arrshowBoardDel=[]
+    var arrshowBoardContent=[]
+
     var imageSrc2 = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
     // 마커 이미지의 이미지 크기 입니다
     var imageSize2 = new kakao.maps.Size(35, 50);
@@ -686,9 +641,19 @@
     showBoardMarker();
 
     function showBoardMarker() {
+
         for (var i = 0; i < boardInfo.length; i++) {
             arrLat[i] = boardInfo[i].lat;
             arrLng[i] = boardInfo[i].lng;
+            arridBoard[i] = boardInfo[i].id;
+            arrshowBoardNickname[i] = boardInfo[i].username
+            arrshowBoardTitle[i] = boardInfo[i].title
+            arrshowBoardType[i] = boardInfo[i].storeType
+            arrshowBoardName[i] = boardInfo[i].storeName
+            arrshowBoardOrder[i] = boardInfo[i].orderDetail
+            arrshowBoardMin[i] = boardInfo[i].minimumOrderAmount
+            arrshowBoardDel[i] = boardInfo[i].deliveryCharge
+            arrshowBoardContent[i] = boardInfo[i].content
         }
 
         for (var i = 0; i < boardInfo.length; i++) {
@@ -696,27 +661,62 @@
         }
 
         for (var i = 0; i < positions.length; i++) {
-            addMarker(positions[i]);
+            addMarker(positions[i], arridBoard[i]);
         }
     }
 
-    function addMarker(positions2) {
+    function addMarker(positions2, idBoard2) {
         // 마커를 생성합니다
         var marker2 = new kakao.maps.Marker({
             map: map, // 마커를 표시할 지도
             position: positions2, // 마커를 표시할 위치
-            image : markerImage2 // 마커 이미지
+            image : markerImage2, // 마커 이미지
+            title: idBoard2
         });
 
         kakao.maps.event.addListener(marker2, 'click', function() {
-            console.log(marker2.getPosition().Ma)
-            console.log(marker2.getPosition().La)
+
             var boardLat = document.getElementById('showBoardLat')
             var boardLng = document.getElementById('showBoardLng')
-            for(var i=0; i<positions.length; i++){
-                if(marker2.getPosition().Ma == arrLat[i] && marker2.getPosition().La == arrLng[i]){
+            var showBoardNickname= document.getElementById('showBoardNickname')
+            var showBoardLocate = document.getElementById('showBoardLocate')
+            var showBoardTitle = document.getElementById('showBoardTitle')
+            var showBoardType = document.getElementById('showBoardType')
+            var showBoardName = document.getElementById('showBoardName')
+            var showBoardOrder = document.getElementById('showBoardOrder')
+            var showBoardMin = document.getElementById('showBoardMin')
+            var showBoardDel = document.getElementById('showBoardDel')
+            var showBoardContent = document.getElementById('showBoardContent')
+
+
+
+            for(var i=0; i<boardInfo.length; i++){
+                let geocoder = new kakao.maps.services.Geocoder();
+
+                let callback = function(result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        // console.log(result[0].address);
+                        showBoardLocate.innerText =result[0].address.address_name
+                    }
+                };
+
+                if(arridBoard[i] == marker2.getTitle()){
+                    let coord = new kakao.maps.LatLng(arrLat[i], arrLng[i]);
+                    var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
+
                     boardLat.innerText = arrLat[i];
-                    boardLng.innerText = arrLng[i]
+                    boardLng.innerText = arrLng[i];
+                    // showBoardLocate.innerText = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)[0].address.address_name
+                    showBoardNickname.innerText = arrshowBoardNickname[i];
+                    showBoardTitle.innerText = arrshowBoardTitle[i];
+                    showBoardType.innerText = arrshowBoardType[i];
+                    showBoardName.innerText = arrshowBoardName[i];
+                    showBoardOrder.innerText = arrshowBoardOrder[i];
+                    showBoardMin.innerText = arrshowBoardMin[i];
+                    showBoardDel.innerText = arrshowBoardDel[i];
+                    showBoardContent.innerText = arrshowBoardContent[i];
+                }else{
+
                 }
             }
             boardDetailModal.style.display = 'block';
