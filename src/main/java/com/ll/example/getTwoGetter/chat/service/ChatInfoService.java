@@ -31,4 +31,9 @@ public class ChatInfoService {
         ChatInfo chatInfo = chatInfoRepository.findById(id).orElse(null);
         return chatInfo;
     }
+
+
+    public void save(ChatInfo chatInfo) {
+        chatInfoRepository.save(chatInfo);
+    }
 }

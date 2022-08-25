@@ -1,6 +1,7 @@
 package com.ll.example.getTwoGetter.chat.controller;
 
 
+import com.ll.example.getTwoGetter.chat.dto.ChatInfoDto;
 import com.ll.example.getTwoGetter.chat.dto.ChatMessageDto;
 import com.ll.example.getTwoGetter.chat.model.ChatInfo;
 import com.ll.example.getTwoGetter.chat.model.ChatMessage;
@@ -39,6 +40,16 @@ public class ChatApiController {
         chatMessage.setChatMessageTime(LocalDateTime.now());
 
         chatMessageService.save(chatMessage);
+
+    }
+    @PostMapping("/chatPost")
+    public void sendChatPost(@RequestBody ChatInfoDto chatInfoDto){
+        ChatInfo chatInfo = new ChatInfo();
+        chatInfo.setChatTitle(chatInfoDto.getChatTitle());
+        chatInfo.setCreateChatDate(LocalDateTime.now());
+        chatInfo.setUsername(chatInfoDto.getUsername());
+        chatInfo.setPartner(chatInfoDto.getPartner());
+        chatInfoService.save(chatInfo);
 
     }
 }

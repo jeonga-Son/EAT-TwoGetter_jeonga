@@ -146,10 +146,6 @@
         </div>
 
 
-
-
-
-
         <!--게시판 정보 모달 띄우기 start!-->
         <div sec:authorize="isAuthenticated()">
             <div class="boardDetailModal">
@@ -212,7 +208,7 @@
                             </tbody>
                         </table>
                         <div class="col-auto mt-5">
-                            <button type="button" class="btn btn-primary chat-btn">채팅하기</button>
+                            <button type="button" class="btn btn-primary chat-btn" onclick="showChat()">채팅하기</button>
                             <button type="button" class="btn btn-secondary boardDetailModal_close">닫기</button>
                         </div>
                         <button type="button" class="btn-close btn-close-black boardDetailModal_close2" aria-label="Close"></button>
@@ -221,6 +217,16 @@
             </div>
         </div>
         <!--게시판 정보 모달 띄우기 end!-->
+        <div class="chatRoomModal">
+            <div class="chatRoomModal_body">
+                <div>채팅방 제목</div>
+                <input id="chatRoomTitle" type="text" placeholder="채팅방 제목을 입력해주세요."/>
+                <div>
+                    <button onclick="postChat()">확인</button>
+                    <button class="chatRoomModal_close" onclick="closeChat()">닫기</button>
+                </div>
+            </div>
+        </div>
 
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
     </div>
@@ -228,6 +234,41 @@
 
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=374dc9ec4e95ae00f4f8e366bf25c14e&libraries=services"></script>
+<script>
+    const chatModal = document.querySelector('.chatRoomModal')
+    function showChat(){
+        var showBoardNickname = document.getElementById('showBoardNickname')
+        if(user1.nickname==showBoardNickname.innerText){
+            alert("채팅은 다른 사용자와 가능합니다")
+        }else{
+            chatModal.style.display='block';
+        }
+    }
+    function closeChat(){
+        chatModal.style.display='none';
+    }
+    function postChat(){
+        var chatRoomTitle=  document.getElementById('chatRoomTitle')
+        var showBoardNickname = document.getElementById('showBoardNickname')
+
+        fetch("/chatApi/chatPost",{
+            method: 'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body : JSON.stringify({
+                chatTitle: chatRoomTitle.value,
+                username: user1.nickname,
+                partner: showBoardNickname.innerText
+            }),
+        }).then((response)=>{
+            if(response.status==200){
+                location.href="chat/list";
+            }
+        })
+
+    }
+</script>
 <script>
     // $('input[name=lat]').attr('value',infoDiv);
     // $('input[name=lng]').attr('value',infoLng);
@@ -609,6 +650,7 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     let boardInfo = /*[[${board}]]*/;
+    let user1 = /*[[${user}]]*/;
     /*]]>*/
 </script>
 
