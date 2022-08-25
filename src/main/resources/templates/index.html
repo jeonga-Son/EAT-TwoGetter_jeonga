@@ -238,6 +238,10 @@
 
 <script>
     const showProfileModal  = document.querySelector(".modal")
+    function removeStorage(){
+        localStorage.removeItem("Lat")
+        localStorage.removeItem("Lng")
+    }
     function showProfile(){
         showProfileModal.style.display='block';
     }
@@ -286,8 +290,7 @@
     }
 </script>
 <script>
-    // $('input[name=lat]').attr('value',infoDiv);
-    // $('input[name=lng]').attr('value',infoLng);
+
 
 
     // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다

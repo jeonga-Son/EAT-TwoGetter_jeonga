@@ -55,6 +55,17 @@
             document.getElementById('navFix').classList.add('sb-sidenav-toggled')
         }
     }
+    function removeStorage(){
+        localStorage.removeItem("Lat")
+        localStorage.removeItem("Lng")
+    }
+    const showProfileModal  = document.querySelector(".modal")
+    function showProfile(){
+        showProfileModal.style.display='block';
+    }
+    function closeProfile(){
+        showProfileModal.style.display='none';
+    }
 </script>
 <script th:inline="javascript">
     /*<![CDATA[*/

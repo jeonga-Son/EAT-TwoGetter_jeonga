@@ -48,15 +48,13 @@
                         <li><a class="dropdown-item btn-open-popup" href="#!" onclick="showProfile()">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><form th:action="@{/logout}" method="POST">
+                        <li><form th:action="@{/logout}" method="POST" onsubmit="removeStorage()">
                             <button class="dropdown-item" type="submit" >Logout</button>
                         </form></li>
                     </ul>
                 </li>
             </ul>
         </div>
-
-
         <div class="modal" sec:authorize="isAuthenticated()">
             <div class="modal_body">
                 <form th:action="@{/account/modify}" method="get">
