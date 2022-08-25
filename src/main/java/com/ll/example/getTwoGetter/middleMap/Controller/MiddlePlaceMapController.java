@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -22,11 +23,14 @@ public class MiddlePlaceMapController {
     UserService userService;
 
     @GetMapping("/middleMap")
-    public String showMap(@AuthenticationPrincipal UserDetails userDetails, Model model, HttpSession session) {
+    public String showMap(@AuthenticationPrincipal UserDetails userDetails, Model model, HttpSession session, @RequestParam String lat, @RequestParam String lng) {
+
         if (userDetails != null) {
             String username = userDetails.getUsername();
             User user = userService.findByUsename(username);
             model.addAttribute("user", user); // user라는 key값에 login된 사용자 user의 정보를 넘긴다.
+            model.addAttribute("lat", lat);
+            model.addAttribute("lng", lng);
         }
         if (session.getAttribute("message") != null) {
             String message = (String) session.getAttribute("message");

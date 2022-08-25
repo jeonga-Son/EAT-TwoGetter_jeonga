@@ -7,33 +7,73 @@
 <th:block th:replace = "fragment/common :: menu('home')"></th:block>
 <div id="layoutSidenav">
     <div th:replace = "fragment/common :: side('side')"></div>
+    <div id="middleAddress">
+        <span id="middleAddress_title" style="font-size: 20px"></span>
+        <div>
+            <button id="clickBtn" @click="setVisible()">켜기</button>
+            <button onclick="newTapSendUrl()">카카오맵 길찾기로 이동</button>
+        </div>
+
+    </div>
     <div id="layoutSidenav_content">
             <div class="map_wrap">
                 <div id="map" style="width:100%;height:100%;"></div>
-                <button id="clickBtn" @click="setVisible()">켜기</button>
-                <button onclick="newTapSendUrl()">카카오맵 길찾기로 이동</button>
             </div>
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
     </div>
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=374dc9ec4e95ae00f4f8e366bf25c14e&libraries=services"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let boardInfo = /*[[${board}]]*/;
+    let user1 = /*[[${user}]]*/;
+    let partnerLat = /*[[${lat}]]*/;
+    let partnerLng = /*[[${lng}]]*/;
+    /*]]>*/
+</script>
 <script>
-
     // 0. 임의 위치의 값6
-    let myLat = 37.68828198962639;
-    let myLng = 126.93602389184888;
-    let cusLat = 37.58970095394986;
-    let cusLng = 126.92798311517365;
-    const cenLat = (myLat + cusLat) / 2;
-    const cenLng = (myLng + cusLng) / 2;
+    var myLat = 37.68828198962639;
+    var myLng = 126.93602389184888;
+
+    var cusLat = 37.58970095394986;
+    var cusLng = 126.92798311517365;
+
+    var cenLat = (myLat + cusLat) / 2;
+    var cenLng = (myLng + cusLng) / 2;
+
+    var middleAddress = document.getElementById("middleAddress_title");
+
 
     // 1. 지도 생성
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(cenLat, cenLng), // 지도의 중심좌표
-            level: 4 // 지도의 확대 레벨
+            level: 4, // 지도의 확대 레벨
         };
+    if(localStorage.getItem("Lat")!=null){
+        myLat = localStorage.getItem("Lat")
+        myLng = localStorage.getItem("Lng")
+        cusLat= parseFloat(partnerLat);
+        cusLng = parseFloat(partnerLng);
+        cenLat = (parseFloat(myLat) + cusLat) / 2;
+        cenLng = (parseFloat(myLng) + cusLng) / 2;
+
+        let geocoder = new kakao.maps.services.Geocoder();
+
+        let callback = function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                middleAddress.innerText =result[0].address.address_name
+            }
+        };
+        let coord = new kakao.maps.LatLng(cenLat, cenLng);
+        var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
+
+        middleAddress.innerText=cusLng;
+
+        mapOption.center = new kakao.maps.LatLng(cenLat, cenLng)
+    }
 
     // 지도를 생성합니다
     var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -92,7 +132,7 @@
     // 3. 나의 마커
 
     // 마커가 표시될 위치입니다
-    var myMarkerPosition = new kakao.maps.LatLng(myLat, myLng);
+    var myMarkerPosition = new kakao.maps.LatLng(myLat,myLng);
 
     //마커 이미지를 변경
     let iconMy = new kakao.maps.MarkerImage(

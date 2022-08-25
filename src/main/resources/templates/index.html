@@ -150,6 +150,7 @@
         <div sec:authorize="isAuthenticated()">
             <div class="boardDetailModal">
                 <div class="boardDetailModal_content">
+                    <button onclick="middlespace()">중간 지점 찾기</button>
                     <h4 class="boardDetailModal_header">게시글 정보입니다.</h4>
                     <div class="boardDetailModal_body ">
                         <table class="table">
@@ -267,6 +268,13 @@
             }
         })
 
+    }
+</script>
+<script>
+    function middlespace(){
+        var partnerLat= document.getElementById('showBoardLat').innerText
+        var partnerLng =document.getElementById('showBoardLng').innerText
+        location.href=`/middlePlaceMap/middleMap?lat=${partnerLat}&lng=${partnerLng}`;
     }
 </script>
 <script>
@@ -717,6 +725,10 @@
         });
 
         kakao.maps.event.addListener(marker2, 'click', function() {
+            if(user1==null){
+                alert("로그인 이후 가능합니다")
+                location.href="/account/login"
+            }
 
             var boardLat = document.getElementById('showBoardLat')
             var boardLng = document.getElementById('showBoardLng')
