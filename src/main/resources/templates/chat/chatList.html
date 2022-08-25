@@ -20,7 +20,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="chatInfo: ${chatInfos}" th:classappend="|${chatInfo.chatTitle}|">
+                        <tr th:each="chatInfo: ${chatInfos}" th:id="${chatInfo.chatTitle}">
                             <td th:text="${chatInfo.chatTitle}"></td>
                             <!--                        <td th:text="${#temporals.format(question.createDate, 'yy-MM-dd HH:mm')}"></td>-->
                             <td th:text="${chatInfo.createChatDate}"></td>
@@ -66,15 +66,13 @@
 <script>
     const chatModal = document.querySelector('.chatModal');
     const chatClose = document.querySelector('.closeChat');
-    chatClose.addEventListener('click', () => {
-        content.innerText=""
-        chatModal.style.display = 'none';
-    });
-
-</script>
-<script>
+    // chatClose.addEventListener('click', () => {
+    //     content.innerText=""
+    //     chatModal.style.display = 'none';
+    // });
     function closeChat(){
-        modal.style.display = 'none';
+        chatClose.style.display = 'none';
+        content.innerText=""
         location.reload();
     }
     function chatMessage_upload(id){
@@ -97,8 +95,6 @@
                             ${responseData[i].content}</div</div>`
                         content.innerHTML+=`<br/>`
                         content.innerHTML+=`<br/>`
-
-
                     }
                 }
             })
@@ -121,14 +117,17 @@
     }
 </script>
 <script>
-    const modal = document.querySelector('.modal');
-    const btnClosePopup = document.querySelector('.modal_close');
+    // const modal = document.querySelector('.modal');
+    // const btnClosePopup = document.querySelector('.modal_close');
     const title = document.getElementById('title');
     const content = document.getElementById('content');
     let arr_chatId=[];
     let chatId;
     for(let i= 0; i<chatInfo_length; i++){
-        arr_chatId[i] = document.querySelector('.'+chatInfos[i].chatTitle)
+        console.log("dd")
+        console.log(chatInfos)
+        arr_chatId[i] = document.getElementById(chatInfos[i].chatTitle)
+        console.log(arr_chatId[i])
     }
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i].addEventListener('click', () => {
@@ -139,10 +138,6 @@
         });
     }
 
-    // btnClosePopup.addEventListener('click', () => {
-    //     modal.style.display = 'none';
-    //     window.location.href="/account/login"
-    // });
 
 </script>
 <script th:inline="javascript">
