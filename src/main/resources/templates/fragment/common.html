@@ -45,7 +45,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item btn-open-popup" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item btn-open-popup" href="#!" onclick="showProfile()">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><form th:action="@{/logout}" method="POST">
@@ -89,7 +89,7 @@
                                 th:onclick="deleteAccount(this.getAttribute('username'))">회원탈퇴</button>
                     </div>
                     <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit">수정</button>
-                    <button class="modal_close btn btn-secondary mb-3" type="button">닫기</button>
+                    <button class="modal_close btn btn-secondary mb-3" type="button" onclick="closeProfile()">닫기</button>
 
                 </form>
             </div>
