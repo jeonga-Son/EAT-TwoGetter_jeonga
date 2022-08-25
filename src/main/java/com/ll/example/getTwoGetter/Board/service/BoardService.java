@@ -75,6 +75,7 @@ public class BoardService {
     public void deletePost(Long id) {
         boardRepository.deleteById(id);
     }
+
     public List<Board> findAll() {
         List<Board> boards = boardRepository.findAll();
         return boards;

@@ -30,9 +30,9 @@ public class HomeController {
             String username = userDetails.getUsername();
             User user = userService.findByUsename(username);
             model.addAttribute("user",user);
-            List<Board> boards = boardService.findAll();
-            model.addAttribute("board", boards);
         }
+        List<Board> boards = boardService.findAll();
+        model.addAttribute("board", boards);
         if(session.getAttribute("message")!=null){
             String message = (String) session.getAttribute("message");
             model.addAttribute("message", message);

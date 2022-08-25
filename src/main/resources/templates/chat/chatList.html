@@ -10,42 +10,43 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-            <div class="chatList">
-                <table class="table">
-                    <thead class="table-dark">
-                    <tr>
-                        <th>제목</th>
-                        <th>생성일</th>
-                        <th>상대방</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="chatInfo: ${chatInfos}" th:classappend="|${chatInfo.chatTitle}|">
-                        <td th:text="${chatInfo.chatTitle}"></td>
-                        <!--                        <td th:text="${#temporals.format(question.createDate, 'yy-MM-dd HH:mm')}"></td>-->
-                        <td th:text="${chatInfo.createChatDate}"></td>
-                        <td th:if="${user.nickname == chatInfo.username}" th:text="${chatInfo.partner}"></td>
-                        <td th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="chatModal">
-                <div class="chatModal_body">
-                    <div class = "chatModal_All" id="all">
-                        <div class="chat_title" id="title" style="margin-bottom: 20px"></div>
-                        <div class="chat_content" id="content"></div>
-                    </div>
-                    <input type="text" class="inputMessage" placeholder="내용 입력" id="inputMessage" name="inputMessage">
-                    <button class = "sendMessage" type="button" onclick="messagePost()">전송</button>
-                    <button class="closeChat" onclick="closeChat()">닫기</button>
+                <div class="chatList">
+                    <table class="table">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>제목</th>
+                            <th>생성일</th>
+                            <th>상대방</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="chatInfo: ${chatInfos}" th:classappend="|${chatInfo.chatTitle}|">
+                            <td th:text="${chatInfo.chatTitle}"></td>
+                            <!--                        <td th:text="${#temporals.format(question.createDate, 'yy-MM-dd HH:mm')}"></td>-->
+                            <td th:text="${chatInfo.createChatDate}"></td>
+                            <td th:if="${user.nickname == chatInfo.username}" th:text="${chatInfo.partner}"></td>
+                            <td th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+                <div class="chatModal">
+                    <div class="chatModal_body">
+                        <div class = "chatModal_All" id="all">
+                            <div class="chat_title" id="title" style="margin-bottom: 20px"></div>
+                            <div class="chat_content" id="content"></div>
+                        </div>
+                        <input type="text" class="inputMessage" placeholder="내용 입력" id="inputMessage" name="inputMessage">
+                        <button class = "sendMessage" type="button" onclick="messagePost()">전송</button>
+                        <button class="closeChat" onclick="closeChat()">닫기</button>
+                    </div>
+                </div>
             </div>
         </main>
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
     </div>
 </div>
+
 <script>
     function showNav(){
         if(document.getElementById('navFix').classList.contains('sb-sidenav-toggled')){

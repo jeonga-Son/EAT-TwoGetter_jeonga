@@ -4,6 +4,7 @@
 package com.ll.example.getTwoGetter.Board.controller;
 
 
+import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
 import com.ll.example.getTwoGetter.Board.service.BoardService;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,11 @@ public class BoardController {
         List<BoardDto> boardDtoList = boardService.getBoardList();
         model.addAttribute("postList", boardDtoList);
         return "board/list.html";
+    }
+
+    @GetMapping("/post")
+    public String post() {
+        return "index.html";
     }
 
     @PostMapping("/post")

@@ -40,7 +40,9 @@
 /*    left: 50%;*/
 /*    transform: translateX(-50%) translateY(-50%);*/
 /*}*/
-.boardModal {
+
+.boardModal, .boardDetailModal {
+    z-index: 3;
     position: absolute;
     top: 0;
     left: 0;
@@ -51,21 +53,19 @@
     display: none;
 
     background-color: rgba(0, 0, 0, 0.4);
-
-    z-index: 3;
 }
 
-.boardModal.show {
+.boardModal.show, .boardDetailModal.show {
     display: block;
 }
 
-.boardModal_body {
+.boardModal_content, .boardDetailModal_content {
     position: absolute;
     top: 50%;
     left: 50%;
 
-    width: 650px;
-    height: 680px;
+    width: 600px;
+    height: 700px;
 
     padding: 40px;
 
@@ -76,4 +76,12 @@
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 
     transform: translateX(-50%) translateY(-50%);
+
+    overflow-y: auto;
+}
+
+.boardModal_close2, .boardDetailModal_close2 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

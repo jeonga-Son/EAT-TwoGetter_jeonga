@@ -2,11 +2,10 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-<!--    <title th:text="@{'게시판 - ' + ${post.title}}"></title>-->
+    <!--    <title th:text="@{'게시판 - ' + ${post.title}}"></title>-->
     <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
 </head>
 <body>
-<header th:insert="common/header.html"></header>
 <div class="container">
     <div class="card">
         <div class="card-body">
@@ -17,12 +16,15 @@
                         th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"
                 ></small>
             </p>
-            <p class="card-text" th:text="${post.storeType}"></p>
-            <p class="card-text" th:text="${post.storeName}"></p>
-            <p class="card-text" th:text="${post.orderDetail}"></p>
-            <p class="card-text" th:text="${post.minimumOrderAmount}"></p>
-            <p class="card-text" th:text="${post.deliveryCharge}"></p>
-            <p class="card-text" th:text="${post.content}"></p>
+            <p class="card-text" th:text="|닉네임 : ${post.username}|"></p>
+            <p class="card-text" th:text="|위도 : ${post.lat}|"></p>
+            <p class="card-text" th:text="|경도 : ${post.lng}|"></p>
+            <p class="card-text" th:text="|가게유형 : ${post.storeType}|"></p>
+            <p class="card-text" th:text="|상호명 : ${post.storeName}|"></p>
+            <p class="card-text" th:text="|주문내역 : ${post.orderDetail}|"></p>
+            <p class="card-text" th:text="|최소주문금액 : ${post.minimumOrderAmount}|"></p>
+            <p class="card-text" th:text="|배달요금 : ${post.deliveryCharge}|"></p>
+            <p class="card-text" th:text="|기타사항 : ${post.content}|"></p>
         </div>
     </div>
     <div class="row mt-3">
