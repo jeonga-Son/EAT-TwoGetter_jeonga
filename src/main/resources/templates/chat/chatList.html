@@ -22,8 +22,11 @@
                         <tbody>
                         <tr th:each="chatInfo: ${chatInfos}" th:id="${chatInfo.chatTitle}">
                             <td th:text="${chatInfo.chatTitle}"></td>
-                            <!--                        <td th:text="${#temporals.format(question.createDate, 'yy-MM-dd HH:mm')}"></td>-->
-                            <td th:text="${chatInfo.createChatDate}"></td>
+                            <td th:text="|${#strings.substring(chatInfo.createChatDate,0,4)}년 ${#strings.substring(chatInfo.createChatDate,5,7)}월 ${#strings.substring(chatInfo.createChatDate,8,10)}일
+                            ${#strings.substring(chatInfo.createChatDate,11,13)}시 ${#strings.substring(chatInfo.createChatDate,14,16)}분
+                            |"></td>
+
+
                             <td th:if="${user.nickname == chatInfo.username}" th:text="${chatInfo.partner}"></td>
                             <td th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></td>
                         </tr>
@@ -87,7 +90,6 @@
         location.reload();
     }
     function chatMessage_upload(id){
-        console.log("실행")
         fetch(`/chatApi/chatMessage/${id}`)
             .then(data=>data.json())
             .then(responseData=>{
@@ -135,10 +137,7 @@
     let arr_chatId=[];
     let chatId;
     for(let i= 0; i<chatInfo_length; i++){
-        console.log("dd")
-        console.log(chatInfos)
         arr_chatId[i] = document.getElementById(chatInfos[i].chatTitle)
-        console.log(arr_chatId[i])
     }
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i].addEventListener('click', () => {

@@ -80,4 +80,9 @@ public class BoardService {
         List<Board> boards = boardRepository.findAll();
         return boards;
     }
+
+    public Board findById(long id) {
+        Board board = boardRepository.findById(id).orElse(null);
+        return board;
+    }
 }

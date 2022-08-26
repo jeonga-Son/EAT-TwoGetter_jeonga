@@ -10,6 +10,7 @@
     <div id="middleAddress">
         <span id="middleAddress_title" style="font-size: 20px"></span>
         <div>
+            <button onclick="goBack()">뒤로가기</button>
             <button id="clickBtn" @click="setVisible()">켜기</button>
             <button onclick="newTapSendUrl()">카카오맵 길찾기로 이동</button>
         </div>
@@ -149,6 +150,9 @@
             position: myMarkerPosition,
             image: iconMy
         });
+    }
+    function goBack(){
+        location.href="/";
     }
 
     displayMyMarker(myMarkerPosition);

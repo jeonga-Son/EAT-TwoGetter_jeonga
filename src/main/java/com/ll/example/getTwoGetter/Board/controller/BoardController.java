@@ -28,6 +28,13 @@ public class BoardController {
         model.addAttribute("postList", boardDtoList);
         return "board/list.html";
     }
+    @GetMapping("/getMarkerBoard/{id}")
+    @ResponseBody
+    public Board getMarkerBoard(@PathVariable long id){
+        System.out.println(id);
+        Board board = boardService.findById(id);
+        return board;
+    }
 
     @GetMapping("/post")
     public String post() {

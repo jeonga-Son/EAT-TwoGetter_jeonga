@@ -167,16 +167,12 @@
                                 <td id="showBoardNickname"></td>
                             </tr>
                             <tr>
-                                <th scope="row">위치</th>
-                                <td id="showBoardLocate"></td>
+                                <th scope="row">생성 시간</th>
+                                <td id="makeBoardTime"></td>
                             </tr>
                             <tr>
-                                <th scope="row">위도</th>
-                                <td id="showBoardLat"></td>
-                            </tr>
-                            <tr >
-                                <th scope="row">경도</th>
-                                <td id="showBoardLng"></td>
+                                <th scope="row">위치</th>
+                                <td id="showBoardLocate"></td>
                             </tr>
                             <tr>
                                 <th scope="row">제목</th>
@@ -208,6 +204,10 @@
                             </tr>
                             </tbody>
                         </table>
+
+                        <input type="hidden" id="showBoardLat" />
+                        <input type="hidden" id="showBoardLng" />
+
                         <div class="col-auto mt-5">
                             <button type="button" class="btn btn-primary chat-btn" onclick="showChat()">채팅하기</button>
                             <button type="button" class="btn btn-secondary boardDetailModal_close">닫기</button>
@@ -678,15 +678,6 @@
     var arrLng = [];
     var positions = [];
     var arridBoard= [];
-    var arrshowBoardNickname = []
-    var arrshowBoardLocate=[]
-    var arrshowBoardTitle=[]
-    var arrshowBoardType = []
-    var arrshowBoardName= []
-    var arrshowBoardOrder = []
-    var arrshowBoardMin= []
-    var arrshowBoardDel=[]
-    var arrshowBoardContent=[]
 
     var imageSrc2 = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
     // 마커 이미지의 이미지 크기 입니다
@@ -707,14 +698,6 @@
             arrLat[i] = boardInfo[i].lat;
             arrLng[i] = boardInfo[i].lng;
             arridBoard[i] = boardInfo[i].id;
-            arrshowBoardNickname[i] = boardInfo[i].username
-            arrshowBoardTitle[i] = boardInfo[i].title
-            arrshowBoardType[i] = boardInfo[i].storeType
-            arrshowBoardName[i] = boardInfo[i].storeName
-            arrshowBoardOrder[i] = boardInfo[i].orderDetail
-            arrshowBoardMin[i] = boardInfo[i].minimumOrderAmount
-            arrshowBoardDel[i] = boardInfo[i].deliveryCharge
-            arrshowBoardContent[i] = boardInfo[i].content
         }
 
         for (var i = 0; i < boardInfo.length; i++) {
@@ -736,13 +719,6 @@
         });
 
         kakao.maps.event.addListener(marker2, 'click', function() {
-            if(user1==null){
-                alert("로그인 이후 가능합니다")
-                location.href="/account/login"
-            }
-
-            var boardLat = document.getElementById('showBoardLat')
-            var boardLng = document.getElementById('showBoardLng')
             var showBoardNickname= document.getElementById('showBoardNickname')
             var showBoardLocate = document.getElementById('showBoardLocate')
             var showBoardTitle = document.getElementById('showBoardTitle')
@@ -752,38 +728,45 @@
             var showBoardMin = document.getElementById('showBoardMin')
             var showBoardDel = document.getElementById('showBoardDel')
             var showBoardContent = document.getElementById('showBoardContent')
+            var makeBoardTime = document.getElementById('makeBoardTime')
+            var showBoardLat = document.getElementById('showBoardLat')
+            var showBoardLng = document.getElementById('showBoardLng')
 
-
-
-            for(var i=0; i<boardInfo.length; i++){
-                let geocoder = new kakao.maps.services.Geocoder();
-
-                let callback = function(result, status) {
-                    if (status === kakao.maps.services.Status.OK) {
-                        // console.log(result[0].address);
-                        showBoardLocate.innerText =result[0].address.address_name
-                    }
-                };
-
-                if(arridBoard[i] == marker2.getTitle()){
-                    let coord = new kakao.maps.LatLng(arrLat[i], arrLng[i]);
-                    var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
-
-                    boardLat.innerText = arrLat[i];
-                    boardLng.innerText = arrLng[i];
-                    // showBoardLocate.innerText = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)[0].address.address_name
-                    showBoardNickname.innerText = arrshowBoardNickname[i];
-                    showBoardTitle.innerText = arrshowBoardTitle[i];
-                    showBoardType.innerText = arrshowBoardType[i];
-                    showBoardName.innerText = arrshowBoardName[i];
-                    showBoardOrder.innerText = arrshowBoardOrder[i];
-                    showBoardMin.innerText = arrshowBoardMin[i];
-                    showBoardDel.innerText = arrshowBoardDel[i];
-                    showBoardContent.innerText = arrshowBoardContent[i];
-                }else{
-
-                }
+            if(user1==null){
+                alert("로그인 이후 가능합니다")
+                location.href="/account/login"
             }
+            fetch(`/getMarkerBoard/${marker2.getTitle()}`)
+                .then(data=>data.json())
+                .then(responseData=>{
+                    console.log(responseData)
+                    let geocoder = new kakao.maps.services.Geocoder();
+
+                    let callback = function(result, status) {
+                        if (status === kakao.maps.services.Status.OK) {
+                            showBoardLocate.innerText =result[0].address.address_name
+                        }
+                    };
+                    let coord = new kakao.maps.LatLng(responseData.lat, responseData.lng);
+                    var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
+                    var createDate = responseData.createdDate
+                    var createDate_ = createDate.substring(0, 4)+"년 "+createDate.substring(5, 7)+"월" +createDate.substring(8, 10)+"일 ";
+                    var createDate__ = " "+createDate.substring(11,13)+"시"+createDate.substring(14,16)+"분"
+                    makeBoardTime.innerText = createDate_
+                    makeBoardTime.innerText+=createDate__
+                    showBoardNickname.innerText = responseData.username
+                    showBoardTitle.innerText = responseData.title
+                    showBoardType.innerText = responseData.storeType
+                    showBoardName.innerText = responseData.storeName
+                    showBoardOrder.innerText = responseData.orderDetail
+                    showBoardMin.innerText = responseData.minimumOrderAmount
+                    showBoardDel.innerText = responseData.deliveryCharge
+                    showBoardContent.innerText = responseData.content
+                    showBoardLat.innerText = responseData.lat
+                    showBoardLng.innerText = responseData.lng
+                    }
+                )
+
             boardDetailModal.style.display = 'block';
         });
     }
