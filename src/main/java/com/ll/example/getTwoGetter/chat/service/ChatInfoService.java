@@ -36,4 +36,8 @@ public class ChatInfoService {
     public void save(ChatInfo chatInfo) {
         chatInfoRepository.save(chatInfo);
     }
+
+    public void delete(ChatInfo chatInfo) {
+        chatInfoRepository.delete(chatInfo);
+    }
 }

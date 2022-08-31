@@ -50,6 +50,12 @@ public class ChatApiController {
         chatInfo.setUsername(chatInfoDto.getUsername());
         chatInfo.setPartner(chatInfoDto.getPartner());
         chatInfoService.save(chatInfo);
+    }
 
+    @DeleteMapping("/chatDelete/{id}")
+    public void chatDelete(@PathVariable long id){
+        System.out.println(id);
+        ChatInfo chatInfo = chatInfoService.findById(id);
+        chatInfoService.delete(chatInfo);
     }
 }
