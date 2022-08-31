@@ -1,0 +1,36 @@
+<!--카테고리 박스, 가운데 핀,
+현재 위치(replace 적용, 별도 파일임) 박스, gps 버튼 fragment-->
+
+
+<div class="map_wrap" th:fragment="map_wrap('map_wrap')">
+  <div id="map" style="width:100%;height:100%;"></div>
+  <ul id="category">
+    <li id="BK9" data-order="0">
+      <span class="category_bg bank"></span>
+      한식
+    </li>
+    <li id="MT1" data-order="1">
+      <span class="category_bg mart"></span>
+      양식
+    </li>
+    <li id="PM9" data-order="2">
+      <span class="category_bg pharmacy"></span>
+      일식
+    </li>
+    <li id="OL7" data-order="3">
+      <span class="category_bg oil"></span>
+      중식
+    </li>
+    <li id="CE7" data-order="4">
+      <span class="category_bg cafe"></span>
+      치킨
+    </li>
+    <li id="CS2" data-order="5">
+      <span class="category_bg store"></span>
+      피자
+    </li>
+  </ul>
+  <button class="gpsButton" id="gpsButtonConnect" onclick="gpsButton()" ><img style="width:40px; height:40px;" src="./images/gpsButton.svg" alt="gps"></button>
+  <img id="pin" th:src="@{/images/pin.png}" alt="pin" />
+  <div th:replace ="mainMap/present_location :: address_view('address_view')"></div>
+</div>
