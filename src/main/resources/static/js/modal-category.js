@@ -1,6 +1,6 @@
 /*<![CDATA[*/
 let boardInfo = /*[[${board}]]*/
-let user1 = /*[[${user}]]*/;
+let user1 = /*[[${user}]]*/
 /*]]>*/
 
 var arrLat = [];

@@ -87,11 +87,10 @@ public class AccountController {
             mailService.sendMail(username, randomPassword);
 
             model.addAttribute("message", "메일이 발송되었습니다.");
-            return "account/find";
         }else{
             model.addAttribute("message", "존재하지 않는 이메일입니다.");
-            return "account/find";
         }
+        return "account/find";
     }
 
     @PostMapping("/register")
