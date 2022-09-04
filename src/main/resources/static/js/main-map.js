@@ -1,3 +1,4 @@
+
 // 1. 기본 맵 생성
 
 // 1) 카카오맵을 담을 컨테이너 생성
@@ -9,8 +10,8 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 // 2) 로컬 스토리지 활용, 핀 위치 저장.
 /**
- 새로 고침 또는 페이지 이동을 하여도 핀이 그 자리에 고정되어 나타나도록 하기 위함.
- */
+새로 고침 또는 페이지 이동을 하여도 핀이 그 자리에 고정되어 나타나도록 하기 위함.
+*/
 if(localStorage.getItem("Lat")!=null){
     var latCenter = localStorage.getItem("Lat")
     var lngCenter = localStorage.getItem("Lng")
@@ -19,8 +20,8 @@ if(localStorage.getItem("Lat")!=null){
 
 // 3) 지도 객체 생성.
 /**
- parameter : Map(container, options)
- */
+parameter : Map(container, options)
+*/
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
 
@@ -36,8 +37,8 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
 
 // 1) gpsButton 메서드
 /**
- 현재 자신의 위치를 알려줄 수 있는 gps 마커를 띄우는 버튼에 필요한 메서드
- */
+현재 자신의 위치를 알려줄 수 있는 gps 마커를 띄우는 버튼에 필요한 메서드
+*/
 function gpsButton(){
     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
     if (navigator.geolocation) {
@@ -60,8 +61,8 @@ function gpsButton(){
 
 // 2) 마커 이미지 객체 생성
 /**
- 마커 이미지와 사이즈를 설정할 수 있다.
- */
+마커 이미지와 사이즈를 설정할 수 있다.
+*/
 let icon = new kakao.maps.MarkerImage(
     //마커 이미지를 변경
     "images/gpsIcon.png",

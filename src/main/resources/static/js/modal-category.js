@@ -1,6 +1,6 @@
 /*<![CDATA[*/
 let boardInfo = /*[[${board}]]*/
-    let user1 = /*[[${user}]]*/
+let user1 = /*[[${user}]]*/
 /*]]>*/
 
 var arrLat = [];
@@ -68,31 +68,31 @@ function addMarker(positions2, idBoard2) {
         fetch(`/getMarkerBoard/${marker2.getTitle()}`)
             .then(data=>data.json())
             .then(responseData=>{
-                    console.log(responseData)
-                    let geocoder = new kakao.maps.services.Geocoder();
+                console.log(responseData)
+                let geocoder = new kakao.maps.services.Geocoder();
 
-                    let callback = function(result, status) {
-                        if (status === kakao.maps.services.Status.OK) {
-                            showBoardLocate.innerText =result[0].address.address_name
-                        }
-                    };
-                    let coord = new kakao.maps.LatLng(responseData.lat, responseData.lng);
-                    var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
-                    var createDate = responseData.createdDate
-                    var createDate_ = createDate.substring(0, 4)+"년 "+createDate.substring(5, 7)+"월" +createDate.substring(8, 10)+"일 ";
-                    var createDate__ = " "+createDate.substring(11,13)+"시"+createDate.substring(14,16)+"분"
-                    makeBoardTime.innerText = createDate_
-                    makeBoardTime.innerText+=createDate__
-                    showBoardNickname.innerText = responseData.username
-                    showBoardTitle.innerText = responseData.title
-                    showBoardType.innerText = responseData.storeType
-                    showBoardName.innerText = responseData.storeName
-                    showBoardOrder.innerText = responseData.orderDetail
-                    showBoardMin.innerText = responseData.minimumOrderAmount
-                    showBoardDel.innerText = responseData.deliveryCharge
-                    showBoardContent.innerText = responseData.content
-                    showBoardLat.innerText = responseData.lat
-                    showBoardLng.innerText = responseData.lng
+                let callback = function(result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        showBoardLocate.innerText =result[0].address.address_name
+                    }
+                };
+                let coord = new kakao.maps.LatLng(responseData.lat, responseData.lng);
+                var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
+                var createDate = responseData.createdDate
+                var createDate_ = createDate.substring(0, 4)+"년 "+createDate.substring(5, 7)+"월" +createDate.substring(8, 10)+"일 ";
+                var createDate__ = " "+createDate.substring(11,13)+"시"+createDate.substring(14,16)+"분"
+                makeBoardTime.innerText = createDate_
+                makeBoardTime.innerText+=createDate__
+                showBoardNickname.innerText = responseData.username
+                showBoardTitle.innerText = responseData.title
+                showBoardType.innerText = responseData.storeType
+                showBoardName.innerText = responseData.storeName
+                showBoardOrder.innerText = responseData.orderDetail
+                showBoardMin.innerText = responseData.minimumOrderAmount
+                showBoardDel.innerText = responseData.deliveryCharge
+                showBoardContent.innerText = responseData.content
+                showBoardLat.innerText = responseData.lat
+                showBoardLng.innerText = responseData.lng
                 }
             )
 
