@@ -78,8 +78,8 @@ public class AccountController {
     public String findPw(@RequestBody String username, Model model){
         username = username.split("=")[1];
         username = username.replace("%40", "@");
-        if(userService.findByUsename(username)!=null){
-            User user = userService.findByUsename(username);
+        if(userService.findByUserName(username)!=null){
+            User user = userService.findByUserName(username);
 
             String randomPassword = Util.randomPassword();
             user.setPassword(randomPassword);
