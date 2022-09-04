@@ -1,7 +1,7 @@
-/*<![CDATA[*/
-let boardInfo = /*[[${board}]]*/
-let user1 = /*[[${user}]]*/
-/*]]>*/
+// /*<![CDATA[*/
+// let boardInfo = /*[[${board}]]*/
+// let user1 = /*[[${user}]]*/
+// /*]]>*/
 
 var arrLat = [];
 var arrLng = [];

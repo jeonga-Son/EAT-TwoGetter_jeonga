@@ -17,9 +17,16 @@
         <div th:replace ="board/modal_board :: boardDetailModal('boardDetailModal')"></div>
         <div th:replace ="board/modal_board :: chatRoomModal('chatRoomModal')"></div>
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
+        <button onclick="showData()">확인</button>
     </div>
 </div>
 
+<script th:inline="javascript">
+/*<![CDATA[*/
+    let boardInfo = /*[[${board}]]*/
+    let user1 = /*[[${user}]]*/
+/*]]>*/
+</script>
 
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=374dc9ec4e95ae00f4f8e366bf25c14e&libraries=services"></script>
