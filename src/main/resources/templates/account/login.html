@@ -10,7 +10,7 @@
 
 <body class="text-center">
 <main class="form-signin">
-    <form th:action="@{/account/login}" method="post">
+    <form th:action="@{/account/login}" method="post" onsubmit="sessionSaveUsername()">
         <a th:href="@{/}">
             <img class="mb-4" src="../images/mainLogo.png" alt="" width="72" height="72">
         </a>
@@ -47,15 +47,6 @@
         <p class="mt-5 mb-3 text-muted">&copy; 멋쟁이사자</p>
     </form>
 </main>
-<script th:inline="javascript">
-    // var message = [[${message}]];
-    // if(message!==null){
-    //     alert(message);
-    // }
-    // location.replace([[${searchUrl}]]);
-    var username = document.getElementById('username').value
-    sessionStorage.setItem("username",username)
-    console.log(username)
-</script>
+
 </body>
 </html>

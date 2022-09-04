@@ -17,6 +17,7 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/account")
+//url의 시작주소가 "/account" 일 경우
 public class AccountController {
     @Autowired
     private UserService userService;
@@ -36,18 +37,19 @@ public class AccountController {
 
     @GetMapping("/login")
     public String login(){
-
         return "account/login";
     }
 
     @GetMapping("/register")
     public String register(Model model){
+        //회원 정보를 담을 model을 생성하여 폼에 전달
         User user = new User();
         model.addAttribute("userForm", user);
         return "account/register";
     }
     @GetMapping("/modify")
     public String modify(@RequestParam String username, @RequestParam String nickname, @RequestParam String password, HttpSession session){
+        //수정할 때 입력받은 정보를 조건에 맞는지 필터링과정
         if(username.trim().equals("") || nickname.trim().equals("") || password.trim().equals("")){
             if(username.trim().equals("")){
                 session.setAttribute("message" ,"이메일을 입력해주세요.");
@@ -62,6 +64,7 @@ public class AccountController {
                 return "redirect:/";
             }
         }
+        //입력받은 정보로 수정하기 위해 생성한 user에 값을 set 한 후 저장
         User user = userRepository.findByUsername(username);
         user.setNickname(nickname);
         user.setPassword(password);
@@ -76,11 +79,13 @@ public class AccountController {
     }
     @PostMapping("/find")
     public String findPw(@RequestBody String username, Model model){
+        //RequestBody로 넘어온 username값을 활용하기 위한 필터링
         username = username.split("=")[1];
         username = username.replace("%40", "@");
-        if(userService.findByUsename(username)!=null){
-            User user = userService.findByUsename(username);
 
+        //비밀번호를 찾을 때 google계정을 활용하여 임의의 비밀번호를 전송하고 현재 저장된 비밀번호를 임의의 비밀번호로 수정한다.
+        if(userService.findByUsername(username)!=null){
+            User user = userService.findByUsername(username);
             String randomPassword = Util.randomPassword();
             user.setPassword(randomPassword);
             userService.save(user);

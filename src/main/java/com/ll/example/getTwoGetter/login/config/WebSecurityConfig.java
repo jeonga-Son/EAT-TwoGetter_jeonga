@@ -22,6 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
+    //Spring security 설정
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

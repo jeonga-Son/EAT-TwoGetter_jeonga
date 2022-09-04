@@ -26,14 +26,17 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(@AuthenticationPrincipal UserDetails userDetails, Model model, HttpSession session){
+        //로그인 상태일 경우 user의 정보를 model에 담아서 같이 전달
         if(userDetails != null){
             String username = userDetails.getUsername();
-            User user = userService.findByUsename(username);
+            User user = userService.findByUsername(username);
             model.addAttribute("user",user);
         }
+        //모든 게시글의 정보를 index에 전달
         List<Board> boards = boardService.findAll();
         model.addAttribute("board", boards);
         if(session.getAttribute("message")!=null){
+            //session에 저장된 메시지값을 index에 전달
             String message = (String) session.getAttribute("message");
             model.addAttribute("message", message);
         }

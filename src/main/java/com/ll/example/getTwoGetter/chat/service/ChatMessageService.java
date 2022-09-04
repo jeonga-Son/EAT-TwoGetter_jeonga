@@ -13,11 +13,13 @@ import java.util.List;
 public class ChatMessageService {
     private final ChatMessageRepository chatMessageRepository;
 
+    //채팅방 정보에 해당하는 채팅 메시지를 찾는다
     public List<ChatMessage> findByChatInfo(ChatInfo chatInfo) {
         List<ChatMessage> chatMessages = chatMessageRepository.findByChatInfo(chatInfo);
         return chatMessages;
     }
 
+    //채팅 메시를 저장한다.
     public void save(ChatMessage chatMessage) {
         chatMessageRepository.save(chatMessage);
     }

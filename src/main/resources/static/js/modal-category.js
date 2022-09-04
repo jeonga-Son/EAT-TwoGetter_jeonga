@@ -21,18 +21,17 @@ const boardDetailModal_close2 = document.querySelector('.boardDetailModal_close2
 
 showBoardMarker();
 
+//게시글이 생성된 위도, 경도를 이용하여 마커를 띄우기 위해
+//컨트롤러에서 받아온 boardInfo에 담겨져 있는 게시글 정보를 선언한 배열에 넣어준다.
 function showBoardMarker() {
-
     for (var i = 0; i < boardInfo.length; i++) {
         arrLat[i] = boardInfo[i].lat;
         arrLng[i] = boardInfo[i].lng;
         arridBoard[i] = boardInfo[i].id;
     }
-
     for (var i = 0; i < boardInfo.length; i++) {
         positions[i] = new kakao.maps.LatLng(arrLat[i], arrLng[i]);
     }
-
     for (var i = 0; i < positions.length; i++) {
         addMarker(positions[i], arridBoard[i]);
     }
@@ -47,6 +46,7 @@ function addMarker(positions2, idBoard2) {
         title: idBoard2
     });
 
+    //마커가 클릭되었을때 해당 마커마다 각 게시판 정보를 보여준다.
     kakao.maps.event.addListener(marker2, 'click', function() {
         var showBoardNickname= document.getElementById('showBoardNickname')
         var showBoardLocate = document.getElementById('showBoardLocate')
@@ -61,14 +61,16 @@ function addMarker(positions2, idBoard2) {
         var showBoardLat = document.getElementById('showBoardLat')
         var showBoardLng = document.getElementById('showBoardLng')
 
+        //로그인 상태가 아닐 경우
         if(user1==null){
             alert("로그인 이후 가능합니다")
             location.href="/account/login"
         }
+        //로그인 상태의 경우
+        //선택된 마커에 대한 게시글 정보를 요청하고 받아온 값을 HTML태그의 text에 넣어준다.
         fetch(`/getMarkerBoard/${marker2.getTitle()}`)
             .then(data=>data.json())
             .then(responseData=>{
-                console.log(responseData)
                 let geocoder = new kakao.maps.services.Geocoder();
 
                 let callback = function(result, status) {
@@ -95,7 +97,6 @@ function addMarker(positions2, idBoard2) {
                 showBoardLng.innerText = responseData.lng
                 }
             )
-
         boardDetailModal.style.display = 'block';
     });
 }

@@ -51,6 +51,7 @@
 </div>
 
 <script>
+    //반응형 웹 => 웹의 크기가 줄어들었을 때 해당하는 메뉴버튼을 눌르면 class 명을 수정하여 상황에 맞게 작동하도록 한다.
     function showNav(){
         if(document.getElementById('navFix').classList.contains('sb-sidenav-toggled')){
             document.getElementById('navFix').classList.remove('sb-sidenav-toggled')
@@ -58,37 +59,44 @@
             document.getElementById('navFix').classList.add('sb-sidenav-toggled')
         }
     }
+    //로그아웃 버튼이 눌렸을 때 localStorage에 저장된 현재의 위도, 경도 정보를 삭제한다.
     function removeStorage(){
         localStorage.removeItem("Lat")
         localStorage.removeItem("Lng")
     }
+
     const showProfileModal  = document.querySelector(".modal")
+    //버튼을 누르면 프로필을 보여주기 위한 함수
     function showProfile(){
         showProfileModal.style.display='block';
     }
+    //버튼을 누르면 프로필을 닫는 함수
     function closeProfile(){
         showProfileModal.style.display='none';
     }
 </script>
+
 <script th:inline="javascript">
+    //컨트롤러에서 받아온 변수값을 js에서 사용하기 위한 선언
     /*<![CDATA[*/
     let chatInfos = /*[[${chatInfos}]]*/;
     let chatInfo_length = /*[[${chatInfos.size()}]]*/;
     let user = /*[[${user}]]*/;
     /*]]>*/
 </script>
+
 <script>
     const chatModal = document.querySelector('.chatModal');
     const chatClose = document.querySelector('.closeChat');
-    // chatClose.addEventListener('click', () => {
-    //     content.innerText=""
-    //     chatModal.style.display = 'none';
-    // });
+
+    //채팅방에서 닫기 버튼을 눌렀을 때 채팅방을 끄는 함수
     function closeChat(){
         chatClose.style.display = 'none';
         content.innerText=""
         location.reload();
     }
+
+    //선택한 채팅방에 채팅내용을 실시간으로 받아오며 재귀함수를 이용해서 지정한 시간을 주기로 계속해서 최신화한다.
     function chatMessage_upload(id){
         fetch(`/chatApi/chatMessage/${id}`)
             .then(data=>data.json())
@@ -97,6 +105,7 @@
                 for(let i=0; i<responseData.length; i++){
                     var time = responseData[i].chatMessageTime
                     var time2 = time.substring(11,16)
+                    //채팅내용을 계속해서 추가한다.
                     if(responseData[i].username == user.nickname){
                         content.innerHTML+=`<div class="chatUserAll"><div class="chatUser"><div class="chatUsername">나&nbsp;</div>`+`<div class="chatTime">${time2}</div></div>`+`<br/>`+`<div class="chatMessageUser">
                         ${responseData[i].content}</div></div>`
@@ -113,6 +122,8 @@
             })
         setTimeout(function (){chatMessage_upload(id)},2000);
     }
+
+    //채팅방에서 POST 요청으로 메시지를 입력하면 DB에 추가하기 위한 함수
     function messagePost(){
         var inputMessage = document.getElementById('inputMessage').value;
         fetch("/chatApi/sendMessage/"+chatId,{
@@ -125,31 +136,36 @@
                 chatId : chatId,
                 chatContent: inputMessage
             }),
+            //body에 닉네임과 채팅방ID, 입력된 채팅내용을 추가하여 POST요청을 보낸다.
         }).then((response)=>console.log(response))
         document.getElementById('inputMessage').value=""
     }
 </script>
+
 <script>
-    // const modal = document.querySelector('.modal');
-    // const btnClosePopup = document.querySelector('.modal_close');
     const title = document.getElementById('title');
     const content = document.getElementById('content');
     let arr_chatId=[];
     let chatId;
+    //for문을 활용하여 새로 생성한 arr_chatId 배열에 컨트롤러에서 받아온 chatInfos의 제목에 해당하는 ID값을 가진 태그를 추출하여 추가한다.
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i] = document.getElementById(chatInfos[i].chatTitle)
     }
+    //해당하는 채팅방이 클릭되었을 때 상황에 맞는 채팅방 제목과 채팅방 내용을 요청하기 위한 함수
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i].addEventListener('click', () => {
             title.innerHTML = `<div>${chatInfos[i].chatTitle}</div>`
             chatId = chatInfos[i].id;
             chatMessage_upload(chatInfos[i].id)
-            // chatModal.style.display = 'block';
         });
     }
+
+    //채팅방 모달을 띄우는 함수
     function showChatModal(){
         chatModal.style.display = 'block';
     }
+
+    //채팅방을 삭제하기 위한 함수
     function deleteChat(id){
         if (!confirm("정말로 삭제하시겠습니까?")) {
             // alert("삭제가 취소되었습니다.")
@@ -163,11 +179,13 @@
                 }
             })
         }
+        //삭제 버튼을 눌렀을 때 DELETE 요청을 보낸다.
 
     }
 
 
 </script>
+
 <script th:inline="javascript">
     var message = [[${message}]];
     if(message!==null){
@@ -175,24 +193,25 @@
     }
     // location.replace([[${searchUrl}]]);
 </script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-<script  th:inline="javascript">
-    function deleteAccount(username){
-        if (!confirm("정말로 삭제하시겠습니까?")) {
-            alert("삭제가 취소되었습니다.")
-        } else {
-            $.ajax({
-                url:'/api/users/'+username,
-                type:'DELETE',
-                success: function (result){
-                    alert('정상적으로 삭제 되었습니다.')
-                    window.location.href="/account/login";
-                }
-            })
-        }
-    }
-</script>
+<!--<script  th:inline="javascript">-->
+<!--    function deleteAccount(username){-->
+<!--        if (!confirm("정말로 삭제하시겠습니까?")) {-->
+<!--            alert("삭제가 취소되었습니다.")-->
+<!--        } else {-->
+<!--            $.ajax({-->
+<!--                url:'/api/users/'+username,-->
+<!--                type:'DELETE',-->
+<!--                success: function (result){-->
+<!--                    alert('정상적으로 삭제 되었습니다.')-->
+<!--                    window.location.href="/account/login";-->
+<!--                }-->
+<!--            })-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>-->
 <!--<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>-->

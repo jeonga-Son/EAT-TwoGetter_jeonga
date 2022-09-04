@@ -17,10 +17,10 @@
         <div th:replace ="board/modal_board :: boardDetailModal('boardDetailModal')"></div>
         <div th:replace ="board/modal_board :: chatRoomModal('chatRoomModal')"></div>
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
-        <button onclick="showData()">확인</button>
     </div>
 </div>
 
+<!--컨트롤러에서 받아온 게시글들의 정보와 user에 대한 정보를 js에서 사용하기 위함-->
 <script th:inline="javascript">
 /*<![CDATA[*/
     let boardInfo = /*[[${board}]]*/

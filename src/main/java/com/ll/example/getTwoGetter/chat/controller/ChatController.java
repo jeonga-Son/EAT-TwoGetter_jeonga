@@ -29,12 +29,13 @@ public class ChatController {
     public String chatList(@AuthenticationPrincipal UserDetails userDetails, Model model){
         if(userDetails != null){
             String username = userDetails.getUsername();
-            User user = userService.findByUsename(username);;
+            User user = userService.findByUsername(username);;
             List<ChatInfo> chatInfos_user =chatInfoService.findByUsername(user.getNickname());
             List<ChatInfo> chatInfos_partner = chatInfoService.findByPartner(user.getNickname());
 
             List<ChatInfo> joined = new ArrayList<>();
 
+            //joined 리스트에 채팅방에 user 객체와 상대방 partner 객체를 둘 다 넣고 폼에 전달한다.
             joined.addAll(chatInfos_user);
             joined.addAll(chatInfos_partner);
             model.addAttribute("chatInfos", joined);
