@@ -150,7 +150,7 @@
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">편의 메뉴</div>
-                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/middlePlaceMap/middleMap}">불량회원 신고하기</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/report/userReport}">불량회원 신고하기</a>
                             <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">불량회원 신고하기</a>
 
                     </div>
@@ -182,7 +182,6 @@
             </footer>
         </div>
     </div>
-
 
 </body>
 </html>

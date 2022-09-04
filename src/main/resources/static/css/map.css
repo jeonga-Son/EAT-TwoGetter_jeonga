@@ -32,6 +32,7 @@
 }
 
 #address_view {
+    min-width:400px;
     color:white;
     z-index:1;
     background-color:rgba(24,53,125,0.87);
