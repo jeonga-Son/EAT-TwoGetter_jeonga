@@ -28,32 +28,34 @@
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!" onclick="showNav()"><i class="fas fa-bars"></i></button>
         <div class="container">
         </div>
-            <p class= "mt-3" style="color: white; width: 100px;" sec:authorize="!isAuthenticated()">비로그인</p>
+            <p class= "mt-3" style="color: white; width: 280px;" sec:authorize="!isAuthenticated()">로그인을 해주세요</p>
+            <!--로그아웃 시 나타나는 상단 토글바-->
             <div sec:authorize="!isAuthenticated()">
                 <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="/account/login" th:href="@{/account/login}">Login</a></li>
+                            <li><a class="dropdown-item" href="/account/login" th:href="@{/account/login}">로그인</a></li>
                         </ul>
 
                     </li>
                 </ul>
             </div>
 
-        <p class="userState mt-3" style="color: white; width: 100px;"  th:text="${user.nickname}" sec:authorize="isAuthenticated()">비로그인</p>
+        <!--로그인 시 나타나는 상단 토글바-->
+        <p class="userState mt-3" style="color: white; width: 100px;"  th:text="${user.nickname}" sec:authorize="isAuthenticated()">로그인을 해주세요</p>
         <div sec:authorize="isAuthenticated()">
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item btn-open-popup" href="#!" onclick="showProfile()">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a class="dropdown-item" href="#!">나의 프로필</a></li>
+                        <li><a class="dropdown-item btn-open-popup" href="#!" onclick="showProfile()">회원정보 수정</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><form th:action="@{/logout}" method="POST" onsubmit="removeStorage()">
-                            <button class="dropdown-item" type="submit" >Logout</button>
+                            <button class="dropdown-item" type="submit" >로그아웃</button>
                         </form></li>
                     </ul>
                 </li>
