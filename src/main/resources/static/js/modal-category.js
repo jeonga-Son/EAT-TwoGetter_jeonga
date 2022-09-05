@@ -3,6 +3,7 @@ var arrLat = [];
 var arrLng = [];
 var positions = [];
 var arridBoard= [];
+var markers = [];
 
 var imageSrc2 = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 // 마커 이미지의 이미지 크기 입니다
@@ -31,6 +32,8 @@ function showBoardMarker() {
 
     for (var i = 0; i < positions.length; i++) {
         addMarker(positions[i], arridBoard[i]);
+        // 모든 마커를 숨깁니다.
+        markers[i].setVisible(false);
     }
 }
 
@@ -42,6 +45,9 @@ function addMarker(positions2, idBoard2) {
         image : markerImage2, // 마커 이미지
         title: idBoard2
     });
+
+    // 생성된 마커를 배열에 추가합니다
+    markers.push(marker2);
 
     kakao.maps.event.addListener(marker2, 'click', function() {
         var showBoardNickname= document.getElementById('showBoardNickname')
