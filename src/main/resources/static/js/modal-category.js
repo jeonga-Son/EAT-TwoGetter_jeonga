@@ -83,6 +83,8 @@ function addMarker(positions2, idBoard2) {
                 var createDate = responseData.createdDate
                 var createDate_ = createDate.substring(0, 4)+"년 "+createDate.substring(5, 7)+"월" +createDate.substring(8, 10)+"일 ";
                 var createDate__ = " "+createDate.substring(11,13)+"시"+createDate.substring(14,16)+"분"
+                var boardMinimumOrderAmount = responseData.minimumOrderAmount + "원"
+                var boardDeliveryCharge = responseData.deliveryCharge + "원"
 
                 makeBoardTime.innerText = createDate_
                 makeBoardTime.innerText+=createDate__
@@ -91,8 +93,8 @@ function addMarker(positions2, idBoard2) {
                 showBoardType.innerText = responseData.storeType
                 showBoardName.innerText = responseData.storeName
                 showBoardOrder.innerText = responseData.orderDetail
-                showBoardMin.innerText = responseData.minimumOrderAmount
-                showBoardDel.innerText = responseData.deliveryCharge
+                showBoardMin.innerText = boardMinimumOrderAmount
+                showBoardDel.innerText = boardDeliveryCharge
                 showBoardContent.innerText = responseData.content
                 showBoardLat.innerText = responseData.lat
                 showBoardLng.innerText = responseData.lng
