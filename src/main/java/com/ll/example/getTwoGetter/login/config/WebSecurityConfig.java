@@ -22,13 +22,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
-    //Spring security 설정
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/account/**","/css/**","/api/**","/chatApi/**", "/images/**","/board/**", "/post/**", "/chat/**","/boardInfo2","/boardInfo", "/js/**").permitAll()
+                .antMatchers("/","/account/**","/css/**","/api/**","/chatApi/**", "/images/**","/board/**", "/post/**", "/chat/**","/boardInfo2","/boardInfo", "/aaa").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -40,11 +39,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .permitAll();
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {

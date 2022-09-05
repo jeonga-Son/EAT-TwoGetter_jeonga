@@ -3,8 +3,6 @@ package com.ll.example.getTwoGetter;
 import java.util.Random;
 
 public class Util {
-
-    //임의의 비밀번호를 만든다.
     public static String randomPassword(){
         int leftLimit = 48; // numeral '0'
         int rightLimit = 122; // letter 'z'

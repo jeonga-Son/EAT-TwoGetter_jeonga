@@ -24,7 +24,6 @@ btnClosePopup3.addEventListener('click', () => {
 });
 
 
-//계정을 삭제하기 위한 함수
 function deleteAccount(username){
     if (!confirm("정말로 삭제하시겠습니까?")) {
         alert("삭제가 취소되었습니다.")

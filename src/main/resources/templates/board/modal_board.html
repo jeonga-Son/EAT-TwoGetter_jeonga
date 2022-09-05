@@ -96,8 +96,7 @@
 <div sec:authorize="isAuthenticated()" th:fragment="boardDetailModal('boardDetailModal')">
   <div class="boardDetailModal">
     <div class="boardDetailModal_content">
-      <button onclick="middlespace()">중간 지점 찾기</button>
-      <h4 class="boardDetailModal_header">게시글 정보입니다.</h4>
+      <h3 class="boardDetailModal_header">게시글 정보입니다.</h3>
       <div class="boardDetailModal_body ">
         <table class="table">
           <thead>
@@ -155,6 +154,7 @@
         <input type="hidden" id="showBoardLng" />
 
         <div class="col-auto mt-5">
+          <button type="button" class="btn btn-success" onclick="middlespace()">중간 지점 찾기</button>
           <button type="button" class="btn btn-primary chat-btn" onclick="showChat()">채팅하기</button>
           <button type="button" class="btn btn-secondary boardDetailModal_close">닫기</button>
         </div>

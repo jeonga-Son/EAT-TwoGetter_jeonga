@@ -20,15 +20,12 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-
     @Transactional
-    //게시글 저장
     public Long savePost(BoardDto boardDto) {
         return boardRepository.save(boardDto.toEntity()).getId();
     }
 
     @Transactional
-    //게시글의 모든 정보를 리턴
     public List<BoardDto> getBoardList() {
         List<Board> boardList = boardRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
@@ -54,7 +51,6 @@ public class BoardService {
     }
 
     @Transactional
-    //해당하는 게시글 정보를 리턴
     public BoardDto getPost(Long id) {
         Board board = boardRepository.findById(id).get();
 
@@ -80,13 +76,11 @@ public class BoardService {
         boardRepository.deleteById(id);
     }
 
-    //게시글의 모든 정보를 리턴
     public List<Board> findAll() {
         List<Board> boards = boardRepository.findAll();
         return boards;
     }
 
-    //해당하는 게시글의 정보를 리턴
     public Board findById(long id) {
         Board board = boardRepository.findById(id).orElse(null);
         return board;

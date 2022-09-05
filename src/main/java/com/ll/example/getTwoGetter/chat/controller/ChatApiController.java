@@ -17,7 +17,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/chatApi")
-//시작주소가 "chatApi일 경우 상황에 맞는 chat정보의 api를 json형식으로 리턴"
 public class ChatApiController {
     @Autowired
     ChatInfoService chatInfoService;
@@ -25,14 +24,12 @@ public class ChatApiController {
     ChatMessageService chatMessageService;
 
     @GetMapping("/chatMessage/{id}")
-    //채팅방에 채팅메시지들을 List로 리턴
     public List<ChatMessage> showChatMessage(@PathVariable("id") long id){
         ChatInfo chatInfo = chatInfoService.findById(id);
         List<ChatMessage> chatMessages = chatMessageService.findByChatInfo(chatInfo);
         return chatMessages;
     }
     @PostMapping("/sendMessage/{id}")
-    //채팅 메시지 생성
     public void sendMessage(@PathVariable long id, @RequestBody ChatMessageDto chatMessageDto){
         ChatInfo chatInfo = chatInfoService.findById(Long.parseLong(chatMessageDto.getChatId()));
 
@@ -43,10 +40,9 @@ public class ChatApiController {
         chatMessage.setChatMessageTime(LocalDateTime.now());
 
         chatMessageService.save(chatMessage);
-    }
 
+    }
     @PostMapping("/chatPost")
-    //채팅방 생성
     public void sendChatPost(@RequestBody ChatInfoDto chatInfoDto){
         ChatInfo chatInfo = new ChatInfo();
         chatInfo.setChatTitle(chatInfoDto.getChatTitle());
@@ -57,7 +53,6 @@ public class ChatApiController {
     }
 
     @DeleteMapping("/chatDelete/{id}")
-    //채팅방 삭제
     public void chatDelete(@PathVariable long id){
         System.out.println(id);
         ChatInfo chatInfo = chatInfoService.findById(id);
