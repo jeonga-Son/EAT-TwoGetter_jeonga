@@ -32,9 +32,9 @@ public class Board {
     @Column(length = 100, nullable = false)
     private String orderDetail;
     @Column(length = 100, nullable = false)
-    private String minimumOrderAmount;
+    private int minimumOrderAmount;
     @Column(length = 100, nullable = false)
-    private String deliveryCharge;
+    private int deliveryCharge;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
@@ -55,8 +55,8 @@ public class Board {
     private String lng;
 
     @Builder
-    public Board(Long id, String title,  String storeType, String storeName, String orderDetail, String minimumOrderAmount,
-                 String deliveryCharge, String content, String username, String lat, String lng) {
+    public Board(Long id, String title,  String storeType, String storeName, String orderDetail, int minimumOrderAmount,
+                 int deliveryCharge, String content, String username, String lat, String lng) {
         this.id = id;
         this.title = title;
         this.storeType = storeType;
