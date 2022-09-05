@@ -33,7 +33,7 @@ function showBoardMarker() {
     for (var i = 0; i < positions.length; i++) {
         addMarker(positions[i], arridBoard[i]);
         // 모든 마커를 숨깁니다.
-        markers[i].setVisible(false);
+        // markers[i].setVisible(false);
     }
 }
 
