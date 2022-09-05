@@ -53,6 +53,21 @@
     box-shadow: -5px -5px 5px gray;
 }
 
+#middleAddress {
+     min-width:400px;
+     color:white;
+     z-index:1;
+     background-color:rgba(24,53,125,0.87);
+     position:absolute;
+     left:0%;
+     top:0%;
+     width:40%;
+     height:20%;
+     border-radius:0% 0% 50% 50%;
+     border:1px solid;
+     box-shadow: 5px 5px 5px gray;
+ }
+
 #centerAddr {
     display:block;
     margin-top:2px;
