@@ -32,8 +32,6 @@ function showBoardMarker() {
 
     for (var i = 0; i < positions.length; i++) {
         addMarker(positions[i], arridBoard[i]);
-        // 모든 마커를 숨깁니다.
-        markers[i].setVisible(false);
     }
 }
 
@@ -71,6 +69,7 @@ function addMarker(positions2, idBoard2) {
             .then(data=>data.json())
             .then(responseData=>{
                 console.log(responseData)
+
                 let geocoder = new kakao.maps.services.Geocoder();
 
                 let callback = function(result, status) {
@@ -78,11 +77,13 @@ function addMarker(positions2, idBoard2) {
                         showBoardLocate.innerText =result[0].address.address_name
                     }
                 };
+
                 let coord = new kakao.maps.LatLng(responseData.lat, responseData.lng);
                 var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
                 var createDate = responseData.createdDate
                 var createDate_ = createDate.substring(0, 4)+"년 "+createDate.substring(5, 7)+"월" +createDate.substring(8, 10)+"일 ";
                 var createDate__ = " "+createDate.substring(11,13)+"시"+createDate.substring(14,16)+"분"
+
                 makeBoardTime.innerText = createDate_
                 makeBoardTime.innerText+=createDate__
                 showBoardNickname.innerText = responseData.username
