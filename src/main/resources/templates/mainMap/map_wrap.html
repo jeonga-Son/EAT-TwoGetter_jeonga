@@ -4,6 +4,7 @@
 
 <div class="map_wrap" th:fragment="map_wrap('map_wrap')">
   <div id="map" style="width:100%;height:100%;"></div>
+    <!--마커게시판 필터링 바 삽입 공간-->
     <div id="category">
       <button type="button" id="all" class="all" onclick="allBtn()" data-order="0" height ="40" width="40" th:valeu="전체"><img src="./images/all.png" height ="40" width="40" />전체</button>
       <button type="button" id="k_food" onclick="k_foodBtn()" class="k_food_btn" data-order="1" th:valeu="한식"><img src="./images/k-food.png" height ="40" width="40"  />한식</button>
@@ -14,6 +15,7 @@
       <button type="button" id="late_food"  class="late_food" data-order="6" onclick="late_foodBtn()" th:valeu="야식"><img src="./images/late-food.png" height ="40" width="40"  />야식</button>
       <button type="button" id="etc"  class="etc" data-order="7" onclick="etcBtn()" th:valeu="기타"><img src="./images/etc.png" height ="40" width="40" />기타</button>
     </div>
+
   <button class="gpsButton" id="gpsButtonConnect" onclick="gpsButton()" ><img style="width:40px; height:40px;" src="./images/gpsButton.svg" alt="gps"></button>
   <img id="pin" th:src="@{/images/pin.png}" alt="pin" />
   <div th:replace ="mainMap/present_location :: address_view('address_view')"></div>
