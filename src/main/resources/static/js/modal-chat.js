@@ -43,7 +43,16 @@ function postChat(){
 
 }
 
-function middlespace(){
+function middleSpace(){
+//     console.log(user1.nickname)
+//     console.log("---")
+//     console.log(showBoardNickname.innerText)
+    if(user1.nickname === showBoardNickname.innerText){
+        alert("자기 자신과는 중간거리를 알아볼 수 없어요!!")
+        location.href="/"
+        return;
+    }
+
     var partnerLat= document.getElementById('showBoardLat').innerText
     var partnerLng =document.getElementById('showBoardLng').innerText
     location.href=`/middlePlaceMap/middleMap?lat=${partnerLat}&lng=${partnerLng}`;

@@ -67,6 +67,9 @@ function addMarker(positions2, idBoard2) {
             alert("로그인 이후 가능합니다")
             location.href="/account/login"
         }
+
+
+
         fetch(`/getMarkerBoard/${marker2.getTitle()}`)
             .then(data=>data.json())
             .then(responseData=>{
