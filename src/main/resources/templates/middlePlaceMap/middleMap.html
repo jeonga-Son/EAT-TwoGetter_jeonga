@@ -64,6 +64,9 @@
         cusLng = parseFloat(partnerLng);
         cenLat = (parseFloat(myLat) + cusLat) / 2;
         cenLng = (parseFloat(myLng) + cusLng) / 2;
+        console.log(myLat, myLng);
+        console.log(cusLat, cusLng);
+        console.log(cenLat, cenLng);
 
         let geocoder = new kakao.maps.services.Geocoder();
 
@@ -96,7 +99,7 @@
     //마커 이미지를 변경
     let iconCenter = new kakao.maps.MarkerImage(
         //middleMap.html이 별도 디렉토리 안에 있기 때문에 ../를 써줘야 한다.
-        '../images/pin.png',
+        '../images/middleMapCenterPin.png',
         new kakao.maps.Size(40, 40)
     );
 

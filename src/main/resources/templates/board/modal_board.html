@@ -1,7 +1,7 @@
 <div sec:authorize="isAuthenticated()" th:fragment="boardModal('boardModal')">
   <div class="boardModal">
     <div class="boardModal_content">
-      <h4 class="boardModal_header border-bottom mb-3">현재 위치에 EAT TWO를 띄웁니다!</h4>
+      <h4 class="boardModal_header border-bottom mb-3" th:text="${user.nickname}"></h4>
       <div class="boardModal_body ">
         <form action="/post" method="post">
           <div class="form-group row">
