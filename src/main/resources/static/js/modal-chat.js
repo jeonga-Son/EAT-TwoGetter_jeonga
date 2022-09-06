@@ -48,8 +48,12 @@ function middleSpace(){
 //     console.log("---")
 //     console.log(showBoardNickname.innerText)
     if(user1.nickname === showBoardNickname.innerText){
-        alert("자기 자신과는 중간거리를 알아볼 수 없어요!!")
-        location.href="/"
+        Swal.fire({
+          icon: 'error',
+          title: '다른 사람과 만나세요!',
+          text: '자기 자신과의 중간거리는 알아볼 수 없어요!',
+        })
+
         return;
     }
 
