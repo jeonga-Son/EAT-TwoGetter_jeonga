@@ -31,6 +31,18 @@ let boardInfo = /*[[${board}]]*/
 let user1 = /*[[${user}]]*/
 /*]]>*/
 </script>
+
+<!--프로필 변경 시 필터-->
+<script th:inline="javascript">
+    var message = [[${message}]];
+    if(message!==null){
+        alert(message);
+        console.log(message)
+        message=null;
+        console.log(message)
+    }
+    // location.replace([[${searchUrl}]]);
+</script>
 <script src="js/modal-category.js"></script>
 <script src="js/category-marker.js"></script>
 <script src="js/modal-chat.js"></script>

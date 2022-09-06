@@ -7,10 +7,13 @@ import com.ll.example.getTwoGetter.login.Service.UserService;
 import com.ll.example.getTwoGetter.Util;
 import com.ll.example.getTwoGetter.login.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -47,27 +50,40 @@ public class AccountController {
         return "account/register";
     }
     @GetMapping("/modify")
-    public String modify(@RequestParam String username, @RequestParam String nickname, @RequestParam String password, HttpSession session){
-        if(username.trim().equals("") || nickname.trim().equals("") || password.trim().equals("")){
-            if(username.trim().equals("")){
-                session.setAttribute("message" ,"이메일을 입력해주세요.");
-                return "redirect:/";
+    public String modify(@RequestParam String username, @RequestParam String nickname, @RequestParam String password, HttpSession session, @AuthenticationPrincipal UserDetails userDetails, RedirectAttributes rttr){
+        if(userDetails != null){
+            if(nickname.length()==0|| password.length()==0){
+                if(password.length()==0 && nickname.length()!=0){
+//                    session.setAttribute("message" ,"비밀번호를 입력해주세요.");
+                    rttr.addFlashAttribute("modifyTry", "false");
+                    rttr.addFlashAttribute("message", "비밀번호를 입력해주세요");
+                    return "redirect:/";
+                }else{
+//                    session.setAttribute("message" ,"닉네임을 입력해주세요.");
+                    rttr.addFlashAttribute("modifyTry", "false");
+                    rttr.addFlashAttribute("message", "닉네임을 입력해주세요");
+                    return "redirect:/";
+                }
             }
-            if(nickname.trim().equals("")){
-                session.setAttribute("message" ,"닉네임을 입력해주세요.");
-                return "redirect:/";
+            if(userService.findByNickname(nickname)!=null){
+                User user2 = userService.findByNickname(nickname);
+                User user1 = userService.findByUsername(userDetails.getUsername());
+                if(!(user2.getNickname().equals(user1.getNickname()))){
+//                    session.setAttribute("message" ,"중복되는 닉네임이 존재합니다.");
+                    rttr.addFlashAttribute("modifyTry", "false");
+                    rttr.addFlashAttribute("message", "중복되는 닉네임이 존재합니다.");
+                    return "redirect:/";
+                }
             }
-            if(password.trim().equals("")){
-                session.setAttribute("message" ,"비밀번호를 입력해주세요.");
-                return "redirect:/";
-            }
+            User user = userService.findByUsername(username);
+            user.setNickname(nickname);
+            user.setPassword(password);
+            user.setUsername(username);
+            userService.save(user);
+            rttr.addFlashAttribute("message" ,"수정이 완료되었습니다.");
+            rttr.addFlashAttribute("modifyTry", "true");
+            return "redirect:/";
         }
-        User user = userRepository.findByUsername(username);
-        user.setNickname(nickname);
-        user.setPassword(password);
-        user.setUsername(username);
-        userService.save(user);
-        session.setAttribute("message" ,"수정이 완료되었습니다.");
         return "redirect:/";
     }
     @GetMapping("/find")
@@ -78,8 +94,8 @@ public class AccountController {
     public String findPw(@RequestBody String username, Model model){
         username = username.split("=")[1];
         username = username.replace("%40", "@");
-        if(userService.findByUserName(username)!=null){
-            User user = userService.findByUserName(username);
+        if(userService.findByUsername(username)!=null){
+            User user = userService.findByUsername(username);
 
             String randomPassword = Util.randomPassword();
             user.setPassword(randomPassword);

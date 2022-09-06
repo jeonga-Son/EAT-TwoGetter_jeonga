@@ -21,18 +21,30 @@ public class HomeController {
     private final BoardService boardService;
 
     @GetMapping("/")
-    public String home(@AuthenticationPrincipal UserDetails userDetails, Model model, HttpSession session){
+    public String home(@AuthenticationPrincipal UserDetails userDetails, Model model, HttpSession session,String modifyTry, String message){
         if(userDetails != null){
             String username = userDetails.getUsername();
-            User user = userService.findByUserName(username);
+            User user = userService.findByUsername(username);
             model.addAttribute("user",user);
         }
         List<Board> boards = boardService.findAll();
         model.addAttribute("board", boards);
-        if(session.getAttribute("message")!=null){
-            String message = (String) session.getAttribute("message");
-            model.addAttribute("message", message);
+        if(modifyTry == null)
+            return "index";
+        if(modifyTry.equals("false")){
+            model.addAttribute("modifyTry", false);
+            model.addAttribute("message",message);
+        }else{
+            model.addAttribute("modifyTry", true);
+            model.addAttribute("message",message);
         }
+
+//        if(session.getAttribute("message")!=null){
+//            String message = (String) session.getAttribute("message");
+//            model.addAttribute("message", message);
+////            session.removeAttribute("message");
+//            return "index";
+//        }
         return "index";
     }
 

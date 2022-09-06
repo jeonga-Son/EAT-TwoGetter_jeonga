@@ -20,7 +20,7 @@ public class reportController {
     public String userReport(@AuthenticationPrincipal UserDetails userDetails, Model model){
         if(userDetails != null){
             String username = userDetails.getUsername();
-            User user = userService.findByUserName(username);
+            User user = userService.findByUsername(username);
             model.addAttribute("user",user);
         }
         return "report/userReport";

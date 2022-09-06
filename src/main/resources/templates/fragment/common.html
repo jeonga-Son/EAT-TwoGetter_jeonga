@@ -70,7 +70,7 @@
         </div>
         <div class="modal" sec:authorize="isAuthenticated()">
             <div class="modal_body">
-                <form th:action="@{/account/modify}" method="get">
+                <form th:action="@{/account/modify}" method ="get">
                     <a th:href="@{/}">
                         <img class="mb-4" src="https://getbootstrap.kr/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
                     </a>
@@ -78,14 +78,14 @@
                     <h2 class="h3 mb-3 fw-normal">프로필</h2>
                     <div class="mb-3 row">
                         <label for="nickname" class="col-sm-2 col-form-label">이름</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-10" style="border:2px solid">
                             <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username">
+                            <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" readonly>
                         </div>
                     </div>
                     <div class="mb-3 row">

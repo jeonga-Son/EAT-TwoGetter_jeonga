@@ -34,4 +34,13 @@ public class AccountApiController {
         userService.delete(user);
     }
 
+    @GetMapping("/user/{nickname}")
+    public Boolean getUserNickname(@PathVariable String nickname){
+        User user = userService.findByNickname(nickname);
+        if(user==null){
+            return true;
+        }
+        return false;
+    }
+
 }

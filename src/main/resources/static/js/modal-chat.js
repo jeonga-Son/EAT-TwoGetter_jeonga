@@ -33,6 +33,7 @@ function postChat(){
         body : JSON.stringify({
             chatTitle: chatRoomTitle.value,
             username: user1.nickname,
+            email:user1.username,
             partner: showBoardNickname.innerText
         }),
     }).then((response)=>{

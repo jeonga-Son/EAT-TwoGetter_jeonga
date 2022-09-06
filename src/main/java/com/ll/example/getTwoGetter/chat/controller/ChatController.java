@@ -26,7 +26,7 @@ public class ChatController {
     public String chatList(@AuthenticationPrincipal UserDetails userDetails, Model model){
         if(userDetails != null){
             String username = userDetails.getUsername();
-            User user = userService.findByUserName(username);;
+            User user = userService.findByUsername(username);;
             List<ChatInfo> chatInfos_user =chatInfoService.findByUsername(user.getNickname());
             List<ChatInfo> chatInfos_partner = chatInfoService.findByPartner(user.getNickname());
 

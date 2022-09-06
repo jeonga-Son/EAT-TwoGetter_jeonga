@@ -26,10 +26,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findByUserName(String username){
-        User user = userRepository.findByUsername(username);
-        return user;
-    }
+
 
     public List<User> findAll() {
         List<User> users = userRepository.findAll();
@@ -43,5 +40,10 @@ public class UserService {
 
     public void delete(User user) {
         userRepository.delete(user);
+    }
+
+    public User findByNickname(String nickname) {
+        User user = userRepository.findByNickname(nickname);
+        return user;
     }
 }
