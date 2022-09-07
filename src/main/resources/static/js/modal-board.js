@@ -33,7 +33,7 @@ function deleteAccount(username){
             type:'DELETE',
             success: function (result){
                 alert('정상적으로 삭제 되었습니다.')
-                window.location.href="/account/login";
+                window.location.href="/logout";
             }
         })
     }

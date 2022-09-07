@@ -95,7 +95,7 @@
                 content.innerHTML="<div></div>"
                 for(let i=0; i<responseData.length; i++){
                     var time = responseData[i].chatMessageTime
-                    var time2 = time.substring(11,16)
+                    var time2 = time.substring(5,7)+"월 "+time.substring(8,10)+"일 "+time.substring(11,16) //11,16 //5,6 월  8,9 일
                     if(responseData[i].username == user.nickname){
                         content.innerHTML+=`<div class="chatUserAll"><div class="chatUser"><div class="chatUsername">나&nbsp;</div>`+`<div class="chatTime">${time2}</div></div>`+`<br/>`+`<div class="chatMessageUser">
                         ${responseData[i].content}</div></div>`
@@ -186,7 +186,7 @@
                 type:'DELETE',
                 success: function (result){
                     alert('정상적으로 삭제 되었습니다.')
-                    window.location.href="/account/login";
+                    window.location.href="/logout";
                 }
             })
         }

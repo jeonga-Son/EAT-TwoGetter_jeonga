@@ -78,11 +78,28 @@ public class BoardService {
 
     public List<Board> findAll() {
         List<Board> boards = boardRepository.findAll();
+        if(boards==null){
+            return null;
+        }
         return boards;
     }
 
     public Board findById(long id) {
         Board board = boardRepository.findById(id).orElse(null);
         return board;
+    }
+
+    public List<Board> findByUsername(String nickname) {
+        List<Board> boards = boardRepository.findByUsername(nickname);
+        if(boards==null){
+            return null;
+        }
+        return boards;
+    }
+
+    public void delete(List<Board> boards) {
+        for(int i=0; i<boards.size(); i++){
+            boardRepository.delete(boards.get(i));
+        }
     }
 }

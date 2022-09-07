@@ -50,6 +50,10 @@ function addMarker(positions2, idBoard2) {
     markers.push(marker2);
 
     kakao.maps.event.addListener(marker2, 'click', function() {
+        if(user1==null){
+            alert("로그인 이후 가능합니다")
+            location.href="/account/login"
+        }
         var showBoardNickname= document.getElementById('showBoardNickname')
         var showBoardLocate = document.getElementById('showBoardLocate')
         var showBoardTitle = document.getElementById('showBoardTitle')
@@ -63,10 +67,6 @@ function addMarker(positions2, idBoard2) {
         var showBoardLat = document.getElementById('showBoardLat')
         var showBoardLng = document.getElementById('showBoardLng')
 
-        if(user1==null){
-            alert("로그인 이후 가능합니다")
-            location.href="/account/login"
-        }
         fetch(`/getMarkerBoard/${marker2.getTitle()}`)
             .then(data=>data.json())
             .then(responseData=>{

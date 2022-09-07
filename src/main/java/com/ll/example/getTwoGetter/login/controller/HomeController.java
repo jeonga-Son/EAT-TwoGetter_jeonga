@@ -29,22 +29,17 @@ public class HomeController {
         }
         List<Board> boards = boardService.findAll();
         model.addAttribute("board", boards);
+
         if(modifyTry == null)
             return "index";
         if(modifyTry.equals("false")){
-            model.addAttribute("modifyTry", false);
+            model.addAttribute("modifyTry", "false");
             model.addAttribute("message",message);
         }else{
-            model.addAttribute("modifyTry", true);
+            model.addAttribute("modifyTry", "true");
             model.addAttribute("message",message);
         }
 
-//        if(session.getAttribute("message")!=null){
-//            String message = (String) session.getAttribute("message");
-//            model.addAttribute("message", message);
-////            session.removeAttribute("message");
-//            return "index";
-//        }
         return "index";
     }
 

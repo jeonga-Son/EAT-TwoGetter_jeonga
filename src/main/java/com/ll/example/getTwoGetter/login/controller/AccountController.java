@@ -24,8 +24,6 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private KakaoService kakaoService;

@@ -1,6 +1,8 @@
 package com.ll.example.getTwoGetter.login.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ll.example.getTwoGetter.Board.domain.entity.Board;
+import com.ll.example.getTwoGetter.chat.model.ChatMessage;
 import lombok.Data;
 
 import javax.persistence.*;

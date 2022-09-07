@@ -40,4 +40,9 @@ public class ChatInfoService {
     public void delete(ChatInfo chatInfo) {
         chatInfoRepository.delete(chatInfo);
     }
+    public void delete(List<ChatInfo> chatInfos){
+        for(int i=0; i<chatInfos.size(); i++){
+            chatInfoRepository.delete(chatInfos.get(i));
+        }
+    }
 }

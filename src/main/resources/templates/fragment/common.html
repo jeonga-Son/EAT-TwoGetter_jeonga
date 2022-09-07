@@ -52,7 +52,7 @@
             </div>
 
         <!--로그인 시 나타나는 상단 토글바-->
-        <p class="userState mt-3" style="color: white; width: 500px; text-align:end;"  th:text="${user.nickname} + ' 님 환영합니다.'" sec:authorize="isAuthenticated()"></p>
+        <p sec:authorize="isAuthenticated()" class="userState mt-3" style="color: white; width: 500px; text-align:end;"  th:text="${user.nickname} + ' 님 환영합니다.'"></p>
         <div sec:authorize="isAuthenticated()">
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">

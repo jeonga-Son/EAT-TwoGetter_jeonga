@@ -2,6 +2,8 @@
 
 package com.ll.example.getTwoGetter.Board.domain.entity;
 
+import com.ll.example.getTwoGetter.chat.model.ChatInfo;
+import com.ll.example.getTwoGetter.login.model.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,6 +55,7 @@ public class Board {
 
     @Column(length = 100)
     private String lng;
+
 
     @Builder
     public Board(Long id, String title,  String storeType, String storeName, String orderDetail, String minimumOrderAmount,
