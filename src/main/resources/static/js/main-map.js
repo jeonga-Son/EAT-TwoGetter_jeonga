@@ -41,6 +41,8 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
 */
 var gpsMarkers;
 
+localStorage.setItem("isMarker", "0");
+
 function gpsButton(){
 
     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
