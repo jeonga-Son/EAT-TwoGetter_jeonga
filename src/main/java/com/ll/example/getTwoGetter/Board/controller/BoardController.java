@@ -31,7 +31,6 @@ public class BoardController {
     @GetMapping("/getMarkerBoard/{id}")
     @ResponseBody
     public Board getMarkerBoard(@PathVariable long id){
-        System.out.println(id);
         Board board = boardService.findById(id);
         return board;
     }

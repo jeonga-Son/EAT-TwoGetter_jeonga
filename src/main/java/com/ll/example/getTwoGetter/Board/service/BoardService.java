@@ -6,6 +6,8 @@ package com.ll.example.getTwoGetter.Board.service;
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.domain.repository.BoardRepository;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
+import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,6 +17,9 @@ import java.util.List;
 @Service
 public class BoardService {
     private BoardRepository boardRepository;
+
+    @Autowired
+    private ChatInfoService chatInfoService;
 
     public BoardService(BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
@@ -101,5 +106,20 @@ public class BoardService {
         for(int i=0; i<boards.size(); i++){
             boardRepository.delete(boards.get(i));
         }
+    }
+
+    public void modify(String beforeNickname, String afterNickname) {
+        List<Board> boards = boardRepository.findAll();
+        if(boards ==null){
+            return;
+        }
+        for(int i=0; i<boards.size(); i++){
+            Board board = boards.get(i);
+            if(board.getUsername().equals(beforeNickname)){
+                board.setUsername(afterNickname);
+                boardRepository.save(board);
+            }
+        }
+        chatInfoService.modify(beforeNickname, afterNickname);
     }
 }

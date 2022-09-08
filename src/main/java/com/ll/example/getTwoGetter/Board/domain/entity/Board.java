@@ -57,6 +57,7 @@ public class Board {
     private String lng;
 
 
+
     @Builder
     public Board(Long id, String title,  String storeType, String storeName, String orderDetail, String minimumOrderAmount,
                  String deliveryCharge, String content, String username, String lat, String lng) {
@@ -71,5 +72,9 @@ public class Board {
         this.username = username;
         this.lat = lat;
         this.lng = lng;
+    }
+
+    public void setUsername(String afterNickname) {
+        this.username = afterNickname;
     }
 }

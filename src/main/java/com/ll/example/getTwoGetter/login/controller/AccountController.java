@@ -1,5 +1,8 @@
 package com.ll.example.getTwoGetter.login.controller;
 
+import com.ll.example.getTwoGetter.Board.service.BoardService;
+import com.ll.example.getTwoGetter.chat.model.ChatInfo;
+import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
 import com.ll.example.getTwoGetter.login.Repository.UserRepository;
 import com.ll.example.getTwoGetter.login.Service.KakaoService;
 import com.ll.example.getTwoGetter.login.Service.MailService;
@@ -23,6 +26,12 @@ import java.io.IOException;
 public class AccountController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BoardService boardService;
+
+    @Autowired
+    private ChatInfoService chatInfoService;
 
     @Autowired
     private KakaoService kakaoService;
@@ -72,11 +81,21 @@ public class AccountController {
                     return "redirect:/";
                 }
             }
+            //현재 사용중인 아이디(변경 전)
+            User user_=userService.findByUsername(userDetails.getUsername());
+            //게시판 작성자 닉네임 변경 => 게시판 변경 시 채팅방 변경 => 채팅방 변경 시 채팅 내용 변경
+            boardService.modify(user_.getNickname(),nickname);
+
+            //계정 변경
             User user = userService.findByUsername(username);
             user.setNickname(nickname);
             user.setPassword(password);
             user.setUsername(username);
             userService.save(user);
+
+
+
+
             rttr.addFlashAttribute("message" ,"수정이 완료되었습니다.");
             rttr.addFlashAttribute("modifyTry", "true");
             return "redirect:/";
