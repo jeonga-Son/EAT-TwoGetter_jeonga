@@ -3,18 +3,22 @@ var arrLat = [];
 var arrLng = [];
 var positions = [];
 var arridBoard= [];
-var markers = [];
+var boardMarkers = [];
 
-var imageSrc2 = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+var boardMarkersImage = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 // 마커 이미지의 이미지 크기 입니다
 var imageSize2 = new kakao.maps.Size(35, 50);
 
 // 마커 이미지를 생성합니다
-var markerImage2 = new kakao.maps.MarkerImage(imageSrc2, imageSize2);
+var markerImage2 = new kakao.maps.MarkerImage(boardMarkersImage, imageSize2);
 
 const boardDetailModal = document.querySelector('.boardDetailModal');
 const boardDetailModal_close = document.querySelector('.boardDetailModal_close');
 const boardDetailModal_close2 = document.querySelector('.boardDetailModal_close2');
+const boardDeleteBtn = document.querySelector('.boardDeleteBtn');
+const boardModifyBtn = document.querySelector('.boardModifyBtn');
+const findMiddleBtn = document.querySelector('.findMiddleBtn');
+const chat_Btn = document.querySelector('.chat_btn');
 
 showBoardMarker();
 
@@ -37,7 +41,7 @@ function showBoardMarker() {
 
 function addMarker(positions2, idBoard2) {
     // 마커를 생성합니다
-    var marker2 = new kakao.maps.Marker({
+    var boardMarker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: positions2, // 마커를 표시할 위치
         image : markerImage2, // 마커 이미지
@@ -45,9 +49,11 @@ function addMarker(positions2, idBoard2) {
     });
 
     // 생성된 마커를 배열에 추가합니다
-    markers.push(marker2);
+    boardMarkers.push(boardMarker);
 
-    kakao.maps.event.addListener(marker2, 'click', function() {
+    kakao.maps.event.addListener(boardMarker, 'click', function() {
+
+
         var showBoardNickname= document.getElementById('showBoardNickname')
         var showBoardLocate = document.getElementById('showBoardLocate')
         var showBoardTitle = document.getElementById('showBoardTitle')
@@ -65,7 +71,10 @@ function addMarker(positions2, idBoard2) {
             alert("로그인 이후 가능합니다")
             location.href="/account/login"
         }
-        fetch(`/getMarkerBoard/${marker2.getTitle()}`)
+
+
+
+        fetch(`/getMarkerBoard/${boardMarker.getTitle()}`)
             .then(data=>data.json())
             .then(responseData=>{
                 console.log(responseData)
@@ -99,7 +108,20 @@ function addMarker(positions2, idBoard2) {
                 showBoardLat.innerText = responseData.lat
                 showBoardLng.innerText = responseData.lng
                 }
+
             )
+
+            if(user1.nickname == showBoardNickname.innerText) {
+                boardDeleteBtn.style.display ="block";
+                boardModifyBtn.style.display ="block";
+                findMiddleBtn.style.display="none";
+                chat_Btn.style.display="none";
+            } else {
+                boardDeleteBtn.style.display ="none";
+                boardModifyBtn.style.display ="none";
+                findMiddleBtn.style.display="block";
+                chat_Btn.style.display="block";
+            }
 
         boardDetailModal.style.display = 'block';
     });

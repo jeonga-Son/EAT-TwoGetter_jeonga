@@ -82,7 +82,7 @@
             </div>
           </div>
           <div class="col-auto mt-5">
-            <button type="submit" class="btn btn-primary btn-write" role="button">글쓰기</button>
+            <button type="submit" onclick="boardSubmitClickEvent()" class="btn btn-primary btn-write" role="button">글쓰기</button>
             <button type="button" class="btn btn-secondary boardModal_close">닫기</button>
           </div>
           <button type="button" class="btn-close btn-close-black boardModal_close2" aria-label="Close"></button>
@@ -154,8 +154,18 @@
         <input type="hidden" id="showBoardLng" />
 
         <div class="col-auto mt-5">
-          <button type="button" class="btn btn-success" onclick="middlespace()">중간 지점 찾기</button>
-          <button type="button" class="btn btn-primary chat-btn" onclick="showChat()">채팅하기</button>
+<!--          <div class="partnerBtn" th:if="!${user1.nickname == shoBoardNickname.innerText}">-->
+          <div class="partnerBtn">
+          <button type="button" class="btn btn-success findMiddleBtn" onclick="middlespace()">중간 지점 찾기</button>
+          <button type="button" class="btn btn-primary chat-btn chat_btn" onclick="showChat()">채팅하기</button>
+          </div>
+<!--          <a href=`/deleteBoard/${id}` class="btn btn-danger" onclick="deleteBoard()">삭제</a>-->
+<!--          <a href=`/post/edit/${id}` class="btn btn-warning" onclick="modifyBoard()">수정</a>-->
+<!--          <div class="myBtn" th:if="${user1.nickname == shoBoardNickname.innerText}">-->
+          <div class="myBtn">
+          <button class="btn btn-danger boardDeleteBtn" onclick="deleteBoard(this.getAttribute('id'))">삭제</button>
+          <button class="btn btn-warning boardModifyBtn" onclick="modifyBoard(id)">수정</button>
+          </div>
           <button type="button" class="btn btn-secondary boardDetailModal_close">닫기</button>
         </div>
         <button type="button" class="btn-close btn-close-black boardDetailModal_close2" aria-label="Close"></button>
@@ -163,6 +173,9 @@
     </div>
   </div>
 </div>
+
+<!--th:if="${user.nickname == boardInfo.username}"-->
+
 <!--게시판 정보 모달 띄우기 end!-->
 <div class="chatRoomModal" th:fragment="chatRoomModal('chatRoomModal')">
   <div class="chatRoomModal_body">

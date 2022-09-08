@@ -39,6 +39,8 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
 /**
 현재 자신의 위치를 알려줄 수 있는 gps 마커를 띄우는 버튼에 필요한 메서드
 */
+var gpsMarkers;
+
 function gpsButton(){
     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
     if (navigator.geolocation) {
@@ -75,13 +77,15 @@ let icon = new kakao.maps.MarkerImage(
 마커를 생성하고 변경된 이미지를 반영한 후, 현재 사용자의 위치에 띄운다.
 gps 마커가 지도의 가운데에 보이게 하기 위해 setCenter() 메서드를 사용한다.
 */
+
+
 function displayMarker(locPosition) {
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
+    // gps마커를 생성합니다
+    gpsMarker = new kakao.maps.Marker({
         map: map,
         position: locPosition
     });
-    marker.setImage(icon);
+    gpsMarker.setImage(icon);
     // 지도 중심좌표를 접속위치로 변경합니다
     map.setCenter(locPosition);
 }
@@ -130,7 +134,6 @@ function displayCenterInfo(result, status) {
             // 로컬 스토리지에 좌표 경위도 값을 저장
             localStorage.setItem("Lat", centerMapx)
             localStorage.setItem("Lng", centerMapy)
-
 
         }
     }

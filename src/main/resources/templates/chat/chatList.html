@@ -28,7 +28,6 @@
                             <td th:if="${user.nickname == chatInfo.username}" th:text="${chatInfo.partner}"></td>
                             <td th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></td>
                             <td><button onclick="showChatModal()">입장</button>  <button th:id="${chatInfo.id}" onclick="deleteChat(this.getAttribute('id'))">삭제</button></td>
-
                         </tr>
                         </tbody>
                     </table>

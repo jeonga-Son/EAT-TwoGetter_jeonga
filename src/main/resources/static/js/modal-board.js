@@ -23,6 +23,30 @@ btnClosePopup3.addEventListener('click', () => {
     boardModal.style.display = 'none';
 });
 
+function boardSubmitClickEvent() {
+    gpsMarkerd.setVisible(false);
+}
+
+function deleteBoard(clicked_id) {
+    console.log(clicked_id)
+
+        if (!confirm("정말로 삭제하시겠습니까?")) {
+            // alert("삭제가 취소되었습니다.")
+        } else {
+            $.ajax({
+                url:'/deleteBoard/'+clicked_id,
+                type:'DELETE',
+                success: function (result){
+                    alert('정상적으로 삭제 되었습니다.')
+                    window.location.href="/";
+                }
+            })
+        }
+}
+
+function modifyBoard(clicked_id) {
+
+}
 
 function deleteAccount(username){
     if (!confirm("정말로 삭제하시겠습니까?")) {
@@ -38,3 +62,4 @@ function deleteAccount(username){
         })
     }
 }
+
