@@ -1,14 +1,3 @@
-const showProfileModal  = document.querySelector(".modal")
-function removeStorage(){
-    localStorage.removeItem("Lat")
-    localStorage.removeItem("Lng")
-}
-function showProfile(){
-    showProfileModal.style.display='block';
-}
-function closeProfile(){
-    showProfileModal.style.display='none';
-}
 const chatModal = document.querySelector('.chatRoomModal')
 function showChat(){
     var showBoardNickname = document.getElementById('showBoardNickname')
