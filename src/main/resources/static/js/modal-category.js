@@ -107,42 +107,44 @@ function addMarker(positions2, idBoard2) {
                 showBoardContent.innerText = responseData.content
                 showBoardLat.innerText = responseData.lat
                 showBoardLng.innerText = responseData.lng
+
+               if(user1.nickname == showBoardNickname.innerText) {
+                               boardDeleteBtn.style.display ="block";
+                               boardModifyBtn.style.display ="block";
+                               findMiddleBtn.style.display="none";
+                               chat_Btn.style.display="none";
+               } else {
+                   boardDeleteBtn.style.display ="none";
+                   boardModifyBtn.style.display ="none";
+                   findMiddleBtn.style.display="block";
+                   chat_Btn.style.display="block";
+               }
+
+
                 }
-
             )
-
-            if(user1.nickname == showBoardNickname.innerText) {
-                boardDeleteBtn.style.display ="block";
-                boardModifyBtn.style.display ="block";
-                findMiddleBtn.style.display="none";
-                chat_Btn.style.display="none";
-            } else {
-                boardDeleteBtn.style.display ="none";
-                boardModifyBtn.style.display ="none";
-                findMiddleBtn.style.display="block";
-                chat_Btn.style.display="block";
-            }
-
         boardDetailModal.style.display = 'block';
     });
 }
 
-function deleteBoard(clicked_id) {
-    console.log(clicked_id)
-    console.log(location.reload());
-        if (!confirm("정말로 삭제하시겠습니까?")) {
-            // alert("삭제가 취소되었습니다.")
-        } else {
-            $.ajax({
-                url:'/deleteBoard/'+clicked_id,
-                type:'DELETE',
-                success: function (result){
-                    alert('정상적으로 삭제 되었습니다.')
-                    window.location.href= "/";
-                    console.log(location.reload());
-                }
-            })
+function deleteBoard() {
+//    console.log(user1.nickname);
+        for (var int=0; i<boardInfo.length; i++) {
+            if(user1.nickname == boardInfo[i].username ) {
+                 if (!confirm("정말로 삭제하시겠습니까?")) {
+                            // alert("삭제가 취소되었습니다.")
+                        } else {
+                            $.ajax({
+                                url:'/deleteBoard/'+clicked_id,
+                                type:'DELETE',
+                                success: function (result){
+                                    alert('정상적으로 삭제 되었습니다.')
+                                    window.location.href= "/";
+                                }
+                            })
+                        }
         }
+    }
 }
 
 function modifyBoard(clicked_id) {
