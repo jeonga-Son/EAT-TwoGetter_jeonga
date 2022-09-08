@@ -75,10 +75,9 @@ public class BoardController {
     }
 
     @DeleteMapping("/deleteBoard/{id}")
-    public void  boardDelete(@PathVariable long id) {
+    public void  deleteBoard(@PathVariable long id) {
         System.out.println(id);
         Board board = boardService.findById(id);
         boardService.delete(board);
     }
-
 }
