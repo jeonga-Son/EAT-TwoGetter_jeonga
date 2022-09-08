@@ -1,7 +1,7 @@
 <div id="address_view" th:fragment="address_view('address_view')">
     <p style="margin-top: 20px; font-size: 20px; text-align:center; font-weight: bold">현재 위치</p>
     <span id="centerAddr" style="font-size: 18px; text-align:center;"></span>
-    <input type="hidden" id="centerLatLng" style="font-size: 20px;">
+    <input type="hidden" id="centerLatLng" style="font-size: 20px;" ></input>
 
     <div class="modal-generate-button-wrap">
         <button sec:authorize="isAuthenticated()" type="button" class="btn btn-success build_marker" style="display:inline-block;">게시물 생성</button>

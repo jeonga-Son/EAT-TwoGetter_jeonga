@@ -16,7 +16,7 @@
       <button type="button" id="etc"  class="etc" data-order="7" onclick="etcBtn()" th:valeu="기타"><img src="./images/etc.png" height ="40" width="40" />기타</button>
     </div>
 
-  <button class="gpsButton" id="gpsButtonConnect" onclick="gpsButton()" ><img style="width:40px; height:40px;" src="./images/gpsButton.svg" alt="gps"></button>
-  <img id="pin" th:src="@{/images/pin.png}" alt="pin" />
-  <div th:replace ="mainMap/present_location :: address_view('address_view')"></div>
+    <button class="gpsButton" id="gpsButtonConnect" onclick="gpsButton()" ><img style="width:40px; height:40px;" src="./images/gpsButton.svg" alt="gps"></button>
+      <img id="pin" th:src="@{/images/pin.png}"  />
+    <div th:replace ="mainMap/present_location :: address_view('address_view')"></div>
 </div>
