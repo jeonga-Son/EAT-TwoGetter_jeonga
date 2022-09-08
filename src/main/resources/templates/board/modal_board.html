@@ -153,7 +153,7 @@
         <input type="hidden" id="showBoardLat" />
         <input type="hidden" id="showBoardLng" />
 
-        <div class="col-auto mt-5">
+        <div class="col-auto mt-5" th:each="boards: ${board}" th:id="${boards.title}">
 <!--          <div class="partnerBtn" th:if="!${user1.nickname == shoBoardNickname.innerText}">-->
           <div class="partnerBtn">
             <button type="button" class="btn btn-success findMiddleBtn" onclick="middleSpace()">중간 지점 찾기</button>
@@ -163,7 +163,7 @@
 <!--          <a href=`/post/edit/${id}` class="btn btn-warning" onclick="modifyBoard()">수정</a>-->
 <!--          <div class="myBtn" th:if="${user1.nickname == shoBoardNickname.innerText}">-->
           <div class="myBtn">
-            <button class="btn btn-danger boardDeleteBtn" onclick="deleteBoard(this.getAttribute('id'))">삭제</button>
+            <button class="btn btn-danger boardDeleteBtn" th:id="${boards.id}" onclick="deleteBoard(this.getAttribute('id'))">삭제</button>
             <button class="btn btn-warning boardModifyBtn" onclick="modifyBoard(id)">수정</button>
           </div>
             <button type="button" class="btn btn-secondary boardDetailModal_close">닫기</button>

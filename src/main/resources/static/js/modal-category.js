@@ -127,6 +127,28 @@ function addMarker(positions2, idBoard2) {
     });
 }
 
+function deleteBoard(clicked_id) {
+    console.log(clicked_id)
+    console.log(location.reload());
+        if (!confirm("정말로 삭제하시겠습니까?")) {
+            // alert("삭제가 취소되었습니다.")
+        } else {
+            $.ajax({
+                url:'/deleteBoard/'+clicked_id,
+                type:'DELETE',
+                success: function (result){
+                    alert('정상적으로 삭제 되었습니다.')
+                    window.location.href= "/";
+                    console.log(location.reload());
+                }
+            })
+        }
+}
+
+function modifyBoard(clicked_id) {
+
+}
+
 boardDetailModal_close.addEventListener('click', () => {
     boardDetailModal.style.display = 'none';
 });

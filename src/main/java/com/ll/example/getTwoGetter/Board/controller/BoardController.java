@@ -7,12 +7,15 @@ package com.ll.example.getTwoGetter.Board.controller;
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
 import com.ll.example.getTwoGetter.Board.service.BoardService;
+import com.ll.example.getTwoGetter.chat.model.ChatInfo;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Component
 @Controller
 public class BoardController {
 
@@ -71,10 +74,11 @@ public class BoardController {
         return "redirect:/";
     }
 
-    @PostMapping("/deleteBoard/{id}")
-    public String delete(@PathVariable("id") Long id) {
-        boardService.deletePost(id);
-        return "redirect:/";
+    @DeleteMapping("/deleteBoard/{id}")
+    public void  boardDelete(@PathVariable long id) {
+        System.out.println(id);
+        Board board = boardService.findById(id);
+        boardService.delete(board);
     }
 
 }

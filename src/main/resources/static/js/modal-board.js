@@ -3,6 +3,7 @@ const btnOpenPopup2 = document.querySelector('.build_marker');
 const btnClosePopup2 = document.querySelector('.boardModal_close');
 const btnClosePopup3 = document.querySelector('.boardModal_close2');
 
+
 var infoDiv = document.getElementById('centerAddr')
 var infoLng = document.getElementById('centerLatLng')
 
@@ -27,26 +28,6 @@ function boardSubmitClickEvent() {
     gpsMarkerd.setVisible(false);
 }
 
-function deleteBoard(clicked_id) {
-    console.log(clicked_id)
-
-        if (!confirm("정말로 삭제하시겠습니까?")) {
-            // alert("삭제가 취소되었습니다.")
-        } else {
-            $.ajax({
-                url:'/deleteBoard/'+clicked_id,
-                type:'DELETE',
-                success: function (result){
-                    alert('정상적으로 삭제 되었습니다.')
-                    window.location.href="/";
-                }
-            })
-        }
-}
-
-function modifyBoard(clicked_id) {
-
-}
 
 function deleteAccount(username){
     if (!confirm("정말로 삭제하시겠습니까?")) {

@@ -71,10 +71,6 @@ public class BoardService {
         return boardDto;
     }
 
-    @Transactional
-    public void deletePost(Long id) {
-        boardRepository.deleteById(id);
-    }
 
     public List<Board> findAll() {
         List<Board> boards = boardRepository.findAll();
@@ -84,5 +80,9 @@ public class BoardService {
     public Board findById(long id) {
         Board board = boardRepository.findById(id).orElse(null);
         return board;
+    }
+
+    public void delete(Board board) {
+        boardRepository.delete(board);
     }
 }
