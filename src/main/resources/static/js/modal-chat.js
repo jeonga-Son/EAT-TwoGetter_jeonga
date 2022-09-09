@@ -43,6 +43,8 @@ function postChat(){
 
 }
 
+
+
 function middleSpace(){
 //     console.log(user1.nickname)
 //     console.log("---")

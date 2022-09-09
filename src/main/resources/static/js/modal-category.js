@@ -4,7 +4,7 @@ var arrLng = [];
 var positions = [];
 var arridBoard= [];
 var boardMarkers = [];
-
+var boardId = 0;
 var boardMarkersImage = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 // 마커 이미지의 이미지 크기 입니다
 var imageSize2 = new kakao.maps.Size(35, 50);
@@ -67,6 +67,7 @@ function addMarker(positions2, idBoard2) {
         var showBoardLat = document.getElementById('showBoardLat')
         var showBoardLng = document.getElementById('showBoardLng')
 
+
         if(user1==null){
             alert("로그인 이후 가능합니다")
             location.href="/account/login"
@@ -107,24 +108,32 @@ function addMarker(positions2, idBoard2) {
                 showBoardContent.innerText = responseData.content
                 showBoardLat.innerText = responseData.lat
                 showBoardLng.innerText = responseData.lng
+                showBoardId.innerText = responseData.id
 
                if(user1.nickname == showBoardNickname.innerText) {
-                               boardDeleteBtn.style.display ="inline-block";
-                               boardModifyBtn.style.display ="inline-block";
-                               findMiddleBtn.style.display="none";
-                               chat_Btn.style.display="none";
+                   boardDeleteBtn.style.display ="inline-block";
+                   boardModifyBtn.style.display ="inline-block";
+                   findMiddleBtn.style.display="none";
+                   chat_Btn.style.display="none";
                } else {
                    boardDeleteBtn.style.display ="none";
                    boardModifyBtn.style.display ="none";
                    findMiddleBtn.style.display="inline-block";
                    chat_Btn.style.display="inline-block";
                }
-
-
-                }
-            )
-        boardDetailModal.style.display = 'block';
+            })
+            boardDetailModal.style.display = 'block';
     });
+}
+
+function deleteGetBoardId(){
+    const boardId = document.getElementById('showBoardId');
+
+    const url = "/board/delete/" + boardId.innerText;
+
+    location.href = url;
+
+
 }
 
 //    console.log(user1.nickname);
@@ -159,34 +168,38 @@ function addMarker(positions2, idBoard2) {
 //        }
 //    }
 //}
-function deleteBoard() {
+//function deleteBoard() {
+//
+//    if (!confirm("정말로 삭제하시겠습니까?")) {
+//                //        alert("삭제가 취소되었습니다.")
+//        return;
+//    } else {
+//
+//        for (var i=0; i<=boardInfo.length; i++) {
+//            console.log("i : " + i)
+//            console.log("boardMarkers[i].getTitle() : " + boardMarkers[i].getTitle())
+//            console.log(" boardInfo[i].id : " +  boardInfo[i].id)
+//            if (document.getElementById('showBoardId') == boardInfo[i].id) {
+//                console.log("if문 통과 시 i : " + i)
+//                $.ajax({
+//                    url:'/deleteBoard/'+boardInfo[i].id,
+//                    type:'DELETE',
+//                    success: function (){
+//                        alert('정상적으로 삭제 되었습니다.')
+//                        location.reload();
+//                    }
+//                });
+//            }
+//            return;
+//        }
+//    }
+//}
+//
 
-    if (!confirm("정말로 삭제하시겠습니까?")) {
-                //        alert("삭제가 취소되었습니다.")
-        return;
-    } else {
 
-        for (var i=0; i<=boardInfo.length; i++) {
-            if (boardMarkers[i].getTitle() == boardInfo[i].id) {
-                  $.ajax({
-                        url:'/deleteBoard/'+boardInfo[i].id,
-                        type:'DELETE',
-                        success: function (){
-                            alert('정상적으로 삭제 되었습니다.')
-                            location.reload();
-                        }
-                  });
-            }
-            return;
-        }
-    }
-}
-
-
-
-function modifyBoard(clicked_id) {
-
-}
+//function modifyBoard(clicked_id) {
+//
+//}
 
 boardDetailModal_close.addEventListener('click', () => {
     boardDetailModal.style.display = 'none';

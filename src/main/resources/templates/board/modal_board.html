@@ -147,6 +147,10 @@
             <th scope="row">기타사항</th>
             <td id="showBoardContent"></td>
           </tr>
+          <tr>
+            <th scope="row">보드 id</th>
+            <td id="showBoardId"></td>
+          </tr>
           </tbody>
         </table>
 
@@ -155,12 +159,15 @@
 
         <div class="col-auto mt-5">
           <div class="partnerBtn">
-            <button type="button" class="btn btn-success findMiddleBtn" onclick="middleSpace()">중간 지점 찾기</button>
+            <button type="button" class="btn btn-success findMiddleBtn" onclick="middleSpace()" >중간 지점 찾기</button>
             <button type="button" class="btn btn-primary chat-btn chat_btn" onclick="showChat()">채팅하기</button>
           </div>
           <div class="myBtn">
             <button class="btn btn-danger boardDeleteBtn" onclick="deleteBoard()" >삭제</button>
             <button class="btn btn-warning boardModifyBtn" onclick="modifyBoard()">수정</button>
+            <a href="javascript:void(0);" onclick="deleteGetBoardId()"
+               class="delete btn btn-danger btn-outline-secondary deleteBtn" sec:authorize="isAuthenticated()"
+               th:text="삭제"></a>
           </div>
             <button type="button" class="btn btn-secondary boardDetailModal_close">닫기</button>
         </div>
@@ -195,3 +202,5 @@
     </div>
   </div>
 </div>
+
+

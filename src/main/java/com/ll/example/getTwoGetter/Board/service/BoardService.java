@@ -6,11 +6,13 @@ package com.ll.example.getTwoGetter.Board.service;
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.domain.repository.BoardRepository;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
+import com.ll.example.getTwoGetter.exception.DataNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -85,4 +87,14 @@ public class BoardService {
     public void delete(Board board) {
         boardRepository.delete(board);
     }
+
+    public Board getBoard(Long id) throws DataNotFoundException {
+        Optional<Board> board = this.boardRepository.findById(id);
+        if(board.isPresent()){
+            return board.get();
+        }else{
+            throw new DataNotFoundException("question not found");
+        }
+    }
+
 }
