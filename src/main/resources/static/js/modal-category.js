@@ -169,7 +169,7 @@ function deleteBoard() {
         for (var i=0; i<=boardInfo.length; i++) {
             if (boardMarkers[i].getTitle() == boardInfo[i].id) {
                   $.ajax({
-                        url:'/deleteBoard/'+boardInfo[i].id,
+                        url:'/deleteBoard/'+ boardInfo[i].id,
                         type:'DELETE',
                         success: function (){
                             alert('정상적으로 삭제 되었습니다.')

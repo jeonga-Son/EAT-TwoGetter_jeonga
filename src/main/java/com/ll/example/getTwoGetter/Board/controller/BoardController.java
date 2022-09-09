@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Component
 @Controller
 public class BoardController {
 
@@ -75,6 +74,7 @@ public class BoardController {
     }
 
     @DeleteMapping("/deleteBoard/{id}")
+    @ResponseBody
     public void  deleteBoard(@PathVariable long id) {
         System.out.println(id);
         Board board = boardService.findById(id);
