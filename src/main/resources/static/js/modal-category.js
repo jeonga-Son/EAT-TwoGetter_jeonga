@@ -4,7 +4,7 @@ var arrLng = [];
 var positions = [];
 var arridBoard= [];
 var boardMarkers = [];
-var boardId = 0;
+
 var boardMarkersImage = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 // 마커 이미지의 이미지 크기 입니다
 var imageSize2 = new kakao.maps.Size(35, 50);
@@ -66,7 +66,6 @@ function addMarker(positions2, idBoard2) {
         var makeBoardTime = document.getElementById('makeBoardTime')
         var showBoardLat = document.getElementById('showBoardLat')
         var showBoardLng = document.getElementById('showBoardLng')
-
 
         if(user1==null){
             alert("로그인 이후 가능합니다")
