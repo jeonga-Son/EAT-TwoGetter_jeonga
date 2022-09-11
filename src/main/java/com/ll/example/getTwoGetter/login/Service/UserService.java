@@ -25,6 +25,13 @@ public class UserService {
         user.getRoles().add(role);
         return userRepository.save(user);
     }
+    public String comparePassword(String oldPassword, String newPassword){
+        if(passwordEncoder.matches(oldPassword, newPassword)==true){
+            return "t";
+        }else{
+            return "f";
+        }
+    }
 
 
 

@@ -58,8 +58,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">나의 프로필</a></li>
-                        <li><a class="dropdown-item btn-open-popup" href="#!" onclick="showProfile()">회원정보 수정</a></li>
+                        <li><a class="dropdown-item btn-open-popup" href="#!" onclick="showProfile()">나의 프로필</a></li>
+                        <li><a class="dropdown-item" href="/showProfile">회원정보 수정</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><form th:action="@{/logout}" method="POST" onsubmit="removeStorage()">
                             <button class="dropdown-item" type="submit" >로그아웃</button>
@@ -70,7 +70,6 @@
         </div>
         <div class="modal" sec:authorize="isAuthenticated()">
             <div class="modal_body">
-                <form th:action="@{/account/modify}" method ="get">
                     <a th:href="@{/}">
                         <img class="mb-4" src="https://getbootstrap.kr/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
                     </a>
@@ -78,8 +77,8 @@
                     <h2 class="h3 mb-3 fw-normal">프로필</h2>
                     <div class="mb-3 row">
                         <label for="nickname" class="col-sm-2 col-form-label">이름</label>
-                        <div class="col-sm-10" style="border:2px solid">
-                            <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname">
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname" readonly>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -91,18 +90,16 @@
                     <div class="mb-3 row">
                         <label for="password" class="col-sm-2 col-form-label">PWD</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control-plaintext" id="password" placeholder="password" name="password">
+                            <input type="password" class="form-control-plaintext" id="password" placeholder="password" name="password" readonly>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="button"
-                                th:username="${user.username}"
-                                th:onclick="deleteAccount(this.getAttribute('username'))">회원탈퇴</button>
-                    </div>
-                    <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit">수정</button>
+<!--                    <div class="mb-3 row">-->
+<!--                        <a class="w-10 btn btn-primary mb-3" style="text-align: center"-->
+<!--                                th:username="${user.username}"-->
+<!--                           onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" th:href="@{|/account/remove/${user.username}|}">회원탈퇴</a>-->
+<!--                    </div>-->
+                    <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit" onclick="location.href='/showProfile'">수정</button>
                     <button class="modal_close btn btn-secondary mb-3" type="button" onclick="closeProfile()">닫기</button>
-
-                </form>
             </div>
         </div>
     </nav>
@@ -114,30 +111,16 @@
             document.getElementById('navFix').classList.add('sb-sidenav-toggled')
         }
     }
-    const showProfileModal  = document.querySelector(".modal")
     function removeStorage(){
         localStorage.removeItem("Lat")
         localStorage.removeItem("Lng")
     }
+    const showProfileModal  = document.querySelector(".modal")
     function showProfile(){
         showProfileModal.style.display='block';
     }
     function closeProfile(){
         showProfileModal.style.display='none';
-    }
-    function deleteAccount(username){
-        if (!confirm("정말로 삭제하시겠습니까?")) {
-            alert("삭제가 취소되었습니다.")
-        } else {
-            $.ajax({
-                url:'/api/users/'+username,
-                type:'DELETE',
-                success: function (result){
-                    alert('정상적으로 삭제 되었습니다.')
-                    window.location.href="/logout";
-                }
-            })
-        }
     }
     </script>
 </th:block>
@@ -182,6 +165,7 @@
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">편의 메뉴</div>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/showProfile}">나의 프로필 보기</a>
                             <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/report/userReport}">불량회원 신고하기</a>
                             <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">불량회원 신고하기</a>
 

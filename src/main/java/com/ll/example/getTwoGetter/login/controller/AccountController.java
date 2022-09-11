@@ -1,5 +1,6 @@
 package com.ll.example.getTwoGetter.login.controller;
 
+import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.service.BoardService;
 import com.ll.example.getTwoGetter.chat.model.ChatInfo;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/account")
@@ -54,6 +56,25 @@ public class AccountController {
         User user = new User();
         model.addAttribute("userForm", user);
         return "account/register";
+    }
+    @GetMapping("/remove/{username}")
+    public String remove(@PathVariable String username){
+        User user = userService.findByUsername(username);
+        userService.delete(user);
+
+        List<Board> boards = boardService.findByUsername(user.getNickname());
+        if(boards!=null){
+            boardService.delete(boards);
+        }
+        List<ChatInfo> chatInfos = chatInfoService.findByUsername(user.getNickname());
+        List<ChatInfo> chatInfos_=chatInfoService.findByPartner(user.getNickname());
+        if(chatInfos!=null){
+            chatInfoService.delete(chatInfos);
+        }
+        if(chatInfos_!=null){
+            chatInfoService.delete(chatInfos_);
+        }
+        return "redirect:/logout";
     }
     @GetMapping("/modify")
     public String modify(@RequestParam String username, @RequestParam String nickname, @RequestParam String password, HttpSession session, @AuthenticationPrincipal UserDetails userDetails, RedirectAttributes rttr){

@@ -55,7 +55,6 @@ public class AccountApiController {
         if(chatInfos_!=null){
             chatInfoService.delete(chatInfos_);
         }
-
     }
 
     @GetMapping("/user/{nickname}")
