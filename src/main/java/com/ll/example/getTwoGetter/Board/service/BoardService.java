@@ -32,7 +32,7 @@ public class BoardService {
         List<Board> boardList = boardRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
 
-        for(Board board : boardList) {
+        for (Board board : boardList) {
             BoardDto boardDto = BoardDto.builder()
                     .id(board.getId())
                     .title(board.getTitle())
@@ -90,11 +90,37 @@ public class BoardService {
 
     public Board getBoard(Long id) throws DataNotFoundException {
         Optional<Board> board = this.boardRepository.findById(id);
-        if(board.isPresent()){
+        if (board.isPresent()) {
             return board.get();
-        }else{
+        } else {
             throw new DataNotFoundException("question not found");
         }
     }
 
+    public void modify(Board board, String title, String storeName, String storeType, String orderDetail, int minimumOrderAmount, int deliveryCharge, String content) {
+        board.setTitle(title);
+        board.setStoreType(storeType);
+        board.setStoreName(storeName);
+        board.setOrderDetail(orderDetail);
+        board.setMinimumOrderAmount(minimumOrderAmount);
+        board.setDeliveryCharge(deliveryCharge);
+        board.setContent(content);
+
+        this.boardRepository.save(board);
+    }
 }
+
+//}    @Column(length = 100, nullable = false)
+//private String title;
+//    @Column(length = 100, nullable = false)
+//    private String storeType;
+//
+//    @Column(length = 100, nullable = false)
+//    private String storeName;
+//
+//    @Column(length = 100, nullable = false)
+//    private String orderDetail;
+//    @Column(length = 100, nullable = false)
+//    private int minimumOrderAmount;
+//    @Column(length = 100, nullable = false)
+//    private int deliveryCharge;

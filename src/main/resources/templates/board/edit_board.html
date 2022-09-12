@@ -1,0 +1,101 @@
+<!--게시판 수정 모달 띄우기 start!-->
+<div sec:authorize="isAuthenticated()" th:fragment="editBoardModal('editBoardModal')">
+  <div class="editBoardModal">
+    <div class="editBoardModal_content">
+      <h4 class="editBoardModal_header border-bottom mb-3" th:text="${user.nickname} + ' 님의 주문 메이트 구인공고'"></h4>
+      <div class="mt-2 editBoardModal_body ">
+        <form th:action="@{/board/modify}">
+          <div class="form-group row">
+            <label for="username" class="col-sm-2 col-form-label mb-3"><strong>닉네임</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="username" class="form-control" id="username" value="username" th:value="${user.nickname}" readonly></input>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="modifyBoardLocate" class="col-sm-2 col-form-label mb-3"><strong>위치</strong></label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="modifyBoardLocate" readonly></input>
+            </div>
+          </div>
+          <div class="form-group row" hidden>
+            <label for="lat" class="col-sm-2 col-form-label mb-3"><strong>위도</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="lat" class="form-control" id="lat" readonly/>
+            </div>
+          </div>
+          <div class="form-group row" hidden>
+            <label for="lng" class="col-sm-2 col-form-label mb-3"><strong>경도</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="lng" class="form-control" id="lng" readonly/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="modifyBoardTitle" class="col-sm-2 col-form-label mb-3"><strong>제목</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="title" class="form-control" id="modifyBoardTitle" required />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="modifyBoardStoreType" class=" col-sm-2 col-form-label mb-3"><strong>가게유형</strong></label>
+            <div class="col-sm-10">
+              <select class="form-select" required="required" name="storeType" id="modifyBoardStoreType" onchange="selectBoxChange(this.value);" aria-label="Default select example">
+                <option value="" text=""selected disabled hidden>가게유형을 선택해주세요.</option>
+                <option value="한식" id="한식">한식</option>
+                <option value="중식" id="중식">중식</option>
+                <option value="일식" id="일식">일식</option>
+                <option value="양식" id="양식">양식</option>
+                <option value="카페" id="카페">카페</option>
+                <option value="야식" id="야식">야식</option>
+                <option value="기타" id="기타">기타</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="modifyBoardStoreName" class="col-sm-2 col-form-label mb-3"><strong>상호명</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="storeName" id="modifyBoardStoreName"  class="form-control" required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="modifyBoardOrderDetail" class="col-sm-2 col-form-label mb-3"><strong>주문내용</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="orderDetail" class="form-control" id="modifyBoardOrderDetail" required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="modifyBoardMinimumOrderAmount" class="col-sm-2 col-form-label mb-3"><strong>최소주문금액(원)</strong></label>
+            <div class="col-sm-10">
+              <input type="number" name="minimumOrderAmount" class="form-control" id="modifyBoardMinimumOrderAmount" placeholder="숫자만 입력해주세요" required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="modifyBoardDeliveryCharge" class="col-sm-2 col-form-label mb-3"><strong>배달요금(원)</strong></label>
+            <div class="col-sm-10">
+              <input type="number" min="0" max="30000"  name="deliveryCharge" class="form-control" id="modifyBoardDeliveryCharge" placeholder="숫자만 입력해주세요" required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="modifyBoardContent" class="col-sm-2 col-form-label mb-3" ><strong>기타사항</strong></label>
+            <div class="col-sm-10">
+              <textarea type="text" name="content" class="form-control" id="modifyBoardContent" maxlength='200'></textarea>
+            </div>
+          </div>
+          <div class="form-group row" hidden>
+            <label for="inputBoardId" class="col-sm-2 col-form-label mb-3"><strong>게시판번호</strong></label>
+            <div class="col-sm-10">
+              <input type="int" name="id" class="form-control" id="inputBoardId" readonly/>
+            </div>
+          </div>
+          <div class="col-auto mt-5">
+            <button type="submit" class="btn btn-primary btn-editSave">수정완료</button>
+            <button type="button" class="btn btn-secondary editBoardModal_close">닫기</button>
+          </div>
+          <button type="button" class="btn-close btn-close-black editBoardModal_close2" aria-label="Close"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--게시판 수정 모달 띄우기 end!-->

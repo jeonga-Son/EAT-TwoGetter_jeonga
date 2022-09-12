@@ -2,6 +2,8 @@ const boardModal = document.querySelector('.boardModal')
 const btnOpenPopup2 = document.querySelector('.build_marker');
 const btnClosePopup2 = document.querySelector('.boardModal_close');
 const btnClosePopup3 = document.querySelector('.boardModal_close2');
+const editBoardClose1 = document.querySelector('.editBoardModal_close');
+const editBoardClose2 = document.querySelector('.editBoardModal_close2');
 
 
 var infoDiv = document.getElementById('centerAddr')
@@ -22,6 +24,13 @@ btnClosePopup2.addEventListener('click', () => {
 
 btnClosePopup3.addEventListener('click', () => {
     boardModal.style.display = 'none';
+});
+
+editBoardClose1.addEventListener('click', () => {
+    editBoardModal.style.display = 'none';
+});
+editBoardClose2.addEventListener('click', () => {
+    editBoardModal.style.display = 'none';
 });
 
 function boardSubmitClickEvent() {

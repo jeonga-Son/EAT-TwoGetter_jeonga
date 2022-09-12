@@ -4,6 +4,7 @@ var arrLng = [];
 var positions = [];
 var arridBoard= [];
 var boardMarkers = [];
+var boardMarkersModify = [];
 
 var boardMarkersImage = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 // 마커 이미지의 이미지 크기 입니다
@@ -13,14 +14,17 @@ var imageSize2 = new kakao.maps.Size(35, 50);
 var markerImage2 = new kakao.maps.MarkerImage(boardMarkersImage, imageSize2);
 
 const boardDetailModal = document.querySelector('.boardDetailModal');
+const editBoardModal = document.querySelector('.editBoardModal');
 const boardDetailModal_close = document.querySelector('.boardDetailModal_close');
 const boardDetailModal_close2 = document.querySelector('.boardDetailModal_close2');
 const boardDeleteBtn = document.querySelector('.boardDeleteBtn');
 const boardModifyBtn = document.querySelector('.boardModifyBtn');
+const editSaveBtn = document.querySelector('.btn-editSave');
 const findMiddleBtn = document.querySelector('.findMiddleBtn');
 const chat_Btn = document.querySelector('.chat_btn');
 
 showBoardMarker();
+
 
 function showBoardMarker() {
 
@@ -50,9 +54,9 @@ function addMarker(positions2, idBoard2) {
 
     // 생성된 마커를 배열에 추가합니다
     boardMarkers.push(boardMarker);
+    boardMarkersModify.push(boardMarker);
 
     kakao.maps.event.addListener(boardMarker, 'click', function() {
-
 
         var showBoardNickname= document.getElementById('showBoardNickname')
         var showBoardLocate = document.getElementById('showBoardLocate')
@@ -67,12 +71,11 @@ function addMarker(positions2, idBoard2) {
         var showBoardLat = document.getElementById('showBoardLat')
         var showBoardLng = document.getElementById('showBoardLng')
 
+
         if(user1==null){
             alert("로그인 이후 가능합니다")
             location.href="/account/login"
         }
-
-
 
         fetch(`/getMarkerBoard/${boardMarker.getTitle()}`)
             .then(data=>data.json())
@@ -108,6 +111,7 @@ function addMarker(positions2, idBoard2) {
                 showBoardLat.innerText = responseData.lat
                 showBoardLng.innerText = responseData.lng
                 showBoardId.innerText = responseData.id
+                localStorage.setItem("markerBoardId", responseData.id);
 
                if(user1.nickname == showBoardNickname.innerText) {
                    boardDeleteBtn.style.display ="inline-block";
@@ -127,78 +131,68 @@ function addMarker(positions2, idBoard2) {
 
 function deleteGetBoardId(){
     const boardId = document.getElementById('showBoardId');
-
     const url = "/board/delete/" + boardId.innerText;
-
     location.href = url;
+}
 
+function editSave(){
+    const boardId = parseInt(localStorage.getItem("markerBoardId"));
+    const url = "/board/modify/" + boardId;
+    location.replace = url;
+}
+
+function modifyBoard(){
+    boardDetailModal.style.display = "none";
+    editBoardModal.style.display="block";
+
+        var modifyBoardNickname= document.getElementById('modifyBoardNickname')
+        var modifyBoardLocate = document.getElementById('modifyBoardLocate')
+        var modifyBoardTitle = document.getElementById('modifyBoardTitle')
+        var modifyBoardType = document.getElementById('modifyBoardType')
+        var modifyBoardName = document.getElementById('modifyBoardName')
+        var modifyBoardOrder = document.getElementById('modifyBoardOrder')
+        var modifyBoardMin = document.getElementById('modifyBoardMin')
+        var modifyBoardDel = document.getElementById('modifyBoardDel')
+        var modifyBoardContent = document.getElementById('modifyBoardContent')
+        var modifyBoardTime = document.getElementById('modifyBoardTime')
+        var modifyBoardLat = document.getElementById('modifyBoardLat')
+        var modifyBoardLng = document.getElementById('modifyBoardLng')
+
+        const modifyBoardId = parseInt(localStorage.getItem("markerBoardId"))
+
+        fetch(`/getMarkerBoard/${modifyBoardId}`)
+            .then(data=>data.json())
+            .then(responseData=>{
+                console.log(responseData)
+
+                let geocoder = new kakao.maps.services.Geocoder();
+
+                let callback = function(result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        document.getElementById("modifyBoardLocate").setAttribute("value", result[0].address.address_name)
+                    }
+                };
+
+                let coord = new kakao.maps.LatLng(responseData.lat, responseData.lng);
+                var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
+                var createDate = responseData.createdDate
+                var createDate_ = createDate.substring(0, 4)+"년 "+createDate.substring(5, 7)+"월" +createDate.substring(8, 10)+"일 ";
+                var createDate__ = " "+createDate.substring(11,13)+"시"+createDate.substring(14,16)+"분"
+                var boardMinimumOrderAmount = responseData.minimumOrderAmount + "원"
+                var boardDeliveryCharge = responseData.deliveryCharge + "원"
+
+                document.getElementById("modifyBoardTitle").setAttribute("value", responseData.title)
+                modifyBoardStoreType.value = responseData.storeType
+                document.getElementById("modifyBoardStoreName").setAttribute("value", responseData.storeName)
+                document.getElementById("modifyBoardOrderDetail").setAttribute("value", responseData.orderDetail)
+                document.getElementById("modifyBoardMinimumOrderAmount").setAttribute("value", responseData.minimumOrderAmount)
+                document.getElementById("modifyBoardDeliveryCharge").setAttribute("value", responseData.deliveryCharge)
+                document.getElementById("modifyBoardContent").setAttribute("value", responseData.content)
+
+            })
 
 }
 
-//    console.log(user1.nickname);
-//    console.log(boardInfo.length);
-
-//    for (var i=0; i<=boardInfo.length; i++) {
-//        console.log(boardInfo[i].id);
-//        console.log(boardMarkers[i].getTitle());
-//        return;
-//    }
-
-
-//function deleteBoard() {
-//
-//    if (!confirm("정말로 삭제하시겠습니까?")) {
-//                //        alert("삭제가 취소되었습니다.")
-//        return;
-//    } else {
-//
-//        for (var i=0; i<=boardInfo.length; i++) {
-//            if (boardMarkers[i].getTitle() == boardInfo[i].id) {
-//                  $.ajax({
-//                        url:'/deleteBoard/'+boardInfo[i].id,
-//                        type:'DELETE',
-//                        success: function (){
-//                            alert('정상적으로 삭제 되었습니다.')
-//                            location.reload();
-//                        }
-//                  });
-//            }
-//            return;
-//        }
-//    }
-//}
-//function deleteBoard() {
-//
-//    if (!confirm("정말로 삭제하시겠습니까?")) {
-//                //        alert("삭제가 취소되었습니다.")
-//        return;
-//    } else {
-//
-//        for (var i=0; i<=boardInfo.length; i++) {
-//            console.log("i : " + i)
-//            console.log("boardMarkers[i].getTitle() : " + boardMarkers[i].getTitle())
-//            console.log(" boardInfo[i].id : " +  boardInfo[i].id)
-//            if (document.getElementById('showBoardId') == boardInfo[i].id) {
-//                console.log("if문 통과 시 i : " + i)
-//                $.ajax({
-//                    url:'/deleteBoard/'+boardInfo[i].id,
-//                    type:'DELETE',
-//                    success: function (){
-//                        alert('정상적으로 삭제 되었습니다.')
-//                        location.reload();
-//                    }
-//                });
-//            }
-//            return;
-//        }
-//    }
-//}
-//
-
-
-//function modifyBoard(clicked_id) {
-//
-//}
 
 boardDetailModal_close.addEventListener('click', () => {
     boardDetailModal.style.display = 'none';

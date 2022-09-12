@@ -169,6 +169,10 @@
             <a href="javascript:void(0);" onclick="deleteGetBoardId()"
                class="delete btn btn-danger btn-outline-secondary deleteBtn" sec:authorize="isAuthenticated()"
                th:text="삭제"></a>
+<!--            <a th:href="@{|/board/modify/${board.id}|}" class="btn btn-sm btn-outline-secondary"-->
+<!--               sec:authorize="isAuthenticated()"-->
+<!--               th:if="${board.author != null and #authentication.getPrincipal().getUsername() == board.author.username}"-->
+<!--               th:text="수정"></a>-->
           </div>
             <button type="button" class="btn btn-secondary boardDetailModal_close">닫기</button>
         </div>

@@ -5,15 +5,18 @@ package com.ll.example.getTwoGetter.Board.controller;
 
 
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
+import com.ll.example.getTwoGetter.Board.domain.entity.BoardForm;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
 import com.ll.example.getTwoGetter.Board.service.BoardService;
 import com.ll.example.getTwoGetter.chat.model.ChatInfo;
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -65,8 +68,6 @@ public class BoardController {
         return board;
     }
 
-
-
     @GetMapping("/post/edit/{id}")
     public String edit(@PathVariable("id") Long id, Model model) {
         BoardDto boardDto = boardService.getPost(id);
@@ -74,25 +75,24 @@ public class BoardController {
         return "index.html";
     }
 
-//    @PutMapping("/post/edit/{id}")
-//    public String update(BoardDto boardDto) {
-//        boardService.savePost(boardDto);
-//        return "redirect:/";
-//    }
-
-//    @DeleteMapping("/deleteBoard/{id}")
-//    public String deleteBoard(@PathVariable("id") long id) {
-//        Board board = this.boardService.findById(id);
-//        this.boardService.delete(board);
-//        return "redirect:/";
-//    }
-
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/board/delete/{id}")
     public String boardDelete(Principal principal, @PathVariable("id") Long id) throws DataNotFoundException {
         Board board = this.boardService.getBoard(id);
         this.boardService.delete(board);
         return "/";
+    }
+
+    @GetMapping("/board/modify/")
+    public String boardModify(@RequestParam Long id, @RequestParam String title, @RequestParam String storeType, @RequestParam String storeName, @RequestParam String orderDetail, @RequestParam int minimumOrderAmount, @RequestParam int deliveryCharge, @RequestParam String content) throws DataNotFoundException {
+        System.out.println("여기");
+        System.out.println(title);
+        System.out.println(storeType);
+        Board board = this.boardService.getBoard(id);
+
+
+        this.boardService.modify(board, title, storeType, storeName, orderDetail, minimumOrderAmount, deliveryCharge, content);
+        return "redirect:/";
     }
 
 
