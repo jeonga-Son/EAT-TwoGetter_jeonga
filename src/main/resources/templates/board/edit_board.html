@@ -4,7 +4,7 @@
     <div class="editBoardModal_content">
       <h4 class="editBoardModal_header border-bottom mb-3" th:text="${user.nickname} + ' 님의 주문 메이트 구인공고'"></h4>
       <div class="mt-2 editBoardModal_body ">
-        <form th:action="@{/board/modify}">
+        <form th:action="@{'/board/modify'}" method="post">
           <div class="form-group row">
             <label for="username" class="col-sm-2 col-form-label mb-3"><strong>닉네임</strong></label>
             <div class="col-sm-10">
@@ -18,15 +18,15 @@
             </div>
           </div>
           <div class="form-group row" hidden>
-            <label for="lat" class="col-sm-2 col-form-label mb-3"><strong>위도</strong></label>
+            <label for="modifyBoardLat" class="col-sm-2 col-form-label mb-3"><strong>위도</strong></label>
             <div class="col-sm-10">
-              <input type="text" name="lat" class="form-control" id="lat" readonly/>
+              <input type="text" name="lat" class="form-control" id="modifyBoardLat" readonly/>
             </div>
           </div>
           <div class="form-group row" hidden>
-            <label for="lng" class="col-sm-2 col-form-label mb-3"><strong>경도</strong></label>
+            <label for="modifyBoardLng" class="col-sm-2 col-form-label mb-3"><strong>경도</strong></label>
             <div class="col-sm-10">
-              <input type="text" name="lng" class="form-control" id="lng" readonly/>
+              <input type="text" name="lng" class="form-control" id="modifyBoardLng" readonly/>
             </div>
           </div>
           <div class="form-group row">
@@ -82,10 +82,10 @@
               <textarea type="text" name="content" class="form-control" id="modifyBoardContent" maxlength='200'></textarea>
             </div>
           </div>
-          <div class="form-group row" hidden>
-            <label for="inputBoardId" class="col-sm-2 col-form-label mb-3"><strong>게시판번호</strong></label>
+          <div class="form-group row">
+            <label for="modifyBoardId" class="col-sm-2 col-form-label mb-3"><strong>게시판번호</strong></label>
             <div class="col-sm-10">
-              <input type="int" name="id" class="form-control" id="inputBoardId" readonly/>
+              <input type="int" name="id" class="form-control" id="modifyBoardId" readonly/>
             </div>
           </div>
           <div class="col-auto mt-5">

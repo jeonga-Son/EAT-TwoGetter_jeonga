@@ -4,7 +4,7 @@ var arrLng = [];
 var positions = [];
 var arridBoard= [];
 var boardMarkers = [];
-var boardMarkersModify = [];
+
 
 var boardMarkersImage = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 // 마커 이미지의 이미지 크기 입니다
@@ -54,7 +54,7 @@ function addMarker(positions2, idBoard2) {
 
     // 생성된 마커를 배열에 추가합니다
     boardMarkers.push(boardMarker);
-    boardMarkersModify.push(boardMarker);
+
 
     kakao.maps.event.addListener(boardMarker, 'click', function() {
 
@@ -135,11 +135,7 @@ function deleteGetBoardId(){
     location.href = url;
 }
 
-function editSave(){
-    const boardId = parseInt(localStorage.getItem("markerBoardId"));
-    const url = "/board/modify/" + boardId;
-    location.replace = url;
-}
+
 
 function modifyBoard(){
     boardDetailModal.style.display = "none";
@@ -158,9 +154,9 @@ function modifyBoard(){
         var modifyBoardLat = document.getElementById('modifyBoardLat')
         var modifyBoardLng = document.getElementById('modifyBoardLng')
 
-        const modifyBoardId = parseInt(localStorage.getItem("markerBoardId"))
+        let markerBoardId = parseInt(localStorage.getItem("markerBoardId"))
 
-        fetch(`/getMarkerBoard/${modifyBoardId}`)
+        fetch(`/getMarkerBoard/${markerBoardId}`)
             .then(data=>data.json())
             .then(responseData=>{
                 console.log(responseData)
@@ -175,19 +171,18 @@ function modifyBoard(){
 
                 let coord = new kakao.maps.LatLng(responseData.lat, responseData.lng);
                 var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
-                var createDate = responseData.createdDate
-                var createDate_ = createDate.substring(0, 4)+"년 "+createDate.substring(5, 7)+"월" +createDate.substring(8, 10)+"일 ";
-                var createDate__ = " "+createDate.substring(11,13)+"시"+createDate.substring(14,16)+"분"
-                var boardMinimumOrderAmount = responseData.minimumOrderAmount + "원"
-                var boardDeliveryCharge = responseData.deliveryCharge + "원"
 
-                document.getElementById("modifyBoardTitle").setAttribute("value", responseData.title)
+                modifyBoardTitle.value = responseData.title
                 modifyBoardStoreType.value = responseData.storeType
-                document.getElementById("modifyBoardStoreName").setAttribute("value", responseData.storeName)
-                document.getElementById("modifyBoardOrderDetail").setAttribute("value", responseData.orderDetail)
-                document.getElementById("modifyBoardMinimumOrderAmount").setAttribute("value", responseData.minimumOrderAmount)
-                document.getElementById("modifyBoardDeliveryCharge").setAttribute("value", responseData.deliveryCharge)
-                document.getElementById("modifyBoardContent").setAttribute("value", responseData.content)
+                modifyBoardStoreName.value =responseData.storeName
+                modifyBoardOrderDetail.value = responseData.orderDetail
+                modifyBoardMinimumOrderAmount.value = responseData.minimumOrderAmount
+                modifyBoardDeliveryCharge.value = responseData.deliveryCharge
+                modifyBoardContent.value = responseData.content
+                modifyBoardLat.value = responseData.lat
+                modifyBoardLng.value = responseData.lng
+                modifyBoardId.value = markerBoardId
+
 
             })
 
