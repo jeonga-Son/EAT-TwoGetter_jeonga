@@ -47,8 +47,8 @@
             <a class="btn btn-primary"
                     th:username="${user.username}"
                onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" th:href="@{|/account/remove/${user.username}|}">회원탈퇴</a>
-
         </div>
+        <h2 class="h3 mb-3 fw-normal">내가 쓴 게시글</h2>
 
         <div class="modal_accountModifyNickname" sec:authorize="isAuthenticated()">
             <div class="modal_body_accountModifyNickname">
@@ -110,6 +110,9 @@
     function closeProfilePassword(){
         accountModifyPassword.style.display='none';
     }
+
+</script>
+<script>
 
 </script>
 <script src="js/modal-category.js"></script>

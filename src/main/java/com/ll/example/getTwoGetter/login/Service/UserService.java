@@ -25,15 +25,6 @@ public class UserService {
         user.getRoles().add(role);
         return userRepository.save(user);
     }
-    public String comparePassword(String oldPassword, String newPassword){
-        if(passwordEncoder.matches(oldPassword, newPassword)==true){
-            return "t";
-        }else{
-            return "f";
-        }
-    }
-
-
 
     public List<User> findAll() {
         List<User> users = userRepository.findAll();
@@ -52,5 +43,16 @@ public class UserService {
     public User findByNickname(String nickname) {
         User user = userRepository.findByNickname(nickname);
         return user;
+    }
+
+    public void modifyNickname(User user, String nickname) {
+        user.setNickname(nickname);
+        userRepository.save(user);
+    }
+
+    public void modifyPassword(User user, String password) {
+        String encodePassword = passwordEncoder.encode(password);
+        user.setPassword(encodePassword);
+        userRepository.save(user);
     }
 }

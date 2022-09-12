@@ -123,6 +123,14 @@
         showProfileModal.style.display='none';
     }
     </script>
+    <!--프로필 변경 시 필터-->
+    <script th:inline="javascript">
+        var message = [[${message}]];
+        if(message!==null){
+            alert(message);
+        }
+        // location.replace([[${searchUrl}]]);
+    </script>
 </th:block>
 
     <div id="layoutSidenav">

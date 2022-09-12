@@ -32,14 +32,14 @@ let user1 = /*[[${user}]]*/
 /*]]>*/
 </script>
 
-<!--프로필 변경 시 필터-->
-<script th:inline="javascript">
-    var message = [[${message}]];
-    if(message!==null){
-        alert(message);
-    }
-    // location.replace([[${searchUrl}]]);
-</script>
+<!--&lt;!&ndash;프로필 변경 시 필터&ndash;&gt;-->
+<!--<script th:inline="javascript">-->
+<!--    var message = [[${message}]];-->
+<!--    if(message!==null){-->
+<!--        alert(message);-->
+<!--    }-->
+<!--    // location.replace([[${searchUrl}]]);-->
+<!--</script>-->
 <script src="js/modal-category.js"></script>
 <script src="js/category-marker.js"></script>
 <script src="js/modal-chat.js"></script>
