@@ -7,6 +7,7 @@ import com.ll.example.getTwoGetter.login.model.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
@@ -33,10 +35,12 @@ public class Board {
 
     @Column(length = 100, nullable = false)
     private String orderDetail;
+
     @Column(length = 100, nullable = false)
-    private String minimumOrderAmount;
+    private int minimumOrderAmount;
+
     @Column(length = 100, nullable = false)
-    private String deliveryCharge;
+    private int deliveryCharge;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
@@ -56,11 +60,9 @@ public class Board {
     @Column(length = 100)
     private String lng;
 
-
-
     @Builder
-    public Board(Long id, String title,  String storeType, String storeName, String orderDetail, String minimumOrderAmount,
-                 String deliveryCharge, String content, String username, String lat, String lng) {
+    public Board(Long id, String title,  String storeType, String storeName, String orderDetail, int minimumOrderAmount,
+                 int deliveryCharge, String content, String username, String lat, String lng) {
         this.id = id;
         this.title = title;
         this.storeType = storeType;

@@ -7,18 +7,22 @@
 <th:block th:replace = "fragment/common :: menu('home')"></th:block>
 <div id="layoutSidenav">
     <div th:replace = "fragment/common :: side('side')"></div>
-    <div id="middleAddress">
-        <span id="middleAddress_title" style="font-size: 20px"></span>
-        <div>
-            <button onclick="goBack()">뒤로가기</button>
-            <button id="clickBtn" @click="setVisible()">켜기</button>
-            <button onclick="newTapSendUrl()">카카오맵 길찾기로 이동</button>
-        </div>
-
-    </div>
     <div id="layoutSidenav_content">
             <div class="map_wrap">
                 <div id="map" style="width:100%;height:100%;"></div>
+                <div id="middleAddress" style="display: flex; flex-wrap:wrap;">
+<!--                    <span id="middleAddress_title" style="display:block; justify-content:center; font-size: 20px"></span>-->
+
+                    <p id="middleAddress_title" style="margin-top:10px; width:100%; text-align: center; font-weight:bolder; font-size: 15px;"></p>
+                    <div class="middleMap_button_wrap" style="text-align: center; width:100%;">
+                        <button type="button" class="btn btn-outline-light" style="font-size:12px;" onclick="goBack()">뒤로가기</button>
+                        <button type="button" class="btn btn-outline-info" style="font-size:12px;" id="clickBtn" @click="setVisible()">중간 지점 설정</button>
+                        <button type="button" class="btn btn-outline-warning" style="font-size:12px;" onclick="newTapSendUrl()">카카오맵 길찾기</button>
+
+
+                    </div>
+
+                </div>
             </div>
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
     </div>
@@ -51,7 +55,7 @@
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(cenLat, cenLng), // 지도의 중심좌표
-            level: 4, // 지도의 확대 레벨
+            level: 6, // 지도의 확대 레벨
         };
     if(localStorage.getItem("Lat")!=null){
         myLat = localStorage.getItem("Lat")
@@ -60,6 +64,9 @@
         cusLng = parseFloat(partnerLng);
         cenLat = (parseFloat(myLat) + cusLat) / 2;
         cenLng = (parseFloat(myLng) + cusLng) / 2;
+        console.log(myLat, myLng);
+        console.log(cusLat, cusLng);
+        console.log(cenLat, cenLng);
 
         let geocoder = new kakao.maps.services.Geocoder();
 
@@ -79,9 +86,6 @@
     // 지도를 생성합니다
     var map = new kakao.maps.Map(mapContainer, mapOption);
 
-    // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-    var mapTypeControl = new kakao.maps.MapTypeControl();
-
     // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
@@ -95,7 +99,7 @@
     //마커 이미지를 변경
     let iconCenter = new kakao.maps.MarkerImage(
         //middleMap.html이 별도 디렉토리 안에 있기 때문에 ../를 써줘야 한다.
-        '../images/pin.png',
+        '../images/middleMapCenterPin.png',
         new kakao.maps.Size(40, 40)
     );
 
@@ -167,7 +171,7 @@
     let iconCustomer = new kakao.maps.MarkerImage(
         //middleMap.html이 별도 디렉토리 안에 있기 때문에 ../를 써줘야 한다.
         '../images/customer.png',
-        new kakao.maps.Size(50, 50)
+        new kakao.maps.Size(80, 100)
     );
 
     // 센터 마커 표시 함수
