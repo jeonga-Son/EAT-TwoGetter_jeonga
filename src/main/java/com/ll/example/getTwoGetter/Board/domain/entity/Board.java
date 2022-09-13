@@ -2,6 +2,8 @@
 
 package com.ll.example.getTwoGetter.Board.domain.entity;
 
+import com.ll.example.getTwoGetter.chat.model.ChatInfo;
+import com.ll.example.getTwoGetter.login.model.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,8 +35,10 @@ public class Board {
 
     @Column(length = 100, nullable = false)
     private String orderDetail;
+
     @Column(length = 100, nullable = false)
     private int minimumOrderAmount;
+
     @Column(length = 100, nullable = false)
     private int deliveryCharge;
 
@@ -72,4 +76,7 @@ public class Board {
         this.lng = lng;
     }
 
+    public void setUsername(String afterNickname) {
+        this.username = afterNickname;
+    }
 }

@@ -7,6 +7,8 @@ import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.domain.repository.BoardRepository;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
+import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,6 +19,9 @@ import java.util.Optional;
 @Service
 public class BoardService {
     private BoardRepository boardRepository;
+
+    @Autowired
+    private ChatInfoService chatInfoService;
 
     public BoardService(BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
@@ -32,7 +37,7 @@ public class BoardService {
         List<Board> boardList = boardRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
 
-        for (Board board : boardList) {
+        for(Board board : boardList) {
             BoardDto boardDto = BoardDto.builder()
                     .id(board.getId())
                     .title(board.getTitle())
@@ -73,9 +78,16 @@ public class BoardService {
         return boardDto;
     }
 
+    @Transactional
+    public void deletePost(Long id) {
+        boardRepository.deleteById(id);
+    }
 
     public List<Board> findAll() {
         List<Board> boards = boardRepository.findAll();
+        if(boards==null){
+            return null;
+        }
         return boards;
     }
 
@@ -108,19 +120,33 @@ public class BoardService {
 
         this.boardRepository.save(board);
     }
-}
 
-//}    @Column(length = 100, nullable = false)
-//private String title;
-//    @Column(length = 100, nullable = false)
-//    private String storeType;
-//
-//    @Column(length = 100, nullable = false)
-//    private String storeName;
-//
-//    @Column(length = 100, nullable = false)
-//    private String orderDetail;
-//    @Column(length = 100, nullable = false)
-//    private int minimumOrderAmount;
-//    @Column(length = 100, nullable = false)
-//    private int deliveryCharge;
+    public List<Board> findByUsername(String nickname) {
+        List<Board> boards = boardRepository.findByUsername(nickname);
+        if(boards==null){
+            return null;
+        }
+        return boards;
+    }
+
+    public void delete(List<Board> boards) {
+        for(int i=0; i<boards.size(); i++){
+            boardRepository.delete(boards.get(i));
+        }
+    }
+
+    public void modify(String beforeNickname, String afterNickname) {
+        List<Board> boards = boardRepository.findAll();
+        if(boards ==null){
+            return;
+        }
+        for(int i=0; i<boards.size(); i++){
+            Board board = boards.get(i);
+            if(board.getUsername().equals(beforeNickname)){
+                board.setUsername(afterNickname);
+                boardRepository.save(board);
+            }
+        }
+        chatInfoService.modify(beforeNickname, afterNickname);
+    }
+}

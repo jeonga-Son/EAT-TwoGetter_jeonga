@@ -7,6 +7,12 @@ package com.ll.example.getTwoGetter.Board.controller;
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
 import com.ll.example.getTwoGetter.Board.service.BoardService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
@@ -35,7 +41,9 @@ public class BoardController {
         List<BoardDto> boardDtoList = boardService.getBoardList();
         model.addAttribute("postList", boardDtoList);
         return "index.html";
+
     }
+
 
     @GetMapping("/post")
     public String post() {
@@ -47,7 +55,6 @@ public class BoardController {
         boardService.savePost(boardDto);
         return "redirect:/";
     }
-
 
     @GetMapping("/post/{id}")
     public String detail(@PathVariable("id") Long id, Model model) {
@@ -67,8 +74,6 @@ public class BoardController {
 
     @PostMapping("/board/modify")
     public String modifyBoard(BoardDto boardDto) {
-        System.out.println("수정 성공");
-        System.out.println(boardDto);
         boardService.savePost(boardDto);
         return "redirect:/";
     }
