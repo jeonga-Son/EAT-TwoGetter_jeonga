@@ -4,7 +4,6 @@ import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.service.BoardService;
 import com.ll.example.getTwoGetter.chat.model.ChatInfo;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
-import com.ll.example.getTwoGetter.login.Repository.UserRepository;
 import com.ll.example.getTwoGetter.login.Service.KakaoService;
 import com.ll.example.getTwoGetter.login.Service.MailService;
 import com.ll.example.getTwoGetter.login.Service.UserService;
@@ -47,7 +46,6 @@ public class AccountController {
 
     @GetMapping("/login")
     public String login(){
-
         return "account/login";
     }
 
@@ -113,9 +111,6 @@ public class AccountController {
             user.setPassword(password);
             user.setUsername(username);
             userService.save(user);
-
-
-
 
             rttr.addFlashAttribute("message" ,"수정이 완료되었습니다.");
             rttr.addFlashAttribute("modifyTry", "true");
