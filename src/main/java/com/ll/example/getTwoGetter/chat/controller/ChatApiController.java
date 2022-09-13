@@ -49,6 +49,7 @@ public class ChatApiController {
         chatInfo.setCreateChatDate(LocalDateTime.now());
         chatInfo.setUsername(chatInfoDto.getUsername());
         chatInfo.setPartner(chatInfoDto.getPartner());
+        chatInfo.setUserEmail(chatInfoDto.getEmail());
         chatInfoService.save(chatInfo);
     }
 

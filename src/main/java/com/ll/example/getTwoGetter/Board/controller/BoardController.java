@@ -7,12 +7,28 @@ package com.ll.example.getTwoGetter.Board.controller;
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
 import com.ll.example.getTwoGetter.Board.service.BoardService;
+import com.ll.example.getTwoGetter.Board.model.PageResult;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import com.ll.example.getTwoGetter.exception.DataNotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.security.Principal;
+import java.util.List;
+
+@Component
 @Controller
 public class BoardController {
 
@@ -22,12 +38,31 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @GetMapping("/board")
+    @GetMapping("/board") //view용 컨트롤러
     public String list(Model model) {
-        List<BoardDto> boardDtoList = boardService.getBoardList();
-        model.addAttribute("postList", boardDtoList);
         return "board/list.html";
     }
+
+    /**
+     *
+     * rest-api : boards
+     * board list를 return
+     * @param page - 호출할 페이지
+     * @param latitude - 위도
+     * @param longitude - 경도
+     * @return
+     */
+
+    @GetMapping("/boards")
+    public ResponseEntity<PageResult> getBoards(@RequestParam int page, @RequestParam String latitude,
+                                                @RequestParam String longitude) {
+        System.out.println("::::::::::::::" + latitude + ":::::::::" + longitude);
+
+        PageResult pageResult = boardService.getBoardList(page, latitude, longitude);
+        // rest-api controller 응답값으로는 ResponseEntity를 사용하는 것이 좋다고함
+        return ResponseEntity.ok().body(pageResult);
+    }
+
     @GetMapping("/getMarkerBoard/{id}")
     @ResponseBody
     public Board getMarkerBoard(@PathVariable long id){
@@ -62,16 +97,18 @@ public class BoardController {
         return "board/edit.html";
     }
 
-    @PutMapping("/post/edit/{id}")
-    public String update(BoardDto boardDto) {
+    @PostMapping("/board/modify")
+    public String modifyBoard(BoardDto boardDto) {
         boardService.savePost(boardDto);
-        return "redirect:/board";
+        return "redirect:/";
     }
 
-    @DeleteMapping("/deleteBoard/{id}")
-    public String delete(@PathVariable("id") Long id) {
-        boardService.deletePost(id);
-        return "redirect:/board";
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/board/delete/{id}")
+    public String boardDelete(Principal principal, @PathVariable("id") Long id) throws DataNotFoundException {
+        Board board = this.boardService.getBoard(id);
+        this.boardService.delete(board);
+        return "/";
     }
 
 }

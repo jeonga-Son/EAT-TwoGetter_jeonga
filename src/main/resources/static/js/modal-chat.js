@@ -33,6 +33,7 @@ function postChat(){
         body : JSON.stringify({
             chatTitle: chatRoomTitle.value,
             username: user1.nickname,
+            email:user1.username,
             partner: showBoardNickname.innerText
         }),
     }).then((response)=>{
@@ -43,7 +44,22 @@ function postChat(){
 
 }
 
-function middlespace(){
+
+
+function middleSpace(){
+//     console.log(user1.nickname)
+//     console.log("---")
+//     console.log(showBoardNickname.innerText)
+    if(user1.nickname === showBoardNickname.innerText){
+        Swal.fire({
+          icon: 'error',
+          title: '다른 사람과 만나세요!',
+          text: '자기 자신과의 중간거리는 알아볼 수 없어요!',
+        })
+
+        return;
+    }
+
     var partnerLat= document.getElementById('showBoardLat').innerText
     var partnerLng =document.getElementById('showBoardLng').innerText
     location.href=`/middlePlaceMap/middleMap?lat=${partnerLat}&lng=${partnerLng}`;

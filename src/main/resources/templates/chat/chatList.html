@@ -4,7 +4,7 @@
 
 </head>
 <body class="sb-nav-fixed" id="navFix">
-<th:block th:replace = "fragment/common :: menu('chat')"></th:block>
+<th:block th:replace = "fragment/common :: menu('chatList')"></th:block>
 <div id="layoutSidenav">
     <div th:replace = "fragment/common :: side('side')"></div>
     <div id="layoutSidenav_content">
@@ -28,7 +28,6 @@
                             <td th:if="${user.nickname == chatInfo.username}" th:text="${chatInfo.partner}"></td>
                             <td th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></td>
                             <td><button onclick="showChatModal()">입장</button>  <button th:id="${chatInfo.id}" onclick="deleteChat(this.getAttribute('id'))">삭제</button></td>
-
                         </tr>
                         </tbody>
                     </table>
@@ -49,27 +48,6 @@
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
     </div>
 </div>
-
-<script>
-    function showNav(){
-        if(document.getElementById('navFix').classList.contains('sb-sidenav-toggled')){
-            document.getElementById('navFix').classList.remove('sb-sidenav-toggled')
-        }else{
-            document.getElementById('navFix').classList.add('sb-sidenav-toggled')
-        }
-    }
-    function removeStorage(){
-        localStorage.removeItem("Lat")
-        localStorage.removeItem("Lng")
-    }
-    const showProfileModal  = document.querySelector(".modal")
-    function showProfile(){
-        showProfileModal.style.display='block';
-    }
-    function closeProfile(){
-        showProfileModal.style.display='none';
-    }
-</script>
 <script th:inline="javascript">
     /*<![CDATA[*/
     let chatInfos = /*[[${chatInfos}]]*/;
@@ -96,7 +74,7 @@
                 content.innerHTML="<div></div>"
                 for(let i=0; i<responseData.length; i++){
                     var time = responseData[i].chatMessageTime
-                    var time2 = time.substring(11,16)
+                    var time2 = time.substring(5,7)+"월 "+time.substring(8,10)+"일 "+time.substring(11,16) //11,16 //5,6 월  8,9 일
                     if(responseData[i].username == user.nickname){
                         content.innerHTML+=`<div class="chatUserAll"><div class="chatUser"><div class="chatUsername">나&nbsp;</div>`+`<div class="chatTime">${time2}</div></div>`+`<br/>`+`<div class="chatMessageUser">
                         ${responseData[i].content}</div></div>`
@@ -163,9 +141,7 @@
                 }
             })
         }
-
     }
-
 
 </script>
 <script th:inline="javascript">
@@ -177,22 +153,6 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-<script  th:inline="javascript">
-    function deleteAccount(username){
-        if (!confirm("정말로 삭제하시겠습니까?")) {
-            alert("삭제가 취소되었습니다.")
-        } else {
-            $.ajax({
-                url:'/api/users/'+username,
-                type:'DELETE',
-                success: function (result){
-                    alert('정상적으로 삭제 되었습니다.')
-                    window.location.href="/account/login";
-                }
-            })
-        }
-    }
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>-->
 <!--<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>-->

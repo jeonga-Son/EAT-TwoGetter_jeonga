@@ -18,8 +18,8 @@ public class BoardDto {
     private String storeType;
     private String storeName;
     private String orderDetail;
-    private String minimumOrderAmount;
-    private String deliveryCharge;
+    private int minimumOrderAmount;
+    private int deliveryCharge;
     private String content;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
@@ -48,8 +48,8 @@ public class BoardDto {
     }
 
     @Builder
-    public BoardDto(Long id, String title, String storeType, String storeName, String orderDetail, String minimumOrderAmount,
-                    String deliveryCharge, String content, LocalDateTime createdDate, LocalDateTime modifiedDate, String username, String lat, String lng) {
+    public BoardDto(Long id, String title, String storeType, String storeName, String orderDetail, int minimumOrderAmount,
+                    int deliveryCharge, String content, LocalDateTime createdDate, LocalDateTime modifiedDate, String username, String lat, String lng) {
         this.id = id;
         this.title = title;
         this.storeType = storeType;

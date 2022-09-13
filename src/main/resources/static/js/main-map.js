@@ -8,7 +8,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         level: 4 // 지도의 확대 레벨
     };
 
-// 2) 로컬 스토리지 활용, 핀 위치 저장.
+// 2) 로컬 스토리지 활용, 핀 위치 이동.
 /**
 새로 고침 또는 페이지 이동을 하여도 핀이 그 자리에 고정되어 나타나도록 하기 위함.
 */
@@ -39,7 +39,12 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
 /**
 현재 자신의 위치를 알려줄 수 있는 gps 마커를 띄우는 버튼에 필요한 메서드
 */
+var gpsMarkers;
+
+localStorage.setItem("isMarker", "0");
+
 function gpsButton(){
+
     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
     if (navigator.geolocation) {
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -48,6 +53,11 @@ function gpsButton(){
             var lat = position.coords.latitude, // 위도
                 lon = position.coords.longitude; // 경도
             var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+
+            if(localStorage.getItem("isMarker") == "1"){
+                map.setCenter(locPosition);
+                return;
+            }
 
             // 마커와 인포윈도우를 표시합니다
             displayMarker(locPosition);
@@ -75,15 +85,18 @@ let icon = new kakao.maps.MarkerImage(
 마커를 생성하고 변경된 이미지를 반영한 후, 현재 사용자의 위치에 띄운다.
 gps 마커가 지도의 가운데에 보이게 하기 위해 setCenter() 메서드를 사용한다.
 */
+
+
 function displayMarker(locPosition) {
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
+    // gps마커를 생성합니다
+    gpsMarker = new kakao.maps.Marker({
         map: map,
         position: locPosition
     });
-    marker.setImage(icon);
+    gpsMarker.setImage(icon);
     // 지도 중심좌표를 접속위치로 변경합니다
     map.setCenter(locPosition);
+    localStorage.setItem("isMarker", 1);
 }
 
 
@@ -130,7 +143,6 @@ function displayCenterInfo(result, status) {
             // 로컬 스토리지에 좌표 경위도 값을 저장
             localStorage.setItem("Lat", centerMapx)
             localStorage.setItem("Lng", centerMapy)
-
 
         }
     }

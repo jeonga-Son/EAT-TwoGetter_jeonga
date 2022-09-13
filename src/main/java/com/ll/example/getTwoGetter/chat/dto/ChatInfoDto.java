@@ -9,4 +9,5 @@ public class ChatInfoDto {
     private String chatTitle;
     private String username;
     private String partner;
+    private String email;
 }

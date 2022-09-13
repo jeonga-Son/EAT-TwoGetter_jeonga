@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/middlePlaceMap")
@@ -27,7 +26,7 @@ public class MiddlePlaceMapController {
 
         if (userDetails != null) {
             String username = userDetails.getUsername();
-            User user = userService.findByUsename(username);
+            User user = userService.findByUsername(username);
             model.addAttribute("user", user); // user라는 key값에 login된 사용자 user의 정보를 넘긴다.
             model.addAttribute("lat", lat);
             model.addAttribute("lng", lng);

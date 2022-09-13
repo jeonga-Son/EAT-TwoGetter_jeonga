@@ -6,13 +6,20 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title th:text="${title}">Hello!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="/css/signin.css" rel="stylesheet" th:href="@{/css/modal.css}">
 <!--    <link href="/css/signin.css" rel="stylesheet">-->
     <link href="/css/styles.css" rel="stylesheet"/>
     <link href="/css/map.css" rel="stylesheet"/>
     <link href="/css/chat.css" rel="stylesheet"/>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -21,7 +28,7 @@
 <body class="sb-nav-fixed">
 
 <th:block th:fragment="menu(menu)">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark">
         <!-- Navbar Brand-->
 
         <a class="navbar-brand ps-3" th:href="@{/}">EAT-Two Getter</a>
@@ -45,14 +52,14 @@
             </div>
 
         <!--로그인 시 나타나는 상단 토글바-->
-        <p class="userState mt-3" style="color: white; width: 100px;"  th:text="${user.nickname}" sec:authorize="isAuthenticated()">로그인을 해주세요</p>
+        <p sec:authorize="isAuthenticated()" class="userState mt-3" style="color: white; width: 500px; text-align:end;"  th:text="${user.nickname} + ' 님 환영합니다.'"></p>
         <div sec:authorize="isAuthenticated()">
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">나의 프로필</a></li>
-                        <li><a class="dropdown-item btn-open-popup" href="#!" onclick="showProfile()">회원정보 수정</a></li>
+                        <li><a class="dropdown-item btn-open-popup" href="#!" onclick="showProfile()">나의 프로필</a></li>
+                        <li><a class="dropdown-item" href="/showProfile">회원정보 수정</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><form th:action="@{/logout}" method="POST" onsubmit="removeStorage()">
                             <button class="dropdown-item" type="submit" >로그아웃</button>
@@ -63,7 +70,6 @@
         </div>
         <div class="modal" sec:authorize="isAuthenticated()">
             <div class="modal_body">
-                <form th:action="@{/account/modify}" method="get">
                     <a th:href="@{/}">
                         <img class="mb-4" src="https://getbootstrap.kr/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
                     </a>
@@ -72,30 +78,28 @@
                     <div class="mb-3 row">
                         <label for="nickname" class="col-sm-2 col-form-label">이름</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname">
+                            <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname" readonly>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username">
+                            <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" readonly>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="password" class="col-sm-2 col-form-label">PWD</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control-plaintext" id="password" placeholder="password" name="password">
+                            <input type="password" class="form-control-plaintext" id="password" placeholder="password" name="password" readonly>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="button"
-                                th:username="${user.username}"
-                                th:onclick="deleteAccount(this.getAttribute('username'))">회원탈퇴</button>
-                    </div>
-                    <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit">수정</button>
+<!--                    <div class="mb-3 row">-->
+<!--                        <a class="w-10 btn btn-primary mb-3" style="text-align: center"-->
+<!--                                th:username="${user.username}"-->
+<!--                           onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" th:href="@{|/account/remove/${user.username}|}">회원탈퇴</a>-->
+<!--                    </div>-->
+                    <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit" onclick="location.href='/showProfile'">수정</button>
                     <button class="modal_close btn btn-secondary mb-3" type="button" onclick="closeProfile()">닫기</button>
-
-                </form>
             </div>
         </div>
     </nav>
@@ -107,6 +111,25 @@
             document.getElementById('navFix').classList.add('sb-sidenav-toggled')
         }
     }
+    function removeStorage(){
+        localStorage.removeItem("Lat")
+        localStorage.removeItem("Lng")
+    }
+    const showProfileModal  = document.querySelector(".modal")
+    function showProfile(){
+        showProfileModal.style.display='block';
+    }
+    function closeProfile(){
+        showProfileModal.style.display='none';
+    }
+    </script>
+    <!--프로필 변경 시 필터-->
+    <script th:inline="javascript">
+        var message = [[${message}]];
+        if(message!==null){
+            alert(message);
+        }
+        // location.replace([[${searchUrl}]]);
     </script>
 </th:block>
 
@@ -115,12 +138,12 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <div class="sb-sidenav-menu-heading">About ETG</div>
                         <a class="nav-link" href="index.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
+                            ETG 사용방법
                         </a>
-                        <div class="sb-sidenav-menu-heading">Interface</div>
+                        <div class="sb-sidenav-menu-heading">Two getter with Neighbor</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             채팅방
@@ -128,46 +151,36 @@
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/chat/list}">채팅</a>
-                                <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">채팅</a>
-                                <a class="nav-link" th:href="@{/}">채팅(웹소켓)</a>
-                                <a class="nav-link" th:href="@{/board}">게시판</a>
+                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/chat/list}">나의 채팅방</a>
+                                <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">나의 채팅방</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Pages
+                            우리 동네 사람들
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed" href="/board">
+                                    가까운 이웃
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+<!--                                    이거 클릭하면 가까운 위치 순서대로 뜸-->
+                                </a>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                    Authentication
+                                    예비 동지들
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">Login</a>
-                                        <a class="nav-link" href="register.html">Register</a>
-                                        <a class="nav-link" href="password.html">Forgot Password</a>
-                                    </nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                    Error
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="401.html">401 Page</a>
-                                        <a class="nav-link" href="404.html">404 Page</a>
-                                        <a class="nav-link" href="500.html">500 Page</a>
-                                    </nav>
-                                </div>
+<!--                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">-->
+<!--                                    하위 메뉴-->
+<!--                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
+<!--                                </a>-->
                             </nav>
                         </div>
-                        <div class="sb-sidenav-menu-heading">중간 지점 찾기 구현</div>
-                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/middlePlaceMap/middleMap}">중간지점 찾기</a>
-                            <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">중간지점 찾기</a>
+                        <div class="sb-sidenav-menu-heading">편의 메뉴</div>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/showProfile}">나의 프로필 보기</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/report/userReport}">불량회원 신고하기</a>
+                            <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">불량회원 신고하기</a>
 
                     </div>
                 </div>
@@ -198,7 +211,6 @@
             </footer>
         </div>
     </div>
-
 
 </body>
 </html>
