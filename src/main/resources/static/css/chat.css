@@ -1,0 +1,145 @@
+.chatList{
+    width: 100%;
+    height: 100%;
+    border: 3px solid;
+    font-family: 'Black Han Sans', sans-serif;font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+.chatModal{
+    font-family: 'Black Han Sans', sans-serif;font-family: 'Noto Sans KR', sans-serif;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+
+    z-index: 3;
+}
+.boardModal.show {
+    display: block;
+}
+.chatModal_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 650px;
+    height: 680px;
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+}
+.chatModal_All{
+    border: solid 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width:400px;
+    height: 550px;
+
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+}
+.closeChat{
+    position: absolute;
+    left: 50%;
+    top: 94%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.sendMessage{
+    position: absolute;
+    left: 63%;
+    top: 86%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.chatUser{
+    /*background-color: rgba(96,26,97,0.56);*/
+    float: right;
+    font-weight: bold;
+
+}
+.chatPartner{
+    /*background-color: rgba(96,26,97,0.17);*/
+    float: left;
+    font-weight: bold;
+}
+.inputMessage{
+    position: absolute;
+    left: 48%;
+    top: 86%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.chatModal_All{
+    /*background-color:red;*/
+}
+.chat_title{
+    margin-top:10px
+}
+.chat_content{
+    border-bottom: solid 2px;
+    border-top:solid 2px;
+    overflow-x: hidden;
+    width:100%;
+    height: 440px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+}
+
+.chatTime{
+    font-size: small;
+    display: inline-block;
+}
+.chatUser div{
+    display: inline-block; /* block요소인 div를 inline으로 만들어준다. */
+
+}
+.chatPartner>div{
+    display: inline-block; /* block요소인 div를 inline으로 만들어준다. */
+}
+.chatUsername{
+
+
+}
+.chatPartnername{
+
+
+}
+.chatMessagePartner{
+    float: left;
+    text-align: left;
+    width: 100%;
+
+}
+.chatMessageUser{
+    text-align: right;
+    float:right;
+    width: 100%;
+
+    margin-left: auto;
+}
+.chatUserAll{
+    border-top: solid 1px;
+}
+.chatPartnerAll{
+    border-top: solid 1px;
+
+}

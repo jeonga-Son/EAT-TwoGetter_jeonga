@@ -1,0 +1,176 @@
+<div sec:authorize="isAuthenticated()" th:fragment="boardModal('boardModal')">
+  <div class="boardModal">
+    <div class="boardModal_content">
+      <h4 class="boardModal_header border-bottom mb-3">현재 위치에 EAT TWO를 띄웁니다!</h4>
+      <div class="boardModal_body ">
+        <form action="/post" method="post">
+          <div class="form-group row">
+            <label for="username" class="col-sm-2 col-form-label mb-3"><strong>닉네임</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="username" class="form-control" id="username" value="username" th:value="${user.nickname}" readonly></input>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="locate" class="col-sm-2 col-form-label mb-3"><strong>위치</strong></label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="locate" readonly></input>
+            </div>
+          </div>
+          <div class="form-group row" hidden>
+            <label for="lat" class="col-sm-2 col-form-label mb-3"><strong>위도</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="lat" class="form-control" id="lat" readonly/>
+            </div>
+          </div>
+          <div class="form-group row" hidden>
+            <label for="lng" class="col-sm-2 col-form-label mb-3"><strong>경도</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="lng" class="form-control" id="lng" readonly/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputTitle" class="col-sm-2 col-form-label mb-3"><strong>제목</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="title" class="form-control" id="inputTitle" required />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="inputStoreType" class="col-sm-2 col-form-label mb-3"><strong>가게유형</strong></label>
+            <div class="col-sm-10">
+              <select class="form-select" required="required" name="storeType" id="inputStoreType" onchange="selectBoxChange(this.value);" aria-label="Default select example">
+                <option value="" selected disabled hidden>가게유형을 선택해주세요.</option>
+                <option value="한식">한식</option>
+                <option value="중식">중식</option>
+                <option value="일식">일식</option>
+                <option value="양식">양식</option>
+                <option value="카페">카페</option>
+                <option value="야식">야식</option>
+                <option value="기타">기타</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="inputStoreName" class="col-sm-2 col-form-label mb-3"><strong>상호명</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="storeName" class="form-control" id="inputStoreName" required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputOrderDetail" class="col-sm-2 col-form-label mb-3"><strong>주문내용</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="orderDetail" class="form-control" id="inputOrderDetail" required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputMinimumOrderAmount" class="col-sm-2 col-form-label mb-3"><strong>최소주문금액</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="minimumOrderAmount" class="form-control" id="inputMinimumOrderAmount" required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputDeliveryCharge" class="col-sm-2 col-form-label mb-3"><strong>배달요금</strong></label>
+            <div class="col-sm-10">
+              <input type="text" name="deliveryCharge" class="form-control" id="inputDeliveryCharge" required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputContent" class="col-sm-2 col-form-label mb-3"><strong>기타사항</strong></label>
+            <div class="col-sm-10">
+              <textarea type="text" name="content" class="form-control" id="inputContent"></textarea>
+            </div>
+          </div>
+          <div class="col-auto mt-5">
+            <button type="submit" class="btn btn-primary btn-write" role="button">글쓰기</button>
+            <button type="button" class="btn btn-secondary boardModal_close">닫기</button>
+          </div>
+          <button type="button" class="btn-close btn-close-black boardModal_close2" aria-label="Close"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--게시판 정보 모달 띄우기 start!-->
+<div sec:authorize="isAuthenticated()" th:fragment="boardDetailModal('boardDetailModal')">
+  <div class="boardDetailModal">
+    <div class="boardDetailModal_content">
+      <h3 class="boardDetailModal_header">게시글 정보입니다.</h3>
+      <div class="boardDetailModal_body ">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">정보</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+            <th scope="row">닉네임</th>
+            <td id="showBoardNickname"></td>
+          </tr>
+          <tr>
+            <th scope="row">생성 시간</th>
+            <td id="makeBoardTime"></td>
+          </tr>
+          <tr>
+            <th scope="row">위치</th>
+            <td id="showBoardLocate"></td>
+          </tr>
+          <tr>
+            <th scope="row">제목</th>
+            <td id="showBoardTitle"></td>
+          </tr>
+          <tr>
+            <th scope="row">가게유형</th>
+            <td id="showBoardType"></td>
+          </tr>
+          <tr>
+            <th scope="row">상호명</th>
+            <td id="showBoardName"></td>
+          </tr>
+          <tr>
+            <th scope="row">주문내용</th>
+            <td id="showBoardOrder"></td>
+          </tr>
+          <tr>
+            <th scope="row">최소주문금액</th>
+            <td id="showBoardMin"></td>
+          </tr>
+          <tr>
+            <th scope="row">배달요금</th>
+            <td id="showBoardDel"></td>
+          </tr>
+          <tr>
+            <th scope="row">기타사항</th>
+            <td id="showBoardContent"></td>
+          </tr>
+          </tbody>
+        </table>
+
+        <input type="hidden" id="showBoardLat" />
+        <input type="hidden" id="showBoardLng" />
+
+        <div class="col-auto mt-5">
+          <button type="button" class="btn btn-success" onclick="middlespace()">중간 지점 찾기</button>
+          <button type="button" class="btn btn-primary chat-btn" onclick="showChat()">채팅하기</button>
+          <button type="button" class="btn btn-secondary boardDetailModal_close">닫기</button>
+        </div>
+        <button type="button" class="btn-close btn-close-black boardDetailModal_close2" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--게시판 정보 모달 띄우기 end!-->
+<div class="chatRoomModal" th:fragment="chatRoomModal('chatRoomModal')">
+  <div class="chatRoomModal_body">
+    <div>채팅방 제목</div>
+    <input id="chatRoomTitle" type="text" placeholder="채팅방 제목을 입력해주세요."/>
+    <div>
+      <button onclick="postChat()">확인</button>
+      <button class="chatRoomModal_close" onclick="closeChat()">닫기</button>
+    </div>
+  </div>
+</div>
