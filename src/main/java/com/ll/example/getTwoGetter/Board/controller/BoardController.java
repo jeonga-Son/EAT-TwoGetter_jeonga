@@ -7,11 +7,11 @@ package com.ll.example.getTwoGetter.Board.controller;
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
 import com.ll.example.getTwoGetter.Board.service.BoardService;
+import com.ll.example.getTwoGetter.Board.model.PageResult;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 public class BoardController {
@@ -22,12 +22,31 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @GetMapping("/board")
+    @GetMapping("/board") //view용 컨트롤러
     public String list(Model model) {
-        List<BoardDto> boardDtoList = boardService.getBoardList();
-        model.addAttribute("postList", boardDtoList);
         return "board/list.html";
     }
+
+    /**
+     *
+     * rest-api : boards
+     * board list를 return
+     * @param page - 호출할 페이지
+     * @param latitude - 위도
+     * @param longitude - 경도
+     * @return
+     */
+
+    @GetMapping("/boards")
+    public ResponseEntity<PageResult> getBoards(@RequestParam int page, @RequestParam String latitude,
+                                                @RequestParam String longitude) {
+        System.out.println("::::::::::::::" + latitude + ":::::::::" + longitude);
+
+        PageResult pageResult = boardService.getBoardList(page, latitude, longitude);
+        // rest-api controller 응답값으로는 ResponseEntity를 사용하는 것이 좋다고함
+        return ResponseEntity.ok().body(pageResult);
+    }
+
     @GetMapping("/getMarkerBoard/{id}")
     @ResponseBody
     public Board getMarkerBoard(@PathVariable long id){

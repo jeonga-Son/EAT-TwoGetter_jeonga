@@ -53,10 +53,12 @@ public class Board {
 
     @Column(length = 100)
     private String lng;
+    @Column(length = 100)
+    private Double distance;
 
     @Builder
     public Board(Long id, String title,  String storeType, String storeName, String orderDetail, String minimumOrderAmount,
-                 String deliveryCharge, String content, String username, String lat, String lng) {
+                 String deliveryCharge, String content, String username, String lat, String lng, Double distance) {
         this.id = id;
         this.title = title;
         this.storeType = storeType;
@@ -68,5 +70,7 @@ public class Board {
         this.username = username;
         this.lat = lat;
         this.lng = lng;
+        this.distance=distance;
     }
+
 }

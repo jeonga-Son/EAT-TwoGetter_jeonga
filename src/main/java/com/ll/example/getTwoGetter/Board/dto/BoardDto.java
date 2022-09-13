@@ -49,7 +49,8 @@ public class BoardDto {
 
     @Builder
     public BoardDto(Long id, String title, String storeType, String storeName, String orderDetail, String minimumOrderAmount,
-                    String deliveryCharge, String content, LocalDateTime createdDate, LocalDateTime modifiedDate, String username, String lat, String lng) {
+                    String deliveryCharge, String content, LocalDateTime createdDate, LocalDateTime modifiedDate,
+                    String username, String lat, String lng) {
         this.id = id;
         this.title = title;
         this.storeType = storeType;
