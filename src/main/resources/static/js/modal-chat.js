@@ -1,4 +1,4 @@
-const showProfileModal  = document.querySelector(".modal")
+
 function removeStorage(){
     localStorage.removeItem("Lat")
     localStorage.removeItem("Lng")

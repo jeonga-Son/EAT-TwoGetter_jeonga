@@ -37,14 +37,7 @@
 <script src="js/modal-chat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script layout:fragment="script" type='text/javascript'>
-    const delete_elements = document.getElementsByClassName("delete");
-    Array.from(delete_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 삭제하시겠습니까?")) {
-                location.href = "/";
-            };
-        });
-    });
+
 </script>
 
 </body>
