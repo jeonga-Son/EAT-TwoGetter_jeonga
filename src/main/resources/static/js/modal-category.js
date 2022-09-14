@@ -9,7 +9,7 @@ var boardMarkers = [];
 var arrImages = [];
 
 // 카테고리 마커 이미지의 이미지 크기
-var imageSize2 = new kakao.maps.Size(100, 125);
+var imageSize2 = new kakao.maps.Size(50, 65);
 
 //카테고리 마커 이미지, 사이즈 담는 배열
 var markerImage2=[];
@@ -19,31 +19,31 @@ for (var i=0; i<boardInfo.length; i++) {
 //    console.log(boardInfo[i].storeType)
 
     if ( boardInfo[i].storeType === "한식") {
-        arrImages[i] = "https://github.com/jeonga-Son/image/blob/932d7e7aeb94bf770bff9a334d8eb0d836c84618/images/k-food.png?raw=true"
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/c3208ecdc82cd0e49e3c988b5317af041a0eabaa/images/k-food_marker.png"
         markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
     }
     else if ( boardInfo[i].storeType === "일식") {
-        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/932d7e7aeb94bf770bff9a334d8eb0d836c84618/images/j-food.png"
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/c3208ecdc82cd0e49e3c988b5317af041a0eabaa/images/j-food_marker.png"
         markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
     }
     else if ( boardInfo[i].storeType === "중식") {
-        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/932d7e7aeb94bf770bff9a334d8eb0d836c84618/images/c-food.png"
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/c3208ecdc82cd0e49e3c988b5317af041a0eabaa/images/c-food_marker.png"
         markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
     }
     else if ( boardInfo[i].storeType === "양식") {
-        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/932d7e7aeb94bf770bff9a334d8eb0d836c84618/images/w-food.png"
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/c3208ecdc82cd0e49e3c988b5317af041a0eabaa/images/w-food_marker.png"
         markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
     }
     else if ( boardInfo[i].storeType === "카페") {
-        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/932d7e7aeb94bf770bff9a334d8eb0d836c84618/images/cafe.png"
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/c3208ecdc82cd0e49e3c988b5317af041a0eabaa/images/cafe_marker.png"
         markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
     }
     else if ( boardInfo[i].storeType === "야식") {
-        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/932d7e7aeb94bf770bff9a334d8eb0d836c84618/images/late-food.png"
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/c3208ecdc82cd0e49e3c988b5317af041a0eabaa/images/late-food_marker.png"
         markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
     }
     else {
-        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/932d7e7aeb94bf770bff9a334d8eb0d836c84618/images/etc.png"
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/c3208ecdc82cd0e49e3c988b5317af041a0eabaa/images/etc_marker.png"
         markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
     }
 }
