@@ -59,7 +59,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item btn-open-popup" href="#!" onclick="showProfile()">나의 프로필</a></li>
-                        <li><a class="dropdown-item" href="/showProfile">회원정보 수정</a></li>
+                        <li><a class="dropdown-item" href="//modifyProfile">회원정보 수정</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><form th:action="@{/logout}" method="POST" onsubmit="removeStorage()">
                             <button class="dropdown-item" type="submit" >로그아웃</button>
@@ -78,27 +78,16 @@
                     <div class="mb-3 row">
                         <label for="nickname" class="col-sm-2 col-form-label">이름</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname" readonly>
+                            <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname" disabled>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" readonly>
+                            <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" disabled>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="password" class="col-sm-2 col-form-label">PWD</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control-plaintext" id="password" placeholder="password" name="password" readonly>
-                        </div>
-                    </div>
-<!--                    <div class="mb-3 row">-->
-<!--                        <a class="w-10 btn btn-primary mb-3" style="text-align: center"-->
-<!--                                th:username="${user.username}"-->
-<!--                           onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" th:href="@{|/account/remove/${user.username}|}">회원탈퇴</a>-->
-<!--                    </div>-->
-                    <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit" onclick="location.href='/showProfile'">수정</button>
+                    <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit" onclick="location.href='/modifyProfile'">프로필 변경</button>
                     <button class="modal_close btn btn-secondary mb-3" type="button" onclick="closeProfile()">닫기</button>
             </div>
         </div>
@@ -165,20 +154,11 @@
                                 <a class="nav-link collapsed" href="/board">
                                     가까운 이웃
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-<!--                                    이거 클릭하면 가까운 위치 순서대로 뜸-->
                                 </a>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                    예비 동지들
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-<!--                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">-->
-<!--                                    하위 메뉴-->
-<!--                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
-<!--                                </a>-->
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">편의 메뉴</div>
-                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/showProfile}">나의 프로필 보기</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/modifyProfile}">나의 프로필 보기</a>
                             <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/report/userReport}">불량회원 신고하기</a>
                             <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">불량회원 신고하기</a>
 

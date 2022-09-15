@@ -31,12 +31,6 @@
             <label for="password">PASSWORD</label>
             <input type="password" class="form-control" id="password" placeholder="Password" name="password">
         </div>
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         <a class="w-100 btn btn-lg btn-primary mt-2" th:href="@{/account/register}">회원가입</a>
         <a class="w-100 btn btn-lg btn-primary mt-2" th:href="@{/account/find}">ID/PW 찾기</a>
@@ -48,14 +42,12 @@
     </form>
 </main>
 <script th:inline="javascript">
-    // var message = [[${message}]];
-    // if(message!==null){
-    //     alert(message);
-    // }
-    // location.replace([[${searchUrl}]]);
+    var message = [[${message}]];
+    if(message!==null){
+        alert(message);
+    }
     var username = document.getElementById('username').value
     sessionStorage.setItem("username",username)
-    console.log(username)
 </script>
 </body>
 </html>
