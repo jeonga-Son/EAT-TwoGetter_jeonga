@@ -108,7 +108,7 @@ public class BoardController {
     public String boardDelete(Principal principal, @PathVariable("id") Long id) throws DataNotFoundException {
         Board board = this.boardService.getBoard(id);
         this.boardService.delete(board);
-        return "/";
+        return "redirect:/";
     }
 
 }

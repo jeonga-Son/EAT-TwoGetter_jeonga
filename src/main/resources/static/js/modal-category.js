@@ -5,14 +5,51 @@ var positions = [];
 var arridBoard= [];
 var boardMarkers = [];
 
+// 카테고리 마커이미지 담는 배열
+var arrImages = [];
 
-var boardMarkersImage = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-// 마커 이미지의 이미지 크기 입니다
-var imageSize2 = new kakao.maps.Size(35, 50);
+// 카테고리 마커 이미지의 이미지 크기
+var imageSize2 = new kakao.maps.Size(40, 40);
+
+//카테고리 마커 이미지, 사이즈 담는 배열
+var markerImage2=[];
+
+// 카테고리 마커 이미지 각각 다르게 담는 코드
+for (var i=0; i<boardInfo.length; i++) {
+//    console.log(boardInfo[i].storeType)
+
+    if ( boardInfo[i].storeType === "한식") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/k-food_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else if ( boardInfo[i].storeType === "일식") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/j-food_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else if ( boardInfo[i].storeType === "중식") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/c-food_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else if ( boardInfo[i].storeType === "양식") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/w-food_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else if ( boardInfo[i].storeType === "카페") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/5b8f8ed1221caab4804143506aaa248247b7d5c8/images/cafe_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else if ( boardInfo[i].storeType === "야식") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/late-food_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/etc_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+}
+
 
 // 마커 이미지를 생성합니다
-var markerImage2 = new kakao.maps.MarkerImage(boardMarkersImage, imageSize2);
-
 const boardDetailModal = document.querySelector('.boardDetailModal');
 const editBoardModal = document.querySelector('.editBoardModal');
 const boardDetailModal_close = document.querySelector('.boardDetailModal_close');
@@ -39,16 +76,16 @@ function showBoardMarker() {
     }
 
     for (var i = 0; i < positions.length; i++) {
-        addMarker(positions[i], arridBoard[i]);
+        addMarker(positions[i], arridBoard[i], markerImage2[i]);
     }
 }
 
-function addMarker(positions2, idBoard2) {
+function addMarker(positions2, idBoard2, img) {
     // 마커를 생성합니다
     var boardMarker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: positions2, // 마커를 표시할 위치
-        image : markerImage2, // 마커 이미지
+        image : img, // 마커 이미지
         title: idBoard2
     });
 
@@ -113,26 +150,28 @@ function addMarker(positions2, idBoard2) {
                 showBoardId.innerText = responseData.id
                 localStorage.setItem("markerBoardId", responseData.id);
 
-               if(user1.nickname == showBoardNickname.innerText) {
-                   boardDeleteBtn.style.display ="inline-block";
-                   boardModifyBtn.style.display ="inline-block";
-                   findMiddleBtn.style.display="none";
-                   chat_Btn.style.display="none";
-               } else {
-                   boardDeleteBtn.style.display ="none";
-                   boardModifyBtn.style.display ="none";
-                   findMiddleBtn.style.display="inline-block";
-                   chat_Btn.style.display="inline-block";
-               }
+                if(user1.nickname == showBoardNickname.innerText) {
+                    boardDeleteBtn.style.display ="inline-block";
+                    boardModifyBtn.style.display ="inline-block";
+                    findMiddleBtn.style.display="none";
+                    chat_Btn.style.display="none";
+                } else {
+                    boardDeleteBtn.style.display ="none";
+                    boardModifyBtn.style.display ="none";
+                    findMiddleBtn.style.display="inline-block";
+                    chat_Btn.style.display="inline-block";
+                }
             })
-            boardDetailModal.style.display = 'block';
+        boardDetailModal.style.display = 'block';
     });
 }
 
 function deleteGetBoardId(){
+
     const boardId = document.getElementById('showBoardId');
     const url = "/board/delete/" + boardId.innerText;
     location.href = url;
+
 }
 
 
@@ -141,50 +180,50 @@ function modifyBoard(){
     boardDetailModal.style.display = "none";
     editBoardModal.style.display="block";
 
-        var modifyBoardNickname= document.getElementById('modifyBoardNickname')
-        var modifyBoardLocate = document.getElementById('modifyBoardLocate')
-        var modifyBoardTitle = document.getElementById('modifyBoardTitle')
-        var modifyBoardType = document.getElementById('modifyBoardType')
-        var modifyBoardName = document.getElementById('modifyBoardName')
-        var modifyBoardOrder = document.getElementById('modifyBoardOrder')
-        var modifyBoardMin = document.getElementById('modifyBoardMin')
-        var modifyBoardDel = document.getElementById('modifyBoardDel')
-        var modifyBoardContent = document.getElementById('modifyBoardContent')
-        var modifyBoardTime = document.getElementById('modifyBoardTime')
-        var modifyBoardLat = document.getElementById('modifyBoardLat')
-        var modifyBoardLng = document.getElementById('modifyBoardLng')
+    var modifyBoardNickname= document.getElementById('modifyBoardNickname')
+    var modifyBoardLocate = document.getElementById('modifyBoardLocate')
+    var modifyBoardTitle = document.getElementById('modifyBoardTitle')
+    var modifyBoardType = document.getElementById('modifyBoardType')
+    var modifyBoardName = document.getElementById('modifyBoardName')
+    var modifyBoardOrder = document.getElementById('modifyBoardOrder')
+    var modifyBoardMin = document.getElementById('modifyBoardMin')
+    var modifyBoardDel = document.getElementById('modifyBoardDel')
+    var modifyBoardContent = document.getElementById('modifyBoardContent')
+    var modifyBoardTime = document.getElementById('modifyBoardTime')
+    var modifyBoardLat = document.getElementById('modifyBoardLat')
+    var modifyBoardLng = document.getElementById('modifyBoardLng')
 
-        let markerBoardId = parseInt(localStorage.getItem("markerBoardId"))
+    let markerBoardId = parseInt(localStorage.getItem("markerBoardId"))
 
-        fetch(`/getMarkerBoard/${markerBoardId}`)
-            .then(data=>data.json())
-            .then(responseData=>{
-                console.log(responseData)
+    fetch(`/getMarkerBoard/${markerBoardId}`)
+        .then(data=>data.json())
+        .then(responseData=>{
+            console.log(responseData)
 
-                let geocoder = new kakao.maps.services.Geocoder();
+            let geocoder = new kakao.maps.services.Geocoder();
 
-                let callback = function(result, status) {
-                    if (status === kakao.maps.services.Status.OK) {
-                        document.getElementById("modifyBoardLocate").setAttribute("value", result[0].address.address_name)
-                    }
-                };
+            let callback = function(result, status) {
+                if (status === kakao.maps.services.Status.OK) {
+                    document.getElementById("modifyBoardLocate").setAttribute("value", result[0].address.address_name)
+                }
+            };
 
-                let coord = new kakao.maps.LatLng(responseData.lat, responseData.lng);
-                var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
+            let coord = new kakao.maps.LatLng(responseData.lat, responseData.lng);
+            var boardlocate = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
 
-                modifyBoardTitle.value = responseData.title
-                modifyBoardStoreType.value = responseData.storeType
-                modifyBoardStoreName.value =responseData.storeName
-                modifyBoardOrderDetail.value = responseData.orderDetail
-                modifyBoardMinimumOrderAmount.value = responseData.minimumOrderAmount
-                modifyBoardDeliveryCharge.value = responseData.deliveryCharge
-                modifyBoardContent.value = responseData.content
-                modifyBoardLat.value = responseData.lat
-                modifyBoardLng.value = responseData.lng
-                modifyBoardId.value = markerBoardId
+            modifyBoardTitle.value = responseData.title
+            modifyBoardStoreType.value = responseData.storeType
+            modifyBoardStoreName.value =responseData.storeName
+            modifyBoardOrderDetail.value = responseData.orderDetail
+            modifyBoardMinimumOrderAmount.value = responseData.minimumOrderAmount
+            modifyBoardDeliveryCharge.value = responseData.deliveryCharge
+            modifyBoardContent.value = responseData.content
+            modifyBoardLat.value = responseData.lat
+            modifyBoardLng.value = responseData.lng
+            modifyBoardId.value = markerBoardId
 
 
-            })
+        })
 
 }
 
