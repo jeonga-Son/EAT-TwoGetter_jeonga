@@ -16,48 +16,14 @@ var late_food_img =  document.getElementById("late_food_img");
 var etc_img =  document.getElementById("etc_img");
 
 function allBtn() {
-    if(all_img.src.match("all")) {
-        all_img.src = "./images/all_red.png"
-    }
-
-    k_food_img.src = "./images/k-food.png"
-    j_food_img.src = "./images/j-food.png"
-    c_food_img.src = "./images/c-food.png"
-    w_food_img.src = "./images/w-food.png"
-    cafe_img.src = "./images/cafe.png"
-    late_food_img.src = "./images/late-food.png"
-    etc_img.src = "./images/etc.png"
 
     for (var i=0; i<boardMarkers.length; i++) {
         boardMarkers[i].setVisible(true);
     }
 }
-//function allBtn() {
-//    var all_img =  document.getElementById("all_img");
-//    if(all_img.src.match("all")) {
-//        all_img.src = "./images/all_red.png"
-//    } else {
-//        all_img.src = "./images/all.png"
-//    }
-//
-//    for (var i=0; i<boardMarkers.length; i++) {
-//        boardMarkers[i].setVisible(true);
-//    }
-//}
 
 
 function k_foodBtn() {
-        if(k_food_img.src.match("k-food")) {
-            k_food_img.src = "./images/k-food_red.png"
-        }
-
-        all_img.src = "./images/all.png"
-        j_food_img.src = "./images/j-food.png"
-        c_food_img.src = "./images/c-food.png"
-        w_food_img.src = "./images/w-food.png"
-        cafe_img.src = "./images/cafe.png"
-        late_food_img.src = "./images/late-food.png"
-        etc_img.src = "./images/etc.png"
 
     for (var i=0; i<boardMarkers.length; i++) {
         boardMarkers[i].setVisible(false);
@@ -68,17 +34,6 @@ function k_foodBtn() {
 }
 
 function j_foodBtn() {
-    if(j_food_img.src.match("j-food")) {
-        j_food_img.src = "./images/j-food_red.png"
-    }
-
-    all_img.src = "./images/all.png"
-    k_food_img.src = "./images/k-food.png"
-    c_food_img.src = "./images/c-food.png"
-    w_food_img.src = "./images/w-food.png"
-    cafe_img.src = "./images/cafe.png"
-    late_food_img.src = "./images/late-food.png"
-    etc_img.src = "./images/etc.png"
 
     for (var i=0; i<boardMarkers.length; i++) {
         boardMarkers[i].setVisible(false);
@@ -89,17 +44,6 @@ function j_foodBtn() {
 }
 
 function c_foodBtn() {
-    if(c_food_img.src.match("c-food")) {
-        c_food_img.src = "./images/c-food_red.png"
-    }
-
-    all_img.src = "./images/all.png"
-    k_food_img.src = "./images/k-food.png"
-    j_food_img.src = "./images/j-food.png"
-    w_food_img.src = "./images/w-food.png"
-    cafe_img.src = "./images/cafe.png"
-    late_food_img.src = "./images/late-food.png"
-    etc_img.src = "./images/etc.png"
 
     for (var i=0; i<boardMarkers.length; i++) {
         boardMarkers[i].setVisible(false);
@@ -110,17 +54,6 @@ function c_foodBtn() {
 }
 
 function w_foodBtn() {
-    if(w_food_img.src.match("w-food")) {
-        w_food_img.src = "./images/w-food_red.png"
-    }
-
-    all_img.src = "./images/all.png"
-    k_food_img.src = "./images/k-food.png"
-    j_food_img.src = "./images/j-food.png"
-    c_food_img.src = "./images/c-food.png"
-    cafe_img.src = "./images/cafe.png"
-    late_food_img.src = "./images/late-food.png"
-    etc_img.src = "./images/etc.png"
 
     for (var i=0; i<boardMarkers.length; i++) {
         boardMarkers[i].setVisible(false);
@@ -131,17 +64,6 @@ function w_foodBtn() {
 }
 
 function cafeBtn() {
-    if(cafe_img.src.match("cafe")) {
-        cafe_img.src = "./images/cafe_red.png"
-    }
-
-    all_img.src = "./images/all.png"
-    k_food_img.src = "./images/k-food.png"
-    j_food_img.src = "./images/j-food.png"
-    c_food_img.src = "./images/c-food.png"
-    w_food_img.src = "./images/w-food.png"
-    late_food_img.src = "./images/late-food.png"
-    etc_img.src = "./images/etc.png"
 
     for (var i=0; i<boardMarkers.length; i++) {
         boardMarkers[i].setVisible(false);
@@ -152,17 +74,6 @@ function cafeBtn() {
 }
 
 function late_foodBtn() {
-    if(late_food_img.src.match("late-food")) {
-        late_food_img.src = "./images/late-food_red.png"
-    }
-
-    all_img.src = "./images/all.png"
-    k_food_img.src = "./images/k-food.png"
-    j_food_img.src = "./images/j-food.png"
-    c_food_img.src = "./images/c-food.png"
-    w_food_img.src = "./images/w-food.png"
-    cafe_img.src = "./images/cafe.png"
-    etc_img.src = "./images/etc.png"
 
     for (var i=0; i<boardMarkers.length; i++) {
         boardMarkers[i].setVisible(false);
@@ -173,17 +84,6 @@ function late_foodBtn() {
 }
 
 function etcBtn() {
-    if(etc_img.src.match("etc")) {
-        etc_img.src = "./images/etc_red.png"
-    }
-
-    all_img.src = "./images/all.png"
-    k_food_img.src = "./images/k-food.png"
-    j_food_img.src = "./images/j-food.png"
-    c_food_img.src = "./images/c-food.png"
-    w_food_img.src = "./images/w-food.png"
-    cafe_img.src = "./images/cafe.png"
-    late_food_img.src = "./images/late-food.png"
 
     for (var i=0; i<boardMarkers.length; i++) {
         boardMarkers[i].setVisible(false);
