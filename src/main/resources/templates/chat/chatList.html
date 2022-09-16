@@ -27,7 +27,7 @@
                             |"></td>
                             <td th:if="${user.nickname == chatInfo.username}" th:text="${chatInfo.partner}"></td>
                             <td th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></td>
-                            <td><button onclick="showChatModal()">입장</button>  <button th:id="${chatInfo.id}" onclick="deleteChat(this.getAttribute('id'))">삭제</button></td>
+                            <td><button th:id="${chatInfo.id}" onclick="showChatModal(this.getAttribute('id'))">입장</button>  <button th:id="${chatInfo.id}" onclick="deleteChat(this.getAttribute('id'))">삭제</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -40,7 +40,7 @@
                         </div>
                         <input type="text" class="inputMessage" placeholder="내용 입력" id="inputMessage" name="inputMessage">
                         <button class = "sendMessage" type="button" onclick="messagePost()">전송</button>
-                        <button class="closeChat" onclick="closeChat()">닫기</button>
+                        <button class="closeChat" onclick="closeChat(user.nickname)">닫기</button>
                     </div>
                 </div>
             </div>
@@ -58,13 +58,16 @@
 <script>
     const chatModal = document.querySelector('.chatModal');
     const chatClose = document.querySelector('.closeChat');
-    // chatClose.addEventListener('click', () => {
-    //     content.innerText=""
-    //     chatModal.style.display = 'none';
-    // });
-    function closeChat(){
+    function closeChat(name){
         chatClose.style.display = 'none';
         content.innerText=""
+        $.ajax({
+            url:`/chatApi/modifyLastTime/${clickedChatId}/${name}`,
+            type:'POST',
+            success: function (result){
+                location.reload();
+            }
+        })
         location.reload();
     }
     function chatMessage_upload(id){
@@ -82,7 +85,7 @@
                         content.innerHTML+=`<br/>`
 
                     }else{
-                        content.innerHTML+=`<div class="chatPartnerAll"><div class="chatPartner"><div class="chatPartnername">${responseData[i].username}&nbsp; </div>`+`<div class="chatTime">${time2}</div></div>`+`<br/>`+`<div class="chatMessagePartner">
+                        content.innerHTML+=`<div class="chatPartnerAll"><div class="chatPartner"><div class="chatPartnername">${responseData[i].username}님&nbsp; </div>`+`<div class="chatTime">${time2}</div></div>`+`<br/>`+`<div class="chatMessagePartner">
                             ${responseData[i].content}</div</div>`
                         content.innerHTML+=`<br/>`
                         content.innerHTML+=`<br/>`
@@ -110,6 +113,7 @@
 <script>
     // const modal = document.querySelector('.modal');
     // const btnClosePopup = document.querySelector('.modal_close');
+    var clickedChatId = "";
     const title = document.getElementById('title');
     const content = document.getElementById('content');
     let arr_chatId=[];
@@ -117,16 +121,18 @@
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i] = document.getElementById(chatInfos[i].chatTitle)
     }
-    for(let i= 0; i<chatInfo_length; i++){
-        arr_chatId[i].addEventListener('click', () => {
-            title.innerHTML = `<div>${chatInfos[i].chatTitle}</div>`
-            chatId = chatInfos[i].id;
-            chatMessage_upload(chatInfos[i].id)
-            // chatModal.style.display = 'block';
-        });
-    }
-    function showChatModal(){
+    function showChatModal(id){
+
+        //입장버튼 누르면 clickedChatId에 클릭한 채팅방의 ID가 들어옴 이걸 closeChat에서 lastTime 처리해야함
+        clickedChatId  = id;
         chatModal.style.display = 'block';
+        for(let i= 0; i<chatInfo_length; i++){
+            arr_chatId[i].addEventListener('click', () => {
+                title.innerHTML = `<div id="chatTitle${i}">${chatInfos[i].chatTitle}</div>`
+                chatId = chatInfos[i].id;
+                chatMessage_upload(chatInfos[i].id)
+            });
+        }
     }
     function deleteChat(id){
         if (!confirm("정말로 삭제하시겠습니까?")) {

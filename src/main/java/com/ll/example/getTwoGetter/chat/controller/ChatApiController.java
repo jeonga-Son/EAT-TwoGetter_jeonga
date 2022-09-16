@@ -50,12 +50,20 @@ public class ChatApiController {
         chatInfo.setUsername(chatInfoDto.getUsername());
         chatInfo.setPartner(chatInfoDto.getPartner());
         chatInfo.setUserEmail(chatInfoDto.getEmail());
+
+        chatInfo.setUserLastReadTime(LocalDateTime.now());
+        chatInfo.setPartnerLastReadTime(LocalDateTime.now());
         chatInfoService.save(chatInfo);
+    }
+
+    @PostMapping("/modifyLastTime/{id}/{name}")
+    public void modifyLastTime(@PathVariable long id, @PathVariable String name){
+        System.out.println(id);
+        System.out.println(name);
     }
 
     @DeleteMapping("/chatDelete/{id}")
     public void chatDelete(@PathVariable long id){
-        System.out.println(id);
         ChatInfo chatInfo = chatInfoService.findById(id);
         chatInfoService.delete(chatInfo);
     }
