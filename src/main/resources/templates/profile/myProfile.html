@@ -18,7 +18,7 @@
                     이메일
                 </div>
                 <div class="col-sm-2">
-                    <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" readonly>
+                    <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" disabled readonly>
                 </div>
             </div>
             <div class="row">
@@ -26,7 +26,7 @@
                     이름
                 </div>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname" readonly>
+                    <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname"  readonly>
                 </div>
                 <div class="col-sm-2">
                     <button class="btn btn-secondary mb-3" onclick="showAccountModifyNickname()">수정</button>
