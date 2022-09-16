@@ -7,6 +7,7 @@ import com.ll.example.getTwoGetter.chat.repository.ChatInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -68,5 +69,24 @@ public class ChatInfoService {
         }
         chatMessageService.modify(beforeNickname, afterNickname);
 
+    }
+
+    public void modifyLastTime(long id, String name) {
+        ChatInfo chatInfo = chatInfoRepository.findById(id).orElse(null);
+        if(chatInfo.getUsername().equals(name)){
+            chatInfo.setUserLastReadTime(LocalDateTime.now());
+            this.save(chatInfo);
+            return;
+        }
+        if(chatInfo.getPartner().equals(name)){
+            chatInfo.setPartnerLastReadTime(LocalDateTime.now());
+            this.save(chatInfo);
+            return;
+        }
+    }
+
+    public List<ChatInfo> findAll() {
+        List<ChatInfo> chatInfos = chatInfoRepository.findAll();
+        return chatInfos;
     }
 }

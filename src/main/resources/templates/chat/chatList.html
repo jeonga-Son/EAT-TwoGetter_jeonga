@@ -14,13 +14,16 @@
                     <table class="table">
                         <thead class="table-dark">
                         <tr>
+                            <th>알람</th>
                             <th>제목</th>
                             <th>생성일</th>
                             <th>상대방</th>
+                            <th>비고</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="chatInfo: ${chatInfos}" th:id="${chatInfo.chatTitle}">
+                            <td th:id="|notice${chatInfo.id}|">알림 0</td>
                             <td th:text="${chatInfo.chatTitle}"></td>
                             <td th:text="|${#strings.substring(chatInfo.createChatDate,0,4)}년 ${#strings.substring(chatInfo.createChatDate,5,7)}월 ${#strings.substring(chatInfo.createChatDate,8,10)}일
                             ${#strings.substring(chatInfo.createChatDate,11,13)}시 ${#strings.substring(chatInfo.createChatDate,14,16)}분
@@ -54,6 +57,69 @@
     let chatInfo_length = /*[[${chatInfos.size()}]]*/;
     let user = /*[[${user}]]*/;
     /*]]>*/
+</script>
+<script>
+    //로그인 된 사용자가 각각 채팅방을 마지막에 읽은 시간을 넣어줌
+    var lastReadTime=[];
+
+    //각 채팅방의 고유번호(ID)가 담김
+    var chatInfoId =[];
+
+    //각 채팅방에 알람 ID값이 담긴 배열
+    var noticeChatMessages=[];
+
+    chatNotice();
+    function chatNotice(){
+        //채팅방 정보 fetch로 받아옴
+        fetch('/chatApi/chatInfo')
+            .then(data=>data.json())
+            .then(responseData=>{
+                //로그인 된 사용자가 각각 채팅방을 마지막에 읽은 시간을 넣어줌
+                for(let i=0; i<responseData.length; i++){
+                    chatInfoId[i] = responseData[i].id;
+                    if(responseData[i].partner==user.nickname){
+                        lastReadTime[i] = responseData[i].partnerLastReadTime;
+                    }
+                    if(responseData[i].username==user.nickname){
+                        lastReadTime[i] = responseData[i].userLastReadTime;
+                    }
+                }
+
+            })
+
+        //noticeChatMessages배열에 알림 html 태그를 넣어줌
+        for(let i=0; i<chatInfoId.length; i++){
+            noticeChatMessages[i] = document.getElementById(`notice${chatInfoId[i]}`);
+        }
+
+        //여러 채팅방들의 사용자가 읽지 않은 메시지 숫자를 담고있는 배열
+        var chatNoticeNum = new Array(lastReadTime.length);
+        //기본 값 0으로
+        chatNoticeNum.fill(0);
+
+        //이번에는 채팅메시지들을 받아옴
+        fetch('/chatApi/chatMessage')
+            .then(data=>data.json())
+            .then(responseData=>{
+                //채팅방에 대한 채팅내역을 순회하면서 시간비교    시간은 > or < 로 비교 가능, 가장 최근에 본 시간 이후의 시간들이면 값을 ++;
+                for(let j=0; j<chatInfoId.length; j++){
+                    for(let i=0; i<responseData.length; i++){
+                        if(chatInfoId[j]==responseData[i].chatInfo.id){
+                            if(lastReadTime[j] < responseData[i].chatMessageTime){
+                                chatNoticeNum[j]++;
+                            }
+                        }
+                    }
+                }
+                //알림 html 태그에 값을 넣어줌
+                for(let i=0; i<chatNoticeNum.length; i++){
+                    noticeChatMessages[i].innerText= "알림 "+chatNoticeNum[i]
+                }
+            })
+        setTimeout(function (){chatNotice()},4000);
+
+    }
+
 </script>
 <script>
     const chatModal = document.querySelector('.chatModal');

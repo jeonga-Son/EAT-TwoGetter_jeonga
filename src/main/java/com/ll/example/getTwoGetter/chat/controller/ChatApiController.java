@@ -24,11 +24,23 @@ public class ChatApiController {
     ChatMessageService chatMessageService;
 
     @GetMapping("/chatMessage/{id}")
-    public List<ChatMessage> showChatMessage(@PathVariable("id") long id){
+    public List<ChatMessage> showChatMessageId(@PathVariable("id") long id){
         ChatInfo chatInfo = chatInfoService.findById(id);
         List<ChatMessage> chatMessages = chatMessageService.findByChatInfo(chatInfo);
         return chatMessages;
     }
+    @GetMapping("/chatInfo")
+    public List<ChatInfo> showChatInfo(){
+        List<ChatInfo> chatInfos = chatInfoService.findAll();
+        return chatInfos;
+    }
+    @GetMapping("/chatMessage")
+    public List<ChatMessage> showMessageInfo(){
+        List<ChatMessage> chatMessages = chatMessageService.findAll();
+        return chatMessages;
+    }
+
+
     @PostMapping("/sendMessage/{id}")
     public void sendMessage(@PathVariable long id, @RequestBody ChatMessageDto chatMessageDto){
         ChatInfo chatInfo = chatInfoService.findById(Long.parseLong(chatMessageDto.getChatId()));
@@ -58,8 +70,7 @@ public class ChatApiController {
 
     @PostMapping("/modifyLastTime/{id}/{name}")
     public void modifyLastTime(@PathVariable long id, @PathVariable String name){
-        System.out.println(id);
-        System.out.println(name);
+        chatInfoService.modifyLastTime(id, name);
     }
 
     @DeleteMapping("/chatDelete/{id}")
