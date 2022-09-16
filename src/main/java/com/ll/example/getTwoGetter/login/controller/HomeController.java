@@ -43,5 +43,10 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/about_us")
+    public String aboutUs(){
+        return "about/about_us";
+    }
+
 
 }
