@@ -42,27 +42,27 @@
 </div>
 
 <script>
-      // password show 스크립트 클릭이벤트
-      var input = document.querySelector('.pswrd');
-      var show = document.querySelector('.show');
-      show.addEventListener('click', active);
-      function active(){
-        if(input.type === "password"){
-          input.type = "text";
-          show.style.color = "#1DA1F2";
-          show.textContent = "HIDE";
-        }else{
-          input.type = "password";
-          show.textContent = "SHOW";
-          show.style.color = "#111";
-        }
-      }
+// password show 스크립트 클릭이벤트
+var input = document.querySelector('.pswrd');
+var show = document.querySelector('.show');
+show.addEventListener('click', active);
+function active(){
+    if(input.type === "password"){
+        input.type = "text";
+        show.style.color = "#1DA1F2";
+        show.textContent = "HIDE";
+    }else{
+        input.type = "password";
+        show.textContent = "SHOW";
+        show.style.color = "#111";
+    }
+}
 
-      // 존재 이유 불명
-      var username = document.getElementById('username').value
-    sessionStorage.setItem("username",username)
-    console.log(username)
-    </script>
+// 존재 이유 불명
+var username = document.getElementById('username').value
+sessionStorage.setItem("username",username)
+console.log(username)
+</script>
 
 </body>
 </html>
