@@ -86,7 +86,6 @@
                 }
 
             })
-
         //noticeChatMessages배열에 알림 html 태그를 넣어줌
         for(let i=0; i<chatInfoId.length; i++){
             noticeChatMessages[i] = document.getElementById(`notice${chatInfoId[i]}`);
@@ -96,7 +95,6 @@
         var chatNoticeNum = new Array(lastReadTime.length);
         //기본 값 0으로
         chatNoticeNum.fill(0);
-
         //이번에는 채팅메시지들을 받아옴
         fetch('/chatApi/chatMessage')
             .then(data=>data.json())
@@ -117,7 +115,6 @@
                 }
             })
         setTimeout(function (){chatNotice()},4000);
-
     }
 
 </script>
