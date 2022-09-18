@@ -5,6 +5,6 @@
 
     <div class="modal-generate-button-wrap">
         <button sec:authorize="isAuthenticated()" type="button" class="btn btn-success build_marker" style="display:inline-block;">게시물 생성</button>
-        <a sec:authorize="!isAuthenticated()" type="button" class="btn btn-success" style="display:inline-block" th:href="@{/account/login}">게시물 생성</a>
+        <a sec:authorize="!isAuthenticated()" type="button" class="btn btn-success" style="display:inline-block" onclick="whenLogoutBulidMarker()">게시물 생성</a>
     </div>
 </div>

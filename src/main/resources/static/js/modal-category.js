@@ -110,8 +110,18 @@ function addMarker(positions2, idBoard2, img) {
 
 
         if(user1==null){
-            alert("로그인 이후 가능합니다")
-            location.href="/account/login"
+            Swal.fire({
+                  title: '  ',
+                  text: '로그인 이후 주문메이트 공고 확인이 가능합니다.',
+                  showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  }
+                }).then((result) => {
+                    location.href="/account/login"
+                })
         }
 
         fetch(`/getMarkerBoard/${boardMarker.getTitle()}`)
@@ -164,6 +174,21 @@ function addMarker(positions2, idBoard2, img) {
             })
         boardDetailModal.style.display = 'block';
     });
+}
+
+function whenLogoutBulidMarker(){
+    Swal.fire({
+      title: '  ',
+      text: '로그인 이후 주문메이트 공고 생성이 가능합니다.',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    }).then((result) => {
+        location.href="/account/login"
+    })
 }
 
 /**
@@ -250,8 +275,6 @@ function modifyBoard(){
             modifyBoardLat.value = responseData.lat
             modifyBoardLng.value = responseData.lng
             modifyBoardId.value = markerBoardId
-
-
         })
 
 }
