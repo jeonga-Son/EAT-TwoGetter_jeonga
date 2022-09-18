@@ -108,7 +108,7 @@ function addMarker(positions2, idBoard2, img) {
         var showBoardLat = document.getElementById('showBoardLat')
         var showBoardLng = document.getElementById('showBoardLng')
 
-
+        // 비로그인 시 마커 클릭 할 때 나타나는 경고창
         if(user1==null){
             Swal.fire({
                   title: '  ',
@@ -176,6 +176,9 @@ function addMarker(positions2, idBoard2, img) {
     });
 }
 
+/**
+비로그인시 게시물 생성 버튼 클릭 시 나타나는 경고창
+*/
 function whenLogoutBulidMarker(){
     Swal.fire({
       title: '  ',
@@ -191,19 +194,10 @@ function whenLogoutBulidMarker(){
     })
 }
 
-/**
-모달 게시판 삭제 시 기능하는 기능 메서드
-*/
-function deleteGetBoardId(){
-
-    const boardId = document.getElementById('showBoardId');
-    const url = "/board/delete/" + boardId.innerText;
-    location.href = url;
-
-}
 
 /**
-모달 게시판 삭제 시 나타나는 알림창 메서드
+모달 게시판 삭제 메서드, 알림창 UI
+Ok를 누르면 삭제 메서드가 실행된다.
 */
 function deleteBoard(){
 		Swal.fire({
@@ -277,6 +271,41 @@ function modifyBoard(){
             modifyBoardId.value = markerBoardId
         })
 
+}
+
+/**
+수정사항 제출, 알림창 UI 적용 메서드
+*/
+function modifyBoardAlert(){
+    Swal.fire({
+        title: '수정사항을 적용하시겠습니까?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: '적용할께요.',
+        denyButtonText: `적용하지 않을께요.`,
+        cancelButtonText: '취소',
+    }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            Swal.fire(
+                '저장되었습니다!',
+                '',
+                'success'
+            ).then((result) => {
+                document.getElementById('modifySubmit').submit();
+        })
+
+        } else if (result.isDenied) {
+            Swal.fire(
+                '수정사항이 반영되지 않았습니다!',
+                '',
+                'info'
+            ).then((result) => {
+                location.href="/"
+            })
+
+        }
+    })
 }
 
 
