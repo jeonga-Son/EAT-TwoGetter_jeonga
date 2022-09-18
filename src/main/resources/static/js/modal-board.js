@@ -37,7 +37,9 @@ function boardSubmitClickEvent() {
     gpsMarkerd.setVisible(false);
 }
 
-
+/**
+회원 탈퇴 시 사용되는 메서드
+*/
 function deleteAccount(username){
     if (!confirm("정말로 삭제하시겠습니까?")) {
         alert("삭제가 취소되었습니다.")
@@ -52,4 +54,5 @@ function deleteAccount(username){
         })
     }
 }
+
 

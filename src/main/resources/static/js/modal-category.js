@@ -166,6 +166,9 @@ function addMarker(positions2, idBoard2, img) {
     });
 }
 
+/**
+모달 게시판 삭제 시 기능하는 기능 메서드
+*/
 function deleteGetBoardId(){
 
     const boardId = document.getElementById('showBoardId');
@@ -174,7 +177,33 @@ function deleteGetBoardId(){
 
 }
 
-
+/**
+모달 게시판 삭제 시 나타나는 알림창 메서드
+*/
+function deleteBoard(){
+		Swal.fire({
+		  title: '주문메이트 공고 삭제',
+		  text: "삭제하시면 다시 복구시킬 수 없습니다.",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '삭제',
+		  cancelButtonText: '취소'
+		}).then((result) => {
+		  if (result.value) {
+            Swal.fire({
+            title: '삭제가 완료되었습니다.',
+            text: '새로운 주문메이트 공고를 생성해보세요!',
+            icon: 'success'
+             }).then((result2) => {
+                const boardId = document.getElementById('showBoardId');
+                const url = "/board/delete/" + boardId.innerText;
+                location.href = url;
+             })
+		  }
+		})
+	}
 
 function modifyBoard(){
     boardDetailModal.style.display = "none";
