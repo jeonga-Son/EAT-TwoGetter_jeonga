@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://funyphp.com/js/jquery-1.8.3.min.js.pagespeed.jm.0IhQ85x_cu.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
 <div class="container">
@@ -55,90 +58,6 @@
     </div>
 </div>
 
-<script>
-    var booleanId = false;
-    var booleanNickname = false;
-    function checkEmail(){
-        const email = document.getElementById('username').value;
-        if(email===""){alert("Email을 입력해주세요.")}
-        else if(email.includes("@")==false){
-            alert("이메일 형식(@)으로 작성해주세요.")
-        }
-        else{
-            fetch(`http://localhost:8080/api/users?username=${email}`)
-                .then((response)=>response.json())
-                .then(data=>{
-                    if(data[0]!=null){
-                        alert("중복된 Email입니다.")
-                    }else{
-                        alert("사용가능한 Email입니다.")
-                        booleanId=true;
-                    }
-                });
-        }
-    }
-
-    function accountRegister(){
-        var passwordCheck = document.getElementById('passwordCheck').value;
-        var password = document.getElementById('password').value;
-        if(booleanId===true && booleanNickname==true){
-            if(passwordCheck===password){
-                fetch('http://localhost:8080/account/register', {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        nickname: document.getElementById('nickname').value,
-                        username: document.getElementById('username').value,
-                        password: document.getElementById('password').value
-                    })
-                })
-                alert("가입이 완료되었습니다.")
-                window.location.href="http://localhost:8080/account/login"
-            }else{
-                alert("password가 일치하지 않습니다.")
-            }
-        }
-        else if(booleanId==true && booleanNickname==false){
-            alert("닉네임 중복을 확인해주세요.")
-        }else{
-            alert("이메일 중복을 확인해주세요.")
-        }
-    }
-
-    function checkNickname(){
-        var nickname = document.getElementById('nickname').value;
-        if(nickname==""){
-            alert("닉네임을 입력해주세요.")
-        }else {
-            fetch(`http://localhost:8080/api/user/${nickname}`)
-                .then((response)=>response.json())
-                .then(data=>{
-                    if(data==true){
-                        alert("생성가능한 닉네임입니다.")
-                        booleanNickname=true;
-                    }else{
-                        alert("존재하는 닉네임입니다.")
-                    }
-                });
-        }
-    }
-
-    var input = document.querySelector('.password');
-    var show = document.querySelector('.show');
-    show.addEventListener('click', active);
-    function active(){
-      if(input.type === "password"){
-        input.type = "text";
-        show.style.color = "#1DA1F2";
-        show.textContent = "HIDE";
-      }else{
-        input.type = "password";
-        show.textContent = "SHOW";
-        show.style.color = "#111";
-      }
-    }
-  </script>
+<script src="../js/register.js"></script>
 </body>
 </html>
