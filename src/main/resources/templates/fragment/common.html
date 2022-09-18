@@ -68,42 +68,75 @@
                 </li>
             </ul>
         </div>
-        <div class="modal" sec:authorize="isAuthenticated()">
-            <div class="modal_body">
-                    <a th:href="@{/}">
-                        <img class="mb-4" src="https://getbootstrap.kr/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-                    </a>
 
-                    <h2 class="h3 mb-3 fw-normal">프로필</h2>
-                    <div class="mb-3 row">
-                        <label for="nickname" class="col-sm-2 col-form-label">이름</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname" readonly>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" readonly>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="password" class="col-sm-2 col-form-label">PWD</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control-plaintext" id="password" placeholder="password" name="password" readonly>
-                        </div>
-                    </div>
+<!--        &lt;!&ndash;myprofile 모달창&ndash;&gt;-->
+<!--        <div class="modal" sec:authorize="isAuthenticated()">-->
+<!--            <div class="modal_body">-->
+<!--                    <a th:href="@{/}">-->
+<!--                        <img class="mb-4" src="https://getbootstrap.kr/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
+<!--                    </a>-->
+
+<!--                    <h2 class="h3 mb-3 fw-normal">프로필</h2>-->
 <!--                    <div class="mb-3 row">-->
-<!--                        <a class="w-10 btn btn-primary mb-3" style="text-align: center"-->
-<!--                                th:username="${user.username}"-->
-<!--                           onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" th:href="@{|/account/remove/${user.username}|}">회원탈퇴</a>-->
+<!--                        <label for="nickname" class="col-sm-2 col-form-label">이름</label>-->
+<!--                        <div class="col-sm-10">-->
+<!--                            <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname" readonly>-->
+<!--                        </div>-->
 <!--                    </div>-->
-                    <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit" onclick="location.href='/showProfile'">수정</button>
-                    <button class="modal_close btn btn-secondary mb-3" type="button" onclick="closeProfile()">닫기</button>
+<!--                    <div class="mb-3 row">-->
+<!--                        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>-->
+<!--                        <div class="col-sm-10">-->
+<!--                            <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" readonly>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3 row">-->
+<!--                        <label for="password" class="col-sm-2 col-form-label">PWD</label>-->
+<!--                        <div class="col-sm-10">-->
+<!--                            <input type="password" class="form-control-plaintext" id="password" placeholder="password" name="password" readonly>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--&lt;!&ndash;                    <div class="mb-3 row">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a class="w-10 btn btn-primary mb-3" style="text-align: center"&ndash;&gt;-->
+<!--&lt;!&ndash;                                th:username="${user.username}"&ndash;&gt;-->
+<!--&lt;!&ndash;                           onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" th:href="@{|/account/remove/${user.username}|}">회원탈퇴</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                    <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit" onclick="location.href='/showProfile'">수정</button>-->
+<!--                    <button class="modal_close btn btn-secondary mb-3" type="button" onclick="closeProfile()">닫기</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;myprofile 모달창 end!&ndash;&gt;-->
+
+
+    <div class="modal" sec:authorize="isAuthenticated()">
+        <div class="card-container">
+            <div class="upper-container">
+                <div class="image-container">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png" />
+                </div>
+                <button onclick="closeProfile()" type="button" class="btn-close btn-close-black showProfileModal_closeBtn" aria-label="Close"></button>
+            </div>
+            <div class="lower-container">
+                <div>
+                    <h3  th:text="${user.nickname}" name="nickname"></h3>
+                    <h4  th:text="${user.username}" name="username" ></h4>
+                </div>
+                <div>
+                    <p>sodales accumsan ligula. Aenean sed diam tristique,
+                        fermentum mi nec, ornare arch.
+                    </p>
+                </div>
+                <div>
+                    <a href="showProfile" class="btn">edit profile</a>
+                </div>
             </div>
         </div>
+    </div>
     </nav>
+
     <script>
+    const showProfileModal_closeBtn = document.getElementById("showProfileModal_closeBtn")
+    const showProfileModal  = document.querySelector(".modal")
+
     function showNav(){
         if(document.getElementById('navFix').classList.contains('sb-sidenav-toggled')){
             document.getElementById('navFix').classList.remove('sb-sidenav-toggled')
@@ -115,13 +148,15 @@
         localStorage.removeItem("Lat")
         localStorage.removeItem("Lng")
     }
-    const showProfileModal  = document.querySelector(".modal")
+
     function showProfile(){
         showProfileModal.style.display='block';
     }
+
     function closeProfile(){
         showProfileModal.style.display='none';
     }
+
     </script>
     <!--프로필 변경 시 필터-->
     <script th:inline="javascript">
