@@ -36,4 +36,9 @@ public class ChatMessageService {
             }
         }
     }
+
+    public List<ChatMessage> findAll() {
+        List<ChatMessage> messages = chatMessageRepository.findAll();
+        return messages;
+    }
 }

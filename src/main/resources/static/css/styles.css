@@ -11329,6 +11329,7 @@ body {
   z-index: 1038;
   transform: translateX(-225px);
 }
+
 #layoutSidenav #layoutSidenav_content {
   position: relative;
   display: flex;

@@ -4,7 +4,7 @@
     <div class="editBoardModal_content">
       <h4 class="editBoardModal_header border-bottom mb-3" th:text="${user.nickname} + ' 님의 주문 메이트 구인공고'"></h4>
       <div class="mt-2 editBoardModal_body ">
-        <form th:action="@{'/board/modify'}" method="post">
+        <form th:action="@{'/board/modify'}" id="modifySubmit" method="post">
           <div class="form-group row">
             <label for="username" class="col-sm-2 col-form-label mb-3"><strong>닉네임</strong></label>
             <div class="col-sm-10">
@@ -89,7 +89,7 @@
             </div>
           </div>
           <div class="col-auto mt-5">
-            <button type="submit" class="btn btn-primary btn-editSave">수정완료</button>
+            <button type="button" id="btn-editSave" onclick="modifyBoardAlert()" class="btn btn-primary btn-editSave">수정완료</button>
             <button type="button" class="btn btn-secondary editBoardModal_close">닫기</button>
           </div>
           <button type="button" class="btn-close btn-close-black editBoardModal_close2" aria-label="Close"></button>

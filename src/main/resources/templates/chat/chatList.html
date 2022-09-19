@@ -14,20 +14,23 @@
                     <table class="table">
                         <thead class="table-dark">
                         <tr>
+                            <th>알람</th>
                             <th>제목</th>
                             <th>생성일</th>
                             <th>상대방</th>
+                            <th>비고</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="chatInfo: ${chatInfos}" th:id="${chatInfo.chatTitle}">
+                            <td th:id="|notice${chatInfo.id}|">알림 0</td>
                             <td th:text="${chatInfo.chatTitle}"></td>
                             <td th:text="|${#strings.substring(chatInfo.createChatDate,0,4)}년 ${#strings.substring(chatInfo.createChatDate,5,7)}월 ${#strings.substring(chatInfo.createChatDate,8,10)}일
                             ${#strings.substring(chatInfo.createChatDate,11,13)}시 ${#strings.substring(chatInfo.createChatDate,14,16)}분
                             |"></td>
                             <td th:if="${user.nickname == chatInfo.username}" th:text="${chatInfo.partner}"></td>
                             <td th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></td>
-                            <td><button onclick="showChatModal()">입장</button>  <button th:id="${chatInfo.id}" onclick="deleteChat(this.getAttribute('id'))">삭제</button></td>
+                            <td><button th:id="${chatInfo.id}" onclick="showChatModal(this.getAttribute('id'))">입장</button>  <button th:id="${chatInfo.id}" onclick="deleteChat(this.getAttribute('id'))">삭제</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -40,7 +43,7 @@
                         </div>
                         <input type="text" class="inputMessage" placeholder="내용 입력" id="inputMessage" name="inputMessage">
                         <button class = "sendMessage" type="button" onclick="messagePost()">전송</button>
-                        <button class="closeChat" onclick="closeChat()">닫기</button>
+                        <button class="closeChat" onclick="closeChat(user.nickname)">닫기</button>
                     </div>
                 </div>
             </div>
@@ -56,15 +59,78 @@
     /*]]>*/
 </script>
 <script>
+    //로그인 된 사용자가 각각 채팅방을 마지막에 읽은 시간을 넣어줌
+    var lastReadTime=[];
+
+    //각 채팅방의 고유번호(ID)가 담김
+    var chatInfoId =[];
+
+    //각 채팅방에 알람 ID값이 담긴 배열
+    var noticeChatMessages=[];
+
+    chatNotice();
+    function chatNotice(){
+        //채팅방 정보 fetch로 받아옴
+        fetch('/chatApi/chatInfo')
+            .then(data=>data.json())
+            .then(responseData=>{
+                //로그인 된 사용자가 각각 채팅방을 마지막에 읽은 시간을 넣어줌
+                for(let i=0; i<responseData.length; i++){
+                    chatInfoId[i] = responseData[i].id;
+                    if(responseData[i].partner==user.nickname){
+                        lastReadTime[i] = responseData[i].partnerLastReadTime;
+                    }
+                    if(responseData[i].username==user.nickname){
+                        lastReadTime[i] = responseData[i].userLastReadTime;
+                    }
+                }
+
+            })
+        //noticeChatMessages배열에 알림 html 태그를 넣어줌
+        for(let i=0; i<chatInfoId.length; i++){
+            noticeChatMessages[i] = document.getElementById(`notice${chatInfoId[i]}`);
+        }
+
+        //여러 채팅방들의 사용자가 읽지 않은 메시지 숫자를 담고있는 배열
+        var chatNoticeNum = new Array(lastReadTime.length);
+        //기본 값 0으로
+        chatNoticeNum.fill(0);
+        //이번에는 채팅메시지들을 받아옴
+        fetch('/chatApi/chatMessage')
+            .then(data=>data.json())
+            .then(responseData=>{
+                //채팅방에 대한 채팅내역을 순회하면서 시간비교    시간은 > or < 로 비교 가능, 가장 최근에 본 시간 이후의 시간들이면 값을 ++;
+                for(let j=0; j<chatInfoId.length; j++){
+                    for(let i=0; i<responseData.length; i++){
+                        if(chatInfoId[j]==responseData[i].chatInfo.id){
+                            if(lastReadTime[j] < responseData[i].chatMessageTime){
+                                chatNoticeNum[j]++;
+                            }
+                        }
+                    }
+                }
+                //알림 html 태그에 값을 넣어줌
+                for(let i=0; i<chatNoticeNum.length; i++){
+                    noticeChatMessages[i].innerText= "알림 "+chatNoticeNum[i]
+                }
+            })
+        setTimeout(function (){chatNotice()},4000);
+    }
+
+</script>
+<script>
     const chatModal = document.querySelector('.chatModal');
     const chatClose = document.querySelector('.closeChat');
-    // chatClose.addEventListener('click', () => {
-    //     content.innerText=""
-    //     chatModal.style.display = 'none';
-    // });
-    function closeChat(){
+    function closeChat(name){
         chatClose.style.display = 'none';
         content.innerText=""
+        $.ajax({
+            url:`/chatApi/modifyLastTime/${clickedChatId}/${name}`,
+            type:'POST',
+            success: function (result){
+                location.reload();
+            }
+        })
         location.reload();
     }
     function chatMessage_upload(id){
@@ -82,7 +148,7 @@
                         content.innerHTML+=`<br/>`
 
                     }else{
-                        content.innerHTML+=`<div class="chatPartnerAll"><div class="chatPartner"><div class="chatPartnername">${responseData[i].username}&nbsp; </div>`+`<div class="chatTime">${time2}</div></div>`+`<br/>`+`<div class="chatMessagePartner">
+                        content.innerHTML+=`<div class="chatPartnerAll"><div class="chatPartner"><div class="chatPartnername">${responseData[i].username}님&nbsp; </div>`+`<div class="chatTime">${time2}</div></div>`+`<br/>`+`<div class="chatMessagePartner">
                             ${responseData[i].content}</div</div>`
                         content.innerHTML+=`<br/>`
                         content.innerHTML+=`<br/>`
@@ -110,6 +176,7 @@
 <script>
     // const modal = document.querySelector('.modal');
     // const btnClosePopup = document.querySelector('.modal_close');
+    var clickedChatId = "";
     const title = document.getElementById('title');
     const content = document.getElementById('content');
     let arr_chatId=[];
@@ -117,16 +184,18 @@
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i] = document.getElementById(chatInfos[i].chatTitle)
     }
-    for(let i= 0; i<chatInfo_length; i++){
-        arr_chatId[i].addEventListener('click', () => {
-            title.innerHTML = `<div>${chatInfos[i].chatTitle}</div>`
-            chatId = chatInfos[i].id;
-            chatMessage_upload(chatInfos[i].id)
-            // chatModal.style.display = 'block';
-        });
-    }
-    function showChatModal(){
+    function showChatModal(id){
+
+        //입장버튼 누르면 clickedChatId에 클릭한 채팅방의 ID가 들어옴 이걸 closeChat에서 lastTime 처리해야함
+        clickedChatId  = id;
         chatModal.style.display = 'block';
+        for(let i= 0; i<chatInfo_length; i++){
+            arr_chatId[i].addEventListener('click', () => {
+                title.innerHTML = `<div id="chatTitle${i}">${chatInfos[i].chatTitle}</div>`
+                chatId = chatInfos[i].id;
+                chatMessage_upload(chatInfos[i].id)
+            });
+        }
     }
     function deleteChat(id){
         if (!confirm("정말로 삭제하시겠습니까?")) {

@@ -38,11 +38,17 @@ public class BoardController {
         this.boardService = boardService;
     }
 
+//    @GetMapping("/board") //view용 컨트롤러
+//    public String list(Model model) {
+//        List<BoardDto> boardDtoList = boardService.getBoardList();
+//        model.addAttribute("postList", boardDtoList);
+//        return "board/list.html";
+//    }
+
     @GetMapping("/board") //view용 컨트롤러
     public String list(Model model) {
         return "board/list.html";
     }
-
     /**
      *
      * rest-api : boards
