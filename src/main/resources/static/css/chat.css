@@ -364,3 +364,6 @@ margin: 0;
     border-top: solid 1px;
 
 }
+.chatModal{
+    display: none;
+}

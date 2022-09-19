@@ -43,7 +43,7 @@ public class ProfileController {
 
         if(!(Util.checkPassword(currentPassword, currentUser.getPassword()))){
             rttr.addFlashAttribute("modifyTry", "false");
-            rttr.addFlashAttribute("message", "현재 비밀번호가 일치하지 않습니다.");
+            rttr.addFlashAttribute("message", "비밀번호가 일치하지 않습니다.");
             return "redirect:/modifyProfile";
         }
         if(!newPassword.equals(newPasswordCheck)){
@@ -52,6 +52,8 @@ public class ProfileController {
             return "redirect:/modifyProfile";
         }
         userService.modifyPassword(currentUser, newPassword);
+        rttr.addFlashAttribute("modifyTry", "true");
+        rttr.addFlashAttribute("message", "비밀번호가 변경되었습니다.");
 
         return "redirect:/modifyProfile";
     }

@@ -103,7 +103,7 @@
                 for(let j=0; j<chatInfoId.length; j++){
                     for(let i=0; i<responseData.length; i++){
                         if(chatInfoId[j]==responseData[i].chatInfo.id){
-                            if(lastReadTime[j] < responseData[i].chatMessageTime){
+                            if((lastReadTime[j] < responseData[i].chatMessageTime) && user.nickname!=responseData[i].username){
                                 chatNoticeNum[j]++;
                             }
                         }
@@ -121,18 +121,6 @@
 <script>
     const chatModal = document.querySelector('.chatModal');
     const chatClose = document.querySelector('.closeChat');
-    function closeChat(name){
-        chatClose.style.display = 'none';
-        content.innerText=""
-        $.ajax({
-            url:`/chatApi/modifyLastTime/${clickedChatId}/${name}`,
-            type:'POST',
-            success: function (result){
-                location.reload();
-            }
-        })
-        location.reload();
-    }
     function chatMessage_upload(id){
         fetch(`/chatApi/chatMessage/${id}`)
             .then(data=>data.json())
@@ -210,6 +198,18 @@
                 }
             })
         }
+    }
+    function closeChat(name){
+        chatClose.style.display = 'none';
+        content.innerText=""
+        $.ajax({
+            url:`/chatApi/modifyLastTime/${clickedChatId}/${name}`,
+            type:'POST',
+            success: function (result){
+                location.reload();
+            }
+        })
+        location.reload();
     }
 
 </script>
