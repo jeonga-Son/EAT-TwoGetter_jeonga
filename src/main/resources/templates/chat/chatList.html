@@ -74,14 +74,20 @@
         fetch('/chatApi/chatInfo')
             .then(data=>data.json())
             .then(responseData=>{
+                var k=0;
                 //로그인 된 사용자가 각각 채팅방을 마지막에 읽은 시간을 넣어줌
                 for(let i=0; i<responseData.length; i++){
-                    chatInfoId[i] = responseData[i].id;
                     if(responseData[i].partner==user.nickname){
-                        lastReadTime[i] = responseData[i].partnerLastReadTime;
+                        lastReadTime[k] = responseData[i].partnerLastReadTime;
+                        chatInfoId[k] = responseData[i].id;
+                        k++;
+                        // console.log("파트너같을때")
                     }
-                    if(responseData[i].username==user.nickname){
-                        lastReadTime[i] = responseData[i].userLastReadTime;
+                    else if(responseData[i].username==user.nickname){
+                        lastReadTime[k] = responseData[i].userLastReadTime;
+                        chatInfoId[k] = responseData[i].id;
+                        // console.log("유저같을때")
+                        k++;
                     }
                 }
 
@@ -104,6 +110,8 @@
                     for(let i=0; i<responseData.length; i++){
                         if(chatInfoId[j]==responseData[i].chatInfo.id){
                             if((lastReadTime[j] < responseData[i].chatMessageTime) && user.nickname!=responseData[i].username){
+                                // console.log(j+"번째 채팅방 알람증가")
+                                // console.log(chatInfoId.length)
                                 chatNoticeNum[j]++;
                             }
                         }
