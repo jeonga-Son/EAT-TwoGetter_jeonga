@@ -108,10 +108,20 @@ function addMarker(positions2, idBoard2, img) {
         var showBoardLat = document.getElementById('showBoardLat')
         var showBoardLng = document.getElementById('showBoardLng')
 
-
+        // 비로그인 시 마커 클릭 할 때 나타나는 경고창
         if(user1==null){
-            alert("로그인 이후 가능합니다")
-            location.href="/account/login"
+            Swal.fire({
+                  title: '  ',
+                  text: '로그인 이후 주문메이트 공고 확인이 가능합니다.',
+                  showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  }
+                }).then((result) => {
+                    location.href="/account/login"
+                })
         }
 
         fetch(`/getMarkerBoard/${boardMarker.getTitle()}`)
@@ -166,14 +176,53 @@ function addMarker(positions2, idBoard2, img) {
     });
 }
 
-function deleteGetBoardId(){
-
-    const boardId = document.getElementById('showBoardId');
-    const url = "/board/delete/" + boardId.innerText;
-    location.href = url;
+/**
+비로그인시 게시물 생성 버튼 클릭 시 나타나는 경고창
+*/
+function whenLogoutBulidMarker(){
+    Swal.fire({
+      title: '  ',
+      text: '로그인 이후 주문메이트 공고 생성이 가능합니다.',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    }).then((result) => {
+        location.href="/account/login"
+    })
 }
 
 
+/**
+모달 게시판 삭제 메서드, 알림창 UI
+Ok를 누르면 삭제 메서드가 실행된다.
+*/
+function deleteBoard(){
+		Swal.fire({
+		  title: '주문메이트 공고 삭제',
+		  text: "삭제하시면 다시 복구시킬 수 없습니다.",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '삭제',
+		  cancelButtonText: '취소'
+		}).then((result) => {
+		  if (result.value) {
+            Swal.fire({
+            title: '삭제가 완료되었습니다.',
+            text: '새로운 주문메이트 공고를 생성해보세요!',
+            icon: 'success'
+             }).then((result2) => {
+                const boardId = document.getElementById('showBoardId');
+                const url = "/board/delete/" + boardId.innerText;
+                location.href = url;
+             })
+		  }
+		})
+	}
 
 function modifyBoard(){
     boardDetailModal.style.display = "none";
@@ -220,10 +269,43 @@ function modifyBoard(){
             modifyBoardLat.value = responseData.lat
             modifyBoardLng.value = responseData.lng
             modifyBoardId.value = markerBoardId
-
-
         })
 
+}
+
+/**
+수정사항 제출, 알림창 UI 적용 메서드
+*/
+function modifyBoardAlert(){
+    Swal.fire({
+        title: '수정사항을 적용하시겠습니까?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: '적용할께요.',
+        denyButtonText: `적용하지 않을께요.`,
+        cancelButtonText: '취소',
+    }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            Swal.fire(
+                '저장되었습니다!',
+                '',
+                'success'
+            ).then((result) => {
+                document.getElementById('modifySubmit').submit();
+        })
+
+        } else if (result.isDenied) {
+            Swal.fire(
+                '수정사항이 반영되지 않았습니다!',
+                '',
+                'info'
+            ).then((result) => {
+                location.href="/"
+            })
+
+        }
+    })
 }
 
 
