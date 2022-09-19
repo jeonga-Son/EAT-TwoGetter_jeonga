@@ -1,55 +1,50 @@
-<!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragment/common :: head('Profile')">
-
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" dir="ltr">
+<head th:replace="fragment/common :: head(title)">
+    <meta charset="utf-8">
+    <title>Login - EatTwoGetter</title>
+    <link rel="stylesheet" th:href="@{/css/myProfile.css}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body class="sb-nav-fixed" id="navFix">
 <th:block th:replace = "fragment/common :: menu('home')"></th:block>
 <div id="layoutSidenav">
     <div th:replace = "fragment/common :: side('side')"></div>
     <div id="layoutSidenav_content">
-            <a th:href="@{/}">
-                <img class="mb-4" src="https://getbootstrap.kr/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-            </a>
-        <h2 class="h3 mb-3 fw-normal">프로필</h2>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                    이메일
-                </div>
-                <div class="col-sm-2">
-                    <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" disabled>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-2">
-                    이름
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname" disabled>
-                </div>
-                <div class="col-sm-2">
-                    <button class="btn btn-secondary mb-3" onclick="showAccountModifyNickname()">수정</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-2">
-                    비밀번호
-                </div>
-                <div class="col-sm-2">
-                    <input type="password" class="form-control-plaintext" id="password" value="****" name="password" disabled>
-                </div>
-                <div class="col-sm-2">
-                    <button class="btn btn-secondary mb-3" onclick="showAccountModifyPassword()">수정</button>
-                </div>
-            </div>
 
-            <a class="btn btn-primary"
-                    th:username="${user.username}"
-               onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" th:href="@{|/account/remove/${user.username}|}">회원탈퇴</a>
+        <!-- 프로필 보기 페이지 -->
+        <div class="myProfileContainer">
+            <div class="profileContainer">
+                <header>
+                    <br/>
+                    <h3 th:text="${user.nickname} + ' 님의 프로필'"></h3>
+                </header>
+
+                <span class="details">이메일</span>
+                <div class="input-field">
+                    <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" readonly>
+                </div>
+                <span class="details">닉네임</span>
+                <div class="input-field">
+                    <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname" readonly>
+                </div>
+
+                <br/><br/>
+                <div class="button" >
+                    <div class="inner"></div>
+                    <button onclick="showAccountModifyNickname()">닉네임 수정하기</button>
+                </div>
+                <div class="button" >
+                    <div class="inner"></div>
+                    <button onclick="showAccountModifyPassword()">비밀번호 수정하기</button>
+                </div>
+
+                <a th:username="${user.username}"
+                   onclick="if ( !confirm('정말 탈퇴하시겠습니까?') ) return false;" th:href="@{|/account/remove/${user.username}|}">회원탈퇴</a>
+            </div>
         </div>
 
-
+        <!-- 닉네임 변경 모달 -->
         <div class="modal_accountModifyNickname" sec:authorize="isAuthenticated()">
             <div class="modal_body_accountModifyNickname">
                 <h3>닉네임 변경</h3><br/>
@@ -69,6 +64,7 @@
             </div>
         </div>
 
+        <!-- 비밀번호 변경 모달 -->
         <div class="modal_accountModifyPassword" sec:authorize="isAuthenticated()">
             <div class="modal_body_accountModifyPassword">
                 <h3>비밀번호 변경</h3><br/>
@@ -91,6 +87,7 @@
                 </form>
             </div>
         </div>
+
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
     </div>
 </div>
@@ -111,14 +108,11 @@
         accountModifyPassword.style.display='none';
     }
 
-</script>
-<script>
-
-</script>
+  </script>
 <script src="js/modal-category.js"></script>
 <script src="js/category-marker.js"></script>
 <script src="js/modal-chat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-</body>
 
+</body>
 </html>

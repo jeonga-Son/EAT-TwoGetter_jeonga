@@ -45,7 +45,10 @@ public class AccountController {
 
 
     @GetMapping("/login")
-    public String login(){
+    public String login(@RequestParam(value = "error", required = false) String err, Model model){
+        if(err!=null){
+            model.addAttribute("message", "아이디나 비밀번호가 일치하지 않습니다.");
+        }
         return "account/login";
     }
 

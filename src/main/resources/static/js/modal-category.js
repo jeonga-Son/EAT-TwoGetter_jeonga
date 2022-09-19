@@ -5,27 +5,45 @@ var positions = [];
 var arridBoard= [];
 var boardMarkers = [];
 
-
-//이미지를 담는 배열
+// 카테고리 마커이미지 담는 배열
 var arrImages = [];
 
-//var boardMarkersImage = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+// 카테고리 마커 이미지의 이미지 크기
+var imageSize2 = new kakao.maps.Size(40, 40);
 
-//이미지+마커사이즈를 담는 배열
+//카테고리 마커 이미지, 사이즈 담는 배열
 var markerImage2=[];
 
-// 마커 이미지의 이미지 크기 입니다
-var imageSize2 = new kakao.maps.Size(35, 50);
-
+// 카테고리 마커 이미지 각각 다르게 담는 코드
 for (var i=0; i<boardInfo.length; i++) {
-    console.log(boardInfo[i].storeType)
+//    console.log(boardInfo[i].storeType)
 
     if ( boardInfo[i].storeType === "한식") {
-        arrImages[i] = "https://github.com/jeonga-Son/image/blob/932d7e7aeb94bf770bff9a334d8eb0d836c84618/images/k-food.png?raw=true"
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/k-food_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else if ( boardInfo[i].storeType === "일식") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/j-food_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else if ( boardInfo[i].storeType === "중식") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/c-food_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else if ( boardInfo[i].storeType === "양식") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/w-food_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else if ( boardInfo[i].storeType === "카페") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/5b8f8ed1221caab4804143506aaa248247b7d5c8/images/cafe_marker.png"
+        markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
+    }
+    else if ( boardInfo[i].storeType === "야식") {
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/late-food_marker.png"
         markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
     }
     else {
-        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/932d7e7aeb94bf770bff9a334d8eb0d836c84618/images/j-food.png"
+        arrImages[i] = "https://raw.githubusercontent.com/jeonga-Son/image/819496faa58bb39662d1a612d8d39ee09c4e6609/images/etc_marker.png"
         markerImage2[i] = new kakao.maps.MarkerImage(arrImages[i], imageSize2);
     }
 }
@@ -90,10 +108,20 @@ function addMarker(positions2, idBoard2, img) {
         var showBoardLat = document.getElementById('showBoardLat')
         var showBoardLng = document.getElementById('showBoardLng')
 
-
+        // 비로그인 시 마커 클릭 할 때 나타나는 경고창
         if(user1==null){
-            alert("로그인 이후 가능합니다")
-            location.href="/account/login"
+            Swal.fire({
+                  title: '  ',
+                  text: '로그인 이후 주문메이트 공고 확인이 가능합니다.',
+                  showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  }
+                }).then((result) => {
+                    location.href="/account/login"
+                })
         }
 
         fetch(`/getMarkerBoard/${boardMarker.getTitle()}`)
@@ -148,15 +176,53 @@ function addMarker(positions2, idBoard2, img) {
     });
 }
 
-function deleteGetBoardId(){
-
-    const boardId = document.getElementById('showBoardId');
-    const url = "/board/delete/" + boardId.innerText;
-    location.href = url;
-
+/**
+비로그인시 게시물 생성 버튼 클릭 시 나타나는 경고창
+*/
+function whenLogoutBulidMarker(){
+    Swal.fire({
+      title: '  ',
+      text: '로그인 이후 주문메이트 공고 생성이 가능합니다.',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    }).then((result) => {
+        location.href="/account/login"
+    })
 }
 
 
+/**
+모달 게시판 삭제 메서드, 알림창 UI
+Ok를 누르면 삭제 메서드가 실행된다.
+*/
+function deleteBoard(){
+		Swal.fire({
+		  title: '주문메이트 공고 삭제',
+		  text: "삭제하시면 다시 복구시킬 수 없습니다.",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '삭제',
+		  cancelButtonText: '취소'
+		}).then((result) => {
+		  if (result.value) {
+            Swal.fire({
+            title: '삭제가 완료되었습니다.',
+            text: '새로운 주문메이트 공고를 생성해보세요!',
+            icon: 'success'
+             }).then((result2) => {
+                const boardId = document.getElementById('showBoardId');
+                const url = "/board/delete/" + boardId.innerText;
+                location.href = url;
+             })
+		  }
+		})
+	}
 
 function modifyBoard(){
     boardDetailModal.style.display = "none";
@@ -203,10 +269,43 @@ function modifyBoard(){
             modifyBoardLat.value = responseData.lat
             modifyBoardLng.value = responseData.lng
             modifyBoardId.value = markerBoardId
-
-
         })
 
+}
+
+/**
+수정사항 제출, 알림창 UI 적용 메서드
+*/
+function modifyBoardAlert(){
+    Swal.fire({
+        title: '수정사항을 적용하시겠습니까?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: '적용할께요.',
+        denyButtonText: `적용하지 않을께요.`,
+        cancelButtonText: '취소',
+    }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            Swal.fire(
+                '저장되었습니다!',
+                '',
+                'success'
+            ).then((result) => {
+                document.getElementById('modifySubmit').submit();
+        })
+
+        } else if (result.isDenied) {
+            Swal.fire(
+                '수정사항이 반영되지 않았습니다!',
+                '',
+                'info'
+            ).then((result) => {
+                location.href="/"
+            })
+
+        }
+    })
 }
 
 

@@ -1,3 +1,4 @@
+
 .modal {
     position: absolute;
     top: 0;
@@ -6,32 +7,87 @@
     height: 100%;
     display: none;
     background-color: rgba(0, 0, 0, 0.4);
+    font-family: arial;
 }
-
-.modal.show {
-    display: block;
-}
-
-.modal_body {
+.card-container{
+    width: 300px;
+    height: 430px;
+    background: #FFF;
+    border-radius: 6px;
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400px;
-    height: 500px;
-    padding: 40px;
-    text-align: center;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-    transform: translateX(-50%) translateY(-50%);
+    transform: translate(-50%,-50%);
+    box-shadow: 0px 1px 10px 1px #000;
+    overflow: hidden;
+    display: inline-block;
 }
 
-/*.modal_close{*/
-/*    position: absolute;*/
-/*    top: 55%;*/
-/*    left: 50%;*/
-/*    transform: translateX(-50%) translateY(-50%);*/
-/*}*/
+.upper-container{
+    height: 150px;
+    background: #7F00FF;
+}
+
+.image-container{
+    display:inline-block;
+    background: none;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    padding: 5px;
+    transform: translate(100px,100px);
+}
+
+.image-container img{
+    margin:0;
+    padding:0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.lower-container{
+    height: 280px;
+    background: #FFF;
+    padding: 20px;
+    padding-top: 40px;
+    text-align: center;
+}
+
+.lower-container h3, h4{
+    box-sizing: border-box;
+    line-height: 1.5;
+    font-weight: lighter;
+}
+
+.lower-container h4{
+    color: #7F00FF;
+    opacity: .6;
+    font-weight: bold;
+}
+.lower-container p{
+    font-size: 16px;
+    color: gray;
+    margin-bottom: 25px;
+}
+.lower-container .btn{
+    padding: 12px 20px;
+    background: #7F00FF;
+    border: none;
+    color: white;
+    border-radius: 30px;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all .3s ease-in;
+}
+
+.lower-container .btn:hover{
+    background: transparent;
+    color: #7F00FF;
+    border: 2px solid #7F00FF;
+}
+
 
 .boardModal, .boardDetailModal, .editBoardModal {
     font-family: 'Black Han Sans', sans-serif;font-family: 'Noto Sans KR', sans-serif;
@@ -64,7 +120,12 @@
     overflow-y: auto;
 }
 
-.boardModal_close2, .boardDetailModal_close2, .editBoardModal_close2 {
+.showProfileModal_closeBtn {
+    position:absolute;
+   margin:auto;
+}
+
+.boardModal_close2, .boardDetailModal_close2, .editBoardModal_close2, .showProfileModal_closeBtn {
     position: absolute;
     top: 10px;
     right: 10px;

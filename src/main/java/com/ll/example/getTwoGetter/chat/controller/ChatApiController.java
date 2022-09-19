@@ -5,8 +5,6 @@ import com.ll.example.getTwoGetter.chat.dto.ChatInfoDto;
 import com.ll.example.getTwoGetter.chat.dto.ChatMessageDto;
 import com.ll.example.getTwoGetter.chat.model.ChatInfo;
 import com.ll.example.getTwoGetter.chat.model.ChatMessage;
-import com.ll.example.getTwoGetter.chat.repository.ChatInfoRepository;
-import com.ll.example.getTwoGetter.chat.repository.ChatMessageRepository;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
 import com.ll.example.getTwoGetter.chat.service.ChatMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
