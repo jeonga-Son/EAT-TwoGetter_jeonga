@@ -18,10 +18,10 @@
 <th:block th:replace = "fragment/common :: menu('chatList')"></th:block>
 <div id="layoutSidenav">
     <div th:replace = "fragment/common :: side('side')"></div>
-    <div id="layoutSidenav_content" class="chatroomBg">
-        <main class="chat">
-            <div class="container-fluid h-100" >
-                <div class="chatList">
+    <div id="layoutSidenav_content" >
+        <div class="chatroomBg">
+            <div class="chatList row justify-content-center h-100">
+                <div class="col-md-4 col-xl-5 chat">
                     <div class="contacts_card">
                         <div class="card-header">
                             <div class="input-group">
@@ -33,25 +33,24 @@
                         </div>
                         <div class="card-body contacts_body">
                             <ui class="contacts">
-<!--                                <li class="active">-->
-                                    <div class="d-flex bd-highlight" onclick="showChatModal()" th:each="chatInfo: ${chatInfos}" th:id="${chatInfo.chatTitle}">
-                                        <div class="img_cont">
-                                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
-                                            <span class="online_icon"></span>
-                                        </div>
-                                        <div class="user_info" >
-                                            <span th:text="${chatInfo.chatTitle}"></span>
-                                            <p th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></p>
-                                            <p th:text="|${#strings.substring(chatInfo.createChatDate,0,4)}년 ${#strings.substring(chatInfo.createChatDate,5,7)}월 ${#strings.substring(chatInfo.createChatDate,8,10)}일
-                            ${#strings.substring(chatInfo.createChatDate,11,13)}시 ${#strings.substring(chatInfo.createChatDate,14,16)}분
-                            |"></p>
-                                        </div>
+<!--                                    <li class="active">-->
+                                <div class="d-flex bd-highlight" onclick="showChatModal()" th:each="chatInfo: ${chatInfos}" th:id="${chatInfo.chatTitle}">
+                                    <div class="img_cont">
+                                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                                        <span class="online_icon"></span>
                                     </div>
+                                    <div class="user_info" >
+                                        <span th:text="${chatInfo.chatTitle}"></span>
+                                        <p th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></p>
+                                        <p th:text="|${#strings.substring(chatInfo.createChatDate,0,4)}년 ${#strings.substring(chatInfo.createChatDate,5,7)}월 ${#strings.substring(chatInfo.createChatDate,8,10)}일
+                                        ${#strings.substring(chatInfo.createChatDate,11,13)}시 ${#strings.substring(chatInfo.createChatDate,14,16)}분
+                                        |"></p>
+                                    </div>
+                                </div>
 <!--                                </li>-->
                             </ui>
                         </div>
-                        <div class="card-footer"></div>
-<!--                        <tbody>-->
+                        <!--                        <tbody>-->
 <!--                        <tr th:each="chatInfo: ${chatInfos}" th:id="${chatInfo.chatTitle}">-->
 <!--                            <td th:text="${chatInfo.chatTitle}"></td>-->
 <!--                            <td th:text="|${#strings.substring(chatInfo.createChatDate,0,4)}년 ${#strings.substring(chatInfo.createChatDate,5,7)}월 ${#strings.substring(chatInfo.createChatDate,8,10)}일-->
@@ -64,19 +63,32 @@
 <!--                        </tbody>-->
                     </div>
                 </div>
-<!--                <div class="chatModal">-->
-<!--                    <div class="chatModal_body">-->
-<!--                        <div class = "chatModal_All" id="all">-->
-<!--                            <div class="chat_title" id="title" style="margin-bottom: 20px"></div>-->
-<!--                            <div class="chat_content" id="content"></div>-->
-<!--                        </div>-->
-<!--                        <input type="text" class="inputMessage" placeholder="내용 입력" id="inputMessage" name="inputMessage">-->
-<!--                        <button class = "sendMessage" type="button" onclick="messagePost()">전송</button>-->
-<!--                        <button class="closeChat" onclick="closeChat()">닫기</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-                <div class="chatModal_container">
-                    <div class="chatModal">
+
+                <!--채팅할 친구가 없을 경우 뜨는 모달 start-->
+                <div class="col-md-8 col-xl-6 chat" style="display:none;">
+                    <div class="card">
+                        <div class="card-header msg_head">
+                            <div class="d-flex bd-highlight">
+                                <div class="img_cont">
+                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                                    <span class="online_icon"></span>
+                                </div>
+                                <div class="user_info">
+                                    <span>먼저 채팅할 친구를 찾아주세요!</span>
+                                    <p>메세지가 없어요ㅜㅜ</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body msg_card_body">
+                            채팅목록에서 채팅할 사람을 선택해주세요!
+                        </div>
+                        <div class="card-footer"></div>
+                    </div>
+                </div>
+                <!--채팅할 친구가 없을 경우 뜨는 모달 end-->
+
+                <div class="col-md-8 col-xl-6 chat">
+                    <div class="card chatModal">
                         <div class="card-header msg_head">
                             <div class="d-flex bd-highlight">
                                 <div class="img_cont">
@@ -107,13 +119,13 @@
                                 <div class="img_cont_msg">
                                     <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                                 </div>
-                                <div class="msg_container">
+                                <div class="msg_cotainer">
                                     Hi, how are you samim?
                                     <span class="msg_time">8:40 AM, Today</span>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end mb-4">
-                                <div class="msg_container_send">
+                                <div class="msg_cotainer_send">
                                     Hi Khalid i am good tnx how about you?
                                     <span class="msg_time_send">8:55 AM, Today</span>
                                 </div>
@@ -125,13 +137,13 @@
                                 <div class="img_cont_msg">
                                     <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                                 </div>
-                                <div class="msg_container">
+                                <div class="msg_cotainer">
                                     I am good too, thank you for your chat template
                                     <span class="msg_time">9:00 AM, Today</span>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end mb-4">
-                                <div class="msg_container_send">
+                                <div class="msg_cotainer_send">
                                     You are welcome
                                     <span class="msg_time_send">9:05 AM, Today</span>
                                 </div>
@@ -143,13 +155,13 @@
                                 <div class="img_cont_msg">
                                     <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                                 </div>
-                                <div class="msg_container">
+                                <div class="msg_cotainer">
                                     I am looking for your next templates
                                     <span class="msg_time">9:07 AM, Today</span>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end mb-4">
-                                <div class="msg_container_send">
+                                <div class="msg_cotainer_send">
                                     Ok, thank you have a good day
                                     <span class="msg_time_send">9:10 AM, Today</span>
                                 </div>
@@ -161,7 +173,7 @@
                                 <div class="img_cont_msg">
                                     <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                                 </div>
-                                <div class="msg_container">
+                                <div class="msg_cotainer">
                                     Bye, see you
                                     <span class="msg_time">9:12 AM, Today</span>
                                 </div>
@@ -174,18 +186,27 @@
                                 </div>
                                 <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
                                 <div class="input-group-append">
-                                    <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                                    <button class="input-group-text send_btn" type="button" onclick="messagePost()"><i class="fas fa-location-arrow"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+<!--                <div class="chatModal">-->
+<!--                    <div class="chatModal_body">-->
+<!--                        <div class = "chatModal_All" id="all">-->
+<!--                            <div class="chat_title" id="title" style="margin-bottom: 20px"></div>-->
+<!--                            <div class="chat_content" id="content"></div>-->
+<!--                        </div>-->
+<!--                        <input type="text" class="inputMessage" placeholder="내용 입력" id="inputMessage" name="inputMessage">-->
+<!--                        <button class = "sendMessage" type="button" onclick="messagePost()">전송</button>-->
+<!--                        <button class="closeChat" onclick="closeChat()">닫기</button>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
-
-
-        </main>
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
     </div>
+</div>
 </div>
 
 
@@ -199,10 +220,12 @@
 <script>
     const chatModal = document.querySelector('.chatModal');
     const chatClose = document.querySelector('.closeChat');
+
     // chatClose.addEventListener('click', () => {
     //     content.innerText=""
     //     chatModal.style.display = 'none';
     // });
+
     function closeChat(){
         chatClose.style.display = 'none';
         content.innerText=""
@@ -253,7 +276,6 @@
     // const btnClosePopup = document.querySelector('.modal_close');
     const title = document.getElementById('title');
     const content = document.getElementById('content');
-    const chatList = document.getElementById('container-fluid');
 
     let arr_chatId=[];
     let chatId;
@@ -273,7 +295,6 @@
 
     function showChatModal(){
         chatModal.style.display = 'block';
-
     }
 
     function deleteChat(id){
@@ -296,7 +317,6 @@ $(document).ready(function () {
     $(".action_menu").toggle();
   });
 });
-
 </script>
 <script th:inline="javascript">
     var message = [[${message}]];

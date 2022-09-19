@@ -171,7 +171,6 @@ function deleteGetBoardId(){
     const boardId = document.getElementById('showBoardId');
     const url = "/board/delete/" + boardId.innerText;
     location.href = url;
-
 }
 
 
