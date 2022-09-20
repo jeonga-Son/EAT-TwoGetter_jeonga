@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragment/common :: head('HOME')">
+<head th:replace="fragment/common :: head('boardList')">
 </head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,10 +54,12 @@
         <div class="column store_name">상점명</div>
         <div class="column user_name">작성자</div>
         <div class="column created_date">작성일</div>
+        <div class="column distance">거리</div>
+
       </div>
     </div>
     <div class="board_area article_area">
-      <div>loading...</div>
+      <div>Loading...</div>
     </div>
     <div class="paging_area">
     </div>
@@ -101,11 +103,12 @@
                               <div class="column store_name">${v.storeName}</div>
                               <div class="column user_name">${v.username}</div>
                               <div class="column created_date">${v.createdDate.replace(/T/gi, ' ')}</div>
+                              <div class="column distance">${v.distance}</div>
                           </div>`;
           });
         } else {
           // 게시글이 없을 경우
-          html = '<div>텅~</div>';
+          html = '<div>게시글이 없습니다</div>';
         }
 
         // 총 개수를 이용해 페이지 버튼을 만든다.

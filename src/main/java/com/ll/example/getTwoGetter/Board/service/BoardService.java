@@ -11,10 +11,10 @@ import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.ll.example.getTwoGetter.Board.model.PageResult;
 import com.ll.example.getTwoGetter.common.constants.BoardConstants;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Optional;
@@ -22,18 +22,18 @@ import java.util.Optional;
 @Service
 public class BoardService {
     private BoardRepository boardRepository;
-
-    @Autowired
     private ChatInfoService chatInfoService;
 
-    public BoardService(BoardRepository boardRepository) {
+    public BoardService(BoardRepository boardRepository, ChatInfoService chatInfoService) {
         this.boardRepository = boardRepository;
+        this.chatInfoService = chatInfoService;
     }
 
     @Transactional
     public Long savePost(BoardDto boardDto) {
         return boardRepository.save(boardDto.toEntity()).getId();
     }
+
 
     /**
      * getBoardList
@@ -54,7 +54,7 @@ public class BoardService {
         List<Board> boardList = boardRepository.getArticle(BoardConstants.PAGE_SIZE,
                 (page-1) * BoardConstants.PAGE_SIZE, latitude,longitude);
 
-        //Stream
+//        Stream
         List<BoardDto> boardDtoList = boardList.stream().map(board ->
                 BoardDto.builder()
                         .id(board.getId())

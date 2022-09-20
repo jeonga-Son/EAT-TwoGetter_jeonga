@@ -205,7 +205,7 @@
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">편의 메뉴</div>
-                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/showProfile}">나의 프로필 보기</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/modifyProfile}">나의 프로필 보기</a>
                             <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/report/userReport}">불량회원 신고하기</a>
                             <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">불량회원 신고하기</a>
 

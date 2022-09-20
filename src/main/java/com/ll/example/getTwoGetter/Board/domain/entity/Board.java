@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -59,6 +61,8 @@ public class Board {
 
     @Column(length = 100)
     private String lng;
+
+
 
     @Builder
     public Board(Long id, String title,  String storeType, String storeName, String orderDetail, int minimumOrderAmount,

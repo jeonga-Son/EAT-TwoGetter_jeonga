@@ -1,21 +1,60 @@
 var booleanId = false;
 var booleanNickname = false;
 
+var nicknameCheck= "";
+var emailCheck= "";
+
 // 회원가입 양식 최종 체크 메서드
 function accountRegister(){
     var passwordCheck = document.getElementById('passwordCheck').value;
     var password = document.getElementById('password').value;
+
+    var formNickname = document.getElementById('nickname').value;
+    var formEmail = document.getElementById('username').value;
+    if(password == ""){
+        Swal.fire({
+            icon: 'warning',
+            title: '',
+            text: '비밀번호를 입력해주세요.'
+        })
+        return;
+    }
+    if(passwordCheck == ""){
+        Swal.fire({
+            icon: 'warning',
+            title: '',
+            text: '비밀번호 확인을 입력해주세요.'
+        })
+        return;
+    }
+    
+    if(formNickname != nicknameCheck){
+        Swal.fire({
+            icon: 'warning',
+            title: '',
+            text: '닉네임이 중복되었는지 확인해주세요!!'
+        })
+        return;
+    }
+    if(formEmail != emailCheck) {
+        Swal.fire({
+            icon: 'warning',
+            title: '',
+            text: '이메일이 중복되었는지 확인해주세요!!'
+        })
+        return;
+    }
     if(booleanId===true && booleanNickname==true){
-        if(passwordCheck===password){
+        if(passwordCheck===password ){
             fetch('http://localhost:8080/account/register', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    nickname: document.getElementById('nickname').value,
-                    username: document.getElementById('username').value,
-                    password: document.getElementById('password').value
+                    nickname: formNickname,
+                    username: formEmail,
+                    password: password
                 })
             })
             Swal.fire({
@@ -43,7 +82,7 @@ function accountRegister(){
         Swal.fire({
           icon: 'warning',
           title: '',
-          text: '이메일이 중복되었는지 확인해주세요!'
+          text: '이메일이 중복되었는지 확인해주세요!!'
         })
     }
 }
@@ -76,6 +115,7 @@ function checkEmail(){
                       text: '이미 있는 E-mail입니다. 다른 E-mail을 사용해주세요.'
                     })
                 }else{
+                    emailCheck = email;
                     Swal.fire({
                       icon: 'success',
                       title: '',
@@ -101,6 +141,7 @@ function checkNickname(){
             .then((response)=>response.json())
             .then(data=>{
                 if(data==true){
+                    nicknameCheck = nickname;
                     Swal.fire({
                       icon: 'success',
                       title: '',

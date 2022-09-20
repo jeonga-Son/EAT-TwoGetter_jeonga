@@ -18,17 +18,13 @@ import java.util.List;
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
-import java.util.List;
 
-@Component
 @Controller
 public class BoardController {
 
@@ -44,9 +40,18 @@ public class BoardController {
 //        model.addAttribute("postList", boardDtoList);
 //        return "board/list.html";
 //    }
+    @GetMapping("/testpageable") //view용 컨트롤러
+    public String list2() {
+    //    for(int i=0; i<boardDtoDistances.size(); i++){
+    //        System.out.println(boardDtoDistances.get(i).getDistance());
+    //    }
+        return "testPage";
+
+    }
 
     @GetMapping("/board") //view용 컨트롤러
     public String list(Model model) {
+
         return "board/list.html";
     }
     /**
@@ -65,9 +70,15 @@ public class BoardController {
         System.out.println("::::::::::::::" + latitude + ":::::::::" + longitude);
 
         PageResult pageResult = boardService.getBoardList(page, latitude, longitude);
+        List<BoardDto> boards = pageResult.getContents();
+        for(int i=0; i<boards.size(); i++){
+            System.out.println(boards.get(i).getTitle());
+         }
         // rest-api controller 응답값으로는 ResponseEntity를 사용하는 것이 좋다고함
+
         return ResponseEntity.ok().body(pageResult);
     }
+
 
     @GetMapping("/getMarkerBoard/{id}")
     @ResponseBody
