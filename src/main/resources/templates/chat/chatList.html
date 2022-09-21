@@ -65,7 +65,7 @@
                 </div>
 
                 <!--채팅할 친구가 없을 경우 뜨는 모달 start-->
-                <div class="col-md-8 col-xl-6 chat" style="display:none;">
+                <div class="col-md-8 col-xl-6 noChatListModal" >
                     <div class="card">
                         <div class="card-header msg_head">
                             <div class="d-flex bd-highlight">
@@ -87,7 +87,7 @@
                 </div>
                 <!--채팅할 친구가 없을 경우 뜨는 모달 end-->
 
-                <div class="col-md-8 col-xl-6 chat">
+                <div class="col-md-8 col-xl-6 chat" style="display:none;">
                     <div class="card chatModal">
                         <div class="card-header msg_head">
                             <div class="d-flex bd-highlight">
@@ -276,6 +276,7 @@
     // const btnClosePopup = document.querySelector('.modal_close');
     const title = document.getElementById('title');
     const content = document.getElementById('content');
+    const noChatListModal = document.getElementById('noChatListModal');
 
     let arr_chatId=[];
     let chatId;
@@ -295,6 +296,8 @@
 
     function showChatModal(){
         chatModal.style.display = 'block';
+        noChatListModal.style.display = 'none';
+
     }
 
     function deleteChat(id){

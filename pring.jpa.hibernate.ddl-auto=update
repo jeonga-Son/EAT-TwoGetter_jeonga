@@ -1,0 +1,935 @@
+[33mcommit 74a2ff94b52f4bfae08376ff5222c70b7ff525c3[m[33m ([m[1;36mHEAD -> [m[1;32mjeonga[m[33m)[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Wed Sep 21 16:30:55 2022 +0900
+
+    병합 전 커밋_220921
+
+[33mcommit 1c66009bb2b2c1448635e33baea990049571b92b[m[33m ([m[1;31morigin/jeonga[m[33m)[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Wed Sep 21 02:14:23 2022 +0900
+
+    우리동네 사람들 템플릿 적용시 토글창 문제 해결
+
+[33mcommit 56120a9d70abca3ae16eb615ca44415302cffa78[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Wed Sep 21 02:10:05 2022 +0900
+
+    우리동네 사람들 템플릿 적용
+
+[33mcommit 6fad27d61f3e97aee88d298b51c872a6d6d1c48d[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Tue Sep 20 21:38:45 2022 +0900
+
+    about_us footer 추가
+
+[33mcommit 45f548ed2cbf31bf477120de443763c6152065c8[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Tue Sep 20 20:13:11 2022 +0900
+
+    메인 화면 - 비로그인 시 activity log 삭제
+
+[33mcommit c4a554cbf710fd9297624cc87fb4e650e58187d1[m
+Merge: 9b86628 a237b50
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Mon Sep 19 16:56:00 2022 +0900
+
+    동현, 정아 코드 병합 완료_220919
+
+[33mcommit 9b86628dc1bd3b9c5f991e3d830e15a7d6cee3f3[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Mon Sep 19 16:46:12 2022 +0900
+
+    병합 전 커밋_220919
+
+[33mcommit f2b7a9f008b7a41e29edf3be2c5ccce8c8127413[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Sun Sep 18 17:33:23 2022 +0900
+
+    채팅방 리스트, 모달창 구현중 / 나의 프로필 모달창 구현완료
+
+[33mcommit a237b508d97eb755226a08148086db1bbfab1370[m
+Merge: e7894b1 599eea5
+Author: DhKimy <98330884+DhKimy@users.noreply.github.com>
+Date:   Sun Sep 18 16:30:59 2022 +0900
+
+    Merge pull request #17 from likelion-backendschool/donghyeon
+    
+    gpsicon.png 누락 해결
+
+[33mcommit 599eea50eb12d77b70d278528b3dd97c82d2438b[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 18 16:30:05 2022 +0900
+
+    gpsicon.png 누락 해결
+
+[33mcommit e7894b181f1673eaf69d63e53310dc1168a06d81[m
+Merge: 90ad9f2 2a45a74
+Author: DhKimy <98330884+DhKimy@users.noreply.github.com>
+Date:   Sun Sep 18 14:00:22 2022 +0900
+
+    Merge pull request #16 from likelion-backendschool/donghyeon
+    
+    Donghyeon
+
+[33mcommit 2a45a74dc884e7c5497710c9107ee13a073acc09[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 18 13:57:40 2022 +0900
+
+    회원가입 알람창 UI 전부 변경, resister.js로 리팩토링
+
+[33mcommit d2881b05e5e0db3a0f8b2158f7414170a435e0ad[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 18 13:22:06 2022 +0900
+
+    모달 게시판 수정 경고창 적용 완료
+
+[33mcommit 051107a865d5e913142b4bdd071e390dd3bf4674[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 18 12:19:02 2022 +0900
+
+    메인 페이지 알람창 UI 변경
+
+[33mcommit 00d3ebcba900675b381b041868bbb81b2a8a3547[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 18 11:48:22 2022 +0900
+
+    sweetalert2 도입후 삭제 알림창에 적용 완료
+
+[33mcommit 9d4fd92094a4761b5df5e4df7b1800bd8b4b5ea3[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sat Sep 17 23:17:24 2022 +0900
+
+    회원정보 수정 페이지 수정중
+
+[33mcommit 2abd12096ecfaa37d892005280f1cbe42fed93c4[m
+Merge: f2e6be1 90ad9f2
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Sat Sep 17 21:02:17 2022 +0900
+
+    Merge branch 'developer' of https://github.com/likelion-backendschool/ideaBank into jeonga
+
+[33mcommit f2e6be1b2ed74adef1751e621ff58c5a0bd04fea[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Sat Sep 17 21:00:43 2022 +0900
+
+    병합 전 커밋_220917
+
+[33mcommit 90ad9f2d3182b7121ce59439616d36ef2ae9a4da[m
+Merge: c0aa26c ed7fc6c
+Author: DhKimy <98330884+DhKimy@users.noreply.github.com>
+Date:   Sat Sep 17 20:59:45 2022 +0900
+
+    Merge pull request #15 from likelion-backendschool/donghyeon
+    
+    Donghyeon
+
+[33mcommit ed7fc6c496622e0e3a7c483f0f6d4761f6d3d9b3[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sat Sep 17 20:44:59 2022 +0900
+
+    modify gpsbutton css
+
+[33mcommit bb2a4f4de55cf7c5ad1cb07dd8ed188971a33076[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sat Sep 17 20:36:23 2022 +0900
+
+    footer 수정
+
+[33mcommit a44e92a01e2536c229cc215bb229dc4d76a237ed[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sat Sep 17 20:10:27 2022 +0900
+
+    비밀번호 찾기 UI 변경, 로그인, 비밀번호 찾기 화면 배경 url 설정
+
+[33mcommit 40b27b7ce045207ab0967c1eccd948c094740490[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Fri Sep 16 17:45:49 2022 +0900
+
+    about page 추가, 메인 페이지와 연결 코드 병합 완료
+
+[33mcommit c0aa26c6b5c7f01fbc299b5931d9ed04b5af1dbc[m
+Author: DhKimy <98330884+DhKimy@users.noreply.github.com>
+Date:   Fri Sep 16 17:42:36 2022 +0900
+
+    Delete gpsIcon.png
+
+[33mcommit e3be3459ae2230af3ef5cd2e5771d7512b1253eb[m
+Merge: 0620db2 99aab8e
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Fri Sep 16 17:41:32 2022 +0900
+
+    Merge branch 'developer' of https://github.com/likelion-backendschool/ideaBank into jeonga
+
+[33mcommit 0620db292ba83148f7bc3d1b218c6732e51012ae[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Fri Sep 16 17:41:23 2022 +0900
+
+    병합 전 커밋_220916
+
+[33mcommit 99aab8eeeb7881d968be0fb3a7437d53ccd9dcde[m
+Merge: 6ebc90b dfb018d
+Author: DhKimy <98330884+DhKimy@users.noreply.github.com>
+Date:   Fri Sep 16 17:39:42 2022 +0900
+
+    Merge pull request #14 from likelion-backendschool/donghyeon
+    
+    Donghyeon
+
+[33mcommit dfb018d3b7f7f0ada392bdce776146a4245a4c41[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Fri Sep 16 17:38:41 2022 +0900
+
+    about page 추가, 메인 페이지와 연결
+
+[33mcommit d8c757a19e618e966d72d04925861eae405405dd[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Fri Sep 16 16:55:52 2022 +0900
+
+    로그인, 회원가입 UI 대규모 업데이트
+
+[33mcommit abf550f9aa23dd6b3ec3ce8b02300de852286e79[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Fri Sep 16 02:03:36 2022 +0900
+
+    ui 변경 후 pull
+
+[33mcommit 6ebc90bd362faa772b9e1d60deec3b3372a2315c[m
+Merge: 62fc557 bd4db2e
+Author: jeonga-Son <107593020+jeonga-Son@users.noreply.github.com>
+Date:   Fri Sep 16 01:58:51 2022 +0900
+
+    Merge pull request #12 from likelion-backendschool/jeonga
+    
+    gpsIcon, gpsButton 이미지 변경, css 수정
+
+[33mcommit bd4db2e81bc5b4690d11eb1ffd6912114cbeba18[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Fri Sep 16 01:58:07 2022 +0900
+
+    gpsIcon, gpsButton 이미지 변경, css 수정
+
+[33mcommit 62fc5572027a34eb23833f283d8b1a5bf726a2ac[m
+Merge: 69103c6 be42b9f
+Author: jeonga-Son <107593020+jeonga-Son@users.noreply.github.com>
+Date:   Thu Sep 15 23:35:26 2022 +0900
+
+    Merge pull request #11 from likelion-backendschool/jeonga
+    
+    Jeonga
+
+[33mcommit be42b9f6fd03beaab3da86dd489082224fa8c8a8[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Thu Sep 15 23:18:36 2022 +0900
+
+    카테고리 이미지, 마커 이미지 수정 #2
+
+[33mcommit 8cce6b7e59c208139c3300e6158e515155ae31a5[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Thu Sep 15 02:05:35 2022 +0900
+
+    카테고리별 마커 이미지 변경, 카테고리 클릭시 클릭된 이미지 표시되도록 구현
+
+[33mcommit ef1e872ad7e7aa955380324e40c3c7443f48c364[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Wed Sep 14 18:16:15 2022 +0900
+
+    카테고리별 마커 이미지 다르게 구현 완료
+
+[33mcommit 69103c68dce5f97fc3700e7932776933728a93c9[m
+Merge: cee6039 a813017
+Author: DhKimy <98330884+DhKimy@users.noreply.github.com>
+Date:   Wed Sep 14 02:19:26 2022 +0900
+
+    Merge branch 'master' into developer
+
+[33mcommit c6a73672900ccbe6da9d9f8689c242ddb6487c48[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Wed Sep 14 02:12:23 2022 +0900
+
+    코드 통합_220914
+
+[33mcommit 873334d1bb40dd004867956fa328a78b579d0865[m
+Merge: acb4c54 cee6039
+Author: DhKimy <98330884+DhKimy@users.noreply.github.com>
+Date:   Wed Sep 14 01:58:05 2022 +0900
+
+    Merge pull request #9 from likelion-backendschool/donghyeon
+    
+    Donghyeon
+
+[33mcommit cee60399cac85a3bc6301bb6811e38a6be6ebccd[m[33m ([m[1;31morigin/donghyeon[m[33m)[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Wed Sep 14 01:52:17 2022 +0900
+
+    taeseung code merge
+
+[33mcommit f347a91b3f471897f7c77b34a461b7caec436b66[m
+Merge: 4aad160 9262aa6
+Author: dhk767 <dhk767@gmail.com>
+Date:   Wed Sep 14 01:23:32 2022 +0900
+
+    git pull을 위한 커밋
+
+[33mcommit 9262aa649f7433563c559ab33b54f4658c62455e[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Tue Sep 13 18:27:30 2022 +0900
+
+    원격 레포 푸시전 커밋(donghyeon 대리)
+
+[33mcommit 4aad160313296a8d921b3bfb54b38087d4d972b9[m
+Merge: fc2db64 4b36dd2
+Author: dhk767 <dhk767@gmail.com>
+Date:   Tue Sep 13 18:15:57 2022 +0900
+
+    seunghun, donghyeon, jeonga code merge
+
+[33mcommit acb4c5453fdcbf983fbad4756219736e44a60ec9[m
+Author: jeonga-Son <107593020+jeonga-Son@users.noreply.github.com>
+Date:   Tue Sep 13 17:34:44 2022 +0900
+
+    Create 6th_Weekly.md
+
+[33mcommit 4b36dd262a3f031c05dd8b3a56c66a1875eba726[m[33m ([m[1;31morigin/sh970901[m[33m)[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Tue Sep 13 16:29:58 2022 +0900
+
+    sh
+
+[33mcommit 496d139b5dfe7b29354552fbc29089ed61ce4dba[m
+Author: isshosng <purehug@hanmail.net>
+Date:   Tue Sep 13 16:24:53 2022 +0900
+
+    거리별 정렬
+
+[33mcommit fc2db6468854a3dbffc940ee8e6253894f02b855[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 12 21:57:42 2022 +0900
+
+    모달게시판 수정 구현 완료
+
+[33mcommit cfc3e109e1c737f6107d2c4cf02419ec653fd128[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 12 19:25:19 2022 +0900
+
+    수정 로직 구현 중
+
+[33mcommit a0f1e5a95f031b37a42d346fda8cdd232158bc71[m
+Merge: 771f890 23c5e51
+Author: dhk767 <dhk767@gmail.com>
+Date:   Fri Sep 9 17:44:47 2022 +0900
+
+    원격 레포 푸시 전 병합
+
+[33mcommit 771f89086ca8ca07dd4ae2cc168262e591820060[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Fri Sep 9 17:34:38 2022 +0900
+
+    컨트롤러 수정, 삭제 기능 구현, 리팩토링 요ㅁ망
+
+[33mcommit 23c5e5198aa0f84e274044d7b7b1485d9ca3c0e8[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Fri Sep 9 14:00:56 2022 +0900
+
+    deleteBoard 오류 수정, 구현완료
+
+[33mcommit 4a77b5b218a327c1707b0cd9280f48690190be00[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Fri Sep 9 04:47:51 2022 +0900
+
+    boardDelete 3차 수정중
+
+[33mcommit 740e45f122261a5952d4b141b81aee95f5a00ef8[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Fri Sep 9 02:40:19 2022 +0900
+
+    boardDelete 2차 수정중
+
+[33mcommit ef69258d73ae2a5a15b70f45a11d70d8702f7d8d[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Fri Sep 9 00:49:13 2022 +0900
+
+    게시글 버튼 오류 수정
+
+[33mcommit 3008c41991fd2d853c9b91b15f622ad91fe9739f[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Thu Sep 8 23:12:21 2022 +0900
+
+    boardDelete 구현중
+
+[33mcommit 9ee4b8fd9d298dae83bc8e01ee8fe28c7573bfb1[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Thu Sep 8 20:17:17 2022 +0900
+
+    donghyeon 코드와 병합 완료
+
+[33mcommit 41061defa4448e47146307964e5142162270dd9a[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Thu Sep 8 18:53:51 2022 +0900
+
+    middleSpace() 오자 수정
+
+[33mcommit b9b00c444eb1032df05d809204e9d82d26668e69[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Thu Sep 8 18:19:35 2022 +0900
+
+    gps 마커 새로고침 시 다시 띄울 수 있도록 수정
+
+[33mcommit 4c2125a246214c609556bd51df70a5d3e59d8958[m
+Merge: 9135494 f765eea
+Author: dhk767 <dhk767@gmail.com>
+Date:   Thu Sep 8 18:06:16 2022 +0900
+
+    버그 수정 코드 통합 1차(75% 완성)
+
+[33mcommit 913549453b9e9f734c5f55541c1e0dd53d66f6e0[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Thu Sep 8 16:18:11 2022 +0900
+
+    게시판 생성 시 금액 숫자만 받을 수 있도록 변경
+
+[33mcommit f765eeac39c7d1e3168889878f89e3cfeffa2ff3[m[33m ([m[1;32mbugFix[m[33m)[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Thu Sep 8 16:15:40 2022 +0900
+
+    코드 병합을 위한 커밋
+
+[33mcommit f0cd85766368f6242fd325d6921e6edc6a6fc0a0[m
+Author: Taeseung Choi <96964263+isshosng@users.noreply.github.com>
+Date:   Wed Sep 7 17:16:45 2022 +0900
+
+    Create ideaBank_5th_Retrospec_log.md
+
+[33mcommit 9287b54f2390469bd746fee3f0e7de094295911b[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Wed Sep 7 01:30:17 2022 +0900
+
+    메인 메뉴 상단바, 네비게이션 바 배경, 폰트 색상 수정
+
+[33mcommit fbe555ff9f2914e9e56ccc3e43dbd987ad32d4f0[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Wed Sep 7 00:42:04 2022 +0900
+
+    경고창 sweetalert 도입
+
+[33mcommit 74174a7b399d7af9c27ded5d59b21c8b64618afc[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Wed Sep 7 00:14:12 2022 +0900
+
+    유저 본인이 만든 마커게시판 중간지점 보기 클릭시 경고창 생성 구현
+
+[33mcommit 0d45f182fb14d6b28069b754a76ded2a5fbe7993[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Tue Sep 6 22:03:33 2022 +0900
+
+    gps마커 이미지 수정, 카테고리 UI CSS 일부 수정
+
+[33mcommit 228d555257ab593d09580d78676bebd5a5f3bd5e[m
+Author: isshosng <purehug@hanmail.net>
+Date:   Tue Sep 6 21:04:12 2022 +0900
+
+    코드 최신화
+
+[33mcommit 2d27a58bf6c2692e805bd211638063aba843df75[m
+Author: isshosng <purehug@hanmail.net>
+Date:   Tue Sep 6 21:00:07 2022 +0900
+
+    코드 최신화
+
+[33mcommit 23b88f0ee2c7da7734a84579b5d1c5f7517baf72[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Tue Sep 6 17:56:22 2022 +0900
+
+    중간지점 찾기 아이콘 변경
+
+[33mcommit d7215af74458477b78419ddfc91d839cdddcebbf[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Tue Sep 6 13:12:08 2022 +0900
+
+    customer.png 파일 변경
+
+[33mcommit efacfa65a0190f10de5d81df8df7b985e175f15a[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Tue Sep 6 02:14:48 2022 +0900
+
+    middleMap 마커 변경, 수정중
+
+[33mcommit 982adddf38efecce47a49564532ee276a4cfb13b[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Tue Sep 6 01:03:35 2022 +0900
+
+    middleMap css 변경, modal.css, map.css 중복 코드 수정
+
+[33mcommit 04e29a950978c975d1f58274e0aea42315c85843[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Mon Sep 5 22:03:26 2022 +0900
+
+    기타사항 글자 수 200자로 제한
+
+[33mcommit 4209cad68e5ec46d6f1a52bad032e3a9760ebfae[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Mon Sep 5 21:58:35 2022 +0900
+
+    modal-category.js 최소주문금액, 배달요금 '원'표시되도록 구현
+
+[33mcommit dce9618a0676577896bf10ec9606ea293921ee3d[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Mon Sep 5 21:50:52 2022 +0900
+
+    최소주문금액, 배달요금 항목 int 값으로 변경, placeholder 추가
+
+[33mcommit 499942d74d62ae75920e7eacaa894a877b75d78e[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Mon Sep 5 19:06:21 2022 +0900
+
+    map.css 중복 코드 수정
+
+[33mcommit 10b151dc30ae8685ddeb649f1559b3ad3c26df58[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 19:03:45 2022 +0900
+
+    map.css 중복 코드 수정
+
+[33mcommit f79ddf62cd9c3ff558c1e811ff829fa1eed61a2c[m
+Merge: 13fce50 3baaf0e
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 18:26:37 2022 +0900
+
+    위도, 경도 오류 수정후 git 충돌 해결
+
+[33mcommit 13fce504e83e7681e2ce38e8e5536a85e6b51c51[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 18:22:30 2022 +0900
+
+    위도 경도 hidden 처리, DB에 위도 경도 값 들어가게 수정
+
+[33mcommit 1c6bfc140387ca1df861f987ae9fc9f8923099de[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 16:41:09 2022 +0900
+
+    developer push 전 시험 커밋
+
+[33mcommit 4f188bb783be7547bd9dc3fea9326df5f4159794[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 02:41:27 2022 +0900
+
+    닉네임 부분 오른쪽 정렬 CSS 변경
+
+[33mcommit 6ad82d01ef0e1db99a83a147365c62786faabbbf[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 02:38:51 2022 +0900
+
+    신고하기 기능 추가 중, UserService 메서드 명 수정
+
+[33mcommit 69d616844a7235ee4ec1eb3cb89dd9ee69f95f62[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 16:51:47 2022 +0900
+
+    jeongA, donghyeon 수정 합본
+
+[33mcommit 238c9307f548b7c50ac5ec6a2aa6b7b2f4adb7ae[m
+Author: Taeseung Choi <96964263+isshosng@users.noreply.github.com>
+Date:   Mon Sep 5 16:43:29 2022 +0900
+
+    Update 5th_Weekly.md
+
+[33mcommit b62dd678a6446572d05ad2cc6917d58ed1f238a3[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 00:44:36 2022 +0900
+
+    상단 바, 네비게이션 바 메뉴 정리
+
+[33mcommit 4732c0fc3c837084493b88b2e0934dc18d2ac2c5[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Mon Sep 5 16:34:15 2022 +0900
+
+    developer 시험 push전 commit
+
+[33mcommit 518eb5e70f225bad615bfd417e13936da5bb4d95[m
+Author: Taeseung Choi <96964263+isshosng@users.noreply.github.com>
+Date:   Mon Sep 5 16:29:46 2022 +0900
+
+    Update 5th_Weekly.md
+
+[33mcommit 0ff4ff37caeb0bf7226d43164313fc44a59c4134[m
+Author: Taeseung Choi <96964263+isshosng@users.noreply.github.com>
+Date:   Mon Sep 5 16:28:59 2022 +0900
+
+    Update 5th_Weekly.md
+
+[33mcommit 82c563784ae3968536162669553d870531037c7f[m
+Author: Taeseung Choi <96964263+isshosng@users.noreply.github.com>
+Date:   Mon Sep 5 16:28:11 2022 +0900
+
+    Rename 5th_Weekly to 5th_Weekly.md
+
+[33mcommit e2d112f9e34f6c76813b03fe199b8fd14c175b61[m
+Author: Taeseung Choi <96964263+isshosng@users.noreply.github.com>
+Date:   Mon Sep 5 16:27:57 2022 +0900
+
+    Create 5th_Weekly
+
+[33mcommit 19b57615517aa1c10740ce333d1cac1e06d50763[m
+Author: Taeseung Choi <96964263+isshosng@users.noreply.github.com>
+Date:   Mon Sep 5 16:13:00 2022 +0900
+
+    Update 4th_Weekly.md
+
+[33mcommit 3baaf0e149dc63453a59d975ecb5b1010bfa7e38[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 02:41:27 2022 +0900
+
+    닉네임 부분 오른쪽 정렬 CSS 변경
+
+[33mcommit f6fce5c4cd5583a278a9adceb790e22182e70a07[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 02:38:51 2022 +0900
+
+    신고하기 기능 추가 중, UserService 메서드 명 수정
+
+[33mcommit 5275a321a263b0e5724f931a62f8039823e02597[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 01:44:47 2022 +0900
+
+    현재 위치 박스 UI 수정, CSS 불필요한 코드 제거
+
+[33mcommit 7aa94bd1d9a40a12d530353c90b293a4e9be6b11[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Mon Sep 5 00:44:36 2022 +0900
+
+    상단 바, 네비게이션 바 메뉴 정리
+
+[33mcommit a8130173d2d78ede2763d6bb69d36c0e6d966c16[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: jeonga <jjeong0106@gmail.com>
+Date:   Sun Sep 4 21:27:37 2022 +0900
+
+    공용 레포 브랜치 생성 경축
+
+[33mcommit ed1c1966dba1dc66f5c629f842f0a1eb65156fe4[m
+Merge: f990533 1820279
+Author: DhKimy <98330884+DhKimy@users.noreply.github.com>
+Date:   Sun Sep 4 21:02:20 2022 +0900
+
+    Merge pull request #8 from likelion-backendschool/donghyeon
+    
+    Donghyeon
+
+[33mcommit 182027911f6e918300ea68f3307e79f204af7f2e[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 4 21:01:27 2022 +0900
+
+    상단 토글 메뉴 수정, 상단바 수정중(닉네임 표시)
+
+[33mcommit a974f21d73ac3507212a089e72e89d268aea130e[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 4 20:29:13 2022 +0900
+
+    일정크기 이하로 창 축소 시 페이지 떨림 현상 해결
+
+[33mcommit f153f77f4cab063421dbbda93f9ed5de5b486cc9[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 4 19:11:40 2022 +0900
+
+    모달게시판 상시 로딩 복구 완료
+
+[33mcommit 3cc379112d026e6a9b2624c5f60c9c0e4ef0cfaa[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 4 18:46:09 2022 +0900
+
+    로그인 시 오류(js파일로 리다이렉트 되는 오류), 로그아웃 시 맵 안뜨는 오류 수정 완료
+
+[33mcommit f990533df16207c45c084bfc52d64ed046e02af3[m
+Merge: 821c5d6 a627241
+Author: DhKimy <98330884+DhKimy@users.noreply.github.com>
+Date:   Sun Sep 4 18:27:01 2022 +0900
+
+    Merge pull request #7 from likelion-backendschool/donghyeon
+    
+    구성원 브랜치 생성 후 시험 커밋, readMe 파일 생성
+
+[33mcommit a627241050164f13d41a6b061ba1c653f746ea3e[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 4 17:51:03 2022 +0900
+
+    구성원 브랜치 생성 후 시험 커밋, readMe 파일 생성
+
+[33mcommit 821c5d6534c477741749ebf195b4fd16222b8b2d[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 4 17:45:04 2022 +0900
+
+    developer를 활용하기 위한 branch 생성
+
+[33mcommit 49caf6365a79215f174dcc82d12ad685658b6021[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 4 16:08:41 2022 +0900
+
+    위클리 로그, 회고 로그 master branch로 이동
+
+[33mcommit 252cbef59feb4d005261e6410f2016cba5511671[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Sun Sep 4 15:54:56 2022 +0900
+
+    필요 없는 js 코드 삭제, 로그아웃 시 메인 맵 보이지 않는 문제 수정 필요
+
+[33mcommit 4b488a8028e2158ab72213e5565bd81d19f3c0a8[m
+Author: dhk767 <dhk767@gmail.com>
+Date:   Thu Sep 1 01:19:54 2022 +0900
+
+    1차 파일 분리 html
+
+[33mcommit c0b90bc833b331774fb3b86266224bdd63ba762c[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Wed Aug 31 17:11:41 2022 +0900
+
+    채팅방 삭제 구현
+
+[33mcommit ea83f246fdedeba1674f0dc148b5e4dc40e4754c[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Mon Aug 29 13:17:14 2022 +0900
+
+    기능 수행 완료
+
+[33mcommit 8b2dbbae1eca3e3e0bf6415c05a377bdbbfd35a3[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Sat Aug 27 01:18:42 2022 +0900
+
+    마커 클릭 시 게시판 정보 즉시로딩->지연로딩 and 미들 맵 뒤로가기버튼 + 마커 게시판 생성 시간 표시 + 채팅방 생성 시간 표시 수정
+
+[33mcommit 67b19872d480e1bb1e80e507a9ccb466bfc32982[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 26 02:33:23 2022 +0900
+
+    기능구현완료
+
+[33mcommit a153fbecf946a7e2fb7aee222f3623d02b21ffb0[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 26 02:08:38 2022 +0900
+
+    채팅안되는거 수정
+
+[33mcommit 1e75e33f34678c8495dffa1126584968c4e57dda[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 26 00:46:18 2022 +0900
+
+    프로필 보기
+
+[33mcommit 98198fd5ad41f3a5e8c3c0a39b704ea46ac26374[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 26 00:28:42 2022 +0900
+
+    중간좌표 표시
+
+[33mcommit 0d13c709a3e3f0d21b7a3a9e5084fd1a890d0807[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 25 21:55:42 2022 +0900
+
+    맵에서 채팅방 연결
+
+[33mcommit 520aa7d1aec3931d98e2b15ef4678d5cefb33fff[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 25 20:36:40 2022 +0900
+
+    마커클릭시 해당되는 게시판 정보 출력
+
+[33mcommit 4a313b091c25b88b74cf153378d1c6d7d80dc7ef[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 25 18:57:58 2022 +0900
+
+    세션스토리지에서 로컬스토리지 변경, 현재 맵위치저장
+
+[33mcommit fc22d175401a6130c7de06e886c1bb00a341c577[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 25 10:42:47 2022 +0900
+
+    게시글 작성 후 현재 위치 보존
+
+[33mcommit 8d2e3d783ff1671a706440a9e22249896f0b7870[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Sun Aug 21 14:31:55 2022 +0900
+
+    채팅 user 오른쪽 상대방 왼쪽 정렬 및 nav버튼 축소시 버튼 활성화
+
+[33mcommit ca576e468dc90e4e9987ab9cb6483bd5d66e6074[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Sun Aug 21 02:56:06 2022 +0900
+
+    채팅방css
+
+[33mcommit 784d2924ef6e1c0847f7444221f69afa9b7a462b[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Sat Aug 20 03:03:05 2022 +0900
+
+    채팅내용1초마다 fetch(재귀) 및 입력값 초기화
+
+[33mcommit e9f23eb8786360a26a1ac51fadb76d1ba32e7bc5[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Sat Aug 20 02:47:31 2022 +0900
+
+    fetch post로 채팅데이터 추가
+
+[33mcommit 2707c8569a7074be6dcd7f6bd4443e47e40839ef[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 19 17:43:24 2022 +0900
+
+    상황에 맞는 채팅방 설정
+
+[33mcommit 9be0b384ae9e47b57ef6749c8fcaa8be902035b1[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 19 14:24:33 2022 +0900
+
+    채팅방에 따른 fetch
+
+[33mcommit 2906dfb94d23670d66e5ce904b636696cca232fa[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 19 13:18:05 2022 +0900
+
+    채팅방 제목 설정(객체를 받아와서 타임리프, 자바스크립트를 활용하여 객체를 표시)
+
+[33mcommit 99bd7f1e1db74bbd29c623d08d948e0ab8a431a0[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 19 03:04:04 2022 +0900
+
+    타임리프 리스트 자바스크립트 inline으로 받아서 변수 대입
+
+[33mcommit 01de58cdfb8b28b62704f91132e3f7b1bd1d4871[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 19 02:35:23 2022 +0900
+
+    각각의 동적 클래스 부여
+
+[33mcommit 9972991fc4738c00e5a853ce2c45449a78550973[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 18 15:50:39 2022 +0900
+
+    채팅 상대방 출력
+
+[33mcommit ff83335d57e09a41edc0037711cd54954d807ab1[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 18 01:36:45 2022 +0900
+
+    th:if 상대방 표시
+
+[33mcommit 68be199c1b42eb7a38d6edb779e6a7bedb1f4d2c[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 18 01:20:31 2022 +0900
+
+    chatController에서 model에 해당하는 유저의 chatInfo담기
+
+[33mcommit 06e395898e4e458e1fd4dc522edd83f65dec6c26[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 18 00:22:37 2022 +0900
+
+    게시판 형 chat db jpa구축
+
+[33mcommit 3bca0ef4e7c0f17a38060327efbe1bda3286583b[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Wed Aug 17 22:16:56 2022 +0900
+
+    chat페이지 오류
+
+[33mcommit 2780f81f4afd5ca017b8555dc0ea42947b05864d[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Wed Aug 17 00:14:40 2022 +0900
+
+    모달오류수정
+
+[33mcommit b5d3aaf787a191fcbc9278cc5bb42c11c16ed4ef[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Tue Aug 16 22:07:02 2022 +0900
+
+    게시판띄우기, 위도,경도,위치, 사용자정보 기본값
+
+[33mcommit 40285ce376fd5c5d91dda58749f03cdcf2d6afe6[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Tue Aug 16 17:19:28 2022 +0900
+
+    사이드 바 수정
+
+[33mcommit 4d69594abb1b628f123dc6c7650e9b76b79208cc[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Tue Aug 16 13:06:57 2022 +0900
+
+    네비 버튼 문제 해결
+
+[33mcommit 41951208ed701ecb7414c5cd4c480f68ceee6b8c[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Mon Aug 15 23:57:05 2022 +0900
+
+    코드 통합2차
+
+[33mcommit a74c9c8b39f9b200238b798e5230fc6df0ab0abe[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Mon Aug 15 23:39:50 2022 +0900
+
+    코드통합 1차
+
+[33mcommit 79da71dd83dde386687ed0eda8b9bbd5f4c7566b[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Mon Aug 15 22:46:37 2022 +0900
+
+    마커 위치이동
+
+[33mcommit 495871ceb5306fca891637faefaa29d023cc0b62[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Mon Aug 15 21:30:25 2022 +0900
+
+    회원 탈퇴 기능
+
+[33mcommit 8fb50967fe6aef4e48c2073c4ba402bfc6b8cd99[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 12 16:06:23 2022 +0900
+
+    템플릿 프래그먼트 구분 및 로그인
+
+[33mcommit 3382a5848519badf2e36d0c4736a66a816710d9b[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 12 10:38:54 2022 +0900
+
+    부트스트랩 템플릿
+
+[33mcommit 4e3ff2da002dfda72ce762e2d55602cc30b0a4e1[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Fri Aug 12 04:20:15 2022 +0900
+
+    개인정보 수정
+
+[33mcommit 8a37d7a7b32b64f9cbdda7faf494af02eec7384e[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 11 23:54:17 2022 +0900
+
+    비밀번호 찾기 완료
+
+[33mcommit 8c679e1fa85668e1239c802f5dc9585b675ea1b9[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 11 22:27:26 2022 +0900
+
+    입력된 주소로 메일보내기
+
+[33mcommit dcab34fd84d3fa5f9cc0a02bf75e5013fe96e6d3[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 11 10:27:27 2022 +0900
+
+    bootstrap loginform, google mail, google json
+
+[33mcommit 246e8451424c36fd9700cfe05482e4981fb641ca[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 11 10:14:28 2022 +0900
+
+    view 작성
+
+[33mcommit 73371d2102791386a57f4445c086d31b8be5d17e[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 11 10:08:51 2022 +0900
+
+    maven->gradle
+
+[33mcommit 248347f103e4544fc74ca3f5370cd8b5813331c7[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 11 09:52:11 2022 +0900
+
+    spring security config 설정
+
+[33mcommit c6273755ee8c71ab6f370a7c36337861d76eace0[m
+Author: sh970901 <aaddss639@naver.com>
+Date:   Thu Aug 11 09:49:16 2022 +0900
+
+    setting

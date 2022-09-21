@@ -125,45 +125,6 @@
    margin:auto;
 }
 
-.boardModal_header::before {
-    content: "";
-    position: absolute;
-    right : 15%;
-    top: 10%;
-    height: 3px;
-    width: 400px;
-    border-radius: 5px;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
-}
-
-.input-box input {
-      height: 45px;
-      width: 100%;
-      outline: none;
-      font-size: 16px;
-      border-radius: 5px;
-      padding-left: 15px;
-      border: 1px solid #ccc;
-      border-bottom-width: 2px;
-      transition: all 0.3s ease;
-}
-
-input-box input:focus, .input-box input:valid {
-    border-color: #9b59b6;
-}
-
-
-.boardDetailModal_header::before {
-    content: "";
-    position: absolute;
-    right : 25%;
-    top: 11%;
-    height: 3px;
-    width: 300px;
-    border-radius: 5px;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
-}
-
 .boardModal_close2, .boardDetailModal_close2, .editBoardModal_close2, .showProfileModal_closeBtn {
     position: absolute;
     top: 10px;
