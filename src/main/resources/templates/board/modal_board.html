@@ -1,19 +1,19 @@
 <div sec:authorize="isAuthenticated()" th:fragment="boardModal('boardModal')">
   <div class="boardModal">
     <div class="boardModal_content">
-      <h4 class="boardModal_header border-bottom mb-3" th:text="${user.nickname} + ' 님의 주문 메이트 구인공고'"></h4>
+      <h4 class="boardModal_header mb-3" th:text="${user.nickname} + ' 님의 주문 메이트 구인공고'"></h4>
       <div class="mt-2 boardModal_body ">
         <form action="/post" method="post">
           <div class="form-group row">
             <label for="username" class="col-sm-2 col-form-label mb-3"><strong>닉네임</strong></label>
             <div class="col-sm-10">
-              <input type="text" name="username" class="form-control" id="username" value="username" th:value="${user.nickname}" readonly></input>
+              <input style="background:#e6e6fa" type="text" name="username" class="form-control" id="username" value="username" th:value="${user.nickname}" readonly></input>
             </div>
           </div>
           <div class="form-group row">
             <label for="locate" class="col-sm-2 col-form-label mb-3"><strong>위치</strong></label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="locate" readonly></input>
+              <input style="background:#e6e6fa" type="text" class="form-control" id="locate" readonly></input>
             </div>
           </div>
           <div class="form-group row" hidden>
@@ -31,7 +31,7 @@
           <div class="form-group row">
             <label for="inputTitle" class="col-sm-2 col-form-label mb-3"><strong>제목</strong></label>
             <div class="col-sm-10">
-              <input type="text" name="title" class="form-control" id="inputTitle" required />
+              <input style="border-color: #9b59b6;" type="text" name="title" class="form-control" id="inputTitle" required />
             </div>
           </div>
 
