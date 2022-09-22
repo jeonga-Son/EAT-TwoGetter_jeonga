@@ -6,35 +6,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>우리동네 사람들</title>
-<link href="css/list.css" rel="stylesheet" />
+<link href="/css/list.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <body class="sb-nav-fixed" id="navFix">
 <th:block th:replace = "fragment/common :: menu('chatList')"></th:block>
 <div id="layoutSidenav">
-  <div th:replace = "fragment/common :: side('side')"></div>
-  <div id="layoutSidenav_content" >
-      <article class="page_title">우리동네 사람들</article>
-      <article class="right" style="position:absolute; right:30px; top:100px;">
-        총 <span class="total_count"></span>건
-      </article>
-      <article id="board_content">
-        <article class="board_area">
-          <article class="article_wrap head">
-            <article class="column title">제목</article>
-            <article class="column store_name">상점명</article>
-            <article class="column user_name">작성자</article>
-            <article class="column created_date">작성일</article>
-          </article>
+    <div th:replace = "fragment/common :: side('side')"></div>
+    <div id="layoutSidenav_content" >
+        <article class="page_title">우리동네 사람들</article>
+        <article class="right" style="position:absolute; right:30px; top:100px;">
+            총 <span class="total_count"></span>건
         </article>
-        <article class="board_area article_area">
-          <article>loading...</article>
+        <article id="board_content">
+            <article class="board_area">
+                <article class="article_wrap head">
+                    <article class="column title">제목</article>
+                    <article class="column store_name">상점명</article>
+                    <article class="column user_name">작성자</article>
+                    <article class="column created_date">작성일</article>
+                    <article class="column distance">거리</article>
+                </article>
+            </article>
+            <article class="board_area article_area">
+                <article>loading...</article>
+            </article>
+            <article class="paging_area">
+            </article>
         </article>
-        <article class="paging_area">
-        </article>
-      </article>
-    <footer th:replace = "fragment/common :: footer('footer')"></footer>
-  </div>
+        <footer th:replace = "fragment/common :: footer('footer')"></footer>
+    </div>
 </div>
 
 <script src="js/list.js"></script>

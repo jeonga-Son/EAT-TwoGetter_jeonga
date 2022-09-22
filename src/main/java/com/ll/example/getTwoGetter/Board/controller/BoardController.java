@@ -46,16 +46,31 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    // fragment 사용시 @AuthenticationPrincipal UserDetails userDetails 써주지 않으면 닉네임 값이 적용되지 않아 오류가 뜬다.
-    @GetMapping("/board") //view용 컨트롤러
-    public String list(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+//    // fragment 사용시 @AuthenticationPrincipal UserDetails userDetails 써주지 않으면 닉네임 값이 적용되지 않아 오류가 뜬다.
+//    @GetMapping("/board") //view용 컨트롤러
+//    public String list(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+//        if (userDetails != null) {
+//            String username = userDetails.getUsername();
+//            User user = userService.findByUsername(username);
+//            model.addAttribute("user", user); // user라는 key값에 login된 사용자 user의 정보를 넘긴다.
+//        }
+//
+//        return "board/list";
+//    }
+
+    @GetMapping("/board/{latitude}/{longitude}") //view용 컨트롤러
+    public String list(@AuthenticationPrincipal UserDetails userDetails, Model model, @PathVariable String latitude, @PathVariable String longitude) {
+        System.out.println("::::::::::::::" + latitude + ":::::::::" + longitude);
+        List<Double> boardDistance = boardService.getDistanceAsc(latitude,longitude);
+        model.addAttribute("boardDistance", boardDistance);
+
         if (userDetails != null) {
             String username = userDetails.getUsername();
             User user = userService.findByUsername(username);
             model.addAttribute("user", user); // user라는 key값에 login된 사용자 user의 정보를 넘긴다.
         }
 
-        return "board/list";
+        return "board/list.html";
     }
 
     /**

@@ -4,6 +4,12 @@
   let latitude = null; // 위도
   let longitude = null; // 경도
 
+  for(var i=0; i<boardDistance.length; i++){
+    boardDistance[i] = boardDistance[i] * 1000;
+    boardDistance[i] = Math.round(boardDistance[i] * 100 / 100)
+  }
+  var boardDistanceCopy = [...boardDistance];
+
   // 위도, 경도 가져오기
   navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -27,18 +33,21 @@
           //라벨을 위한 json 데이터
           let storeTypes = {'한식':'kr','일식':'jp','중식':'ch','양식':'wes','카페':'cafe','야식':'night','기타':'other'};
           $.each(contents, (i, v) => {
+            v.createdDate = v.createdDate.replace(/T/gi, ' ')
+            v.createdDate = (v.createdDate).substring(0,16)
             // contents loop돌면서 html을 세팅한다. 한줄씩 append 하는 것보단 완성된 하나의 html을 append 하는것이 성능면에서 더 좋다.
             html += `
                             <div class="article_wrap" data-id="${v.id}">
                               <div class="column title"><span class="store_type ${storeTypes[v.storeType]}">${v.storeType}</span>${v.title}</div>
                               <div class="column store_name">${v.storeName}</div>
                               <div class="column user_name">${v.username}</div>
-                              <div class="column created_date">${v.createdDate.replace(/T/gi, ' ')}</div>
+                              <div class="column created_date">${v.createdDate}</div>
+                              <div class="column distance">${boardDistance[i]} m</div>
                           </div>`;
           });
         } else {
           // 게시글이 없을 경우
-          html = '<div>텅~</div>';
+          html = '<div>게시글이 없습니다</div>';
         }
 
         // 총 개수를 이용해 페이지 버튼을 만든다.
@@ -71,6 +80,22 @@
 
     // page 버튼 클릭
     $(document).on('click', '.page', (e) => {
+      console.log((e.target).innerText)
+      if((e.target).innerText == 1){
+        for(var i=0; i<boardDistance.length; i++){
+          boardDistance[i]= boardDistanceCopy[i]
+        }
+      }
+      if((e.target).innerText == 2){
+        for(var i=0; i<boardDistance.length; i++){
+          boardDistance[i]= boardDistanceCopy[i+5]
+        }
+      }
+      if((e.target).innerText == 3){
+        for(var i=0; i<boardDistance.length; i++){
+          boardDistance[i]= boardDistanceCopy[i+10]
+        }
+      }
       // 클릭한 페이지 버튼의 인덱스(페이지)를 현재페이지로 설정하고, 함수를 호출한다.
       let index = $(e.target).index();
       PAGE = index + 1;

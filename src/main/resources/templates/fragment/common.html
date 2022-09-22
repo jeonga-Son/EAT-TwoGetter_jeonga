@@ -32,19 +32,19 @@
         <a class="navbar-brand ps-3" th:href="@{/}">EAT-Two Getter</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!" onclick="showNav()"><i class="fas fa-bars"></i></button>
         <div class="container"></div>
-            <p class= "mt-3" style="color: white; width: 280px;" sec:authorize="!isAuthenticated()">로그인을 해주세요</p>
-            <!--로그아웃 시 나타나는 상단 토글바-->
-            <div sec:authorize="!isAuthenticated()">
-                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/account/login" th:href="@{/account/login}">로그인</a></li>
-                        </ul>
+        <p class= "mt-3" style="color: white; width: 280px;" sec:authorize="!isAuthenticated()">로그인을 해주세요</p>
+        <!--로그아웃 시 나타나는 상단 토글바-->
+        <div sec:authorize="!isAuthenticated()">
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/account/login" th:href="@{/account/login}">로그인</a></li>
+                    </ul>
 
-                    </li>
-                </ul>
-            </div>
+                </li>
+            </ul>
+        </div>
 
         <!--로그인 시 나타나는 상단 토글바-->
         <p sec:authorize="isAuthenticated()" class="userState mt-3" style="color: white; width: 500px; text-align:end;"  th:text="${user.nickname} + ' 님 환영합니다.'"></p>
@@ -65,31 +65,31 @@
         </div>
 
 
-    <!--토글 '나의 프로필' 클릭시 생기는 모달-->
-    <div class="modal" sec:authorize="isAuthenticated()">
-        <div class="card-container">
-            <div class="upper-container">
-                <div class="image-container">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png" />
+        <!--토글 '나의 프로필' 클릭시 생기는 모달-->
+        <div class="modal" sec:authorize="isAuthenticated()">
+            <div class="card-container">
+                <div class="upper-container">
+                    <div class="image-container">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png" />
+                    </div>
+                    <button onclick="closeProfile()" type="button" class="btn-close btn-close-black showProfileModal_closeBtn" aria-label="Close"></button>
                 </div>
-                <button onclick="closeProfile()" type="button" class="btn-close btn-close-black showProfileModal_closeBtn" aria-label="Close"></button>
-            </div>
-            <div class="lower-container">
-                <div>
-                    <h3  th:text="${user.nickname}" name="nickname"></h3>
-                    <h4  th:text="${user.username}" name="username" ></h4>
-                </div>
-                <div>
-                    <p>sodales accumsan ligula. Aenean sed diam tristique,
-                        fermentum mi nec, ornare arch.
-                    </p>
-                </div>
-                <div>
-                    <a href="modifyProfile" class="btn">edit profile</a>
+                <div class="lower-container">
+                    <div>
+                        <h3  th:text="${user.nickname}" name="nickname"></h3>
+                        <h4  th:text="${user.username}" name="username" ></h4>
+                    </div>
+                    <div>
+                        <p>sodales accumsan ligula. Aenean sed diam tristique,
+                            fermentum mi nec, ornare arch.
+                        </p>
+                    </div>
+                    <div>
+                        <a href="modifyProfile" class="btn">edit profile</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </nav>
 
     <script>
@@ -127,76 +127,76 @@
     </script>
 </th:block>
 
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav" th:fragment="side(side)">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading">About ETG</div>
-                        <a class="nav-link" href="/about_us">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            ETG 사용방법
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Two getter with Neighbor</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            채팅방
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/chat/list}">나의 채팅방</a>
-                                <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">나의 채팅방</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            우리 동네 사람들
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="/board">
-                                    가까운 이웃
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-<!--                                    이거 클릭하면 가까운 위치 순서대로 뜸-->
-                                </a>
-<!--                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">-->
-<!--                                    하위 메뉴-->
-<!--                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
-<!--                                </a>-->
-                            </nav>
-                        </div>
-                        <div class="sb-sidenav-menu-heading">편의 메뉴</div>
-                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/modifyProfile}">나의 프로필 보기</a>
-                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/report/userReport}">불량회원 신고하기</a>
-                            <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">불량회원 신고하기</a>
-
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav" th:fragment="side(side)">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">About ETG</div>
+                    <a class="nav-link" href="/about_us">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        ETG 사용방법
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Two getter with Neighbor</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        채팅방
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/chat/list}">나의 채팅방</a>
+                            <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">나의 채팅방</a>
+                        </nav>
                     </div>
-                </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small"><br/></div>
-                    <br/>
-                </div>
-            </nav>
-        </div>
-
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-4">
-
-                </div>
-            </main>
-            <footer class="py-4 bg-light mt-auto" th:fragment="footer(footer)">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div></div>
-                        <div>Copyright &copy; IdaaBANK in LikeLion Backend School</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        우리 동네 사람들
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" onclick="showDistance()">
+                                가까운 이웃
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                <!--                                    이거 클릭하면 가까운 위치 순서대로 뜸-->
+                            </a>
+                            <!--                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">-->
+                            <!--                                    하위 메뉴-->
+                            <!--                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
+                            <!--                                </a>-->
+                        </nav>
                     </div>
+                    <div class="sb-sidenav-menu-heading">편의 메뉴</div>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/modifyProfile}">나의 프로필 보기</a>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/report/userReport}">불량회원 신고하기</a>
+                    <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">불량회원 신고하기</a>
+
                 </div>
-            </footer>
-        </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small"><br/></div>
+                <br/>
+            </div>
+        </nav>
     </div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto" th:fragment="footer(footer)">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div></div>
+                    <div>Copyright &copy; IdaaBANK in LikeLion Backend School</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
 
 </body>
 </html>

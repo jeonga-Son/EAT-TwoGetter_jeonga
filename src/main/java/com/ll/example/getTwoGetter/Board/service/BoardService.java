@@ -8,10 +8,8 @@ import com.ll.example.getTwoGetter.Board.domain.repository.BoardRepository;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.ll.example.getTwoGetter.Board.model.PageResult;
 import com.ll.example.getTwoGetter.common.constants.BoardConstants;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,6 +26,8 @@ public class BoardService {
         this.boardRepository = boardRepository;
         this.chatInfoService = chatInfoService;
     }
+
+
 
     @Transactional
     public Long savePost(BoardDto boardDto) {
@@ -171,5 +171,10 @@ public class BoardService {
             }
         }
         chatInfoService.modify(beforeNickname, afterNickname);
+    }
+
+    public List<Double> getDistanceAsc(String lat, String lng) {
+        List<Double> distances = boardRepository.getArticle2(lat, lng);
+        return distances;
     }
 }
