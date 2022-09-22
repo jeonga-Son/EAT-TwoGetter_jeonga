@@ -38,8 +38,10 @@
                     <div class="inner"></div>
                     <button onclick="showAccountModifyPassword()">비밀번호 수정하기</button>
                 </div>
-
-                <button th:username="${user.username}" onclick="deleteAccount(this.getAttribute('username'))"  >회원탈퇴</button>
+                <div class="button" >
+                    <div class="inner"></div>
+                    <button th:username="${user.username}" onclick="deleteAccount(this.getAttribute('username'))">회원탈퇴</button>
+                </div>
             </div>
         </div>
 
@@ -127,10 +129,9 @@ function deleteAccount(username){
         icon: 'success'
          }).then((result2) => {
             $.ajax({
-                url:'/api/users/'+username,
-                type:'DELETE',
+                url:'/account/remove/'+username,
+                type:'GET',
                 success: function (result){
-                    alert('정상적으로 삭제 되었습니다.')
                     window.location.href="/account/login";
                 }
             })
