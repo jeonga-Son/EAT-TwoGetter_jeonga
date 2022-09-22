@@ -35,20 +35,3 @@ editBoardClose2.addEventListener('click', () => {
 function boardSubmitClickEvent() {
     gpsMarkerd.setVisible(false);
 }
-
-let latitude = null; // 위도
-let longitude = null; // 경도
-
-// 위도, 경도 가져오기
-navigator.geolocation.getCurrentPosition(
-    (position) => {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
-    },
-);
-
-function showDistance(){
-    location.href=`/board/${latitude}/${longitude}`
-}
-
-
