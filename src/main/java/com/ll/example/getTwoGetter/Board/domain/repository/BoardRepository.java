@@ -5,7 +5,6 @@ package com.ll.example.getTwoGetter.Board.domain.repository;
 
 
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
-import com.ll.example.getTwoGetter.Board.dto.BoardDto2;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,8 +26,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     // 수학적 식이 아닌 실제 두 지점간의 거리를 구하고자 삼각함수와 라디안을 사용했습니다.
     // HAVING 부분은 0.5km 이내 글만 뜨게끔 구현한 것
 
+    //하버사인 공식
     @Query(value = "select " +
-            "(6371*ACOS(COS(RADIANS(:lat))) * COS(RADIANS(b.lat)) * COS(RADIANS(b.lng)-RADIANS(:lng) + SIN(RADIANS(:lat)) * SIN(RADIANS(b.lat)))) " +
+            "(6371*ACOS(COS(RADIANS(:lat)) * COS(RADIANS(b.lat)) * COS(RADIANS(b.lng)-RADIANS(:lng)) + SIN(RADIANS(:lat)) * SIN(RADIANS(b.lat)))) " +
             "AS distance "+"from Board b order by distance asc ", nativeQuery = true)
     List<Double> getArticle2(@Param("lat")String lat, @Param("lng") String lng);
 

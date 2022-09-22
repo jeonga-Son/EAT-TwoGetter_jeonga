@@ -6,7 +6,6 @@ package com.ll.example.getTwoGetter.Board.controller;
 
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
-import com.ll.example.getTwoGetter.Board.dto.BoardDto2;
 import com.ll.example.getTwoGetter.Board.service.BoardService;
 import com.ll.example.getTwoGetter.Board.model.PageResult;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import java.util.List;
 
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,27 +33,13 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-//    @GetMapping("/board") //view용 컨트롤러
-//    public String list(Model model) {
-//        List<BoardDto> boardDtoList = boardService.getBoardList();
-//        model.addAttribute("postList", boardDtoList);
-//        return "board/list.html";
-//    }
-    @GetMapping("/testpageable") //view용 컨트롤러
-    public String list2() {
-    //    for(int i=0; i<boardDtoDistances.size(); i++){
-    //        System.out.println(boardDtoDistances.get(i).getDistance());
-    //    }
-        return "testPage";
 
-    }
 
-    @GetMapping("/board") //view용 컨트롤러
-    public String list(Model model) {
-        List<Double> boardDto2s = boardService.getDistance("37.6351961","126.8331015");
-        for(int i=0; i<boardDto2s.size(); i++){
-            System.out.println(boardDto2s.get(i));
-        }
+    @GetMapping("/board/{latitude}/{longitude}") //view용 컨트롤러
+    public String list(Model model, @PathVariable String latitude, @PathVariable String longitude) {
+        System.out.println("::::::::::::::" + latitude + ":::::::::" + longitude);
+        List<Double> boardDistance = boardService.getDistanceAsc(latitude,longitude);
+        model.addAttribute("boardDistance", boardDistance);
 
         return "board/list.html";
     }
@@ -75,10 +59,6 @@ public class BoardController {
         System.out.println("::::::::::::::" + latitude + ":::::::::" + longitude);
 
         PageResult pageResult = boardService.getBoardList(page, latitude, longitude);
-        List<BoardDto> boards = pageResult.getContents();
-        for(int i=0; i<boards.size(); i++){
-            System.out.println(boards.get(i).getTitle());
-         }
         // rest-api controller 응답값으로는 ResponseEntity를 사용하는 것이 좋다고함
 
         return ResponseEntity.ok().body(pageResult);

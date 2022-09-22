@@ -6,13 +6,10 @@ package com.ll.example.getTwoGetter.Board.service;
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.domain.repository.BoardRepository;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
-import com.ll.example.getTwoGetter.Board.dto.BoardDto2;
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.ll.example.getTwoGetter.Board.model.PageResult;
 import com.ll.example.getTwoGetter.common.constants.BoardConstants;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -176,8 +173,8 @@ public class BoardService {
         chatInfoService.modify(beforeNickname, afterNickname);
     }
 
-    public List<Double> getDistance(String lat, String lng) {
-        List<Double> dto2s = boardRepository.getArticle2(lat, lng);
-        return dto2s;
+    public List<Double> getDistanceAsc(String lat, String lng) {
+        List<Double> distances = boardRepository.getArticle2(lat, lng);
+        return distances;
     }
 }

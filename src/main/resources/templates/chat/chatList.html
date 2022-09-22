@@ -59,7 +59,7 @@
                             </ui>
                         </div>
                     </div>
-                </div>
+                </div>R
                 <div class="col-md-8 col-xl-6 noChatListModal chatModal" >
                     <div class = "chatModal_All" id="all">
                         <div class="card">
@@ -246,9 +246,9 @@
         clickedChatId  = id;
         for(let i= 0; i<chatInfo_length; i++){
             arr_chatId[i].addEventListener('click', () => {
-                    title.innerHTML = `<div id="chatTitle${i}">${chatInfos[i].chatTitle}</div>`
-                    chatId = chatInfos[i].id;
-                    chatMessage_upload(chatInfos[i].id, id)
+                title.innerHTML = `<div id="chatTitle${i}">${chatInfos[i].chatTitle}</div>`
+                chatId = chatInfos[i].id;
+                chatMessage_upload(chatInfos[i].id, id)
             });
         }
     }
