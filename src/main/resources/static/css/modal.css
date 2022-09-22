@@ -1,5 +1,5 @@
 
-.modal {
+.modal, partnerProfileModal {
     position: absolute;
     top: 0;
     left: 0;
@@ -125,7 +125,7 @@
    margin:auto;
 }
 
-.boardModal_close2, .boardDetailModal_close2, .editBoardModal_close2, .showProfileModal_closeBtn, .closeChat {
+.boardModal_close2, .boardDetailModal_close2, .editBoardModal_close2, .showProfileModal_closeBtn, .closeChat, .partnerProfileModal_closeBtn {
     position: absolute;
     top: 15px;
     right: 10px;

@@ -82,7 +82,7 @@
                                 <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
                                 <div class="action_menu">
                                     <ul>
-                                        <li><i class="fas fa-user-circle"></i> View profile</li>
+                                        <li onclick="showPartnerProfile()"><i class="fas fa-user-circle"></i> View profile</li>
                                     </ul>
                                 </div>
                             </div>
@@ -111,6 +111,29 @@
 </div>
 </div>
 
+<!--토글 '나의 프로필' 클릭시 생기는 모달-->
+<div class="partnerProfileModal" sec:authorize="isAuthenticated()" style="display:none;" th:each="chatInfo: ${chatInfos}">
+    <div class="card-container">
+        <div class="upper-container">
+            <div class="image-container">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png" />
+            </div>
+            <button onclick="closeProfile()" type="button" class="btn-close btn-close-black partnerProfileModal_closeBtn" aria-label="Close"></button>
+        </div>
+        <div class="lower-container">
+            <div>
+                <h3  th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}" ></h3>
+                <h4  th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.userEmail}" ></h4>
+            </div>
+            <div>
+                <p>sodales accumsan ligula. Aenean sed diam tristique,
+                    fermentum mi nec, ornare arch.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script th:inline="javascript">
     /*<![CDATA[*/
     let chatInfos = /*[[${chatInfos}]]*/;
@@ -119,6 +142,8 @@
     /*]]>*/
 </script>
 <script>
+
+
      <!--로그인 된 사용자가 각각 채팅방을 마지막에 읽은 시간을 넣어줌-->
      var lastReadTime=[];
 
@@ -187,7 +212,9 @@
 
 <script>
     const chatModal = document.querySelector('.chatModal');
+    const partnerProfileModal = document.querySelector('.partnerProfileModal');
     const chatClose = document.querySelector('.closeChat');
+    const action_menu = document.querySelector('.action_menu');
 
      function chatMessage_upload(id) {
         fetch(`/chatApi/chatMessage/${id}`)
@@ -324,6 +351,17 @@
         $(".action_menu").toggle();
       });
     });
+
+    <!--상대방 프로필 보기 모달-->
+    function showPartnerProfile() {
+        partnerProfileModal.style.display = 'block';
+        action_menu.style.display = 'none';
+    }
+
+    <!--상대방 프로필 보기 모달 닫기-->
+     function closeProfile(){
+        partnerProfileModal.style.display='none';
+    }
 
 </script>
 <script th:inline="javascript">
