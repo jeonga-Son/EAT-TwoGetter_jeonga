@@ -6,6 +6,7 @@ package com.ll.example.getTwoGetter.Board.controller;
 
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
+import com.ll.example.getTwoGetter.Board.dto.BoardDto2;
 import com.ll.example.getTwoGetter.Board.service.BoardService;
 import com.ll.example.getTwoGetter.Board.model.PageResult;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +52,10 @@ public class BoardController {
 
     @GetMapping("/board") //view용 컨트롤러
     public String list(Model model) {
+        List<Double> boardDto2s = boardService.getDistance("37.6351961","126.8331015");
+        for(int i=0; i<boardDto2s.size(); i++){
+            System.out.println(boardDto2s.get(i));
+        }
 
         return "board/list.html";
     }

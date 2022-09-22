@@ -6,6 +6,7 @@ package com.ll.example.getTwoGetter.Board.service;
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.domain.repository.BoardRepository;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
+import com.ll.example.getTwoGetter.Board.dto.BoardDto2;
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class BoardService {
         this.boardRepository = boardRepository;
         this.chatInfoService = chatInfoService;
     }
+
+
 
     @Transactional
     public Long savePost(BoardDto boardDto) {
@@ -171,5 +174,10 @@ public class BoardService {
             }
         }
         chatInfoService.modify(beforeNickname, afterNickname);
+    }
+
+    public List<Double> getDistance(String lat, String lng) {
+        List<Double> dto2s = boardRepository.getArticle2(lat, lng);
+        return dto2s;
     }
 }

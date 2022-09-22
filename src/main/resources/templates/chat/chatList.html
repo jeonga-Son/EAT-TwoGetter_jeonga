@@ -246,9 +246,9 @@
         clickedChatId  = id;
         for(let i= 0; i<chatInfo_length; i++){
             arr_chatId[i].addEventListener('click', () => {
-                title.innerHTML = `<div id="chatTitle${i}">${chatInfos[i].chatTitle}</div>`
-                chatId = chatInfos[i].id;
-                chatMessage_upload(chatInfos[i].id, id)
+                    title.innerHTML = `<div id="chatTitle${i}">${chatInfos[i].chatTitle}</div>`
+                    chatId = chatInfos[i].id;
+                    chatMessage_upload(chatInfos[i].id, id)
             });
         }
     }
