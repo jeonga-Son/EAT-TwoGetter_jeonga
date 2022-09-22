@@ -224,6 +224,9 @@ function deleteBoard(){
 		})
 	}
 
+function closeBoardDetailModal() {
+    boardDetailModal.style.display='none';
+}
 
 function modifyBoard(){
     boardDetailModal.style.display = "none";
