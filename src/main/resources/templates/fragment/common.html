@@ -54,7 +54,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item btn-open-popup" href="#!" onclick="showProfile()">나의 프로필</a></li>
-                        <li><a class="dropdown-item" href="/showProfile">회원정보 수정</a></li>
+                        <li><a class="dropdown-item" href="/modifyProfile">회원정보 수정</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><form th:action="@{/logout}" method="POST" onsubmit="removeStorage()">
                             <button class="dropdown-item" type="submit" >로그아웃</button>
@@ -63,44 +63,6 @@
                 </li>
             </ul>
         </div>
-
-<!--        &lt;!&ndash;myprofile 모달창&ndash;&gt;-->
-<!--        <div class="modal" sec:authorize="isAuthenticated()">-->
-<!--            <div class="modal_body">-->
-<!--                    <a th:href="@{/}">-->
-<!--                        <img class="mb-4" src="https://getbootstrap.kr/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
-<!--                    </a>-->
-
-<!--                    <h2 class="h3 mb-3 fw-normal">프로필</h2>-->
-<!--                    <div class="mb-3 row">-->
-<!--                        <label for="nickname" class="col-sm-2 col-form-label">이름</label>-->
-<!--                        <div class="col-sm-10">-->
-<!--                            <input type="text" class="form-control-plaintext" id="nickname" th:value="${user.nickname}" name="nickname" readonly>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="mb-3 row">-->
-<!--                        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>-->
-<!--                        <div class="col-sm-10">-->
-<!--                            <input type="email" class="form-control-plaintext" id="staticEmail" th:value="${user.username}" name="username" readonly>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="mb-3 row">-->
-<!--                        <label for="password" class="col-sm-2 col-form-label">PWD</label>-->
-<!--                        <div class="col-sm-10">-->
-<!--                            <input type="password" class="form-control-plaintext" id="password" placeholder="password" name="password" readonly>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--&lt;!&ndash;                    <div class="mb-3 row">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <a class="w-10 btn btn-primary mb-3" style="text-align: center"&ndash;&gt;-->
-<!--&lt;!&ndash;                                th:username="${user.username}"&ndash;&gt;-->
-<!--&lt;!&ndash;                           onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" th:href="@{|/account/remove/${user.username}|}">회원탈퇴</a>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                    <button class="w-10 btn btn-primary mb-3" style="text-align: center" type="submit" onclick="location.href='/showProfile'">수정</button>-->
-<!--                    <button class="modal_close btn btn-secondary mb-3" type="button" onclick="closeProfile()">닫기</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash;myprofile 모달창 end!&ndash;&gt;-->
-
 
     <div class="modal" sec:authorize="isAuthenticated()">
         <div class="card-container">
@@ -121,7 +83,7 @@
                     </p>
                 </div>
                 <div>
-                    <a href="showProfile" class="btn">edit profile</a>
+                    <a href="modifyProfile" class="btn">edit profile</a>
                 </div>
             </div>
         </div>
@@ -203,7 +165,7 @@
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">편의 메뉴</div>
-                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/showProfile}">나의 프로필 보기</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/modifyProfile}">나의 프로필 보기</a>
                             <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/report/userReport}">불량회원 신고하기</a>
                             <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">불량회원 신고하기</a>
 

@@ -116,6 +116,7 @@ public class BoardController {
     public String modifyBoard(BoardDto boardDto) {
         boardService.savePost(boardDto);
         return "redirect:/";
+        //홈으로 리다이렉트//git연습
     }
 
     @PreAuthorize("isAuthenticated()")

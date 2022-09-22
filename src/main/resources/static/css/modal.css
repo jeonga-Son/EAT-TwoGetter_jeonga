@@ -125,9 +125,9 @@
    margin:auto;
 }
 
-.boardModal_close2, .boardDetailModal_close2, .editBoardModal_close2, .showProfileModal_closeBtn {
+.boardModal_close2, .boardDetailModal_close2, .editBoardModal_close2, .showProfileModal_closeBtn, .closeChat {
     position: absolute;
-    top: 10px;
+    top: 15px;
     right: 10px;
 }
 

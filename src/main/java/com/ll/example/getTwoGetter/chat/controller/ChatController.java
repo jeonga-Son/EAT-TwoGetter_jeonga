@@ -1,7 +1,9 @@
 package com.ll.example.getTwoGetter.chat.controller;
 
 import com.ll.example.getTwoGetter.chat.model.ChatInfo;
+import com.ll.example.getTwoGetter.chat.model.ChatMessage;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
+import com.ll.example.getTwoGetter.chat.service.ChatMessageService;
 import com.ll.example.getTwoGetter.login.Service.UserService;
 import com.ll.example.getTwoGetter.login.model.User;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,8 @@ public class ChatController {
 
     private final ChatInfoService chatInfoService;
 
+    private final ChatMessageService chatMessageService;
+
     @GetMapping("/list")
     public String chatList(@AuthenticationPrincipal UserDetails userDetails, Model model){
         if(userDetails != null){
@@ -29,6 +33,7 @@ public class ChatController {
             User user = userService.findByUsername(username);;
             List<ChatInfo> chatInfos_user =chatInfoService.findByUsername(user.getNickname());
             List<ChatInfo> chatInfos_partner = chatInfoService.findByPartner(user.getNickname());
+
 
             List<ChatInfo> joined = new ArrayList<>();
 
