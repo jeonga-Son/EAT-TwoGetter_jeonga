@@ -10,8 +10,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 
-public class PageResult<T> {
+public class PageResult<BoardDtoDistance> {
     private Long totalCount;
-    private List<T> contents;
+    private BoardDtoDistance[] contents;
 }
 

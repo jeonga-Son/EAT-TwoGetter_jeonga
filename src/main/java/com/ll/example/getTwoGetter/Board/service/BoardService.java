@@ -6,6 +6,7 @@ package com.ll.example.getTwoGetter.Board.service;
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import com.ll.example.getTwoGetter.Board.domain.repository.BoardRepository;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
+import com.ll.example.getTwoGetter.Board.dto.BoardDtoDistance;
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
 import com.ll.example.getTwoGetter.Board.model.PageResult;
@@ -45,7 +46,8 @@ public class BoardService {
      */
 
     @Transactional
-    public PageResult<BoardDto> getBoardList(int page, String latitude, String longitude) {
+    public PageResult<BoardDtoDistance> getBoardList(int page, String latitude, String longitude, List<Double> distances) {
+
 
         Long totalCount = boardRepository.count(); //화면상 페이지 버튼 처리를 위한 total count 계산
 
@@ -72,13 +74,20 @@ public class BoardService {
                         .build()
         ).collect(Collectors.toList());
 
+        BoardDtoDistance[] boardDtoDistance = BoardDtoDistance.getBoardDtoDistances(boardList, distances);
 
         // PageResult에 매핑해서 return
-        return PageResult.<BoardDto>builder()
+//        return PageResult.<BoardDto>builder()
+//                .totalCount(totalCount)
+//                .contents(boardDtoList)
+//                .build();
+        return PageResult.<BoardDtoDistance>builder()
                 .totalCount(totalCount)
-                .contents(boardDtoList)
+                .contents(boardDtoDistance)
                 .build();
     }
+
+
 
     @Transactional
     public BoardDto getPost(Long id) {
@@ -173,8 +182,19 @@ public class BoardService {
         chatInfoService.modify(beforeNickname, afterNickname);
     }
 
-    public List<Double> getDistanceAsc(String lat, String lng) {
+    public List<Double> getDistanceAsc(String lat, String lng, int page) {
         List<Double> distances = boardRepository.getArticle2(lat, lng);
+        List<Double> distancesCopy = distances;
+        for(int k=1; k<=distances.size()/5 +1 ; k++){
+            if(page == k){
+                for(int i=0; i<5; i++){
+                    if(distancesCopy.size()<=i+(5*(k-1))){
+                        break;
+                    }
+                    distances.set(i, distancesCopy.get(i+(5*(k-1))));
+                }
+            }
+        }
         return distances;
     }
 }
