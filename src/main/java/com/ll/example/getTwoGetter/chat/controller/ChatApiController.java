@@ -7,6 +7,9 @@ import com.ll.example.getTwoGetter.chat.model.ChatInfo;
 import com.ll.example.getTwoGetter.chat.model.ChatMessage;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
 import com.ll.example.getTwoGetter.chat.service.ChatMessageService;
+import com.ll.example.getTwoGetter.login.Repository.UserRepository;
+import com.ll.example.getTwoGetter.login.Service.UserService;
+import com.ll.example.getTwoGetter.login.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,9 @@ public class ChatApiController {
     ChatInfoService chatInfoService;
     @Autowired
     ChatMessageService chatMessageService;
+
+    @Autowired
+     UserService userService;
 
     @GetMapping("/chatMessage/{id}")
     public List<ChatMessage> showChatMessageId(@PathVariable("id") long id){
@@ -75,5 +81,11 @@ public class ChatApiController {
     public void chatDelete(@PathVariable long id){
         ChatInfo chatInfo = chatInfoService.findById(id);
         chatInfoService.delete(chatInfo);
+    }
+
+    @GetMapping("/partnerProfile/{chatInfoPartnerName}")
+    public User chatDelete(@PathVariable String chatInfoPartnerName){
+        User user = userService.findByNickname(chatInfoPartnerName);
+        return user;
     }
 }

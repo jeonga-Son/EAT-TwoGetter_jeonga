@@ -117,7 +117,7 @@
 </div>
 
 <!--토글 '나의 프로필' 클릭시 생기는 모달-->
-<div class="partnerProfileModal" sec:authorize="isAuthenticated()" style="display:none;" th:each="chatInfo: ${chatInfos}">
+<div class="partnerProfileModal" style="display:none;" th:each="chatInfo: ${chatInfos}">
   <div class="card-container">
     <div class="upper-container">
       <div class="image-container">
@@ -127,8 +127,8 @@
     </div>
     <div class="lower-container">
       <div>
-        <h3  th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}" ></h3>
-        <h4  th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.userEmail}" ></h4>
+        <h3 id="showYou"></h3>
+        <h4 id="showYourEmail"></h4>
       </div>
       <div>
         <p>sodales accumsan ligula. Aenean sed diam tristique,
@@ -149,7 +149,7 @@
 <script>
     const new_message = document.querySelector('.new_message')
 
-     <!--로그인 된 사용자가 각각 채팅방을 마지막에 읽은 시간을 넣어줌-->
+    <!--로그인 된 사용자가 각각 채팅방을 마지막에 읽은 시간을 넣어줌-->
     var lastReadTime=[];
 
      <!--각 채팅방의 고유번호(ID)를 넣어줌-->
@@ -298,6 +298,8 @@
     const title = document.getElementById('title');
     const content = document.getElementById('content');
     const chatInfoPartnerName = document.getElementById('chatInfoPartnerName');
+    const showYou = document.getElementById('showYou');
+    const showYourEmail = document.getElementById('showYourEmail');
 
     let arr_chatId=[];
     let chatId;
@@ -315,10 +317,10 @@
             arr_chatId[i].addEventListener('click', () => {
                 title.innerHTML = `<div>${chatInfos[i].chatTitle}</div>`
                 if( user.nickname == chatInfos[i].partner) {
-                     chatInfoPartnerName.innerHTML = `<div>${chatInfos[i].username}</div>`
+                     chatInfoPartnerName.innerText = chatInfos[i].username
                 }
                 if( user.nickname == chatInfos[i].username) {
-                     chatInfoPartnerName.innerHTML = `<div>${chatInfos[i].partner}</div>`
+                     chatInfoPartnerName.innerText = chatInfos[i].partner
                 }
                 chatId = chatInfos[i].id;
                 chatMessage_upload(chatInfos[i].id, id)
@@ -381,6 +383,19 @@
     function showPartnerProfile() {
         partnerProfileModal.style.display = 'block';
         action_menu.style.display = 'none';
+
+        var chatInfoPartnerName = document.getElementById('chatInfoPartnerName')
+        var chatInfoPartnerName2 = chatInfoPartnerName.innerText;
+
+<!--        console.log(chatInfoPartnerName2)-->
+
+        fetch(`/chatApi/partnerProfile/${chatInfoPartnerName2}`)
+            .then(data=>data.json())
+            .then(responseData=>{
+                console.log(responseData)
+                showYou.innerText = responseData.nickname
+                showYourEmail.innerText = responseData.username
+            })
     }
 
     <!--상대방 프로필 보기 모달 닫기-->
