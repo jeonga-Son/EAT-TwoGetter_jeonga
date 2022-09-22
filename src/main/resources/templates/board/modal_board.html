@@ -101,7 +101,7 @@
         <table class="table">
           <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">항목</th>
             <th scope="col">정보</th>
           </tr>
           </thead>
@@ -164,9 +164,8 @@
                class="delete btn btn-danger btn-outline-secondary boardDeleteBtn" sec:authorize="isAuthenticated()"
                th:text="삭제"></button>
           </div>
-            <button type="button" class="btn btn-secondary boardDetailModal_close">닫기</button>
         </div>
-        <button type="button" class="btn-close btn-close-black boardDetailModal_close2" aria-label="Close"></button>
+        <button onclick="closeBoardDetailModal()" type="button" class="btn-close btn-close-black boardDetailModal_close2" aria-label="Close"></button>
       </div>
     </div>
   </div>

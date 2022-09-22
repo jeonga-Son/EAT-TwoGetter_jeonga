@@ -1,9 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo');
+
+.bd-highlight {
+    margin:10px;
+}
+
 .chatroomBg{
     height: 100%;
     margin: 0;
     background: #7F7FD5;
     background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
     background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+    overflow-y:hidden;
+    overflow-x:hidden;
 }
 
 .chat{
@@ -58,7 +66,7 @@
     color:white !important;
 }
 .search:focus{
-     box-shadow:none !important;
+    box-shadow:none !important;
    outline:0px !important;
 }
 .type_msg{
@@ -116,13 +124,18 @@
 
 }
 .img_cont{
-        position: relative;
-        height: 70px;
-        width: 70px;
+    position: relative;
+    height: 70px;
+    width: 70px;
 }
+
+.img_cont-1 {
+    margin:auto;
+}
+
 .img_cont_msg{
-        height: 40px;
-        width: 40px;
+    height: 40px;
+    width: 40px;
 }
 .online_icon{
     position: absolute;
@@ -142,6 +155,7 @@
     margin-bottom: auto;
     margin-left: 15px;
 }
+
 .user_info span{
     font-size: 20px;
     color: white;
@@ -152,7 +166,7 @@ color: rgba(255,255,255,0.6);
 }
 .video_cam{
     margin-left: 50px;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 .video_cam span{
     color: white;
@@ -160,7 +174,7 @@ color: rgba(255,255,255,0.6);
     cursor: pointer;
     margin-right: 20px;
 }
-.msg_cotainer{
+.msg_container{
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
@@ -169,7 +183,7 @@ color: rgba(255,255,255,0.6);
     padding: 10px;
     position: relative;
 }
-.msg_cotainer_send{
+.msg_container_send{
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 10px;
@@ -179,6 +193,7 @@ color: rgba(255,255,255,0.6);
     position: relative;
 }
 .msg_time{
+    width:80px;
     position: absolute;
     left: 0;
     bottom: -15px;
@@ -186,6 +201,7 @@ color: rgba(255,255,255,0.6);
     font-size: 10px;
 }
 .msg_time_send{
+    width:80px;
     position: absolute;
     right:0;
     bottom: -15px;
@@ -197,8 +213,8 @@ color: rgba(255,255,255,0.6);
 }
 #action_menu_btn{
     position: absolute;
-    right: 10px;
-    top: 10px;
+    left: 10px;
+    top: 50%;
     color: white;
     cursor: pointer;
     font-size: 20px;
@@ -210,8 +226,8 @@ color: rgba(255,255,255,0.6);
     background-color: rgba(0,0,0,0.5);
     color: white;
     border-radius: 15px;
-    top: 30px;
-    right: 15px;
+    top: 70px;
+    left: 15px;
     display: none;
 }
 .action_menu ul{
@@ -238,9 +254,61 @@ margin: 0;
 }
 }
 
+.frame {
+    margin:15px;
+    font-family: 'Heebo';
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+.chatDeleteBtn {
+    border:none;
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+    border-radius: 50px;
+    font-weight: 900;
+    text-align: center;
+    margin: 30px;
+    width: 70px;
+    transition: all .3s ease;
+    flex: 1 1 auto;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 30px;
+    background-image: linear-gradient(130deg, #fc00ff 0%, #00dbde 100%);
+}
 
+.chatDeleteBtn:hover {
+  background-position: right center; /* change the direction of the change here */
+}
 
+.new_message {
+    display:flex;
+    width:290px;
+    color: white;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align:center;
+
+}
+
+.messageCount-frame {
+    margin-left:auto;
+    width:35px;
+    border-radius:50%;
+    font-size:1.5rem;
+    background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);
+    box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+    font-family: 'Heebo';
+    text-align:center;
+}
 
 .boardModal.show {
     display: block;
@@ -255,42 +323,12 @@ margin: 0;
 
     text-align: center;
 
-    background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 
     transform: translateX(-50%) translateY(-50%);
 }
-.chatModal_All{
-    border: solid 2px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
 
-    width:400px;
-    height: 550px;
-
-
-    text-align: center;
-
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-
-    transform: translateX(-50%) translateY(-50%);
-}
-.closeChat{
-    position: absolute;
-    left: 50%;
-    top: 94%;
-    transform: translateX(-50%) translateY(-50%);
-}
-.sendMessage{
-    position: absolute;
-    left: 63%;
-    top: 86%;
-    transform: translateX(-50%) translateY(-50%);
-}
 .chatUser{
     /*background-color: rgba(96,26,97,0.56);*/
     float: right;
@@ -302,27 +340,12 @@ margin: 0;
     float: left;
     font-weight: bold;
 }
-.inputMessage{
-    position: absolute;
-    left: 48%;
-    top: 86%;
-    transform: translateX(-50%) translateY(-50%);
-}
+
 .chatModal_All{
     /*background-color:red;*/
 }
 .chat_title{
     margin-top:10px
-}
-.chat_content{
-    border-bottom: solid 2px;
-    border-top:solid 2px;
-    overflow-x: hidden;
-    width:100%;
-    height: 440px;
-    text-align: center;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 }
 
 .chatTime{
@@ -336,14 +359,7 @@ margin: 0;
 .chatPartner>div{
     display: inline-block; /* block요소인 div를 inline으로 만들어준다. */
 }
-.chatUsername{
 
-
-}
-.chatPartnername{
-
-
-}
 .chatMessagePartner{
     float: left;
     text-align: left;
@@ -366,4 +382,7 @@ margin: 0;
 }
 .chatModal{
     display: none;
+    top: 20%;
+    margin-top: auto;
+    margin-bottom: auto;
 }

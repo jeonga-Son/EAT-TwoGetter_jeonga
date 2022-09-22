@@ -5,7 +5,6 @@ const btnClosePopup3 = document.querySelector('.boardModal_close2');
 const editBoardClose1 = document.querySelector('.editBoardModal_close');
 const editBoardClose2 = document.querySelector('.editBoardModal_close2');
 
-
 var infoDiv = document.getElementById('centerAddr')
 var infoLng = document.getElementById('centerLatLng')
 
@@ -37,21 +36,19 @@ function boardSubmitClickEvent() {
     gpsMarkerd.setVisible(false);
 }
 
-/**
-회원 탈퇴 시 사용되는 메서드
-*/
-function deleteAccount(username){
-    if (!confirm("정말로 삭제하시겠습니까?")) {
-        alert("삭제가 취소되었습니다.")
-    } else {
-        $.ajax({
-            url:'/api/users/'+username,
-            type:'DELETE',
-            success: function (result){
-                alert('정상적으로 삭제 되었습니다.')
-                window.location.href="/account/login";
-            }
-        })
-    }
+let latitude = null; // 위도
+let longitude = null; // 경도
+
+// 위도, 경도 가져오기
+navigator.geolocation.getCurrentPosition(
+    (position) => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+    },
+);
+
+function showDistance(){
+    location.href=`/board/${latitude}/${longitude}`
 }
+
 

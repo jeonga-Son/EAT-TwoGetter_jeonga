@@ -23,7 +23,7 @@
 				<div class="content">
 					<div>
 						<a th:href="@{/}">
-							<img class="logo" src="../images/mainLogo.png" alt="" width="72" height="72">
+							<img style="margin-bottom:30px;" class="logo" src="../images/mainLogo-white.png" alt="" width="200" height="200">
 						</a>
 					</div>
 					<header>
@@ -132,9 +132,17 @@
 				</div>
 			</div>
 		</section>
-		
 
-		
+		<footer class="py-4 bg-light mt-auto" th:fragment="footer(footer)">
+			<div class="container-fluid px-4">
+				<div class="d-flex align-items-center justify-content-between small">
+					<div></div>
+					<div style="text-align:right">Copyright &copy; IdaaBANK in LikeLion Backend School</div>
+				</div>
+			</div>
+		</footer>
+
+
 		<!-- Scripts -->
 			<script src="/js/jquery.min.js"></script>
 			<script src="/js/jquery.poptrox.min.js"></script>
