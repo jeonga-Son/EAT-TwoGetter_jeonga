@@ -316,3 +316,4 @@ boardDetailModal_close.addEventListener('click', () => {
 boardDetailModal_close2.addEventListener('click', () => {
     boardDetailModal.style.display = 'none';
 });
+

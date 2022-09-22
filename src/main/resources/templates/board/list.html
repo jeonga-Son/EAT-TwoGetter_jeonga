@@ -151,24 +151,17 @@
       }
     }, 1000);
 
+    var pageInt = 5;
     // page 버튼 클릭
     $(document).on('click', '.page', (e) => {
-      console.log((e.target).innerText)
-      if((e.target).innerText == 1){
-        for(var i=0; i<boardDistance.length; i++){
-          boardDistance[i]= boardDistanceCopy[i]
+      for(var j=1; j<= boardDistance.length/pageInt +1; j++){
+        if((e.target).innerText == j){
+          for(var i=0; i<boardDistance.length; i++){
+            boardDistance[i]= boardDistanceCopy[i+5*(j-1)]
+          }
         }
       }
-      if((e.target).innerText == 2){
-        for(var i=0; i<boardDistance.length; i++){
-          boardDistance[i]= boardDistanceCopy[i+5]
-        }
-      }
-      if((e.target).innerText == 3){
-        for(var i=0; i<boardDistance.length; i++){
-          boardDistance[i]= boardDistanceCopy[i+10]
-        }
-      }
+
       // 클릭한 페이지 버튼의 인덱스(페이지)를 현재페이지로 설정하고, 함수를 호출한다.
       let index = $(e.target).index();
       PAGE = index + 1;
