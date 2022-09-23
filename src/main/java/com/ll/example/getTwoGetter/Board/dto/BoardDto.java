@@ -31,7 +31,6 @@ public class BoardDto {
 
     private String lat;
 
-    private double distance = 0;
 
 
     public Board toEntity() {
@@ -53,7 +52,7 @@ public class BoardDto {
 
     @Builder
     public BoardDto(Long id, String title, String storeType, String storeName, String orderDetail, int minimumOrderAmount,
-                    int deliveryCharge, String content, LocalDateTime createdDate, LocalDateTime modifiedDate, String username, String lat, String lng, double distance) {
+                    int deliveryCharge, String content, LocalDateTime createdDate, LocalDateTime modifiedDate, String username, String lat, String lng ) {
         this.id = id;
         this.title = title;
         this.storeType = storeType;
@@ -67,6 +66,5 @@ public class BoardDto {
         this.username = username;
         this.lat = lat;
         this.lng = lng;
-        this.distance = distance;
     }
 }
