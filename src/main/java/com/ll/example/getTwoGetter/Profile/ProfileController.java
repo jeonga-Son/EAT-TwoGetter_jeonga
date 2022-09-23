@@ -24,8 +24,8 @@ public class ProfileController {
     @Autowired
     BoardService boardService;
 
-    @GetMapping("/showProfile")
-    public String showProfile(@AuthenticationPrincipal UserDetails userDetails, Model model){
+    @GetMapping("/modifyProfile")
+    public String modifyProfile(@AuthenticationPrincipal UserDetails userDetails, Model model){
         if (userDetails != null) {
             String username = userDetails.getUsername();
             User user = userService.findByUsername(username);
@@ -43,17 +43,19 @@ public class ProfileController {
 
         if(!(Util.checkPassword(currentPassword, currentUser.getPassword()))){
             rttr.addFlashAttribute("modifyTry", "false");
-            rttr.addFlashAttribute("message", "현재 비밀번호가 일치하지 않습니다.");
-            return "redirect:/showProfile";
+            rttr.addFlashAttribute("message", "비밀번호가 일치하지 않습니다.");
+            return "redirect:/modifyProfile";
         }
         if(!newPassword.equals(newPasswordCheck)){
             rttr.addFlashAttribute("modifyTry", "false");
             rttr.addFlashAttribute("message", "비밀번호를 다시 확인해주세요.");
-            return "redirect:/showProfile";
+            return "redirect:/modifyProfile";
         }
         userService.modifyPassword(currentUser, newPassword);
+        rttr.addFlashAttribute("modifyTry", "true");
+        rttr.addFlashAttribute("message", "비밀번호가 변경되었습니다.");
 
-        return "redirect:/showProfile";
+        return "redirect:/modifyProfile";
     }
 
     @GetMapping("/modifyNickname")
@@ -63,24 +65,24 @@ public class ProfileController {
         if(newNickname.length()==0 && newNickname.trim().equals("")){
             rttr.addFlashAttribute("modifyTry", "false");
             rttr.addFlashAttribute("message", "새 별명을 입력해주세요.");
-            return "redirect:/showProfile";
+            return "redirect:/modifyProfile";
         }
         if(userService.findByNickname(newNickname)!=null){
             User oldUser = userService.findByNickname(newNickname);
             if(oldUser.getNickname().equals(currentUser.getNickname())){
                 rttr.addFlashAttribute("modifyTry", "false");
                 rttr.addFlashAttribute("message", "기존 별명과 동일합니다.");
-                return "redirect:/showProfile";
+                return "redirect:/modifyProfile";
             }else{
                 rttr.addFlashAttribute("modifyTry", "false");
                 rttr.addFlashAttribute("message", "중복되는 별명이 존재합니다.");
-                return "redirect:/showProfile";
+                return "redirect:/modifyProfile";
             }
         }
         boardService.modify(currentUser.getNickname(),newNickname);
         userService.modifyNickname(currentUser,newNickname);
         rttr.addFlashAttribute("modifyTry", "true");
         rttr.addFlashAttribute("message", "정상적으로 변경되었습니다.");
-        return "redirect:/showProfile";
+        return "redirect:/modifyProfile";
     }
 }

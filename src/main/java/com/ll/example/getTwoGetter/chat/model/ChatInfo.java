@@ -33,6 +33,12 @@ public class ChatInfo {
     @LastModifiedDate
     private LocalDateTime createChatDate;
 
+    @LastModifiedDate
+    private LocalDateTime userLastReadTime;
+
+    @LastModifiedDate
+    private  LocalDateTime partnerLastReadTime;
+
     @JsonIgnore
     @OneToMany(mappedBy = "chatInfo", cascade = {CascadeType.ALL})
     private List<ChatMessage> chatMessageList = new ArrayList<>();

@@ -5,10 +5,11 @@ import com.ll.example.getTwoGetter.chat.dto.ChatInfoDto;
 import com.ll.example.getTwoGetter.chat.dto.ChatMessageDto;
 import com.ll.example.getTwoGetter.chat.model.ChatInfo;
 import com.ll.example.getTwoGetter.chat.model.ChatMessage;
-import com.ll.example.getTwoGetter.chat.repository.ChatInfoRepository;
-import com.ll.example.getTwoGetter.chat.repository.ChatMessageRepository;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
 import com.ll.example.getTwoGetter.chat.service.ChatMessageService;
+import com.ll.example.getTwoGetter.login.Repository.UserRepository;
+import com.ll.example.getTwoGetter.login.Service.UserService;
+import com.ll.example.getTwoGetter.login.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,12 +24,27 @@ public class ChatApiController {
     @Autowired
     ChatMessageService chatMessageService;
 
+    @Autowired
+     UserService userService;
+
     @GetMapping("/chatMessage/{id}")
-    public List<ChatMessage> showChatMessage(@PathVariable("id") long id){
+    public List<ChatMessage> showChatMessageId(@PathVariable("id") long id){
         ChatInfo chatInfo = chatInfoService.findById(id);
         List<ChatMessage> chatMessages = chatMessageService.findByChatInfo(chatInfo);
         return chatMessages;
     }
+    @GetMapping("/chatInfo")
+    public List<ChatInfo> showChatInfo(){
+        List<ChatInfo> chatInfos = chatInfoService.findAll();
+        return chatInfos;
+    }
+    @GetMapping("/chatMessage")
+    public List<ChatMessage> showMessageInfo(){
+        List<ChatMessage> chatMessages = chatMessageService.findAll();
+        return chatMessages;
+    }
+
+
     @PostMapping("/sendMessage/{id}")
     public void sendMessage(@PathVariable long id, @RequestBody ChatMessageDto chatMessageDto){
         ChatInfo chatInfo = chatInfoService.findById(Long.parseLong(chatMessageDto.getChatId()));
@@ -50,13 +66,26 @@ public class ChatApiController {
         chatInfo.setUsername(chatInfoDto.getUsername());
         chatInfo.setPartner(chatInfoDto.getPartner());
         chatInfo.setUserEmail(chatInfoDto.getEmail());
+
+        chatInfo.setUserLastReadTime(LocalDateTime.now());
+        chatInfo.setPartnerLastReadTime(LocalDateTime.now());
         chatInfoService.save(chatInfo);
+    }
+
+    @PostMapping("/modifyLastTime/{id}/{name}")
+    public void modifyLastTime(@PathVariable long id, @PathVariable String name){
+        chatInfoService.modifyLastTime(id, name);
     }
 
     @DeleteMapping("/chatDelete/{id}")
     public void chatDelete(@PathVariable long id){
-        System.out.println(id);
         ChatInfo chatInfo = chatInfoService.findById(id);
         chatInfoService.delete(chatInfo);
+    }
+
+    @GetMapping("/partnerProfile/{chatInfoPartnerName}")
+    public User chatDelete(@PathVariable String chatInfoPartnerName){
+        User user = userService.findByNickname(chatInfoPartnerName);
+        return user;
     }
 }

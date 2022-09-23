@@ -5,7 +5,6 @@ const btnClosePopup3 = document.querySelector('.boardModal_close2');
 const editBoardClose1 = document.querySelector('.editBoardModal_close');
 const editBoardClose2 = document.querySelector('.editBoardModal_close2');
 
-
 var infoDiv = document.getElementById('centerAddr')
 var infoLng = document.getElementById('centerLatLng')
 
@@ -35,24 +34,6 @@ editBoardClose2.addEventListener('click', () => {
 
 function boardSubmitClickEvent() {
     gpsMarkerd.setVisible(false);
-}
-
-/**
-회원 탈퇴 시 사용되는 메서드
-*/
-function deleteAccount(username){
-    if (!confirm("정말로 삭제하시겠습니까?")) {
-        alert("삭제가 취소되었습니다.")
-    } else {
-        $.ajax({
-            url:'/api/users/'+username,
-            type:'DELETE',
-            success: function (result){
-                alert('정상적으로 삭제 되었습니다.')
-                window.location.href="/account/login";
-            }
-        })
-    }
 }
 
 

@@ -1,7 +1,8 @@
 <div sec:authorize="isAuthenticated()" th:fragment="boardModal('boardModal')">
   <div class="boardModal">
     <div class="boardModal_content">
-      <h4 class="boardModal_header border-bottom mb-3" th:text="${user.nickname} + ' 님의 주문 메이트 구인공고'"></h4>
+      <label style="font-weight:bold; font-size:1.2rem; color:white;" class="boardModal_header mb-3" th:text="${user.nickname} + ' 님의 주문 메이트 구인공고'"></label>
+      <div class="border-bottom mb-4"></div>
       <div class="mt-2 boardModal_body ">
         <form action="/post" method="post">
           <div class="form-group row">
@@ -38,7 +39,7 @@
           <div class="form-group row">
             <label for="inputStoreType" class=" col-sm-2 col-form-label mb-3"><strong>가게유형</strong></label>
             <div class="col-sm-10">
-              <select class="form-select" required="required" name="storeType" id="inputStoreType" onchange="selectBoxChange(this.value);" aria-label="Default select example">
+              <select style="font-size:0.8rem;" class="form-select" required="required" name="storeType" id="inputStoreType" onchange="selectBoxChange(this.value);" aria-label="Default select example">
                 <option value="" selected disabled hidden>가게유형을 선택해주세요.</option>
                 <option value="한식">한식</option>
                 <option value="중식">중식</option>
@@ -78,14 +79,14 @@
           <div class="form-group row">
             <label for="inputContent" class="col-sm-2 col-form-label mb-3" ><strong>기타사항</strong></label>
             <div class="col-sm-10">
-              <textarea type="text" name="content" class="form-control" id="inputContent" maxlength='200'></textarea>
+              <textarea  type="text" name="content" class="form-control" id="inputContent" maxlength='200'></textarea>
             </div>
           </div>
           <div class="col-auto mt-5">
-            <button type="submit" onclick="boardSubmitClickEvent()" class="btn btn-primary btn-write" role="button">글쓰기</button>
+            <button type="submit" onclick="boardSubmitClickEvent()" class="btn btn-info btn-write" style="margin:10px;" role="button">글쓰기</button>
             <button type="button" class="btn btn-secondary boardModal_close">닫기</button>
           </div>
-          <button type="button" class="btn-close btn-close-black boardModal_close2" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white boardModal_close2" aria-label="Close"></button>
         </form>
       </div>
     </div>
@@ -96,17 +97,17 @@
 <div sec:authorize="isAuthenticated()" th:fragment="boardDetailModal('boardDetailModal')">
   <div class="boardDetailModal">
     <div class="boardDetailModal_content">
-      <h3 class="boardDetailModal_header">게시글 정보입니다.</h3>
+      <label class="boardDetailModal_header" style="font-weight:bold; font-size:1.2rem; margin-bottom:20px;">게시글 정보입니다.</label>
       <div class="boardDetailModal_body ">
         <table class="table">
           <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">항목</th>
             <th scope="col">정보</th>
           </tr>
           </thead>
 
-          <tbody>
+          <tbody  style="color:white;">
           <tr>
             <th scope="row">닉네임</th>
             <td id="showBoardNickname"></td>
@@ -155,18 +156,17 @@
 
         <div class="col-auto mt-5">
           <div class="partnerBtn">
-            <button type="button" class="btn btn-success findMiddleBtn" onclick="middleSpace()" >중간 지점 찾기</button>
-            <button type="button" class="btn btn-primary chat-btn chat_btn" onclick="showChat()">채팅하기</button>
+            <button type="button" class="btn btn-outline-primary findMiddleBtn" style="margin:10px;" onclick="middleSpace()" >중간 지점 찾기</button>
+            <button type="button" class="btn btn-outline-info chat-btn chat_btn" onclick="showChat()">채팅하기</button>
           </div>
           <div class="myBtn">
-            <button class="btn btn-warning boardModifyBtn" onclick="modifyBoard()">수정</button>
+            <button class="btn btn-outline-warning boardModifyBtn" style="margin:10px;" onclick="modifyBoard()">수정</button>
             <button onclick="deleteBoard()"
-               class="delete btn btn-danger btn-outline-secondary boardDeleteBtn" sec:authorize="isAuthenticated()"
+               class="delete btn btn-outline-danger boardDeleteBtn" sec:authorize="isAuthenticated()"
                th:text="삭제"></button>
           </div>
-            <button type="button" class="btn btn-secondary boardDetailModal_close">닫기</button>
         </div>
-        <button type="button" class="btn-close btn-close-black boardDetailModal_close2" aria-label="Close"></button>
+        <button onclick="closeBoardDetailModal()" type="button" class="btn-close btn-close-white boardDetailModal_close2" aria-label="Close"></button>
       </div>
     </div>
   </div>
@@ -181,11 +181,11 @@
 <!--게시판 정보 모달 띄우기 end!-->
 <div class="chatRoomModal" th:fragment="chatRoomModal('chatRoomModal')">
   <div class="chatRoomModal_body">
-    <div>채팅방 제목</div>
-    <input id="chatRoomTitle" type="text" placeholder="채팅방 제목을 입력해주세요."/>
+    <div style="font-weight:bold; font-size:1.2rem; margin-bottom:20px;">채팅방 제목</div>
+    <input id="chatRoomTitle" class="form-control" type="text" style="width:300px; margin-bottom:10px;"  placeholder="채팅방 제목을 입력해주세요."/>
     <div>
-      <button onclick="postChat()">확인</button>
-      <button class="chatRoomModal_close" onclick="closeChat()">닫기</button>
+      <button class="btn btn-outline-info" onclick="postChat()">확인</button>
+      <button class="btn chatRoomModal_close btn-outline-dark" style="margin:10px;" onclick="closeChat()">닫기</button>
     </div>
   </div>
 </div>

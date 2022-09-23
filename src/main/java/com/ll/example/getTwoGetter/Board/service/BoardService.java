@@ -8,13 +8,11 @@ import com.ll.example.getTwoGetter.Board.domain.repository.BoardRepository;
 import com.ll.example.getTwoGetter.Board.dto.BoardDto;
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
 import com.ll.example.getTwoGetter.chat.service.ChatInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.ll.example.getTwoGetter.Board.model.PageResult;
 import com.ll.example.getTwoGetter.common.constants.BoardConstants;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Optional;
@@ -22,18 +20,20 @@ import java.util.Optional;
 @Service
 public class BoardService {
     private BoardRepository boardRepository;
-
-    @Autowired
     private ChatInfoService chatInfoService;
 
-    public BoardService(BoardRepository boardRepository) {
+    public BoardService(BoardRepository boardRepository, ChatInfoService chatInfoService) {
         this.boardRepository = boardRepository;
+        this.chatInfoService = chatInfoService;
     }
+
+
 
     @Transactional
     public Long savePost(BoardDto boardDto) {
         return boardRepository.save(boardDto.toEntity()).getId();
     }
+
 
     /**
      * getBoardList
@@ -54,7 +54,7 @@ public class BoardService {
         List<Board> boardList = boardRepository.getArticle(BoardConstants.PAGE_SIZE,
                 (page-1) * BoardConstants.PAGE_SIZE, latitude,longitude);
 
-        //Stream
+//        Stream
         List<BoardDto> boardDtoList = boardList.stream().map(board ->
                 BoardDto.builder()
                         .id(board.getId())
@@ -171,5 +171,10 @@ public class BoardService {
             }
         }
         chatInfoService.modify(beforeNickname, afterNickname);
+    }
+
+    public List<Double> getDistanceAsc(String lat, String lng) {
+        List<Double> distances = boardRepository.getArticle2(lat, lng);
+        return distances;
     }
 }

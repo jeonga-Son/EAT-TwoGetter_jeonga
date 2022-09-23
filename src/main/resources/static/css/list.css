@@ -1,0 +1,31 @@
+ article {margin:0 auto; padding:0 auto; text-align:center;}
+  #body {padding:50px;}
+
+  .page_title {font-size:35pt; font-weight:bold; margin:30px 0px;}
+
+  .center {text-align:center;}
+  .left {text-align:left;}
+  .right {text-align:right;}
+
+  #board_content {width:100%; text-align:center; color:#999; font-size:11pt;}
+  .board_area {display:flex; flex-direction: column;}
+  .article_wrap {width:100%; display:flex; justify-content:space-between; border-bottom:1px solid #BBB;}
+  .article_wrap:not(:last-child) {margin-bottom:10px;}
+  .article_wrap.head {margin-bottom:30px; border-color:#000; color:#000;}
+  .article_wrap .column {overflow:hidden;text-overflow:ellipsis; flex-grow:1;padding: 6px 10px; max-width:120px; flex-shrink:0}
+  .article_wrap .column.title {flex-grow:6; cursor:pointer; min-width:450px; text-align:left;}
+  .article_wrap .column.created_date {flex-grow:2; max-width:200px;}
+
+  .paging_area {display:flex; justify-content: center; margin-top:100px;}
+  .paging_area .page {margin:0px; border:1px solid #BBB; width:30px;height:30px; line-height:30px; cursor:pointer;}
+  .paging_area .page.on {color:#000; font-weight:bold; border-color:#000;}
+  .paging_area .page:not(:first-child) {margin-left:5px;}
+
+  .store_type {padding: 3px 7px; border-radius: 5px; margin-right: 10px; background-color: #aaa; color: #fff;}
+  .store_type.kr {background-color:#88F;}
+  .store_type.ch {background-color:#F88;}
+  .store_type.jp {background-color:#5AA;}
+  .store_type.wes {background-color:#aa1;}
+  .store_type.cafe {background-color:#934c27;}
+  .store_type.night {background-color:#1BB;}
+  /*배경컬러*/

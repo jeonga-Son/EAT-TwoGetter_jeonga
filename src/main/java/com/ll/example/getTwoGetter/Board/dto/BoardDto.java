@@ -6,6 +6,7 @@ package com.ll.example.getTwoGetter.Board.dto;
 import com.ll.example.getTwoGetter.Board.domain.entity.Board;
 import lombok.*;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Getter
@@ -30,6 +31,9 @@ public class BoardDto {
 
     private String lat;
 
+    private double distance = 0;
+
+
     public Board toEntity() {
         Board build = Board.builder()
                 .id(id)
@@ -49,7 +53,7 @@ public class BoardDto {
 
     @Builder
     public BoardDto(Long id, String title, String storeType, String storeName, String orderDetail, int minimumOrderAmount,
-                    int deliveryCharge, String content, LocalDateTime createdDate, LocalDateTime modifiedDate, String username, String lat, String lng) {
+                    int deliveryCharge, String content, LocalDateTime createdDate, LocalDateTime modifiedDate, String username, String lat, String lng, double distance) {
         this.id = id;
         this.title = title;
         this.storeType = storeType;
@@ -63,5 +67,6 @@ public class BoardDto {
         this.username = username;
         this.lat = lat;
         this.lng = lng;
+        this.distance = distance;
     }
 }
