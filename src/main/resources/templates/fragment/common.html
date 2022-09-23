@@ -80,9 +80,7 @@
                         <h4  th:text="${user.username}" name="username" ></h4>
                     </div>
                     <div>
-                        <p>sodales accumsan ligula. Aenean sed diam tristique,
-                            fermentum mi nec, ornare arch.
-                        </p>
+                        <p>프로필 입니다.</p>
                     </div>
                     <div>
                         <a href="modifyProfile" class="btn">edit profile</a>
@@ -116,20 +114,6 @@
         showProfileModal.style.display='none';
     }
 
-    let latitude = null; // 위도
-    let longitude = null; // 경도
-
-    // 위도, 경도 가져오기
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-        },
-    );
-    function showDistance(){
-        location.href=`/board/${latitude}/${longitude}`
-    }
-
     </script>
     <!--프로필 변경 시 필터-->
     <script th:inline="javascript">
@@ -141,49 +125,50 @@
     </script>
 </th:block>
 
-<div id="layoutSidenav">
-    <div id="layoutSidenav_nav" th:fragment="side(side)">
-        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
-                <div class="nav">
-                    <div class="sb-sidenav-menu-heading">About ETG</div>
-                    <a class="nav-link" href="/about_us">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        ETG 사용방법
-                    </a>
-                    <div class="sb-sidenav-menu-heading">Two getter with Neighbor</div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        채팅방
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/chat/list}">나의 채팅방</a>
-                            <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">나의 채팅방</a>
-                        </nav>
-                    </div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        우리 동네 사람들
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link collapsed" href="#" onclick="showDistance()">
-                                가까운 이웃
-                                <!--                                    이거 클릭하면 가까운 위치 순서대로 뜸-->
-                            </a>
-                            <!--                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">-->
-                            <!--                                    하위 메뉴-->
-                            <!--                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
-                            <!--                                </a>-->
-                        </nav>
-                    </div>
-                    <div class="sb-sidenav-menu-heading">편의 메뉴</div>
-                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/modifyProfile}">나의 프로필 보기</a>
-                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/report/userReport}">불량회원 신고하기</a>
-                    <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">불량회원 신고하기</a>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav" th:fragment="side(side)">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">About ETG</div>
+                        <a class="nav-link" href="/about_us">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            ETG 사용방법
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Two getter with Neighbor</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            채팅방
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/chat/list}">나의 채팅방</a>
+                                <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">나의 채팅방</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            우리 동네 사람들
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed" href="/board">
+                                    가까운 이웃
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+<!--                                    이거 클릭하면 가까운 위치 순서대로 뜸-->
+                                </a>
+<!--                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">-->
+<!--                                    하위 메뉴-->
+<!--                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
+<!--                                </a>-->
+                            </nav>
+                        </div>
+                        <div class="sb-sidenav-menu-heading">편의 메뉴</div>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/modifyProfile}">나의 프로필 보기</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/report/userReport}">불량회원 신고하기</a>
+                            <a class="nav-link" sec:authorize="!isAuthenticated()" href="/account/login">불량회원 신고하기</a>
 
                 </div>
             </div>
@@ -204,7 +189,7 @@
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
                     <div></div>
-                    <div>Copyright &copy; IdaaBANK in LikeLion Backend School</div>
+                    <div>Copyright &copy; IdeaBANK in LikeLion Backend School</div>
                 </div>
             </div>
         </footer>

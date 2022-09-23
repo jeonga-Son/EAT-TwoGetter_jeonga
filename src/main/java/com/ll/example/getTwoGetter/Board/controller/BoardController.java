@@ -23,17 +23,13 @@ import java.util.List;
 
 import com.ll.example.getTwoGetter.exception.DataNotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
-import java.util.List;
 
-@Component
 @Controller
 public class BoardController {
 
@@ -46,33 +42,16 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-//    // fragment 사용시 @AuthenticationPrincipal UserDetails userDetails 써주지 않으면 닉네임 값이 적용되지 않아 오류가 뜬다.
-//    @GetMapping("/board") //view용 컨트롤러
-//    public String list(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-//        if (userDetails != null) {
-//            String username = userDetails.getUsername();
-//            User user = userService.findByUsername(username);
-//            model.addAttribute("user", user); // user라는 key값에 login된 사용자 user의 정보를 넘긴다.
-//        }
-//
-//        return "board/list";
-//    }
 
-    @GetMapping("/board/{latitude}/{longitude}") //view용 컨트롤러
-    public String list(@AuthenticationPrincipal UserDetails userDetails, Model model, @PathVariable String latitude, @PathVariable String longitude) {
-        System.out.println("::::::::::::::" + latitude + ":::::::::" + longitude);
-        List<Double> boardDistance = boardService.getDistanceAsc(latitude,longitude);
-        model.addAttribute("boardDistance", boardDistance);
-
+    @GetMapping("/board") //view용 컨트롤러
+    public String list(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         if (userDetails != null) {
             String username = userDetails.getUsername();
             User user = userService.findByUsername(username);
             model.addAttribute("user", user); // user라는 key값에 login된 사용자 user의 정보를 넘긴다.
         }
-
         return "board/list.html";
     }
-
     /**
      *
      * rest-api : boards
@@ -87,11 +66,15 @@ public class BoardController {
     public ResponseEntity<PageResult> getBoards(@RequestParam int page, @RequestParam String latitude,
                                                 @RequestParam String longitude) {
         System.out.println("::::::::::::::" + latitude + ":::::::::" + longitude);
+        List<Double> boardDistance = boardService.getDistanceAsc(latitude, longitude, page);
 
-        PageResult pageResult = boardService.getBoardList(page, latitude, longitude);
+        PageResult pageResult = boardService.getBoardList(page, latitude, longitude, boardDistance);
         // rest-api controller 응답값으로는 ResponseEntity를 사용하는 것이 좋다고함
+
+
         return ResponseEntity.ok().body(pageResult);
     }
+
 
     @GetMapping("/getMarkerBoard/{id}")
     @ResponseBody
@@ -139,7 +122,7 @@ public class BoardController {
     public String boardDelete(Principal principal, @PathVariable("id") Long id) throws DataNotFoundException {
         Board board = this.boardService.getBoard(id);
         this.boardService.delete(board);
-        return "redirect:/";
+        return "/";
     }
 
 }
