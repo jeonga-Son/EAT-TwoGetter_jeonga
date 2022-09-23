@@ -1,82 +1,3 @@
-.makeModal_open{
-  position:absolute;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  text-decoration: none;
-  color: blue;
-  font-family: "Raleway", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  background: white;
-  text-transform: uppercase;
-  transition: all .3s;
-}
-
-.makeModal {
-
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  height: 0;
-  width: 0;
-  overflow: hidden;
-  background: white;
-  display: flex;
-}
-.makeModal * {
-  opacity: 0;
-  animation-delay: 1.5s;
-}
-
-.makeModal_content div {
-  display: flex;
-  width: 80vw;
-}
-.makeModal_content div i {
-  padding: 10px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.makeModal_open:focus {
-  opacity: 0;
-}
-.makeModal_open:focus ~ .makeModal {
-  animation: load 1.2s forwards;
-}
-.makeModal_open:focus ~ .makeModal * {
-  animation: loadContent 1s forwards;
-  animation-delay: 1.5s;
-}
-.makeModal_open:blur {
-  opacity: 1;
-}
-.makeModal_open:blur ~ .makeModal {
-  animation: load 1.2s reverse;
-}
-
-
-@keyframes load {
-  0% {
-    height: 0;
-    width: 2px;
-  }
-  40% {
-    height: 80vh;
-    width: 2px;
-  }
-  100% {
-    height: 80vh;
-    width: 80vw;
-  }
-}
-@keyframes loadContent {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-
 
 
 .modal, partnerProfileModal {
@@ -168,9 +89,18 @@
     border: 2px solid #7F00FF;
 }
 
+.boardModal input {
+    font-size:0.8rem;
+    border:solid 2px #E6E6FA;
+}
 
- .boardDetailModal, .editBoardModal {
+.col-form-label {
+    color:white;
+}
+
+.boardModal, .boardDetailModal, .editBoardModal {
     font-family: 'Black Han Sans', sans-serif;font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.8rem;
     z-index: 3;
     position: absolute;
     top: 0;
@@ -185,12 +115,31 @@
     display: block;
 }
 
+.boardModal_content {
+    background: #614385;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #516395, #614385);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #516395, #614385); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border: solid 2px white;
+}
+
+.boardModal_content tr, td, th {
+    color:white;
+}
+
+.boardDetailModal_content {
+    background: #614385;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #516395, #614385);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #516395, #614385); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border: solid 2px white;
+    color:white;
+}
+
 .boardModal_content, .boardDetailModal_content, .editBoardModal_content  {
     position: absolute;
     top: 50%;
-    left: 50%;
-    width: 600px;
-    height: 700px;
+    left: 56%;
+    width: 450px;
+    height: 500px;
     padding: 40px;
     text-align: center;
     background-color: rgb(255, 255, 255);
@@ -229,7 +178,26 @@
     display: block;
 }
 
-.modal_body, .chatRoomModal_body {
+.chatRoomModal_body {
+    z-index: 4;
+    position: absolute;
+    top: 50%;
+    left: 56%;
+    width: 400px;
+    height: 200px;
+    padding: 40px;
+    text-align: center;
+    background: #614385;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #516395, #614385);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #516395, #614385); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    transform: translateX(-50%) translateY(-50%);
+    border: solid 2px white;
+    color:white;
+    }
+
+.modal_body,  {
     z-index: 4;
     position: absolute;
     top: 50%;
