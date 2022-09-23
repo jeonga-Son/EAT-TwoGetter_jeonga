@@ -116,6 +116,20 @@
         showProfileModal.style.display='none';
     }
 
+    let latitude = null; // 위도
+    let longitude = null; // 경도
+
+    // 위도, 경도 가져오기
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
+        },
+    );
+    function showDistance(){
+        location.href=`/board/${latitude}/${longitude}`
+    }
+
     </script>
     <!--프로필 변경 시 필터-->
     <script th:inline="javascript">
@@ -156,9 +170,8 @@
                     </a>
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link collapsed" onclick="showDistance()">
+                            <a class="nav-link collapsed" href="#" onclick="showDistance()">
                                 가까운 이웃
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 <!--                                    이거 클릭하면 가까운 위치 순서대로 뜸-->
                             </a>
                             <!--                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">-->

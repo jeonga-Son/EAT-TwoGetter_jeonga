@@ -3,8 +3,100 @@
     <span id="centerAddr" style="font-size: 18px; text-align:center;"></span>
     <input type="hidden" id="centerLatLng" style="font-size: 20px;" ></input>
 
-    <div class="modal-generate-button-wrap">
-        <button sec:authorize="isAuthenticated()" type="button" class="btn btn-success build_marker" style="display:inline-block;">게시물 생성</button>
-        <a sec:authorize="!isAuthenticated()" type="button" class="btn btn-success" style="display:inline-block" onclick="whenLogoutBulidMarker()">게시물 생성</a>
+    <div class="modal-generate-button-wrap" >
+        <button sec:authorize="isAuthenticated()" type="button" class="build_marker makeModal_open" style="display:inline-block;">게시물 생성</button>
+        <a sec:authorize="!isAuthenticated()" type="button" class="makeModal_open" style="display:inline-block" onclick="whenLogoutBulidMarker()">게시물 생성</a>
+        <div class="makeModal" sec:authorize="isAuthenticated()">
+            <div class="makeModal_content">
+                <h4 class="boardModal_header border-bottom mb-3" th:text="${user.nickname} + ' 님의 주문 메이트 구인공고'"></h4>
+                <div class="mt-2 boardModal_body ">
+                    <form action="/post" method="post">
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-2 col-form-label mb-3"><strong>닉네임</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="username" class="form-control" id="username" value="username" th:value="${user.nickname}" readonly></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="locate" class="col-sm-2 col-form-label mb-3"><strong>위치</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="locate" readonly></input>
+                            </div>
+                        </div>
+                        <div class="form-group row" hidden>
+                            <label for="lat" class="col-sm-2 col-form-label mb-3"><strong>위도</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="lat" class="form-control" id="lat" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-group row" hidden>
+                            <label for="lng" class="col-sm-2 col-form-label mb-3"><strong>경도</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="lng" class="form-control" id="lng" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputTitle" class="col-sm-2 col-form-label mb-3"><strong>제목</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="title" class="form-control" id="inputTitle" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputStoreType" class=" col-sm-2 col-form-label mb-3"><strong>가게유형</strong></label>
+                            <div class="col-sm-10">
+                                <select class="form-select" required="required" name="storeType" id="inputStoreType" onchange="selectBoxChange(this.value);" aria-label="Default select example">
+                                    <option value="" selected disabled hidden>가게유형을 선택해주세요.</option>
+                                    <option value="한식">한식</option>
+                                    <option value="중식">중식</option>
+                                    <option value="일식">일식</option>
+                                    <option value="양식">양식</option>
+                                    <option value="카페">카페</option>
+                                    <option value="야식">야식</option>
+                                    <option value="기타">기타</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputStoreName" class="col-sm-2 col-form-label mb-3"><strong>상호명</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="storeName" class="form-control" id="inputStoreName" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputOrderDetail" class="col-sm-2 col-form-label mb-3"><strong>주문내용</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="orderDetail" class="form-control" id="inputOrderDetail" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputMinimumOrderAmount" class="col-sm-2 col-form-label mb-3"><strong>최소주문금액(원)</strong></label>
+                            <div class="col-sm-10">
+                                <input type="number" name="minimumOrderAmount" class="form-control" id="inputMinimumOrderAmount" placeholder="숫자만 입력해주세요" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputDeliveryCharge" class="col-sm-2 col-form-label mb-3"><strong>배달요금(원)</strong></label>
+                            <div class="col-sm-10">
+                                <input type="number" min="0" max="30000"  name="deliveryCharge" class="form-control" id="inputDeliveryCharge" placeholder="숫자만 입력해주세요" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputContent" class="col-sm-2 col-form-label mb-3" ><strong>기타사항</strong></label>
+                            <div class="col-sm-10">
+                                <textarea type="text" name="content" class="form-control" id="inputContent" maxlength='200'></textarea>
+                            </div>
+                        </div>
+                        <div class="col-auto mt-5">
+                            <button type="submit" onclick="boardSubmitClickEvent()" class="btn btn-primary btn-write" role="button">글쓰기</button>
+                            <button type="button" class="btn btn-secondary boardModal_close">닫기</button>
+                        </div>
+                        <button type="button" class="btn-close btn-close-black boardModal_close2" aria-label="Close"></button>
+                    </form>
+                </div>
+                <div><i class="material-icons">close</i></div>
+            </div>
+        </div>
     </div>
 </div>
