@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.ll.example'
-version = '0.0.2-SNAPSHOT'
+version = '1.0.0-eattwogetter'
 sourceCompatibility = '17'
 
 configurations {

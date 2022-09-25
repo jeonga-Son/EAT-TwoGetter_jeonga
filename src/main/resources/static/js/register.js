@@ -46,7 +46,7 @@ function accountRegister(){
     }
     if(booleanId===true && booleanNickname==true){
         if(passwordCheck===password ){
-            fetch('http://localhost:8080/account/register', {
+            fetch('/account/register', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function accountRegister(){
               title: '',
               text: '가입이 완료되었습니다!'
             }).then((result) => {
-                window.location.href="http://localhost:8080/account/login"
+                window.location.href="/account/login"
             })
         }else{
             Swal.fire({
@@ -105,7 +105,7 @@ function checkEmail(){
         })
     }
     else{
-        fetch(`http://localhost:8080/api/users?username=${email}`)
+        fetch(`/api/users?username=${email}`)
             .then((response)=>response.json())
             .then(data=>{
                 if(data[0]!=null){
@@ -137,7 +137,7 @@ function checkNickname(){
           text: '닉네임을 입력해주세요!'
         })
     }else {
-        fetch(`http://localhost:8080/api/user/${nickname}`)
+        fetch(`/api/user/${nickname}`)
             .then((response)=>response.json())
             .then(data=>{
                 if(data==true){
