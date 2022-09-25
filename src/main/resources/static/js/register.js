@@ -4,6 +4,12 @@ var booleanNickname = false;
 var nicknameCheck= "";
 var emailCheck= "";
 
+
+// 로그인으로 돌아가기 onclick
+function backToLogin(){
+    location.href="/account/login";
+}
+
 // 회원가입 양식 최종 체크 메서드
 function accountRegister(){
     var passwordCheck = document.getElementById('passwordCheck').value;
