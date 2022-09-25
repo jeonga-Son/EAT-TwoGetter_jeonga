@@ -219,7 +219,7 @@
 
                 setTimeout(function (){
                     chatNotice()
-                }, 1000);
+                }, 3000);
      }
 </script>
 
@@ -275,9 +275,9 @@
 
      function messagePost(){
         var inputMessage = document.getElementById('inputMessage').value;
-        console.log(inputMessage);
-        if(inputMessage == null){
-          return;
+        if(inputMessage == "" && inputMessage.length() == 0){
+          const enterMessage = document.getElementById('enterMessage');
+          enterMessage.disabled = true;
         }
         fetch("/chatApi/sendMessage/"+chatId,{
             method: 'POST',

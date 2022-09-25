@@ -36,5 +36,47 @@ function boardSubmitClickEvent() {
     gpsMarkerd.setVisible(false);
 }
 
+///**
+//회원 탈퇴 시 사용되는 메서드
+//*/
+//function deleteAccount(username){
+//    if (!confirm("정말로 삭제하시겠습니까?")) {
+//        alert("삭제가 취소되었습니다.")
+//    } else {
+//        $.ajax({
+//            url:'/account/delete/'+username,
+//            type:'GET',
+//            success: function (result){
+//                alert('정상적으로 삭제 되었습니다.')
+//                location.href="/account/login";
+//            }
+//        })
+//    }
+//}
+/*회원 탈퇴 시 사용되는 메서드*/
+//function deleteAccount(username){
+//    Swal.fire({
+//      title: '회원 탈퇴하기',
+//      text: "회원을 탈퇴하면 다시 복구시킬 수 없습니다.",
+//      icon: 'warning',
+//      showCancelButton: true,
+//      confirmButtonColor: '#3085d6',
+//      cancelButtonColor: '#d33',
+//      confirmButtonText: '삭제',
+//      cancelButtonText: '취소'
+//    }).then((result) => {
+//        if (result.value) {
+//            Swal.fire({
+//                title: '삭제가 완료되었습니다.',
+//                text: '그동안 서비스를 이용해주셔서 감사합니다.',
+//                icon: 'success'
+//            }).then((result2) => {
+//                success: function (result){
+//                    location.href=`/account/remove/${username}`
+//                }
+//            })
+//        }//close if
+//    })
+//}
 
 

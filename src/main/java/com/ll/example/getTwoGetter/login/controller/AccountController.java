@@ -58,6 +58,7 @@ public class AccountController {
         model.addAttribute("userForm", user);
         return "account/register";
     }
+
     @GetMapping("/remove/{username}")
     public String remove(@PathVariable String username){
         User user = userService.findByUsername(username);
