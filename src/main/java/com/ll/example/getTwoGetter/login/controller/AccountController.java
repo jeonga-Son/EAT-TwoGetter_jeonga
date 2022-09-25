@@ -142,7 +142,7 @@ public class AccountController {
             rttr.addFlashAttribute("modifyTry", "true");
         }else{
             rttr.addFlashAttribute("modifyTry", "false");
-            rttr.addFlashAttribute("message", "존재하지않는 이메일입니다.");
+            rttr.addFlashAttribute("message", "존재하지 않는 이메일입니다.");
             return "redirect:/account/login";
         }
         return "redirect:/account/login";
