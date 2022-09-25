@@ -15,7 +15,7 @@ var middleAddress = document.getElementById("middleAddress_title");
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(cenLat, cenLng), // 지도의 중심좌표
-        level: 6, // 지도의 확대 레벨
+        level: 4, // 지도의 확대 레벨
     };
 if(localStorage.getItem("Lat")!=null){
     myLat = localStorage.getItem("Lat")

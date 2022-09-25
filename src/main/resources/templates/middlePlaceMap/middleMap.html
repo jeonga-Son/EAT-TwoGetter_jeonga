@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragment/common :: head('HOME')">
+<head th:replace="fragment/common :: head('중간 지점 확인하기 - EatTwoGetter')">
 
 </head>
 
@@ -12,17 +12,12 @@
             <div class="map_wrap">
                 <div id="map" style="width:100%;height:100%;"></div>
                 <div id="middleAddress" style="display: flex; flex-wrap:wrap;">
-<!--                    <span id="middleAddress_title" style="display:block; justify-content:center; font-size: 20px"></span>-->
-
                     <p id="middleAddress_title" style="margin-top:10px; width:100%; text-align: center; font-weight:bolder; font-size: 15px;"></p>
                     <div class="middleMap_button_wrap" style="text-align: center; width:100%;">
                         <button type="button" class="btn btn-outline-light" style="font-size:12px;" onclick="goBack()">뒤로가기</button>
                         <button type="button" class="btn btn-outline-info" style="font-size:12px;" id="clickBtn" @click="setVisible()">중간 지점 설정</button>
                         <button type="button" class="btn btn-outline-warning" style="font-size:12px;" onclick="newTapSendUrl()">카카오맵 길찾기</button>
-
-
                     </div>
-
                 </div>
             </div>
         <footer th:replace = "fragment/common :: footer('footer')"></footer>
