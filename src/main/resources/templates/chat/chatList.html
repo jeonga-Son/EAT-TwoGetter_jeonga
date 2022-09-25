@@ -48,8 +48,6 @@
                                         ${#strings.substring(chatInfo.createChatDate,11,13)}시 ${#strings.substring(chatInfo.createChatDate,14,16)}분
                                         |"></p>
                     </div>
-                    <!--                                        <div th:if="${user.nickname == chatInfo.username}" th:text="${chatInfo.partner}"></div>-->
-                    <!--                                        <div th:if="${user.nickname == chatInfo.partner}" th:text="${chatInfo.username}"></div>-->
                   </div>
                   <div class="new_message" th:id="${chatInfo.id}" onclick="showChatModal(this.getAttribute('id'))">
                     <div class="messageCount-frame">
@@ -102,8 +100,8 @@
                   <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
                 </div>
 
-                <input type="text" class="inputMessage form-control type_msg" placeholder="Type your message..." id="inputMessage" name="inputMessage">
-                <button class = "input-group-text send_btn sendMessage" type="button" onclick="messagePost()"><i class="fas fa-location-arrow"></i></button>
+                <input type="text" class="inputMessage form-control type_msg" placeholder="메시지를 입력하세요..." id="inputMessage" name="inputMessage">
+                <button class="input-group-text send_btn sendMessage" id="enterMessage" type="button" onclick="messagePost()"><i class="fas fa-location-arrow"></i></button>
               </div>
             </div>
             <button class="closeChat btn-close btn-close-white" onclick="closeChat(user.nickname)" aria-label="Close"></button>
@@ -265,6 +263,7 @@
                             </div>`
                     }
                 }
+
             })
 
             setTimeout(function () {
@@ -325,6 +324,15 @@
             });
         }
     }
+
+    var input = document.getElementById("inputMessage");
+
+    input.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("enterMessage").click();
+      }
+    });
 
 
 

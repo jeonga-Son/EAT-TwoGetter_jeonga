@@ -381,8 +381,9 @@ margin: 0;
 
 }
 .chatModal{
+    z-index:3;
     display: none;
-    top: 20%;
+    top: 5%;
     margin-top: auto;
     margin-bottom: auto;
 }
