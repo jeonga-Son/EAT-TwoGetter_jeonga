@@ -1416,3 +1416,6 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [/], t
 2022-09-26 01:20:00.728  INFO 36811 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2022-09-26 01:20:00.731  INFO 36811 --- [restartedMain] c.l.e.g.GetTwoGetterApplication          : Started GetTwoGetterApplication in 0.718 seconds (JVM running for 28.948)
 2022-09-26 01:20:00.732  INFO 36811 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-09-26 01:21:32.069  INFO 36811 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-09-26 01:21:32.075  INFO 36811 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2022-09-26 01:21:32.092  INFO 36811 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
