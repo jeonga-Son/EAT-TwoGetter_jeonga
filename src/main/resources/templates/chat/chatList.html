@@ -179,7 +179,7 @@
                 }
             })
 
-            <!--noticeChatMessages 배열에 알림 html 태그 넣어줌-->
+            // <!--noticeChatMessages 배열에 알림 html 태그 넣어줌-->
             for(let i=0; i<chatInfoId.length; i++) {
                 noticeChatMessages[i] = document.getElementById(`notice${chatInfoId[i]}`);
             }
@@ -231,18 +231,31 @@
     const chat = document.querySelector('#chat_room_content');
 
      function chatMessage_upload(id) {
-        chat.scrollTop = chat.scrollHeight;
-        fetch(`/chatApi/chatMessage/${id}`)
-            .then(data=>data.json())
-            .then(responseData=>{
-                content.innerHTML="<div></div>"
-                for(let i=0; i<responseData.length; i++) {
-                    var time = responseData[i].chatMessageTime
-                    var time2 = time.substring(5,7)+"월 "+time.substring(8,10)+"일 "+time.substring(11,16) //11,16 //5,6 월 //8,9 일
 
-                    if(responseData[i].username == user.nickname) {
-                        content.innerHTML+=
-                            `<div class="d-flex justify-content-end mb-4">
+        chat.scrollTop = chat.scrollHeight;
+       for(let i=0; i<chatInfo_length; i++){
+         if(chatInfos[i].id == id){
+           if(changeChat[i]==0){
+             return
+           }else{
+             if( user.nickname == chatInfos[i].partner) {
+               chatInfoPartnerName.innerText = chatInfos[i].username
+             }
+             if( user.nickname == chatInfos[i].username) {
+               chatInfoPartnerName.innerText = chatInfos[i].partner
+             }
+             title.innerHTML = `<div>${chatInfos[i].chatTitle}</div>`
+             fetch(`/chatApi/chatMessage/${id}`)
+                     .then(data=>data.json())
+                     .then(responseData=>{
+                       content.innerHTML="<div></div>"
+                       for(let i=0; i<responseData.length; i++) {
+                         var time = responseData[i].chatMessageTime
+                         var time2 = time.substring(5,7)+"월 "+time.substring(8,10)+"일 "+time.substring(11,16) //11,16 //5,6 월 //8,9 일
+
+                         if(responseData[i].username == user.nickname) {
+                           content.innerHTML+=
+                                   `<div class="d-flex justify-content-end mb-4">
                                 <div class="msg_container_send">
                                     ${responseData[i].content}
                                     <span class="msg_time_send">${time2}</span>
@@ -252,9 +265,9 @@
                                 </div>
                             </div>`
 
-                    } else {
-                        content.innerHTML+=
-                            `<div class="d-flex justify-content-start mb-4">
+                         } else {
+                           content.innerHTML+=
+                                   `<div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
                                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png" class="rounded-circle user_img_msg">
                                 </div>`+`
@@ -263,14 +276,21 @@
                                     <span class="msg_time">${time2}</span>
                                 </div>
                             </div>`
-                    }
-                }
+                         }
+                       }
 
-            })
+                     })
 
-            setTimeout(function () {
-                chatMessage_upload(id)
-            },1000);
+             setTimeout(function () {
+               chatMessage_upload(id)
+             },1000);
+           }
+         }
+       }
+
+
+
+
     }
 
      function messagePost(){
@@ -305,31 +325,38 @@
     const showYou = document.getElementById('showYou');
     const showYourEmail = document.getElementById('showYourEmail');
 
-    let arr_chatId=[];
+    //기존 채팅방에서 다른채팅방 눌렀을때 변환되기 위해 기존 채팅방의 onoff를 담는다.
+
     let chatId;
+    let arr_chatId=new Array(chatInfo_length)
 
     for(let i= 0; i<chatInfo_length; i++){
         arr_chatId[i] = document.getElementById(chatInfos[i].chatTitle)
     }
+    var changeChat = new Array(chatInfo_length)
 
+
+    for(let i= 0; i<chatInfo_length; i++){
+      arr_chatId[i].addEventListener('click', () => {
+        changeChat.fill(0);
+        changeChat[i]=1;
+        chatId = chatInfos[i].id;
+      });
+    }
      function showChatModal(id) {
         chatModal.style.display = 'block';
-
         <!--입장버튼 누르면 clickedChatId에 클릭한 채팅방의 ID가 들어옴 이걸 closeChat에서 lastTime 처리해야함 -->
         clickedChatId  = id;
-        for(let i= 0; i<chatInfo_length; i++){
-            arr_chatId[i].addEventListener('click', () => {
-                title.innerHTML = `<div>${chatInfos[i].chatTitle}</div>`
-                if( user.nickname == chatInfos[i].partner) {
-                     chatInfoPartnerName.innerText = chatInfos[i].username
-                }
-                if( user.nickname == chatInfos[i].username) {
-                     chatInfoPartnerName.innerText = chatInfos[i].partner
-                }
-                chatId = chatInfos[i].id;
-                chatMessage_upload(chatInfos[i].id, id)
-            });
-        }
+        chatMessage_upload(id)
+       $.ajax({
+         url:`/chatApi/modifyLastTime/${clickedChatId}/${user.nickname}`,
+         type:'POST',
+         success: function (result) {
+           console.log("성공")
+         }
+       })
+
+
     }
 
     <!-- 엔터 누를 때 메시지 전송 기능-->
@@ -345,17 +372,17 @@
 
     <!-- 메시지 삭제 -->
     function deleteChat(id){
-		Swal.fire({
-		  title: '채팅방 나가기',
-		  text: "채팅방을 나가면 다시 복구시킬 수 없습니다.",
-		  icon: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: '#3085d6',
-		  cancelButtonColor: '#d33',
-		  confirmButtonText: '삭제',
-		  cancelButtonText: '취소'
-		}).then((result) => {
-		  if (result.value) {
+      Swal.fire({
+        title: '채팅방 나가기',
+        text: "채팅방을 나가면 다시 복구시킬 수 없습니다.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '삭제',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.value) {
             Swal.fire({
             title: '삭제가 완료되었습니다.',
             text: '새로운 채팅방을 생성해보세요!',
@@ -369,9 +396,9 @@
                     }
                 })
              })
-		  }
-		})
-	}
+        }
+      })
+   }
 
     function closeChat(name){
         chatClose.style.display = 'none'
