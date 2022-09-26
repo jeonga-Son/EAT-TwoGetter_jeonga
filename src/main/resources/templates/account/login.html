@@ -3,6 +3,7 @@
 <head>
     <title>Login - EatTwoGetter</title>
     <link rel="stylesheet" th:href="@{/css/signin.css}">
+    <link rel="icon" href="/images/favicon.png">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
@@ -50,9 +51,8 @@
         Swal.fire({
             icon: 'warning',
             title: '',
-            text: "아이디 또는 비밀번호가 일치하지 않습니다."
+            text: message
         }).then((result) => {
-<!--            window.location.href="http://localhost:8080/account/login"-->
         })
     }
     var username = document.getElementById('username').value

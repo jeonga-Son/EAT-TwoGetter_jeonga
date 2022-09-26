@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title th:text="${title}">Hello!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="/images/favicon.png">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -83,7 +84,7 @@
                         <p>프로필 입니다.</p>
                     </div>
                     <div>
-                        <a href="modifyProfile" class="btn">edit profile</a>
+                        <a href="/modifyProfile" class="btn">회원정보 수정하기</a>
                     </div>
                 </div>
             </div>
@@ -155,7 +156,6 @@
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 <a class="nav-link collapsed" href="/board">가까운 이웃</a>
-
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">편의 메뉴</div>

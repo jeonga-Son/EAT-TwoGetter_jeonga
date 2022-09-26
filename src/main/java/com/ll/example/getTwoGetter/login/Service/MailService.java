@@ -19,7 +19,7 @@ public class MailService {
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo((String[]) toUserList.toArray(new String[toUserSize]));
-        simpleMailMessage.setSubject("임시 비밀번호");
+        simpleMailMessage.setSubject("EatTwoGetter - 임시 비밀번호 발급");
         simpleMailMessage.setText(content);
         javaMailSender.send(simpleMailMessage);
     }

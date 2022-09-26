@@ -58,6 +58,7 @@ public class AccountController {
         model.addAttribute("userForm", user);
         return "account/register";
     }
+
     @GetMapping("/remove/{username}")
     public String remove(@PathVariable String username){
         User user = userService.findByUsername(username);
@@ -141,7 +142,7 @@ public class AccountController {
             rttr.addFlashAttribute("modifyTry", "true");
         }else{
             rttr.addFlashAttribute("modifyTry", "false");
-            rttr.addFlashAttribute("message", "존재하지않는 이메일입니다.");
+            rttr.addFlashAttribute("message", "존재하지 않는 이메일입니다.");
             return "redirect:/account/login";
         }
         return "redirect:/account/login";

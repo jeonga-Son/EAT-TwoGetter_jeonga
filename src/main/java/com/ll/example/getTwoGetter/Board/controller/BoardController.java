@@ -65,14 +65,16 @@ public class BoardController {
     @GetMapping("/boards")
     public ResponseEntity<PageResult> getBoards(@RequestParam int page, @RequestParam String latitude,
                                                 @RequestParam String longitude) {
-        System.out.println("::::::::::::::" + latitude + ":::::::::" + longitude);
+        System.out.println(1);
         List<Double> boardDistance = boardService.getDistanceAsc(latitude, longitude, page);
-
+        System.out.println(2);
         PageResult pageResult = boardService.getBoardList(page, latitude, longitude, boardDistance);
         // rest-api controller 응답값으로는 ResponseEntity를 사용하는 것이 좋다고함
-
+        System.out.println(3);
 
         return ResponseEntity.ok().body(pageResult);
+
+
     }
 
 
@@ -122,7 +124,7 @@ public class BoardController {
     public String boardDelete(Principal principal, @PathVariable("id") Long id) throws DataNotFoundException {
         Board board = this.boardService.getBoard(id);
         this.boardService.delete(board);
-        return "/";
+        return "redirect:/";
     }
 
 }
