@@ -50,10 +50,9 @@ function gpsButton(){
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
         navigator.geolocation.getCurrentPosition(function(position) {
 
-//            var lat = position.coords.latitude, // 위도
-//                lon = position.coords.longitude; // 경도
-            var lat = 37.475798, // 위도
-                lon = 126.952509; // 경도
+            var lat = position.coords.latitude, // 위도
+                lon = position.coords.longitude; // 경도
+
             var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 
             if(localStorage.getItem("isMarker") == "1"){
