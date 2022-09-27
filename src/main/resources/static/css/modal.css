@@ -1,4 +1,6 @@
-
+.partnerProfileModal {
+    z-index:100;
+}
 
 .modal, partnerProfileModal {
     position: absolute;

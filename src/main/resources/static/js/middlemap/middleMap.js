@@ -208,4 +208,11 @@ function changeUrl(){
     return href;
 }
 
+function showNav(){
+    if(document.getElementById('navFix').classList.contains('sb-sidenav-toggled')){
+        document.getElementById('navFix').classList.remove('sb-sidenav-toggled')
+    }else{
+        document.getElementById('navFix').classList.add('sb-sidenav-toggled')
+    }
+}
 
