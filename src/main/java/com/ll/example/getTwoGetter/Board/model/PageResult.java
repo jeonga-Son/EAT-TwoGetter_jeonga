@@ -12,6 +12,6 @@ import java.util.List;
 
 public class PageResult<BoardDtoDistance> {
     private Long totalCount;
-    private BoardDtoDistance[] contents;
+    private List<BoardDtoDistance> contents;
 }
 
