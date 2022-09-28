@@ -18,7 +18,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
      */
     @Query(value = "select b.id, b.title, b.order_detail, b.minimum_order_amount, b.delivery_charge, b.store_type, b.store_name, b.content, b.username, b.created_date, b.lat, b.lng, b.modified_date, " +
             "(6371*ACOS(COS(RADIANS(?3))) * COS(RADIANS(b.lat)) * COS(RADIANS(b.lng)-RADIANS(?4) + SIN(RADIANS(?3)) * SIN(RADIANS(b.lat)))) " +
-            "AS distance "+"from board b order by distance desc limit ?2, ?1", nativeQuery = true)
+            "AS distance "+"from board b order by distance asc limit ?2, ?1", nativeQuery = true)
     List<Board> getArticle(int limit, int offset, String latitude, String longitude);
 //    @Query(value = "select "+"new"+" com.ll.example.getTwoGetter.Board.dto.BoardDto(b.id, b.title, b.order_detail, b.minimum_order_amount, b.delivery_charge, b.store_type, b.store_name, b.content, b.username, b.created_date, b.lat, b.lng, b.modified_date, " +
 //            "(6371*ACOS(COS(RADIANS(?3))) * COS(RADIANS(b.lat)) * COS(RADIANS(b.lng)-RADIANS(?4) + SIN(RADIANS(?3)) * SIN(RADIANS(b.lat)))) " +
