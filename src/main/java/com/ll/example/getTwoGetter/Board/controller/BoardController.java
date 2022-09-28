@@ -65,12 +65,9 @@ public class BoardController {
     @GetMapping("/boards")
     public ResponseEntity<PageResult> getBoards(@RequestParam int page, @RequestParam String latitude,
                                                 @RequestParam String longitude) {
-        System.out.println(1);
-        List<Double> boardDistance = boardService.getDistanceAsc(latitude, longitude, page);
-        System.out.println(2);
-        PageResult pageResult = boardService.getBoardList(page, latitude, longitude, boardDistance);
+//        List<Double> boardDistance = boardService.getDistanceAsc(latitude, longitude, page);
+        PageResult pageResult = boardService.getBoardList(page, latitude, longitude);
         // rest-api controller 응답값으로는 ResponseEntity를 사용하는 것이 좋다고함
-        System.out.println(3);
 
         return ResponseEntity.ok().body(pageResult);
 
