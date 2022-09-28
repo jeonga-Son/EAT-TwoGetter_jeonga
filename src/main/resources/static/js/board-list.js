@@ -20,7 +20,6 @@
       url: `/boards?page=${PAGE}&latitude=${latitude}&longitude=${longitude}`,
       success: (data) => {
         let totalCount = data.totalCount;
-        console.log(totalCount);
         let contents = data.contents;
         let html = '';
         let pageHtml = '';
