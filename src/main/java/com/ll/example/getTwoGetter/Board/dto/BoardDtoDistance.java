@@ -20,31 +20,12 @@ public class BoardDtoDistance {
     private String content;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-
     private String username;
-
     private String lng;
-
     private String lat;
-
     private double distance;
 
-
-    public static BoardDtoDistance[] getBoardDtoDistances(List<Board> boardList, List<Double> distances) {
-
-        BoardDtoDistance[] boardDtoDistances = new BoardDtoDistance[boardList.size()];
-
-        for(int i=0; i<boardDtoDistances.length; i++){
-            Board board = boardList.get(i);
-            Double distance = distances.get(i);
-            boardDtoDistances[i] = BoardDtoDistance.add(board, distance);
-        }
-
-
-        return boardDtoDistances;
-    }
-
-    private static BoardDtoDistance add(Board board, Double distance) {
+    public static BoardDtoDistance addBoardAndDistance(Board board, Double distance) {
         BoardDtoDistance boardDtoDistance = new BoardDtoDistance();
 
         boardDtoDistance.setId(board.getId());
