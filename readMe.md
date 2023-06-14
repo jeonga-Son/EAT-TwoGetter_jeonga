@@ -5,7 +5,7 @@
 
 **"공동 배달을 통해 배달요금을 분담하고 불필요한 지출을 줄인다."**
 
-해당 repo는 "eatTwoGetter - 공동 배달을 위한 Java/Spring 기반 서비스 개발"에 대한 프로젝트 입니다. 
+해당 repo는 "eatTwoGetter- 공동 배달을 위한 Java/Spring 기반 서비스 개발"에 대한 프로젝트 입니다. 
 
 <br>
 
